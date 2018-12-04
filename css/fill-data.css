@@ -1,0 +1,166 @@
+body{
+    background: #fff
+}
+input{
+    font-weight: 700;
+    font-size: 1.1666666666667rem;
+    color: #333
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+.global-btn-round-sm{
+    background: #f2f2f2
+}
+.weui-picker__action,.toolbar .picker-button{
+    color: #945DFF
+}
+.weui-picker__item{
+    font-size: 1.166666667rem
+}
+.picker-text{
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.16666667rem;
+    color: #333
+}
+/*填写资料 */
+#paopao-personal-data{
+    padding: 0 1rem 2rem;
+    display: none
+}
+#paopao-personal-data input::-webkit-input-placeholder{
+    font-weight: 400
+}
+.my-data-block-title{
+    padding: 1rem 0 2rem
+}
+.my-data-save-btn{
+    width: 4rem;
+    height: 2rem;
+    font-weight: 500;
+    color: #fff;
+    background: #945DFF;
+    border-radius: 24px
+}
+#paopao-personal-data .global-btn-round-sm{
+    margin-right: 1rem
+}
+#paopao-personal-data .paopao-personal-data-type .global-btn-round-sm:last-of-type{
+    margin-right: unset
+}
+#paopao-personal-data .validate-btn{
+    margin-right: 0;
+    color:#999;
+    background: #fff;
+    border: 1px solid #f9f3ff
+}
+#paopao-personal-data .validate-ready{
+    color: #fff;
+    border-color: #945DFF;
+    background: #945DFF
+}
+#paopao-personal-data .validate-send{
+    color: #333;
+    border-color: #f2f2f2;
+    background: #f2f2f2
+}
+.paopao-validate-code{
+    display: none
+}
+.validate-input{
+    width:8.75rem;
+    text-align: center;
+    padding-bottom: 4px;
+    letter-spacing: 4px;
+    border-bottom: 1px solid #333;
+}
+#paopao-personal-data .btn-active{
+    color: #fff;
+    background:#945DFF;
+}
+.data-tag-name{
+    width: 32%;
+    font-size: 1.1666666666667rem;
+    color:#999;
+}
+.personal-avatar{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+.paopao-personal-data-item{
+    margin-bottom: 2rem;
+    font-size: 1.166666666rem
+}
+.paopao-personal-tag-wrapper{
+    text-align: left;
+    font-weight: 700
+}
+#paopao-personal-data .icon-arrow-right{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
+    width: 1.1666666666667rem;
+    height: 1.1666666666667rem;
+}
+@keyframes showPersonalDataItem{
+    0%{
+        opacity: 0;
+        transform: translateY(-1.5rem) skewX(6.18deg);
+    }
+    50%{
+        transform: unset
+    }
+    to{
+        opacity: 1
+    }
+}
+.show-personal-data-item{
+    animation-name: showPersonalDataItem;
+    animation-duration: .72s;
+    animation-timing-function: linear;
+    animation-fill-mode: both
+}
+.paopao-data-textarea-wrapper{
+    position: relative;
+    padding: 1rem;
+    width: 100%;
+    height: 7.5rem;
+    margin-bottom: 1rem
+}
+.paopao-data-textarea-wrapper::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ccc;
+    transform: scale(.5);
+}
+.paopao-textarea{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    font-size: 1.1666666667rem;
+    z-index: 2;
+}
+
+.textarea-count{
+    font-size: 1.166666667rem;
+    color: #999;
+    font-weight: 400
+}

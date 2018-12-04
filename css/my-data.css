@@ -1,0 +1,39 @@
+body{
+    background: #fff
+}
+.paopao-data-textarea-wrapper{
+    position: relative;
+    padding: 1rem;
+    width: 100%;
+    height: 7.5rem;
+    margin-bottom: 1rem
+}
+.paopao-data-textarea-wrapper::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ccc;
+    transform: scale(.5);
+}
+.paopao-textarea{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    font-size: 1.1666666667rem;
+    z-index: 2;
+}
+
+.textarea-count{
+    font-size: 1.166666667rem;
+    color: #999;
+    font-weight: 400
+}
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/weui-picker.css">
+        <link rel="stylesheet" href="../css/fill-data.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/my-data.css">
+        <title>个人资料</title>
+    </head>
+
+    <body>
+        <div id="paopao-personal-data" class="global-box anim">
+            <div class="global-flex global-flex-center global-flex-between my-data-block-title">
+                <h2 class="public-block-title">完善资料</h2>
+                <button class="global-btn my-data-save-btn">保存</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">
+                    头像<sup class="font-red">*</sup>
+                </div>
+                <div class="personal-avatar">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543244892462&di=468246e9b88c91d21b054e00f1e75db5&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fd53f8794a4c27d1e17390c8210d5ad6eddc4385c.jpg"
+                        class="global-img">
+                </div>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">
+                    昵称<sup class="font-red">*</sup>
+                </div>
+                <input type="text" placeholder="请输入用户名">
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">
+                    手机号码<sup class="font-red">*</sup>
+                </div>
+                <input type="number" name="number" pattern="[0-9]*" maxlength="11" placeholder="请输入手机号码" class="global-flex-1" />
+                <!-- 
+                    没填手机号码是validate-btn
+                    手机号码正确但是没发送 validate-ready
+                    验证号码发送以后 validate-send
+                 -->
+                <button class="global-btn global-btn-round-sm validate-btn validate-ready">验证</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item paopao-validate-code">
+                <div class="data-tag-name">
+                    验证码<sup class="font-red">*</sup>
+                </div>
+                <input placeholder="请输入验证码" type="number" name="number" pattern="[0-9]*" class="validate-input" />
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item paopao-personal-data-type">
+                <div class="data-tag-name">
+                    交友类型<sup class="font-red">*</sup>
+                </div>
+                <button class="global-btn global-btn-round-sm btn-active">不限</button>
+                <button class="global-btn global-btn-round-sm">相亲</button>
+                <button class="global-btn global-btn-round-sm">交友</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">
+                    出生年月<sup class="font-red">*</sup>
+                </div>
+                <a href="javascript:;" id="pickerBirth" class="picker-text global-flex-1">请选择出生年月</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">家乡</div>
+                <a href="javascript:;" id="pickerHometown" class="picker-text global-flex-1">请选择省份地区</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">个性标签</div>
+                <!-- 参照之前逻辑跳往新的页面 -->
+                <div class="paopao-personal-tag-wrapper global-flex-1">请选择个性标签</div>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">身高</div>
+                <a href="javascript:;" id="pickerBodyHeight" class="picker-text global-flex-1">请选择身高</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">职业</div>
+                <a href="javascript:;" id="pickerProfession" class="picker-text global-flex-1">请选择职业</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">月收入</div> 
+                <a href="javascript:;" id="pickerIncome" class="picker-text global-flex-1">请选择月收入金额</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="paopao-personal-data-item">
+                <h2 class="public-block-title" style="margin-bottom: .5rem">内心独白</h2>
+                <div class="paopao-data-textarea-wrapper global-box">
+                    <textarea placeholder="请输入你的内心独白，展现不一样的你。" class="paopao-textarea global-box"></textarea>
+                </div>
+                <!-- 限制80个字 -->
+                <!-- 这里要统计实时输入的数字 -->
+                <div class="textarea-count">50/80</div>
+            </div>
+        </div>
+    </body>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/zepto.weui.js"></script>
+    <script src="../js/picker.min.js"></script>
+    <script src="../js/picker.city.js"></script>
+    <script>
+        $(function () {
+            // 页面渲染完成以后
+            function showPersonView() {
+                var personView = $('#paopao-personal-data')
+                personView.show()
+                Array.prototype.slice.apply(personView.children()).forEach(function (item, index) {
+                    item.classList.add("show-personal-data-item")
+                    item.style.cssText = 'animation-delay:' + (.0765 * (index + 2)) + 's'
+                })
+            }
+
+            setTimeout(() => {
+                showPersonView()
+            }, 500)
+
+            // 出生年月
+            document.querySelector('#pickerBirth').addEventListener('click', function () {
+                weui.datePicker({
+                    start: 1960,
+                    end: new Date().getFullYear(),
+                    defaultValue:[1995,8],     // 年月
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+            });
+            // 选择省市地区
+            $("#pickerHometown").cityPicker({
+                title: "选择省市地区",
+                showDistrict: false,
+                onChange: function (picker, values, displayValues) {
+                    console.log(values, displayValues);
+                }
+            });
+
+            // 选择身高
+            document.querySelector('#pickerBodyHeight').addEventListener('click', function () {
+                weui.picker([{
+                    label: '170',
+                    value: 170
+                }, {
+                    label: '171',
+                    value: 171
+                }, {
+                    label: '172',
+                    value: 172
+                }, {
+                    label: '173',
+                    value: 173
+                }, {
+                    label: '174',
+                    value: 174
+                }], {
+                    defaultValue: [4],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+            });
+
+
+            // 选择职业
+            document.querySelector('#pickerProfession').addEventListener('click', function () {
+                weui.picker([{
+                    label: '律师',
+                    value: 0
+                }, {
+                    label: '老师',
+                    value: 1
+                }, {
+                    label: 'IT农民',
+                    value: 2
+                }, {
+                    label: '保安',
+                    value: 3
+                }, {
+                    label: '模特',
+                    value: 4
+                }], {
+                    defaultValue: [0],
+                    onChange: function (result) {
+                        //console.log(item, index);
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+            });
+
+            // 选择月收入金额
+            document.querySelector('#pickerIncome').addEventListener('click', function () {
+                weui.picker([{
+                    label: '3000～5000',
+                    value: 0
+                }, {
+                    label: '5000～8000',
+                    value: 1
+                }, {
+                    label: '8000～12000',
+                    value: 2
+                }, {
+                    label: '12000～15000',
+                    value: 3
+                }, {
+                    label: '20000以上',
+                    value: 4
+                }], {
+                    defaultValue: [4],
+                    onChange: function (result) {
+                        //console.log(item, index);
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+            });
+
+        })
+    </script>
+
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/swiper.min.css">
+        <link rel="stylesheet" href="../css/weui-picker.css">
+        <link rel="stylesheet" href="../css/fill-data.css">
+        <link rel="stylesheet" href="../css/jquery.range.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/footer.css">
+        <title>Paopao相亲交友</title>
+    </head>
+
+    <body>
+        <div id="global-wrapper">
+            <!-- banner 泡泡数据 公告 -->
+            <header>
+                <div class="paopao-global-banner">
+                    <img src="../img/global-banner.png" class="global-img">
+                    <div class="paopao-global-banner-content global-img  global-flex global-flex-column global-flex-justify-center">
+                        <h1 class="paopao-global-banner-title">Paopao相亲交友</h1>
+                        <p class="paopao-global-banner paopao-global-banner-greet">广州线上相亲交友，欢迎您的到来</p>
+                    </div>
+                </div>
+                <div class="global-flex global-flex-center paopao-visit-data-wrapper font-12">
+                    <svg class="icon-data">
+                        <use xlink:href="../img/index.svg#icon-data"></use>
+                    </svg>
+                    <div style="margin-right:1.666666667rem">
+                        用户 <span class="paopao-visit-data-num">5.91万</span>
+                    </div>
+                    <div>
+                        访问 <span class="paopao-visit-data-num">19.56万</span>
+                    </div>
+                    <button class="global-align-right global-btn paopao-follow">关注</button>
+                </div>
+                <div class="paopao-announce global-flex global-flex-center">
+                    <!-- 嵌入一张base64到css -->
+                    <div class="paopao-announce-tag"></div>
+                    <div class="swiper-container paopao-announce-swiper global-flex-1">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide font-ellipsis font-ellipsis-1">
+                                哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇
+                            </div>
+                            <div class="swiper-slide font-ellipsis font-ellipsis-1">
+                                决阿娇阿娇阿娇阿娇哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- 交友圈banner -->
+            <section id="paopao-circle">
+                <div class="global-flex global-flex-between global-flex-center paopao-circle-title-wrapper">
+                    <h2 style="font-size:2rem">交友圈</h2>
+                    <div class="global-flex global-flex-center font-999 font-14">
+                        更多动态
+                        <svg aria-hidden="true" class="icon-arrow-right">
+                            <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="swiper-container paopao-circle-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide paopao-circle-swiper-item">
+                            <div class="paopao-circle-item-top global-flex">
+                                <div class="paopao-circle-item-cover">
+                                    <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                        class="global-img">
+                                </div>
+                                <div class="global-flex-1 global-flex global-flex-column paopao-circle-item-content">
+                                    <div class="global-flex global-flex-center" style="margin-bottom:4px">
+                                        <!-- 男的话是没有font-purple这个class的 -->
+                                        <div class="paopao-circle-item-username font-purple font-14 font-bold">诶哦大法的事哦发</div>
+                                        <i class="global-vip-signs"></i>
+                                        <div class="deliver-time">3天前</div>
+                                    </div>
+                                    <!-- 男global-bg-blue 女 global-bg-pink-->
+                                    <div class="paopao-tag global-bg-pink">
+                                        <svg class="icon-sexual" aria-hidden="true">
+                                            <use xlink:href="../img/global.svg#icon-female"></use>
+                                        </svg>19
+                                    </div>
+                                    <ul class="global-align-top circle-ablum-list global-flex">
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                        </li>
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                        </li>
+                                        <!-- 数量大于3张 第三张有遮罩阴影 -->
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                            <div class="circle-ablum-item-mask">
+                                                +5
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="global-flex global-flex-center">
+                                <div class="icon-chat-wrapper global-bg-pink global-flex">
+                                    <svg class="icon-chat" aria-hidden="true">
+                                        <use xlink:href="../img/index.svg#icon-chat"></use>
+                                    </svg>
+                                </div>
+                                <button class="global-flex global-flex-center paopao-circle-btn global-flex">
+                                    <svg class="icon-microphone" aria-hidden="true">
+                                        <use xlink:href="../img/index.svg#icon-microphone"></use>
+                                    </svg>
+                                    <svg class="icon-voice" aria-hidden="true">
+                                        <use xlink:href="../img/index.svg#icon-voice"></use>
+                                    </svg>
+                                    <span class="global-align-right">10s</span>
+                                </button>
+                                <!-- <div class="global-flex-1 global-relative font-12">
+                                    <p class="font-ellipsis font-ellipsis-2">开朗大方开朗大方公开反对可能规范点可能会共和国法律 很可能法规和两个方面你的功夫 </p>
+                                    <a href="javascript:void(0);" class="paopao-circle-article-check">全文</a>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="swiper-slide paopao-circle-swiper-item">
+                            <div class="paopao-circle-item-top global-flex">
+                                <div class="paopao-circle-item-cover">
+                                    <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                        class="global-img">
+                                </div>
+                                <div class="global-flex-1 global-flex global-flex-column paopao-circle-item-content">
+                                    <div class="global-flex global-flex-center" style="margin-bottom:4px">
+                                        <!-- 男的话是没有font-purple这个class的 -->
+                                        <div class="paopao-circle-item-username font-purple font-14 font-bold">诶哦大法的事哦发</div>
+                                        <i class="global-vip-signs"></i>
+                                        <div class="deliver-time">3天前</div>
+                                    </div>
+                                    <!-- 男global-bg-blue 女 global-bg-pink-->
+                                    <div class="paopao-tag global-bg-pink">
+                                        <svg class="icon-sexual" aria-hidden="true">
+                                            <use xlink:href="../img/global.svg#icon-female"></use>
+                                        </svg>19
+                                    </div>
+                                    <ul class="global-align-top circle-ablum-list global-flex">
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                        </li>
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                        </li>
+                                        <!-- 数量大于3张 第三张有遮罩阴影 -->
+                                        <li class="circle-ablum-item">
+                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
+                                                class="global-img">
+                                            <div class="circle-ablum-item-mask">
+                                                +5
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="global-flex global-flex-center">
+                                <div class="icon-chat-wrapper global-bg-pink global-flex">
+                                    <svg class="icon-chat" aria-hidden="true">
+                                        <use xlink:href="../img/index.svg#icon-chat"></use>
+                                    </svg>
+                                </div>
+                                <!-- <button class="global-flex global-flex-center paopao-circle-btn global-flex">
+                                        <svg class="icon-microphone" aria-hidden="true">
+                                            <use xlink:href="../img/index.svg#icon-microphone"></use>
+                                        </svg>
+                                        <svg class="icon-voice" aria-hidden="true">
+                                            <use xlink:href="../img/index.svg#icon-voice"></use>
+                                        </svg>
+                                        <span class="global-align-right">10s</span>
+                                    </button> -->
+                                <div class="global-flex-1 global-relative font-12">
+                                    <p class="font-ellipsis font-ellipsis-2">开朗大方开朗大方公开反对可能规范点可能会共和国法律 很可能法规和两个方面你的功夫
+                                    </p>
+                                    <a href="javascript:void(0);" class="paopao-circle-article-check">全文</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 板块导航 -->
+            <div class="paopao-nav-wrapper global-flex global-flex-center global-box">
+                <nav class="paopao-nav global-flex-1 global-flex global-flex-center">
+                    <li class="paopao-nav-item paopao-nav-active">
+                        <div class="paopao-nav-text">推荐</div>
+                    </li>
+                    <li class="global-relative global-flex global-flex-center paopao-nav-item">
+                        <div class="paopao-nav-text">上首页</div>
+                        <div class="paopao-tag-hot"></div>
+                    </li>
+                </nav>
+                <button class="global-button global-align-right global-flex global-flex-center paopao-selected-nav-btn">
+                    <svg class="icon-selected" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-selected"></use>
+                    </svg>
+                    <div class="paopao-nav-text">筛选</div>
+                </button>
+            </div>
+            <!-- 板块内容 -->
+            <main id="main" class="global-bg-fff global-relative">
+                <!-- 筛选层 -->
+                <div class="paopao-selected-wrapper anim">
+                    <div class="paopao-selected-content global-box">
+                        <div class="selected-item">
+                            <div class="selected-item-top">
+                                <h6 class="selected-item-tagname">性别</h6>
+                            </div>
+                            <div class="global-flex">
+                                <button class="global-btn global-flex-1 selected-sexual-btn selected-sexual-active">全部</button>
+                                <button class="global-btn global-flex-1 selected-sexual-btn">男士</button>
+                                <button class="global-btn global-flex-1 selected-sexual-btn">女士</button>
+                            </div>
+                        </div>
+                        <div class="selected-item">
+                            <div class="global-flex selected-item-top">
+                                <h6 class="selected-item-tagname">身高</h6>
+                                <div class="font-blue">不限</div>
+                            </div>
+                            <div class="slider-wrapper">
+                                <input class="range-slider range-height-slider" type="hidden" value="135,135">
+                            </div>
+                        </div>
+                        <div class="selected-item">
+                            <div class="global-flex selected-item-top">
+                                <h6 class="selected-item-tagname">年龄</h6>
+                                <div class="font-blue">不限</div>
+                            </div>
+                            <div class="slider-wrapper">
+                                <input class="range-slider range-age-slider" type="hidden" value="0,100">
+                            </div>
+                        </div>
+                        <div class="selected-item">
+                            <div class="global-flex selected-item-top">
+                                <h6 class="selected-item-tagname">月薪</h6>
+                                <div class="font-blue">不限</div>
+                            </div>
+                            <div class="slider-wrapper">
+                                <input class="range-slider range-salary-slider" type="hidden" value="0,100">
+                            </div>
+                        </div>
+                        <div class="global-flex">
+                            <button class="global-btn selected-btn selected-btn-reset">重置</button>
+                            <button class="global-btn selected-btn selected-btn-sure global-flex-1">确定</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 板块轮播 -->
+                <div class="swiper-container paopao-block-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide paopao-block">
+                            <ul class="paopao-list global-clearfix">
+                                <li class="paopao-item">
+                                    <div class="paopao-item-cover">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                            class="global-img">
+                                    </div>
+                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                        <div class="paopao-tag global-bg-light-pink">推荐</div>
+                                    </div>
+                                    <div class="global-flex global-flex-wrap paopao-item-type">
+                                        <div class="paopao-tag global-bg-blue">
+                                            <svg class="icon-sexual">
+                                                <use xlink:href="../img/global.svg#icon-man"></use>
+                                            </svg>19
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            182cm
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            月薪15k0
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            幽默
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="paopao-item">
+                                    <div class="paopao-item-cover">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543431551712&di=ab65259a41ba3c9f4d2d7944a67f8b8d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3Dbbc764372234349b600b66c6a1837fbb%2F023b5bb5c9ea15cea8396524bc003af33b87b2cc.jpg"
+                                            class="global-img">
+                                    </div>
+                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                        <!-- 女生的用户名字是是紫色的 font-purple 男生的名字是正常的黑色-->
+                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1 font-purple">哈哈哈哈哈哈哈哈哈哈哈哈</h3>
+                                        <div class="global-vip-signs"></div>
+                                        <!-- 推荐 -->
+                                        <!-- <div class="paopao-tag global-bg-light-pink">推荐</div> -->
+                                    </div>
+                                    <div class="global-flex global-flex-wrap paopao-item-type">
+                                        <!-- 性别 女 global-bg-pink 男 global-bg-blue-->
+                                        <div class="paopao-tag global-bg-pink">
+                                            <svg class="icon-sexual" aria-hidden="true">
+                                                <use xlink:href="../img/global.svg#icon-female"></use>
+                                            </svg>19
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            月薪8000
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="paopao-item">
+                                    <div class="paopao-item-cover">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                            class="global-img">
+                                    </div>
+                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                        <div class="paopao-tag global-bg-light-pink">推荐</div>
+                                    </div>
+                                    <div class="global-flex global-flex-wrap paopao-item-type">
+                                        <div class="paopao-tag global-bg-blue">
+                                            <svg class="icon-sexual">
+                                                <use xlink:href="../img/global.svg#icon-man"></use>
+                                            </svg>19
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            182cm
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            月薪12000
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            幽默
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="paopao-item">
+                                    <div class="paopao-item-cover">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                            class="global-img">
+                                    </div>
+                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                        <div class="paopao-tag global-bg-light-pink">推荐</div>
+                                    </div>
+                                    <div class="global-flex global-flex-wrap paopao-item-type">
+                                        <div class="paopao-tag global-bg-blue">
+                                            <svg class="icon-sexual">
+                                                <use xlink:href="../img/global.svg#icon-man"></use>
+                                            </svg>19
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            182cm
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            月薪12000
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            幽默
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="paopao-item">
+                                    <div class="paopao-item-cover">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                            class="global-img">
+                                    </div>
+                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                        <div class="paopao-tag global-bg-light-pink">推荐</div>
+                                    </div>
+                                    <div class="global-flex global-flex-wrap paopao-item-type">
+                                        <div class="paopao-tag global-bg-blue">
+                                            <svg class="icon-sexual">
+                                                <use xlink:href="../img/global.svg#icon-man"></use>
+                                            </svg>19
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            182cm
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            月薪12000
+                                        </div>
+                                        <div class="paopao-item-tag">
+                                            幽默
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide paopao-content-swiper-block">
+                            <!-- 上首页 -->
+                            <div id="paopao-recommend" class="global-box">
+                                <p class="paopao-recommend-tips">
+                                    上首页可以 让更的人注意到你，相亲交友成功率大幅度提高噢！
+                                </p>
+                                <ul class="paopao-recommend-content">
+                                    <li class="paopao-recommend-item global-flex global-flex-center">
+                                        <div class="paopao-recommend-tag-name">日推/月推</div>
+                                        <button class="global-btn paopao-recommend-btn paopao-recommend-btn-active">1元/天</button>
+                                        <button class="global-btn paopao-recommend-btn">20元/天 </button>
+                                    </li>
+                                    <li class="paopao-recommend-item global-flex global-flex-center">
+                                        <div class="paopao-recommend-tag-name">开通时长</div>
+                                        <input class="paopao-recommend-input" type="number" name="number" pattern="[0-9]*"
+                                            placeholder="填写时长" />天
+                                    </li>
+                                    <li class="paopao-recommend-item global-flex global-flex-center">
+                                        <div class="paopao-recommend-tag-name">支付金额</div>
+                                        <div class="font-purple">
+                                            <span style="font-size:2.5rem">10</span>元
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="paopao-recommend-pay-tips">
+                                    温馨提示：<br>支付完成之后，系统会自动按照您购买的时长显示在首页（按照支 付完成时间排序）
+                                </div>
+                                <button class="global-btn global-btn-round-lg">确认支付</button>
+                                <a href="javascript:;" class="paopao-pay-record">购买记录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- 开通会员 -->
+            <button class="paopao-vip-btn global-flex global-flex-center">
+                <div class="paopao-vip-btn-signs">
+                </div>
+                <div class="paopao-vip-btn-content">
+                    <p>超级特权</p>
+                    <p>7项专属特权</p>
+                </div>
+            </button>
+        </div>
+        <footer id="footer">
+            <nav class="global-flex footer-item-wrapper">
+                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-active footer-item">
+                    <svg class="icon-footer" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-index"></use>
+                    </svg>
+                    <p>首页</p>
+                </li>
+                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                    <svg class="icon-footer" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-date"></use>
+                    </svg>
+                    <p>相亲</p>
+                </li>
+                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                    <svg class="icon-footer" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-rank"></use>
+                    </svg>
+                    <p>排行榜</p>
+                </li>
+                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                    <svg class="icon-footer" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-my"></use>
+                    </svg>
+                    <p>我的</p>
+                </li>
+            </nav>
+        </footer>
+        <!-- 填写资料 -->
+        <div id="paopao-personal-data" class="global-fix-layer global-box anim" style="display:none">
+            <h2 class="public-block-title" style="margin-bottom:2rem">填写资料</h2>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">头像</div>
+                <div class="personal-avatar">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543244892462&di=468246e9b88c91d21b054e00f1e75db5&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fd53f8794a4c27d1e17390c8210d5ad6eddc4385c.jpg"
+                        class="global-img">
+                </div>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">昵称</div>
+                <input type="text" placeholder="请输入用户名">
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">
+                    手机号码
+                </div>
+                <input type="number" name="number" pattern="[0-9]*" maxlength="11" placeholder="请输入手机号码" class="global-flex-1" />
+                <!-- 
+                    没填手机号码是validate-btn
+                    手机号码正确但是没发送 validate-ready
+                    验证号码发送以后 validate-send
+                    -->
+                <button class="global-btn global-btn-round-sm validate-btn">验证</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item paopao-validate-code">
+                <div class="data-tag-name">
+                    验证码
+                </div>
+                <input placeholder="请输入验证码" type="number" name="number" pattern="[0-9]*" class="validate-input" />
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item">
+                <div class="data-tag-name">性别</div>
+                <button class="global-btn global-btn-round-sm global-bg-btn-default btn-active">美女</button>
+                <button class="global-btn global-btn-round-sm global-bg-btn-default">帅哥</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item paopao-personal-data-type">
+                <div class="data-tag-name">交友类型</div>
+                <button class="global-btn global-btn-round-sm global-bg-btn-default btn-active">不限</button>
+                <button class="global-btn global-btn-round-sm global-bg-btn-default">相亲</button>
+                <button class="global-btn global-btn-round-sm global-bg-btn-default">交友</button>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">
+                    出生年月
+                </div>
+                <a href="javascript:;" id="pickerBirth" class="picker-text global-flex-1">请选择出生年月</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                <div class="data-tag-name">家乡</div>
+                <a href="javascript:;" id="pickerHometown" class="picker-text global-flex-1">请选择省份地区</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
+            </div>
+            <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
+                    <div class="data-tag-name">个性标签</div>
+                    <a href="javascript:;" id="pickerHoroscope" class="picker-text global-flex-1">默认根据生日选星座</a>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+            </div>
+            <button class="global-btn global-btn-round-lg">保存</button>
+        </div>
+    </body>
+    <!-- 不要去改这里的调用顺序不然会有bug -->
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/swiper.js"></script>
+    <script src="../js/jquery.range.js"></script>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/zepto.weui.js"></script>
+    <script src="../js/picker.min.js"></script>
+    <script src="../js/picker.city.js"></script>
+    <script>
+        // requestAnimationFrame兼容
+        (function () {
+            if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+                window.requestAnimationFrame = function (callback) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                    var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return timer
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (timer) {
+                    clearTimeout(timer)
+                };
+            }
+        })();
+
+        $(function () {
+            // 全局变量
+            var wrapper = document.querySelector('#global-wrapper');
+
+            // 公告
+            var paopaoAnnounceSwiper = new Swiper('.paopao-announce-swiper', {
+                direction: 'vertical',
+                loop: true,
+                autoplayDisableOnInteraction: false,
+                autoplay: 2500
+            })
+
+            // 交友圈
+            var paopaoCircleSwiper = new Swiper('.paopao-circle-swiper', {
+                speed: 700,
+                loop: true, // 只有一条的时候不要循环滚动
+                autoplayDisableOnInteraction: false,
+                autoplay: 5000
+            })
+
+            // 全局滚动事件
+            function globalScroll() {
+                var paopaoVipBtn = document.querySelector('.paopao-vip-btn');
+                var scrollTop = 0,
+                    timer = null;
+                wrapper.addEventListener('scroll', function (e) {
+                    var timer = setTimeout(() => {
+                        var curScrollTop = e.target.scrollTop;
+                        if (curScrollTop - scrollTop >= 20) {
+                            paopaoVipBtn.classList.remove('show-paopao-vip-btn')
+                        } else {
+                            if (curScrollTop - scrollTop <= -20) {
+                                paopaoVipBtn.classList.add('show-paopao-vip-btn')
+                                navObj.startScroll = false
+                                hideSelected()
+                            }
+                        }
+                        scrollTop = curScrollTop
+                    }, 68)
+                })
+            }
+            globalScroll()
+
+            let navObj = {
+                before: 0, // 前一个索引
+                index: 0, // 当前的索引
+                startScroll: false, // 开始滚动
+                navOffsetTop: 0, // 导航距离顶部的距离
+                navArr: [], // 导航Arr
+                blockArr: [], // 板块
+                isLoadingArr: [], // 正在加载
+                loadAllArr: [], // 加载完成
+                transformArr: function (arr) {
+                    return Array.prototype.slice.call(arr)
+                },
+                init: function () {
+                    var doc = document;
+                    this.navArr = this.transformArr(doc.querySelectorAll('.paopao-nav-item'))
+                    for (var i = 0, len = this.navArr.length; i < len; i++) {
+                        this.isLoadingArr.push(false)
+                        this.loadAllArr.push(false)
+                    }
+                    this.blockArr = this.transformArr(doc.querySelectorAll('.paopao-block'))
+                    this.navOffsetTop = doc.querySelector('.paopao-nav-wrapper').offsetTop;
+                },
+                scrollTo() {
+                    var scrollRate,
+                        navOffsetTop = this.navOffsetTop;
+                    return new Promise(function(resolve,reject){
+                         if (wrapper.scrollTop < navOffsetTop) {
+                            var timer = requestAnimationFrame(function fn() {
+                                if (navOffsetTop - wrapper.scrollTop >= 20) {
+                                    scrollRate = 15;
+                                } else if (navOffsetTop - wrapper.scrollTop < 20 && navOffsetTop - wrapper.scrollTop >=
+                                    1) {
+                                    scrollRate = 2;
+                                } else if (navOffsetTop - wrapper.scrollTop < 1 && navOffsetTop - wrapper.scrollTop >
+                                    0) {
+                                    scrollRate = .1;
+                                }
+                                if (wrapper.scrollTop < navOffsetTop) {
+                                    wrapper.scrollTop += scrollRate;
+                                    timer = requestAnimationFrame(fn)
+                                } else {
+                                    wrapper.scrollTop = navOffsetTop
+                                    navObj.startScroll = true
+                                    cancelAnimationFrame(timer);
+                                    resolve(true)
+                                }
+                            })
+                        }else{
+                            resolve(true)
+                        }
+                    }).catch(function(err){
+                        console.log(err)
+                    })
+                }
+            }
+
+            navObj.init()
+
+            // 导航切换
+            // moveSwitch 手势切换
+            // fn 回调函数
+            function switchPaoPaoNav(moveSwitch, fn) {
+                var cla = 'paopao-nav-active';
+                if (!moveSwitch) {
+                    navObj.navArr.forEach(function (item, index) {
+                        item.onclick = function () {
+                            if (index == navObj.index) return
+                            navObj.scrollTo().then(function(done){
+                                if(done){
+                                    navObj.before = navObj.index
+                                    item.classList.add(cla)
+                                    navObj.navArr[navObj.before].classList.remove(cla)
+                                    navObj.index = index
+                                    fn && fn(index)
+                                }
+                            })
+                            
+                        }
+                    })
+                } else {
+                    navObj.scrollTo().then(function(done) {
+                        fn && fn(cla)
+                    })
+                }
+            }
+
+            // 板块切换
+            var paopaoBlockSwiper = new Swiper('.paopao-block-swiper', {
+                autoplay: false,
+                speed: 720,
+                touchAngle: 30,
+                shortSwipes : false,
+                resistanceRatio: 0.9,
+                touchMoveStopPropagation: false,
+                passiveListeners: false,
+                onSlideChangeStart: function (swiper) {
+                    switchPaoPaoNav(true, function (cla) {
+                        hideSelectedBtn(swiper.activeIndex)
+                        navObj.navArr[swiper.activeIndex].classList.add(cla)
+                        navObj.navArr[swiper.previousIndex].classList.remove(cla)
+                        navObj.index = swiper.activeIndex
+                        navObj.before = swiper.previousIndex
+                    })
+                }
+            })
+
+            function hideSelectedBtn(index) {
+                // 上首页隐藏筛选
+                if (index == 1) {
+                    $('.paopao-selected-nav-btn').hide()
+                } else if (index == 0) {
+                    $('.paopao-selected-nav-btn').show()
+                }
+            }
+
+            switchPaoPaoNav(false, function (index) {
+                hideSelected()
+                hideSelectedBtn(index)
+                paopaoBlockSwiper.slideTo(index, 700, false)
+            })
+
+            // 板块滚动
+            function blockScroll() {
+                // 检测导航位置
+                var startY = 0;
+                var block = document.querySelector('.paopao-block-swiper')
+                block.addEventListener('touchstart', function (e) {
+                    startY = e.changedTouches[0].pageY
+                }, false);
+
+                block.addEventListener('touchmove', function (e) {
+                    e.stopPropagation()
+                    var deltaY = e.changedTouches[0].pageY - startY;
+                    if (navObj.index == 1 && deltaY < 0) {
+                        navObj.scrollTo()
+                        e.preventDefault()
+                        return false
+                    }
+                    if (navObj.index == 0 && deltaY < 0 && !navObj.startScroll) {
+                        e.preventDefault()
+                        return false
+                    }
+                }, false);
+                block.addEventListener('touchend', function (e) {
+                    var deltaY = e.changedTouches[0].pageY - startY;
+                    if (navObj.index == 0 && deltaY < -20) {
+                        navObj.scrollTo()
+                    }
+                })
+
+            }
+            blockScroll()
+
+            // 加载paopao列表页
+            function loadPaopaoItem(fn) {
+                navObj.blockArr[navObj.index].addEventListener('scroll', function(e) {
+                    if (!navObj.isLoadingArr[navObj.index] && !navObj.isLoadingArr[navObj.index]) {
+                        if (e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
+                            fn && fn()
+                        }
+                    }
+                })
+            }
+            loadPaopaoItem(function () {
+                console.log('加载数据啦')
+            })
+
+
+            function showSelected() {
+                $('.paopao-selected-nav-btn').on('click', function () {
+                    if($('.paopao-selected-content').hasClass('sliderFromTop')){
+                        hideSelected()
+                    }else{
+                        navObj.scrollTo().then(function(done){
+                            $('.paopao-selected-wrapper').fadeIn(300)
+                            $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
+                        })
+                    }
+                })
+            }
+            showSelected()
+
+
+            //隐藏筛选弹层
+            function hideSelected() {
+                $('.paopao-selected-content').removeClass('sliderFromTop').addClass('sliderOutTop')
+                setTimeout(() => {
+                    $('.paopao-selected-wrapper').fadeOut()
+                }, 420)
+            }
+            // hideSelected()
+
+            // 点击遮罩层关闭筛选层
+            $('.paopao-selected-wrapper').on('click', function () {
+                hideSelected()
+            })
+            // 筛选层阻止冒泡
+            function forbidSelected(){
+                $('.paopao-selected-content').on('click', function (e) {
+                    e.stopPropagation()
+                })
+            }
+            forbidSelected()
+            
+
+            // 执行填写资料
+            function showPersonView() {
+                var personView = $('#paopao-personal-data')
+                personView.show()
+                Array.prototype.slice.apply(personView.children()).forEach(function (item, index) {
+                    item.classList.add("show-personal-data-item")
+                    item.style.cssText = 'animation-delay:' + (.0825 * (index + 2)) + 's'
+                })
+            }
+
+            setTimeout(() => {
+                // 新用户第一次进来需要填写资料
+                showPersonView()
+                // 这里只是模拟效果
+                setTimeout(() =>{
+                    $('#paopao-personal-data').hide()
+                },2000)
+            },1000)
+
+            // 底部链接跳转
+            function footerLink() {
+                var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
+                url = ''
+                footerList.forEach(function(item,index){
+                    item.onclick = function() {
+                        if(index === 0){
+                            url = 'http://192.168.10.227:3000/html/index.html'
+                        }else if(index === 1){
+
+                        }else if(index === 2){
+
+                        }else if(index === 3){
+                            url = 'http://192.168.10.227:3000/html/my.html'
+                        }
+                        window.open(url)
+                    }
+                })
+            }
+            footerLink()
+
+            // 出生年月
+            document.querySelector('#pickerBirth').addEventListener('click', function () {
+                weui.datePicker({
+                    start: 1960,
+                    end: new Date().getFullYear(),
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+            });
+
+            // 选择省市地区
+            $("#pickerHometown").cityPicker({
+                title: "选择省市地区",
+                showDistrict: false,
+                onChange: function (picker, values, displayValues) {
+                    console.log(values, displayValues);
+                }
+            });
+
+            // 选择职业
+            document.querySelector('#pickerHoroscope').addEventListener('click', function () {
+                weui.picker([{
+                    label: '白羊',
+                    value: 0
+                }, {
+                    label: '天蝎',
+                    value: 1
+                }, {
+                    label: '巨蟹',
+                    value: 2
+                }, {
+                    label: '摩羯',
+                    value: 3
+                }, {
+                    label: '射手',
+                    value: 4
+                }], {
+                    onChange: function (result) {
+                        //console.log(item, index);
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+            });
+
+
+            // 筛选弹层            
+            var heightRange = $('.range-height-slider').jRange({
+                from: 135,
+                to: 200,
+                step: 1,
+                format: '%s',
+                width: 288,
+                showLabels: false,
+                isRange : true,
+                onstatechange:function(val){
+
+                }
+            });
+            var ageRange = $('.range-age-slider').jRange({
+                from: 18,
+                to: 65,
+                step: 1,
+                format: '%s',
+                width: 288,
+                showLabels: false,
+                isRange : true,
+                onstatechange:function(val){
+                    // input上面两个value值相等的时候会叠在一起 文案变成默认
+                    console.log(val)
+                }
+            });
+            var salaryRange = $('.range-salary-slider').jRange({
+                from: 3000,
+                to: 20000,
+                step: 100,
+                format: '%s',
+                width: 288,
+                showLabels: false,
+                isRange : true,
+                onstatechange:function(val){
+
+                }
+            });
+
+            
+
+        })
+    </script>
+
+</html>

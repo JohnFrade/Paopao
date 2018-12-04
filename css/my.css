@@ -1,0 +1,166 @@
+#global-wrapper{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    padding-bottom:4.16666666667rem;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch
+}
+/*头部信息 */
+.my-info{
+    padding: 1rem 1.25rem 2rem 1rem
+}
+.my-avatar{
+    width:7.5rem;
+    height:7.5rem;
+    margin-right: 1rem;
+    border-radius: 50%
+}
+.my-username-wrapper{
+    margin-bottom: .5rem
+}
+.my-username{
+    max-width: 12.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    color: #945dff
+}
+.my-username-wrapper .global-vip-signs{
+    position: relative;
+    top: 2px;
+    margin-left: 4px
+}
+.data-progress{
+    margin-left: 2px;
+    padding: 0 4px;
+    line-height: 1.4;
+    font-size:1rem;
+    color:#666;
+    font-weight: 500;
+    border-radius: 14px;
+}
+
+.my-album-btn{
+    position: absolute;
+    right: 1.25rem;
+    bottom: 2.83333333333333rem;
+    height: 2.333333333335rem;
+    width: 4.8rem;
+    font-size: 1.1666666667rem;
+    font-weight: 400;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 24px
+}
+.my-nav-list{
+    position: sticky;
+    top: 0;
+    padding-bottom: 1rem;
+    font-size: 1.166666666667rem;
+    text-align: center
+}
+.my-nav-list::before{
+    border-color: #e5e5e5
+}
+.my-nav-item-data{
+    margin-bottom: .41666666667rem;
+    font-weight: 700;
+    color:#333
+}
+.new-visit-tips{
+    position: absolute;
+    top: -.5rem
+}
+/* 会员卡 */
+.vip-card-wrapper{
+    padding: 1rem;
+    background: #fff
+}
+.vip-card{
+    display: block;
+    width: 100%;
+    height: 16.666666666667rem;
+    border-radius: .666666666667rem;
+    overflow: hidden
+}
+.open-vip-btn{
+    position: absolute;
+    top: .83333333333rem;
+    right: 1.25rem;
+    width: 6rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1rem;
+    color: #ffc96b;
+    border:1px solid #ffc96b;
+    border-radius: 2.5rem;
+}
+
+#main{
+    position: absolute;
+    width: 100%;
+    padding-bottom: 6rem;
+    background: #f2f2f2;
+    transition: transform .48s cubic-bezier(0.215, 0.650, 0.425, 1.000)
+}
+/* 个人动态 */
+.my-active-news-wrapper{
+    position: relative;
+    padding: 2rem 1.25rem 2rem 1rem;
+    margin-bottom: .83333333333rem;
+    background: #fff
+}
+.my-active-news-wrapper::before{
+    transform: translateY(-.5px)
+}
+.my-active-news-block-name{
+    margin-right: 2.2rem
+}
+.my-active-news-item{
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: .5rem;
+    overflow: hidden
+}
+.my-active-news-item:not(:last-of-type){
+    margin-right: .41666666667rem
+}
+
+/* 我的 */
+.my-item{
+    position: relative;
+    padding: 1rem 1.25rem 1rem 1rem;
+    font-size: 1.16666666667rem;
+    color: #666;
+    background: #fff
+}
+.my-item:last-of-type{
+    margin-top: .833333333333rem
+}
+.icon-my-item{
+    margin-right: .666666666667rem;
+    width: 1.333333333333rem;
+    height:1.333333333333rem
+}
+.gap-right{
+    padding-right: 1.1666666667rem
+}
+.icon-arrow-right{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.25rem;
+    margin: auto 0;
+    width: 1rem;
+    height: 1.0833333333rem;
+}
+
+.my-text-center{
+    position: relative;
+    top:1px
+}
