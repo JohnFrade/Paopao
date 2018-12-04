@@ -63,7 +63,7 @@ html {
 body {
     max-width: 640px;
     margin: 0 auto;
-    font-family:"PingFangSC-Regular", sans-serif;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
     word-wrap: break-word;
     word-break: break-all;
     color: #333;
@@ -540,6 +540,51 @@ ul, li {
     animation: fadeOut .56s cubic-bezier(0.000, 0.505, 0.500, 1.000) both
 }
 
+
+.global-dialog-tips{
+    display: none;
+    position:fixed;
+    z-index:1000;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background:rgba(0, 0, 0, 0.6);
+    z-index: 1000
+}
+.dialog-tips-content{
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: .6666666667rem;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    overflow: hidden    
+}
+.dialog-tips-content-top{
+    height: 10.333333334rem;
+}
+.dialog-title{
+    font-size:1.333333333333rem;
+    margin-bottom: 1rem 
+}
+.dialog-text{
+    padding: 0 4rem;
+    font-size: 1.1666666667rem;
+    line-height: 1.5;
+    color: #999
+}
+.dialog-btn{
+    display: block;
+    text-align: center;
+    width:100%;
+    line-height:3.75rem;
+    font-size:1.3333333333rem;
+    color:#333
+}
 /* 自适应缩放比例 */
 @media screen and (min-width:320px) {
     html {

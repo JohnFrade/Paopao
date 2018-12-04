@@ -16604,7 +16604,6 @@
             });
     
           var config = {
-    
             cssClass: "city-picker",
             rotateEffect: false,  //为了性能
             formatValue: function (p, values, displayValues) {
@@ -16706,7 +16705,7 @@
       };
     
       defaults = $.fn.cityPicker.prototype.defaults = {
-        showDistrict: false //是否显示地区选择
+        showDistrict: true //是否显示地区选择
       };
     
     }($);

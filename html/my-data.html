@@ -73,7 +73,7 @@
             </div>
             <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
                 <div class="data-tag-name">家乡</div>
-                <a href="javascript:;" id="pickerHometown" class="picker-text global-flex-1">请选择省份地区</a>
+                <input class="weui-input picker-text global-flex-1 home-input" id="home-city" type="text" placeholder="请选择地区">
                 <svg class="icon-arrow-right" aria-hidden="true">
                     <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                 </svg>
@@ -152,14 +152,18 @@
                     }
                 });
             });
-            // 选择省市地区
-            $("#pickerHometown").cityPicker({
+           // 选择省市地区
+           $("#home-city").cityPicker({
                 title: "选择省市地区",
                 showDistrict: false,
                 onChange: function (picker, values, displayValues) {
-                    console.log(values, displayValues);
+                    console.log(values)
                 }
             });
+            // 这里用于测试模拟是否可以改变值
+            setTimeout(() => {
+                $("#home-city").picker("setValue",["320000", "320100"])
+            },4000)
 
             // 选择身高
             document.querySelector('#pickerBodyHeight').addEventListener('click', function () {

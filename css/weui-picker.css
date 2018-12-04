@@ -9,6 +9,20 @@
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
 }
+.weui-dialog{
+  position: fixed;
+  z-index: 5000;
+  width: 80%;
+  max-width: 300px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+}
 .weui-picker-modal.weui-picker-modal-visible{
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
@@ -92,7 +106,7 @@
   height: 3.6rem;
   line-height: 3.6rem;
   z-index: 1;
-  padding-right: 1rem
+  padding:0 1rem
 }
 .weui-picker-modal {
   width: 100%;
@@ -384,11 +398,11 @@
     display:-webkit-box;
     display:-webkit-flex;
     display:flex;
-    padding:9px 15px;
+    padding: 1rem;
     background-color:#fff;
     position:relative;
     text-align:center;
-    font-size:17px;
+    font-size:1.33333333333rem;
   }
   .weui-picker__hd:after{
     content:" ";

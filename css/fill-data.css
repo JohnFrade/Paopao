@@ -36,6 +36,10 @@ input[type="number"]{
 #paopao-personal-data input::-webkit-input-placeholder{
     font-weight: 400
 }
+#paopao-personal-data .home-input::-webkit-input-placeholder{
+    font-weight: 700;
+    color: #333
+}
 .my-data-block-title{
     padding: 1rem 0 2rem
 }
@@ -54,6 +58,8 @@ input[type="number"]{
     margin-right: unset
 }
 #paopao-personal-data .validate-btn{
+    position: absolute;
+    right: 0;
     margin-right: 0;
     color:#999;
     background: #fff;
@@ -124,6 +130,7 @@ input[type="number"]{
     }
 }
 .show-personal-data-item{
+    position: relative;
     animation-name: showPersonalDataItem;
     animation-duration: .72s;
     animation-timing-function: linear;

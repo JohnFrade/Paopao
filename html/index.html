@@ -241,7 +241,7 @@
                                 <div class="font-blue">不限</div>
                             </div>
                             <div class="slider-wrapper">
-                                <input class="range-slider range-age-slider" type="hidden" value="0,100">
+                                <input class="range-slider range-age-slider" type="hidden" value="0,65">
                             </div>
                         </div>
                         <div class="selected-item">
@@ -250,7 +250,7 @@
                                 <div class="font-blue">不限</div>
                             </div>
                             <div class="slider-wrapper">
-                                <input class="range-slider range-salary-slider" type="hidden" value="0,100">
+                                <input class="range-slider range-salary-slider" type="hidden" value="3000,20000">
                             </div>
                         </div>
                         <div class="global-flex">
@@ -520,7 +520,7 @@
             </div>
             <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
                 <div class="data-tag-name">家乡</div>
-                <a href="javascript:;" id="pickerHometown" class="picker-text global-flex-1">请选择省份地区</a>
+                <input class="weui-input picker-text global-flex-1 home-input" id="home-city" type="text" placeholder="请选择地区">
                 <svg class="icon-arrow-right" aria-hidden="true">
                     <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                 </svg>
@@ -532,7 +532,17 @@
                         <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                     </svg>
             </div>
-            <button class="global-btn global-btn-round-lg">保存</button>
+            <button class="global-btn global-btn-round-lg save-data">保存</button>
+        </div>
+        <!-- 全局提示层 -->
+        <div class="global-dialog-tips">
+            <div class="dialog-tips-content">
+                <div class="dialog-tips-content-top global-border global-border-bottom global-flex global-flex-column global-flex-justify-center">
+                    <h3 class="dialog-title">提示</h3>
+                    <p class="dialog-text"></p>
+                </div>
+                <a href="javascript:void(0);" class="dialog-btn">知道了</a>
+            </div>
         </div>
     </body>
     <!-- 不要去改这里的调用顺序不然会有bug -->
@@ -826,9 +836,9 @@
                 // 新用户第一次进来需要填写资料
                 showPersonView()
                 // 这里只是模拟效果
-                setTimeout(() =>{
-                    $('#paopao-personal-data').hide()
-                },2000)
+                // setTimeout(() =>{
+                //     $('#paopao-personal-data').hide()
+                // },2000)
             },1000)
 
             // 底部链接跳转
@@ -857,6 +867,7 @@
                 weui.datePicker({
                     start: 1960,
                     end: new Date().getFullYear(),
+                    defaultValue:[1995,8],     // 年月
                     onChange: function (result) {
                         console.log(result);
                     },
@@ -867,13 +878,18 @@
             });
 
             // 选择省市地区
-            $("#pickerHometown").cityPicker({
+            $("#home-city").cityPicker({
                 title: "选择省市地区",
                 showDistrict: false,
                 onChange: function (picker, values, displayValues) {
-                    console.log(values, displayValues);
+                    console.log(values)
                 }
             });
+            // 这里用于测试模拟是否可以改变值
+            setTimeout(() => {
+                $("#home-city").picker("setValue",["320000", "320100"])
+            },4000)
+            
 
             // 选择职业
             document.querySelector('#pickerHoroscope').addEventListener('click', function () {
@@ -893,6 +909,7 @@
                     label: '射手',
                     value: 4
                 }], {
+                    defaultValue:[4],
                     onChange: function (result) {
                         //console.log(item, index);
                         console.log(result);
@@ -943,8 +960,25 @@
                 }
             });
 
-            
+            $('.save-data').on('click',function() {
+                globalDialog('提交保存后，性别将无法修改，请谨慎操作')
+            })  
 
+            function globalDialog(text){
+                $('.global-dialog-tips').fadeIn(300).find('.dialog-text').text(text)
+                $('.dialog-tips-content').on('click',function(e){
+                    e.stopPropagation()
+                    e.preventDefault()
+                })
+                $('.dialog-btn').on('click',function() {
+                    $('.global-dialog-tips').fadeOut(300)
+                })
+            }
+
+            // 没开通vip点击vip
+            $('.paopao-item').on('click',function(){
+                globalDialog('开通VIP，并完善资料才可以查看相亲用户资料噢~！')
+            })
         })
     </script>
 
