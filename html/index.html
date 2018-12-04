@@ -708,7 +708,7 @@
                 autoplay: false,
                 speed: 720,
                 touchAngle: 30,
-                shortSwipes : false,
+                // shortSwipes : false,
                 resistanceRatio: 0.9,
                 touchMoveStopPropagation: false,
                 passiveListeners: false,
@@ -807,7 +807,6 @@
                     $('.paopao-selected-wrapper').fadeOut()
                 }, 420)
             }
-            // hideSelected()
 
             // 点击遮罩层关闭筛选层
             $('.paopao-selected-wrapper').on('click', function () {
@@ -820,6 +819,30 @@
                 })
             }
             forbidSelected()
+
+            //阻止遮罩层可以上下滚动
+            function preventSelectedLayerMove(){
+                var startY = 0,
+                    startX = 0;
+                var select = document.querySelector('.paopao-selected-content')
+                select.addEventListener('touchstart', function (e) {
+                    startY = e.changedTouches[0].pageY;
+                    startX = e.changedTouches[0].pageX
+                }, false);
+
+                select.addEventListener('touchmove', function (e) {
+                    var deltaY = e.changedTouches[0].pageY - startY;
+                    var deltaX = e.changedTouches[0].pageX - startX
+                    if(deltaY < 0 || deltaY > 0){
+                        if(Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)){
+                            e.stopPropagation()
+                            e.preventDefault()
+                            return false
+                        }
+                    }
+                }, false);
+            }
+            preventSelectedLayerMove()
             
 
             // 执行填写资料
@@ -836,9 +859,9 @@
                 // 新用户第一次进来需要填写资料
                 showPersonView()
                 // 这里只是模拟效果
-                // setTimeout(() =>{
-                //     $('#paopao-personal-data').hide()
-                // },2000)
+                setTimeout(() =>{
+                    $('#paopao-personal-data').hide()
+                },5000)
             },1000)
 
             // 底部链接跳转
@@ -920,14 +943,14 @@
                 });
             });
 
-
+            const winW = document.documentElement.clientWidth*.72
             // 筛选弹层            
             var heightRange = $('.range-height-slider').jRange({
                 from: 135,
                 to: 200,
                 step: 1,
                 format: '%s',
-                width: 288,
+                width: winW,
                 showLabels: false,
                 isRange : true,
                 onstatechange:function(val){
@@ -939,7 +962,7 @@
                 to: 65,
                 step: 1,
                 format: '%s',
-                width: 288,
+                width: winW,
                 showLabels: false,
                 isRange : true,
                 onstatechange:function(val){
@@ -952,7 +975,7 @@
                 to: 20000,
                 step: 100,
                 format: '%s',
-                width: 288,
+                width: winW,
                 showLabels: false,
                 isRange : true,
                 onstatechange:function(val){

@@ -1,5 +1,5 @@
   .slider-container {
-    width: 300px;
+    margin-left: 3.3333333333333334rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   .slider-container .back-bar .selected-bar {
@@ -18,18 +18,20 @@
   .slider-container .scale div {
     display: block;
     position: absolute;
-    top: 1rem;
+    top: -1rem;
     width: 4.5rem;
     text-align: center;
     font-size: 1.1666666666667rem;
   }
   .slider-container .scale div:first-of-type{
-    left: 0;
-    text-align: left
+    box-sizing: border-box;
+    padding-right: 1rm;
+    left: -5.5rem;
+    text-align: right
   }
   .slider-container .scale div:last-of-type {
-    right: 0;
-    text-align: right
+    right: -5rem;
+    text-align: left
   }
 
   .theme-green .back-bar {

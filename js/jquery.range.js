@@ -42,9 +42,8 @@
 		template: '<div class="slider-container">\
 			<div class="back-bar">\
                 <div class="selected-bar"></div>\
-                <div class="pointer low"></div><div class="pointer-label low">123456</div>\
-                <div class="pointer high"></div><div class="pointer-label high">456789</div>\
-                <div class="clickable-dummy"></div>\
+                <div class="pointer low"></div><div class="pointer-label low"></div>\
+                <div class="pointer high"></div><div class="pointer-label high"></div>\
             </div>\
             <div class="scale"></div>\
 		</div>',
@@ -66,6 +65,7 @@
 			this.bar           = $('.selected-bar', this.domNode);
 			this.clickableBar  = this.domNode.find('.clickable-dummy');
 			this.interval      = this.options.to - this.options.from;
+
 			this.render();
 		},
 		render: function() {
@@ -122,7 +122,6 @@
 		onDrag: function(pointer, e) {
 			e.stopPropagation();
 			e.preventDefault();
-
 			if (e.originalEvent.touches && e.originalEvent.touches.length) {
 				e = e.originalEvent.touches[0];
 			} else if (e.originalEvent.changedTouches && e.originalEvent.changedTouches.length) {
@@ -145,13 +144,13 @@
 			if (this.isSingle())
 				this.setPosition(this.pointers.last(), x, true, true);
 			else {
-				var firstLeft      	= Math.abs(parseFloat(this.pointers.first().css('left'), 10)),
-						firstHalfWidth 	= this.pointers.first().width() / 2,
-						lastLeft 			 	= Math.abs(parseFloat(this.pointers.last().css('left'), 10)),
-						lastHalfWidth  	= this.pointers.first().width() / 2,
-						leftSide        = Math.abs(firstLeft - x + firstHalfWidth),
-						rightSide       = Math.abs(lastLeft - x + lastHalfWidth),
-						pointer;
+				var firstLeft 		= Math.abs(parseFloat(this.pointers.first().css('left'), 10)),
+					firstHalfWidth 	= this.pointers.first().width()/2,
+					lastLeft 		= Math.abs(parseFloat(this.pointers.last().css('left'), 10)),
+					lastHalfWidth  	= this.pointers.first().width()/2,
+					leftSide        = Math.abs(firstLeft - x + firstHalfWidth),
+					rightSide       = Math.abs(lastLeft - x + lastHalfWidth),
+					pointer;
 
 				if(leftSide == rightSide) {
 					pointer = x < firstLeft ? this.pointers.first() : this.pointers.last();
@@ -170,8 +169,6 @@
 			if (!self.isSingle()) {
 				min = pointer.hasClass('high') ? parseFloat(self.lowPointer.css("left")) + (self.lowPointer.width() / 2) : 0;
 				max = pointer.hasClass('low') ? parseFloat(self.highPointer.css("left")) + (self.highPointer.width() / 2) : self.domNode.width();
-				console.log(min)
-				console.log(max)
 			}
 
 			var value = Math.min(Math.max(position, min), max);
@@ -179,9 +176,9 @@
 		},
 		setPosition: function(pointer, position, isPx, animate) {
 			var leftPos, rightPos,
-				lowPos = parseFloat(this.lowPointer.css("left")),
+				lowPos = parseFloat(this.lowPointer.css("left")) || 0,
 				highPos = parseFloat(this.highPointer.css("left")) || 0,
-				circleWidth = this.highPointer.width() / 2;
+				circleWidth = this.highPointer.width()/2;
 			if (!isPx) {
 				position = this.prcToPx(position);
 			}

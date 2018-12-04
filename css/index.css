@@ -266,7 +266,7 @@
     margin-bottom: 3rem;
 }
 .selected-item-top{
-    margin-bottom:1.2rem;
+    margin-bottom:1.8rem;
     font-size: 1.1666666666667rem
 }
 .selected-item-tagname{
@@ -279,9 +279,6 @@
     color: #666;
     border: 1px solid #ccc;
     border-radius: 30px
-}
-.slider-wrapper{
-    padding-left: 1rem
 }
 .selected-sexual-active{
     color: #fff;
