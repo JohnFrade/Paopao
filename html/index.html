@@ -826,19 +826,16 @@
                     startX = 0;
                 var select = document.querySelector('.paopao-selected-content')
                 select.addEventListener('touchstart', function (e) {
-                    startY = e.changedTouches[0].pageY;
-                    startX = e.changedTouches[0].pageX
+                    startY = e.changedTouches[0].clientY;
+                    startX = e.changedTouches[0].clientX
                 }, false);
-
                 select.addEventListener('touchmove', function (e) {
-                    var deltaY = e.changedTouches[0].pageY - startY;
-                    var deltaX = e.changedTouches[0].pageX - startX
-                    if(deltaY < 0 || deltaY > 0){
-                        if(Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)){
-                            e.stopPropagation()
-                            e.preventDefault()
-                            return false
-                        }
+                    var deltaY = e.changedTouches[0].clientY - startY;
+                    var deltaX = e.changedTouches[0].clientX - startX
+                    //计算位置有缓慢的延时
+                    if(Math.abs(deltaY) > 10){
+                        e.preventDefault()
+                        return false
                     }
                 }, false);
             }
@@ -857,11 +854,11 @@
 
             setTimeout(() => {
                 // 新用户第一次进来需要填写资料
-                showPersonView()
-                // 这里只是模拟效果
-                setTimeout(() =>{
-                    $('#paopao-personal-data').hide()
-                },5000)
+                // showPersonView()
+                // // 这里只是模拟效果
+                // setTimeout(() =>{
+                //     $('#paopao-personal-data').hide()
+                // },5000)
             },1000)
 
             // 底部链接跳转

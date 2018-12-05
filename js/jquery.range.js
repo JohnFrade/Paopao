@@ -176,9 +176,10 @@
 		},
 		setPosition: function(pointer, position, isPx, animate) {
 			var leftPos, rightPos,
-				lowPos = parseFloat(this.lowPointer.css("left")) || 0,
+				lowPos = parseFloat(this.lowPointer.css("left")),
 				highPos = parseFloat(this.highPointer.css("left")) || 0,
 				circleWidth = this.highPointer.width()/2;
+				
 			if (!isPx) {
 				position = this.prcToPx(position);
 			}
