@@ -546,6 +546,12 @@ ul, li {
     width: 3.3333333333rem;
     height: 3.3333333333rem
 }
+.loading-all{
+    font-size: 1rem;
+    color: #999;
+    text-align: center;
+    padding: 1.66666667rem
+}
 
 .global-dialog-tips{
     display: none;
