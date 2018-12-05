@@ -22,13 +22,21 @@
         <div id="global-wrapper">
             <!-- banner 泡泡数据 公告 -->
             <header>
-                <div class="paopao-global-banner">
-                    <img src="../img/global-banner.png" class="global-img">
-                    <div class="paopao-global-banner-content global-img  global-flex global-flex-column global-flex-justify-center">
-                        <h1 class="paopao-global-banner-title">Paopao相亲交友</h1>
-                        <p class="paopao-global-banner paopao-global-banner-greet">广州线上相亲交友，欢迎您的到来</p>
+                <div class="swiper-container paopao-banner-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="javascript:void(0);">
+                                <img src="../img/global-banner.png" class="global-img">
+                            </a>
+                        </div>
+                        <div class="swiper-slide global-flex">
+                            <a href="javascript:void(0);">
+                                <img src="../img/global-banner.png" class="global-img">
+                            </a>
+                        </div>
                     </div>
                 </div>
+
                 <div class="global-flex global-flex-center paopao-visit-data-wrapper font-12">
                     <svg class="icon-data">
                         <use xlink:href="../img/index.svg#icon-data"></use>
@@ -41,16 +49,22 @@
                     </div>
                     <button class="global-align-right global-btn paopao-follow">关注</button>
                 </div>
+
                 <div class="paopao-announce global-flex global-flex-center">
-                    <!-- 嵌入一张base64到css -->
                     <div class="paopao-announce-tag"></div>
                     <div class="swiper-container paopao-announce-swiper global-flex-1">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide font-ellipsis font-ellipsis-1">
-                                哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇
+                            <div class="swiper-slide">
+                                <a href="javascript:;" class="global-flex global-flex-center">
+                                    <div class="paopao-item-tag">投票</div>
+                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
+                                </a>
                             </div>
-                            <div class="swiper-slide font-ellipsis font-ellipsis-1">
-                                决阿娇阿娇阿娇阿娇哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+                            <div class="swiper-slide">
+                                <a href="javascript:;" class="global-flex global-flex-center">
+                                    <div class="paopao-item-tag">投票</div>
+                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -577,6 +591,14 @@
         $(function () {
             // 全局变量
             var wrapper = document.querySelector('#global-wrapper');
+
+            // banner
+            var paopaoBannerSwiper = new Swiper('.paopao-banner-swiper', {
+                speed:500,
+                loop: true,
+                autoplayDisableOnInteraction: false,
+                autoplay: 3000
+            })
 
             // 公告
             var paopaoAnnounceSwiper = new Swiper('.paopao-announce-swiper', {
