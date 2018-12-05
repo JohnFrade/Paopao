@@ -540,6 +540,12 @@ ul, li {
     animation: fadeOut .56s cubic-bezier(0.000, 0.505, 0.500, 1.000) both
 }
 
+.loading-list-icon{
+    display: block;
+    margin: 0 auto;
+    width: 3.3333333333rem;
+    height: 3.3333333333rem
+}
 
 .global-dialog-tips{
     display: none;

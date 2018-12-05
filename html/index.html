@@ -74,12 +74,12 @@
             <section id="paopao-circle">
                 <div class="global-flex global-flex-between global-flex-center paopao-circle-title-wrapper">
                     <h2 style="font-size:2rem">交友圈</h2>
-                    <div class="global-flex global-flex-center font-999 font-14">
+                    <a href="javscript:void(0);" class="global-flex global-flex-center font-999 font-14">
                         更多动态
                         <svg aria-hidden="true" class="icon-arrow-right">
                             <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                         </svg>
-                    </div>
+                    </a>
                 </div>
                 <div class="swiper-container paopao-circle-swiper">
                     <div class="swiper-wrapper">
@@ -407,6 +407,8 @@
                                     </div>
                                 </li>
                             </ul>
+                            <!-- 正在加载中 -->
+                            <img src="../img/loading.svg" class="loading-list-icon">
                         </div>
                         <div class="swiper-slide paopao-content-swiper-block">
                             <!-- 上首页 -->
@@ -623,6 +625,9 @@
                     timer = null;
                 wrapper.addEventListener('scroll', function (e) {
                     var timer = setTimeout(() => {
+                        if (wrapper.scrollTop >= navObj.navOffsetTop){
+                            navObj.startScroll = true
+                        }
                         var curScrollTop = e.target.scrollTop;
                         if (curScrollTop - scrollTop >= 20) {
                             paopaoVipBtn.classList.remove('show-paopao-vip-btn')
@@ -665,7 +670,7 @@
                     var scrollRate,
                         navOffsetTop = this.navOffsetTop;
                     return new Promise(function(resolve,reject){
-                         if (wrapper.scrollTop < navOffsetTop) {
+                        if (wrapper.scrollTop < navOffsetTop) {
                             var timer = requestAnimationFrame(function fn() {
                                 if (navOffsetTop - wrapper.scrollTop >= 20) {
                                     scrollRate = 15;
