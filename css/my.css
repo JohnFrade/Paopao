@@ -139,7 +139,7 @@
     color: #666;
     background: #fff
 }
-.my-item:nth-last-of-type(2),.my-item:last-of-type{
+.my-item-wrapper:nth-last-of-type(2),.my-item-wrapper:last-of-type{
     margin-top: .833333333333rem
 }
 .icon-my-item{

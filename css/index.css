@@ -26,7 +26,7 @@
     display: block;
     position: relative;
     top: -.25rem;
-    vertical-align: middle;
+    line-height: 1;
     font-size: 1.66666666666rem;
     transform: scale(.5);
 }
@@ -170,7 +170,7 @@
     font-size: 1rem;
     color: #999;
 }
-.paopao-circle-item-content .global-bg-pink{
+.paopao-circle-item-content .icon-sexual-wrapper{
     width: 2rem;
     max-width: 3rem;
     font-weight: 700;
@@ -403,6 +403,8 @@
     white-space: nowrap;
 }
 .paopao-item-name-wrapper .paopao-tag{
+    min-width: unset;
+    width: 2.3333333333rem;
     margin-left: .5rem
 }
 

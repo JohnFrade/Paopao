@@ -429,7 +429,7 @@
         $(function () {
             // 全局变量
             var wrapper = document.querySelector('#global-wrapper');
-            const winW = document.documentElement.clientWidth * .72
+            const winW = ((document.documentElement.clientWidth > 640?640:document.documentElement.clientWidth)* .72)
 
             function showSelected() {
                 $('.paopao-selected-nav-btn').on('click', function () {
@@ -486,7 +486,6 @@
                             item.classList.add(cla)
                             navObj.navArr[navObj.before].classList.remove(cla)
                             navObj.index = index
-                            loadPaopaoItem()
                             fn && fn(index)
                         }
                     })
@@ -497,6 +496,9 @@
             switchPaoPaoNav(false, function (index) {
                 hideSelected()
                 paopaoBlockSwiper.slideTo(index, 700, false)
+                // loadPaopaoItem(function(){
+                    
+                // })
             })
 
             // 板块切换
@@ -514,7 +516,9 @@
                         navObj.navArr[swiper.previousIndex].classList.remove(cla)
                         navObj.index = swiper.activeIndex
                         navObj.before = swiper.previousIndex
-                        loadPaopaoItem()
+                        // loadPaopaoItem(function(){
+                        //     console.log('2200')
+                        // })
                     })
                 }
             })
@@ -534,9 +538,11 @@
                         return false
                     }
                 })
-                navObj.blockArr[navObj.index].addEventListener('scroll', function (e) {
+                block.addEventListener('scroll', function (e) {
                     if (!navObj.isLoadingArr[navObj.index] && !navObj.isLoadingArr[navObj.index]) {
-                        if (e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
+                        console.log(e.target.scrollTop + e.target.clientHeight + 68)
+                        // console.log(e.target.scrollHeight)
+                        if (e.target.scrollTop + e.target.clientHeight + 128 >= e.target.scrollHeight) {
                             fn && fn()
                         }
                     }
@@ -583,6 +589,12 @@
 
                 }
             });
+
+            $('.selected-sexual-btn').on('click',function(e){
+                e.stopPropagation()
+                // e.preventDefault()
+                alert(110)
+            })
             // 点击遮罩层关闭筛选层
             $('.paopao-selected-wrapper').on('click', function () {
                 hideSelected()

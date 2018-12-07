@@ -1,0 +1,34 @@
+header{
+    background: #fff;
+    margin-bottom: .833333333333rem
+}
+.personal-banner-swiper,.personal-banner-ablum-swiper{
+    width: 100%;
+    height: 31.25rem;
+}
+.personal-banner-tab{
+    position: absolute;
+}
+.personal-banner-tab-wrapper{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    height: 1.333333333333rem;
+    background: #fff;
+    border-radius: 16px
+}
+.person-nav-active{
+    color: #fff
+}
+.person-nav-active .icon-vcr{
+    fill:#fff
+}
+.personal-banner-slider{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.3333333333rem;
+    border-radius: 16px;
+    background: #945DFF
+}
