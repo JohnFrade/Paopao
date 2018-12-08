@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/album.css">
+    <title>相册</title>
+    <script src="../js/rem.js"></script>
+</head>
+
+<body>
+    <div class="album-container">
+        <div class="album-status-bar">
+            <div class="album-number-wrp">
+                <span>0</span>
+                <span>/</span>
+                <span>29</span>
+            </div>
+
+            <div class="album-rule-tips j-showRulebtn">
+                规则
+            </div>
+        </div>
+        <!-- 已上传时候的显示 -->
+        <ul class="album-list-wrp float-clear">
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="../img/fo.jpg">
+                <div class="album-vcr-bg">
+                    <div class="alum-acr-play-logo postion-middle">
+                        <img src="../img/play-logo.png">
+                    </div>
+                    <div class="album-vcr-tips album-vcr-tips-text">点击播放</div>
+                    <div class="album-vcr-tips album-vcr-tips-time">00:05</div>
+                </div>
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="../img/fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="../img/fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                    <img class="album-image-bg" src="../img/fo.jpg">
+                    <div class="album-radio album-radio-active"></div>
+                </li>
+                <li class="album-item float-left">
+                    <img class="album-image-bg" src="../img/fo.jpg">
+                    <div class="album-radio"></div>
+                </li>
+           
+            
+        </ul>
+        <!-- 未上传时候的显示 -->
+        <div class="album-remind-wrp" style="display: none">
+            <div>暂未上传VCR和照片</div>
+            <div>VCR/照片，会使你更受欢迎噢</div>
+        </div>
+
+        <!-- 规则弹层 -->
+        <div class="album-rule-wrp" style="display: none;" id="j-ruleLayer">
+            <div class="album-rule-content">
+                <div class="album-rule-top">
+                    <div class="album-rule-title">
+                        规则
+                    </div>
+                    <p>
+                        1. 普通用户可上传 9 张照片，VIP会员可上传19张照片，单击可设为头像或者删除。
+                    </p>
+                    <p>
+                        2.
+                        <span class="strong">只能上传一个15内的VCR。上传之后，我们将会进行人工审核。</span>审核通过便会在个人主页展示单击播放。点击右上角关闭删除。 择删除。
+                    </p>
+                    <p>
+                        3. 如果发布与交友不相关的图片或者VCR，将不会被审核通过，谢谢合作。
+                    </p>
+                </div>
+                <div class="album-rule-confirm-btn j-showRulebtn">
+                    确定
+                </div>
+            </div>
+        </div>
+
+        <div class="album-btn-group-wrp float-clear">
+            <div class="album-btn-group-vcr float-left">
+                <span>VCR短视频</span>
+                <div class="album-btn-label">赚钱</div>
+            </div>          
+            <div class="album-btn-group-photo float-right">
+                上传照片
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+<script>
+    var showRulebtn = document.querySelectorAll(".j-showRulebtn");
+    var ruleLayer = document.getElementById("j-ruleLayer");
+    var isShowRuleLayer = false;
+
+
+    function showRuleLayer() {
+        ruleLayer.style.display = isShowRuleLayer ? "none" : "block";
+        isShowRuleLayer = !isShowRuleLayer;
+    }
+
+    for (var i = 0, lth = showRulebtn.length; i < lth; i++) {
+        console.log(showRulebtn[i])
+        showRulebtn[i].addEventListener('touchend', showRuleLayer)
+    }
+
+</script>
+
+
+</html>
