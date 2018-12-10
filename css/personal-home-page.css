@@ -1,34 +1,521 @@
-header{
-    background: #fff;
-    margin-bottom: .833333333333rem
+.tag-text {
+    position: absolute;
+    top: -32%;
+    left: -50%;
+    text-align: center;
+    font-size: 1.6666666667rem;
+    line-height: 1;
+    color: #333;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5)
 }
-.personal-banner-swiper,.personal-banner-ablum-swiper{
+
+.block-title {
+    font-size: 2rem;
+    padding: 1rem 0
+}
+.gap-bar{
     width: 100%;
-    height: 31.25rem;
+    height: .83333333333rem;
+    background: #f2f2f2
 }
-.personal-banner-tab{
+#global-wrapper {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     position: absolute;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    background: #fff;
+    overflow: hidden;
 }
-.personal-banner-tab-wrapper{
-    position: absolute;
+
+header {
+    position: relative;
+    width: 100%;
+    background: #fff
+}
+
+main {
+    position: fixed;
     right: 0;
     left: 0;
     margin: 0 auto;
-    height: 1.333333333333rem;
-    background: #fff;
-    border-radius: 16px
+    max-width: 640px;
+    padding-bottom: 7.75rem;
+    background:#fff;
+    top: 31.25rem;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 99
 }
-.person-nav-active{
+.main-scroll{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+
+.personal-banner-swiper {
+    width: 100%;
+    height: 31.25rem
+}
+
+.personal-banner-swiper .swiper-wrapper {
+    transform-origin: 50% 50%;
+    transition: all .68s cubic-bezier(0.375, 0.015, 0.750, 0.750)
+}
+
+.video-content,
+.banner-video {
+    width: 100%;
+    height: 100%
+}
+
+.banner-video{
+    object-fit: cover;
+    object-position: center center
+}
+.banner-video-full-screen{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+    max-width: 640px
+}
+.play-status-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: rgba(0, 0, 0, .5)
+}
+
+.play-status-wrapper .icon-play {
+    margin: auto;
+    width: 1.1666666666667rem;
+    height: 2.33333333333rem;
+    fill: #fff
+}
+
+.play-status-wrapper .icon-pause {
+    display: none;
+    margin: auto;
+    width: 2.3333333333333rem;
+    height: 2.166666666666rem;
+    fill: #fff
+}
+
+.personal-ablum-count,
+.personal-banner-tab-wrapper {
+    position: absolute;
+    bottom: 1rem;
+}
+
+.personal-ablum-count,
+.personal-banner-tab-wrapper {
+    position: absolute;
+    bottom: 1rem;
+    height: 1.333333333333rem;
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 99
+}
+
+.personal-ablum-count {
+    width: 2.666666667rem;
+    right: 1.333333333rem;
+    background: rgba(0, 0, 0, .4);
+}
+
+.personal-ablum-count-text {
     color: #fff
 }
-.person-nav-active .icon-vcr{
-    fill:#fff
+
+.personal-banner-tab-wrapper {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 6.6666666667rem;
+    background: #fff
 }
-.personal-banner-slider{
+
+.personal-banner-nav {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.personal-banner-nav-item {
+    position: relative;
+    height: 100%
+}
+
+.icon-vcr {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: .32rem;
+    margin: auto 0;
+    width: .8333333333rem;
+    height: 1.166666666rem;
+    fill: #333;
+    transform: scale(.5)
+}
+
+.personal-nav-active .tag-text {
+    color: #fff
+}
+
+.personal-nav-active .icon-vcr {
+    fill: #fff
+}
+
+.personal-banner-nav-item:first-of-type .tag-text {
+    padding-right: .8rem;
+    text-align: right;
+    box-sizing: border-box
+}
+
+.personal-banner-slider {
     position: absolute;
     top: 0;
     left: 0;
     height: 1.3333333333rem;
+    width: 3.3333333333334rem;
     border-radius: 16px;
+    background: #945DFF;
+    transition: transform .22s linear
+}
+
+.personal-banner-slider-active {
+    transform: translateX(100%)
+}
+
+/* 个人信息 */
+.personal-info {
+    margin-bottom: .833333333333rem;
+    padding: 1.25rem 1rem 2.083333333rem;
+    background: #fff
+}
+
+.personal-name {
+    max-width: 75%;
+    margin-bottom: .833333333333rem
+}
+
+.icon-sexual-wrapper {
+    position: relative;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    min-width: 3rem;
+    height: 1.1666666667rem;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.icon-sexual {
+    position: relative;
+    left: -.5rem;
+    vertical-align: middle;
+    width: .83333333333rem;
+    height: .83333333333rem;
+}
+
+.icon-sexual-wrapper .tag-text {
+    top: -39.55555%;
+    left: -30%;
+    color: #fff;
+}
+
+.personal-professional {
+    font-size: 1rem;
+    color: #666
+}
+
+.personal-btn-wrapper {
+    width: 3.3333333333rem;
+    font-size: .833333333rem;
+    color: #6666;
+    text-align: center
+}
+
+.personal-professional .icon-tag {
+    color: #999
+}
+
+.personal-btn {
+    height: 2.5rem;
+    width: 3.33333333333rem;
+    margin-bottom: .33333333333rem;
+    border-radius: 30px;
+}
+
+.personal-love-btn {
+    background: #fb4d4a
+}
+
+.personal-add-btn {
     background: #945DFF
+}
+
+.personal-love-btn .personal-btn-icon {
+    margin: auto;
+    width: 1.166666667rem;
+    height: 1.33333333rem;
+    fill: #fff
+}
+
+.personal-add-btn .personal-btn-icon {
+    margin: auto;
+    width: 1.33333333rem;
+    height: 1.33333333rem;
+    fill: #fff
+}
+
+
+/* 个人动态 */
+.my-active-news-wrapper {
+    position: relative;
+    padding: 2rem 1.25rem 2rem 1rem;
+    background: #fff
+}
+
+.my-active-news-block-name {
+    margin-right: 2.2rem
+}
+
+.my-active-news-item {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: .5rem;
+    overflow: hidden
+}
+
+.my-active-news-item:not(:last-of-type) {
+    margin-right: .41666666667rem
+}
+
+.my-info-contact {
+    margin-bottom: 2.16666666666rem;
+    color: #333;
+    font-size: 1.166666666667rem;
+    font-weight: 700
+}
+
+.my-info-tag-name {
+    margin-right: 2.666666667rem
+}
+
+.persoan-no-vip-btn {
+    width: 9.03333333333rem;
+    height: 2rem;
+    font-size: .833333333333rem;
+    color: #fff;
+    border-radius: 24px;
+    background: linear-gradient(90deg, rgba(255, 187, 1, 1) 0%, rgba(255, 128, 0, 1) 100%)
+}
+
+.icon-no-vip {
+    margin-right: 4px;
+    width: 1rem;
+    height: .83333333333rem
+}
+
+.icon-arrow-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.25rem;
+    margin: auto 0;
+    width: 1rem;
+    height: 1.0833333333rem;
+}
+
+.my-info-item {
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    margin-right: 1rem;
+    overflow: hidden;
+}
+
+.my-info-item::after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    transform: scale(.5)
+}
+
+.my-info-item .tag-text {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    height: 100%;
+    color: #666;
+}
+
+.my-info-block,
+.my-slogan{
+    padding: 0 1rem 2rem;
+    width: 100%;
+    background: #fff
+}
+
+.my-slogan-text {
+    color: #333;
+    font-size: 1.1666666667rem;
+    line-height: 1.6666666667rem;
+    font-weight: 700
+}
+.my-accept{
+    width: 100%;
+    padding: 0 1rem
+}
+.my-accept-list{
+    padding-bottom: 2rem;
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden
+}
+.my-accept-item{
+    display: inline-block;
+    position: relative;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    background: #f2f2f2
+}
+.my-accept-item:not(:last-of-type){
+    margin-right: 1rem
+}
+.my-accept-img{
+    position: absolute;
+    transform: translate(25%, 25%);
+    width: 5rem;
+    height: 5rem;
+}
+.my-accept-count{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.6666666667rem;
+    height: 1.6666666667rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.66666666667rem;
+    font-size: .83333333333rem;
+    border-radius: 50%;
+    background: #FFC96B
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 640px;
+    height: 7.75rem;
+    background-image: linear-gradient(rgba(242, 242, 242, 0.8), rgba(242, 242, 242, 1));
+    z-index: 999
+}
+
+.footer-item {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem
+}
+
+.footer-item-sayHi {
+    background: #FFC96B
+}
+
+.icon-sayHi {
+    margin: auto;
+    width: 2.75rem;
+    height: 2.5rem;
+    fill: #fff;
+    animation: sayHi 3.6s 1s linear infinite both
+}
+
+@keyframes sayHi {
+    from {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+
+    8% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    11% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    14% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    17% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    24% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    28% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.footer-item-gift {
+    background: #C44BFF
+}
+
+.icon-gift {
+    margin: auto;
+    width: 2.75rem;
+    height: 2.66666666666rem;
+    fill: #fff
+}
+
+.footer-item-chat {
+    background: #945DFF
+}
+
+.icon-chat {
+    margin: auto;
+    width: 2.75rem;
+    height: 2.5rem;
+    fill: #fff
 }

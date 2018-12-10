@@ -116,7 +116,7 @@
     background: #fff
 }
 .my-active-news-wrapper::before{
-    transform: translateY(-.5px)
+    top: -1px
 }
 .my-active-news-block-name{
     margin-right: 2.2rem

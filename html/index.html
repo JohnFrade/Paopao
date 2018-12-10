@@ -563,6 +563,8 @@
                     var timer = setTimeout(() => {
                         if (wrapper.scrollTop >= navObj.navOffsetTop){
                             navObj.startScroll = true
+                        }else{
+                            navObj.startScroll = false
                         }
                         var curScrollTop = e.target.scrollTop;
                         if (curScrollTop - scrollTop >= 20) {
@@ -602,10 +604,10 @@
                     this.blockArr = this.transformArr(doc.querySelectorAll('.paopao-block'))
                     this.navOffsetTop = doc.querySelector('.paopao-nav-wrapper').offsetTop;
                 },
-                scrollTo() {
+                scrollTo(callback) {
                     var scrollRate,
                         navOffsetTop = this.navOffsetTop;
-                    return new Promise(function(resolve,reject){
+                    // return new Promise(function(resolve,reject){
                         if (wrapper.scrollTop < navOffsetTop) {
                             var timer = requestAnimationFrame(function fn() {
                                 if (navOffsetTop - wrapper.scrollTop >= 20) {
@@ -617,22 +619,24 @@
                                     0) {
                                     scrollRate = .1;
                                 }
-                                if (wrapper.scrollTop < navOffsetTop) {
+                                if (wrapper.scrollTop <= navOffsetTop) {
                                     wrapper.scrollTop += scrollRate;
-                                    timer = requestAnimationFrame(fn)
+                                    requestAnimationFrame(fn)
                                 } else {
-                                    wrapper.scrollTop = navOffsetTop
-                                    navObj.startScroll = true
-                                    cancelAnimationFrame(timer);
-                                    resolve(true)
+                                    setTimeout(() => {
+                                        wrapper.scrollTop = navOffsetTop
+                                        navObj.startScroll = true
+                                        cancelAnimationFrame(timer);
+                                        callback && callback(true)
+                                    },16.6)
                                 }
                             })
                         }else{
-                            resolve(true)
+                            callback && callback(true)
                         }
-                    }).catch(function(err){
-                        console.log(err)
-                    })
+                    // }).catch(function(err){
+                    //     console.log(err)
+                    // })
                 }
             }
 
@@ -645,9 +649,10 @@
                 var cla = 'paopao-nav-active';
                 if (!moveSwitch) {
                     navObj.navArr.forEach(function (item, index) {
-                        item.onclick = function () {
+                        item.onclick = function (e) {
+                            e.stopPropagation()
                             if (index == navObj.index) return
-                            navObj.scrollTo().then(function(done){
+                            navObj.scrollTo(function(done){
                                 if(done){
                                     navObj.before = navObj.index
                                     item.classList.add(cla)
@@ -656,13 +661,18 @@
                                     fn && fn(index)
                                 }
                             })
-                            
+                            // navObj.scrollTo().then(function(done){
+                                
+                            // })
                         }
                     })
                 } else {
-                    navObj.scrollTo().then(function(done) {
+                    navObj.scrollTo(function(){
                         fn && fn(cla)
                     })
+                    // navObj.scrollTo().then(function(done) {
+                    //     fn && fn(cla)
+                    // })
                 }
             }
 
@@ -753,9 +763,15 @@
                     if($('.paopao-selected-content').hasClass('sliderFromTop')){
                         hideSelected()
                     }else{
-                        navObj.scrollTo().then(function(done){
-                            $('.paopao-selected-wrapper').fadeIn(300)
-                            $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
+                        // navObj.scrollTo().then(function(done){
+                        //     $('.paopao-selected-wrapper').fadeIn(300)
+                        //     $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
+                        // })
+                        navObj.scrollTo(function(done){
+                            if(done){
+                                $('.paopao-selected-wrapper').fadeIn(300)
+                                $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
+                            }
                         })
                     }
                 })

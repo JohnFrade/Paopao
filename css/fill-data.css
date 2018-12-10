@@ -40,6 +40,9 @@ input[type="number"]{
     font-weight: 700;
     color: #333
 }
+#paopao-personal-data input{
+    padding: 1rem 0
+}
 .my-data-block-title{
     padding: 1rem 0 2rem
 }
@@ -103,6 +106,9 @@ input[type="number"]{
 .paopao-personal-data-item{
     margin-bottom: 2rem;
     font-size: 1.166666666rem
+}
+.paopao-personal-data-item:nth-of-type(2),.paopao-personal-data-item:nth-of-type(3),.paopao-personal-data-item:nth-of-type(4){
+    margin-bottom: 1rem
 }
 .paopao-personal-tag-wrapper{
     text-align: left;

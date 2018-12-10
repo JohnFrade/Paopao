@@ -264,6 +264,7 @@
                 deltaY = 0, // 竖直触摸的距离
                 cardH = document.querySelector('#vip-card').offsetHeight;
             var cardTranslateY = cardH * (-.645);
+            
             // 如果用Vue放在页面渲染完成之后执行showVipCard这个方法
             setTimeout(() => {
                 el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)'

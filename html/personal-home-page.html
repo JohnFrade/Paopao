@@ -1,105 +1,555 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
-    <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../css/swiper.min.css">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/personal-home-page.css">
-    <title>xxx的主页</title>
-</head>
-<body>
-    <!-- <div id="global-wrapper"> -->
-        <header>
-            <div class="swiper-container personal-banner-swiper">
-                <div class="swiper-wrapper">
-                    <!-- VCR -->
-                    <div class="swiper-slide personal-banner-item">
-                        <!-- http://mvvideo10.meitudata.com/5c04171473d8e6vgnfdeom7573_H264_1_557b1c4b4bc85b.mp4?k=55c772789f6fb6f8c58181c54f6fb7ee&t=5c0cbf34 -->
-                        <i></i>
-                    </div>
-                    <!-- 相册 -->
-                    <div class="swiper-slide personal-banner-item">
-                        <div class="swiper-container personal-banner-ablum-swiper">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="" class="global-img">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/swiper.min.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/personal-home-page.css">
+        <title>Paopao的主页</title>
+    </head>
+
+    <body>
+        <div id="global-wrapper">
+            <header>
+                <div class="swiper-container personal-banner-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- VCR -->
+                        <div class="swiper-slide personal-banner-item">
+                            <div class="video-content global-relative">
+                                <!-- x5-video-player-type="h5" 启用H5播放器,是wechat安卓版特性-->
+                                <video class="banner-video" poster="http://image13.m1905.cn/uploadfile/2015/0803/20150803030748137367.jpg" src="http://mvvideo11.meitudata.com/5a8ab099b40447414_H264_11_5.mp4?k=557d85b680d2e2bcfa25a4a4a6a1e0d2&t=5c10e712" playsinline="true" webkit-playsinline="true"  x-webkit-airplay="allow" x5-video-player-type="h5" preload="auto"></video>
+                                <!-- 播放 -->
+                                <div class="play-status-wrapper global-flex global-box">
+                                    <svg class="icon-play">
+                                        <use xlink:href="../img/personal-home-page.svg#icon-play"></use>
+                                    </svg>
+                                    <svg class="icon-pause">
+                                        <use xlink:href="../img/personal-home-page.svg#icon-pause"></use>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
-                        <!-- 轮播图计数 -->
-                        <div class="personal-ablum-count">
-                            <i>16/16</i>
+                        <div class="swiper-slide personal-banner-item">
+                            <img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike220%2C5%2C5%2C220%2C73/sign=06e289af040828387c00d446d9f0c264/6c224f4a20a44623286a87d29b22720e0df3d7d9.jpg"
+                                class="global-img">
+                        </div>
+                        <div class="swiper-slide personal-banner-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194246065&di=e6e4d13d81b1348855a43d3b94fb5fa2&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2018-01-22%2F5a65b39382e90.jpg"
+                                class="global-img">
                         </div>
                     </div>
+                    <!-- 轮播图切换 -->
+                    <div class="personal-banner-tab-wrapper">
+                        <nav class="personal-banner-nav global-flex">
+                            <div class="personal-banner-nav-item global-flex-1 personal-nav-active">
+                                <svg class="icon-vcr" aria-hidden="true">
+                                    <use xlink:href="../img/personal-home-page.svg#icon-play"></use>
+                                </svg>
+                                <div class="tag-text">VCR</div>
+                            </div>
+                            <div class="personal-banner-nav-item global-flex-1">
+                                <div class="tag-text">相册</div>
+                            </div>
+                        </nav>
+                        <div class="personal-banner-slider"></div>
+                    </div>
+                    <!-- 轮播图相册计数 -->
+                    <div class="personal-ablum-count">
+                        <i class="tag-text personal-ablum-count-text">16/16</i>
+                    </div>
                 </div>
-                <!-- 轮播图切换 -->
-                <div class="personal-banner-tab-wrapper">
-                    <nav class="personal-banner-nav">
-                        <div class="personal-banner-nav-item">
-                            <svg></svg>
-                            <i></i>
+            </header>
+            <main class="global-box">
+                <section class="global-flex personal-info global-flex-center">
+                    <div class="global-flex-1">
+                        <h2 class="personal-name font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈</h2>
+                        <div class="global-flex global-flex-center">
+                            <div class="icon-sexual-wrapper global-bg-pink">
+                                <!-- global-bg-blue -->
+                                <svg class="icon-sexual">
+                                    <!-- icon-man -->
+                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                </svg>
+                                <i class="tag-text">19</i>
+                            </div>
+                            <div class="personal-professional icon-sexual-wrapper">
+                                <i class="icon-tag">哈哈哈</i>
+                            </div>
                         </div>
-                        <div class="personal-banner-nav-item">
-                            <i></i>
-                        </div>
-                    </nav>
-                    <div class="personal-banner-slider"></div>
-                </div>
-            </div>
-            <!--  -->
-            <div class="global-flex personal-info">
-                <div>
-                    <h2 class="personal-title font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈</h2>
-                    <div class="global-flex">
-
-                        <div class="icon-sexual-wrapper">
-                            <svg class="icon-sexual">
-                                <use xlink:href=""></use>
+                    </div>
+                    <div class="personal-btn-wrapper" style="margin-right:1.333333333rem">
+                        <button class="global-btn global-flex personal-btn personal-love-btn">
+                            <svg class="personal-btn-icon" aria-hidden="true">
+                                <use xlink:href="../img/personal-home-page.svg#icon-love"></use>
                             </svg>
-                        </div>
-                        <div>哈哈哈</div>
+                        </button>
+                        <p>暗恋TA</p>
                     </div>
-                </div>
-                <div class="personal-btn-wrapper">
-                    <button class="global-btn global-flex">
-                        <img src="">
-                    </button>
-                    <p>暗恋TA</p>
-                </div>
-                <div class="personal-btn-wrapper">
-                    <button class="global-btn global-flex">
-                        <img src="">
-                    </button>
-                    <p>加好友</p>
-                </div>
-            </div>
-        </header>
-        <main>
-            <section>
+                    <div class="personal-btn-wrapper">
+                        <button class="global-btn global-flex personal-btn personal-add-btn">
+                            <svg class="personal-btn-icon" aria-hidden="true">
+                                <use xlink:href="../img/personal-home-page.svg#icon-add"></use>
+                            </svg>
+                        </button>
+                        <p>加好友</p>
+                    </div>
+                </section>
+                <div class="gap-bar"></div>
+                <section class="my-active-news-wrapper global-flex global-flex-center global-border global-border-bottom">
+                    <div class="font-bold font-14 my-active-news-block-name">
+                        个人动态
+                    </div>
+                    <!-- 最多显示三张 -->
+                    <ul class="my-active-news-list global-flex">
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                    </ul>
+                    <div class="my-active-news-item" style="display:none">
+                        <img src="" class="global-img">
+                    </div>
+                    <div class="global-align-right font-12 font-999" style="padding-right:1rem">63动态</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+                </section>
+                <section class="my-info-block global-box global-border global-border-bottom">
+                    <h2 class="block-title">我的信息</h2>
+                    <div class="my-info-contact global-flex global-flex-center">
+                        <div class="my-info-tag-name">联系方式</div>
+                        <p style="display:none">188 1234 1542</p>
+                        <button class="global-flex global-flex-center global-flex-justify-center persoan-no-vip-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 10" class="icon-no-vip">
+                                <defs>
+                                    <linearGradient id="color" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="6%" stop-color="#fff"></stop>
+                                        <stop offset="100%" stop-color="rgba(255,196,59,1)"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <polygon points="9 0 3 0 0 3 6 10 12 3 9 0" fill="url(#color)"/>
+                            </svg>
+                            请开通VIP查看
+                        </button>
+                    </div>
+                    <ul class="global-flex global-flex-wrap">
+                        <li class="my-info-item">
+                            <i class="tag-text">165cm</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">12000~15000</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">广东广州</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">幽默</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">老司机</i>
+                        </li>
+                    </ul>
+                </section>
+                <section class="my-slogan global-box global-border global-border-bottom">
+                    <h2 class="block-title">内心独白</h2>
+                    <p class="my-slogan-text">希望有一段让彼此成为更好的人的感情。如果有想法，请 主动，因为我也不会主动的</p>
+                </section>
+                <section class="my-accept global-box">
+                    <h2 class="block-title">收到的礼物（55）</h2>
+                    <ul class="my-accept-list">
+                        <li class="my-accept-item global-flex">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+        <footer id="footer" class="global-flex global-flex-center global-flex-between global-box">
+            <a href="javascript:;" class="footer-item footer-item-sayHi global-flex anim">
+                <svg class="icon-sayHi" aria-hidden="true">
+                    <use xlink:href="../img/personal-home-page.svg#icon-sayHi"></use>
+                </svg>
+            </a>
+            <a href="javascript:;" class="footer-item footer-item-gift global-flex">
+                <svg class="icon-gift" aria-hidden="true">
+                    <use xlink:href="../img/personal-home-page.svg#icon-gift"></use>
+                </svg>
+            </a>
+            <a href="javascript:;" class="footer-item footer-item-chat global-flex">
+                <svg class="icon-chat" aria-hidden="true">
+                    <use xlink:href="../img/personal-home-page.svg#icon-chat"></use>
+                </svg>
+            </a>
+        </footer>
+    </body>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/swiper.js"></script>
+    <script>
+        // requestAnimationFrame兼容
+        (function () {
+            if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+                window.requestAnimationFrame = function (callback) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                    var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return timer
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (timer) {
+                    clearTimeout(timer)
+                };
+            }
+        })();
+        $(function () {
+            // banner对象
+            var bannerObj = {
+                index: 0, // 当前banner
+                before: 0, // 前一个banner
+                haveVcr: true, // 是否有Vcr
+                slider: null, // slider对象
+                bannerArr: [], // 轮播
+                init: function () {
+                    this.bannerArr = Array.prototype.slice.call($('.personal-banner-nav-item'))
+                    this.slider = $('.personal-banner-slider')
+                    if (this.haveVcr) {
+                        $('.personal-ablum-count').hide()
+                    }
+                },
+                // slider滑动动画
+                sliderAnim: function (index) {
+                    if (this.index === index) return false;
+                    this.before = this.index
+                    this.index = index
+                    if (index === 1) {
+                        this.slider.addClass('personal-banner-slider-active')
+                        if (this.bannerArr.length >= 2 && videoObj.isPlaying) {
+                            videoObj.pause()
+                        }
+                    } else if (index === 0) {
+                        this.slider.removeClass('personal-banner-slider-active')
+                    }
+                    this.showSwiperCount()
+                    if ($('.swiper-slide').length >= 2 && this.haveVcr) {
+                        if (index > this.before && index == 1) {
+                            this.bannerArr[1].classList.add('personal-nav-active')
+                            this.bannerArr[0].classList.remove('personal-nav-active')
+                        } else if (this.before > index && index == 0) {
+                            this.bannerArr[0].classList.add('personal-nav-active')
+                            this.bannerArr[1].classList.remove('personal-nav-active')
+                        }
+                    }
+                    this.countIndex()
+                },
+                // 显示轮播图索引
+                showSwiperCount() {
+                    if (this.haveVcr && this.index == 1) {
+                        $('.personal-ablum-count').show()
+                    } else if (this.haveVcr && this.index == 0) {
+                        $('.personal-ablum-count').hide()
+                    }
+                },
+                // 动态显示swiperIndex
+                countIndex() {
+                    var length = this.haveVcr ? ($('.swiper-slide').length - 1) : $('.swiper-slide').length
+                    $('.personal-ablum-count-text').text(this.index + '/' + length)
+                }
+            }
+            bannerObj.init()
 
-            </section>
-            <section>
-                <h2>我的信息</h2>
-                <div>
+            // 初始化banner
+            var banner = new Swiper('.personal-banner-swiper', {
+                loop: false,
+                speed: 500,
+                onSlideChangeStart: function (swiper) {
+                    switchBanner(true, function () {
+                        if (swiper.activeIndex === 1) {
+                            swiper.stopAutoplay()
+                        }
+                        bannerObj.sliderAnim(swiper.activeIndex)
+                    })
+                }
+            })
 
-                </div>
-                <ul>
-                    <li></li>
-                </ul>
-            </section>
-            <section>
-                <h2>内心独白</h2>
-                <p>希望有一段让彼此成为更好的人的感情。如果有想法，请 主动，因为我也不会主动的...</p>
-            </section>
-            <section>
-                <h2>收到的礼物55</h2>
-            </section>
-        </main>
-    <!-- </div> -->
-</body>
+            // 切换banner
+            function switchBanner(swiper, fn) {
+                if (!swiper) {
+                    $('.personal-banner-nav-item').on('click', function (e) {
+                        e.stopPropagation()
+                        var index = $(this).index();
+                        fn && fn(index)
+                    })
+                } else {
+                    fn && fn()
+                }
+            }
+            
+            switchBanner(false, function (index) {
+                banner.slideTo(index, 500, false)
+                bannerObj.sliderAnim(index)
+            })
+
+            var videoObj = {
+                video: null,
+                videoJq: null,
+                isPlaying: false,
+                isFullScreen:false,
+                init: function () {
+                    var that = this
+                    this.videoJq = $('.banner-video')
+                    this.video = this.videoJq.get(0)
+                    videoObj.controlsStatus()
+                    this.video.addEventListener("ended", function () {
+                        that.pause()
+                        $('.play-status-wrapper .icon-play').show()
+                    }, false)
+                },
+                play: function () { // 播放
+                    $('.play-status-wrapper').hide()
+                    $('.play-status-wrapper .icon-play').show()
+                    this.isPlaying = true
+                    this.video.play()
+                },
+                pause: function () { // 暂停
+                    $('.play-status-wrapper').show()
+                    $('.play-status-wrapper .icon-play')
+                    this.isPlaying = false
+                    this.video.pause()
+                },
+                controlsStatus: function (el) { // 控制播放状态
+                    var that = this;
+                    el = el || this.videoJq
+                    el.on('click', function () {
+                        if (that.isPlaying) {
+                            that.pause()
+                        } else {
+                            that.play()
+                        }
+                    })
+                },
+                fullScreen(ele) {
+                    if(ele.requestFullscreen) {
+                        ele.requestFullscreen();
+                    } else if(ele.mozRequestFullScreen) {
+                        ele.mozRequestFullScreen();
+                    } else if(ele.msRequestFullscreen){
+                        ele.msRequestFullscreen();
+                    } else if(ele.oRequestFullscreen){
+                        ele.oRequestFullscreen();
+                    }else if(ele.webkitRequestFullscreen){ 
+                        ele.webkitRequestFullScreen();
+                    }else{
+                        this.isFullScreen = true
+                        $('.video-content').addClass('banner-video-full-screen')
+                    }
+                },
+                exitFullScreen() {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if(document.oRequestFullscreen){
+                        document.oCancelFullScreen();
+                    }else if (document.webkitExitFullscreen){
+                        document.webkitExitFullscreen();
+                    }else{
+                        this.isFullScreen = false
+                        $('.video-content').removeClass('banner-video-full-screen')
+                    }
+                }
+            }
+
+            videoObj.init()
+
+
+            $('.play-status-wrapper').on('click', function () {
+                if (videoObj.isPlaying) {
+                    videoObj.pause()
+                } else {
+                    videoObj.play()
+                }
+            })
+
+            // 监听全局滚动
+            function listenerGlobalScroll() {
+                var startY = 0,
+                    mainScroll = false,
+                    moveTimer = null, //触摸移动的定时器
+                    endTimer = null, // 触摸结束定时器
+                    scrollTimer = null, // 滚动定时器
+                    wrapper = document.querySelector('#global-wrapper'),
+                    swiperH = $('.personal-banner-swiper').height(), // swiper的高度
+                    scrollHeight = 0,
+                    scrollAnim = 0;
+
+                var main = $('main');
+                // 触摸开始
+                wrapper.addEventListener('touchstart', function (e) {
+                    clearTimeout(moveTimer);
+                    cancelAnimationFrame(scrollTimer);
+                    cancelAnimationFrame(endTimer);
+                    startY = e.changedTouches[0].pageY
+                }, false)
+
+                // 触摸移动
+                wrapper.addEventListener('touchmove', function (e) {
+                    cancelAnimationFrame(scrollTimer)
+                    var deltaY = e.changedTouches[0].pageY - startY;
+                    // 向上拖动放大swiper
+                    if (deltaY >= 0 && wrapper.scrollTop == 0 && scrollHeight == 0 && !mainScroll) {
+                        e.preventDefault();
+                        moveTimer = setTimeout(() => {
+                            var scaleRate = ((swiperH + deltaY / 4.2) / swiperH)
+                            $('.swiper-slide').eq(banner.activeIndex).css({
+                                'height': swiperH + (deltaY / 4.2) + 'px',
+                                'transform': 'scale(' + scaleRate + ')',
+                                'transition-timing-function': 'cubic-bezier(0.620, 0.055, 0.810, 0.665)'
+                            })
+                        }, 16.6)
+                    // 向下滑动
+                    } else if (deltaY < 0 && -scrollHeight < swiperH && !mainScroll) {
+                        e.preventDefault();
+                        if(deltaY > - 22) return false;
+                        deltaY = deltaY < -128?-128:deltaY;
+                        scrollTimer = requestAnimationFrame(function fn() {
+                            if (Math.round(scrollAnim) > deltaY * 4 && -scrollHeight < swiperH) {
+                                if (scrollAnim - deltaY * 4 >= 80) {
+                                    scrollAnim -= 5;
+                                    scrollHeight -= 5;
+                                }else if (scrollAnim - deltaY * 4 >= 50) {
+                                    scrollAnim -= 4;
+                                    scrollHeight -= 4;
+                                }else if (scrollAnim - deltaY * 4 >= 20) {
+                                    scrollAnim -= 3;
+                                    scrollHeight -= 3;
+                                }else {
+                                    scrollAnim -= 1;
+                                    scrollHeight -= 1;
+                                }
+                                requestAnimationFrame(fn)
+                            } else {
+                                wrapper.scrollTop = 0
+                                if (-scrollHeight > swiperH) {
+                                    mainScroll = false
+                                    main.addClass('main-scroll')
+                                    videoObj.pause()
+                                    scrollHeight = -swiperH
+                                }
+                                scrollAnim = 0;
+                                cancelAnimationFrame(scrollTimer)
+                            }
+                            main.css({
+                                'transform': 'translateY(' + scrollHeight + 'px)'
+                            })
+                        })
+                    // 向上滑动
+                    }else if (deltaY >= 0 && scrollHeight < 0 && main.scrollTop() === 0) {
+                        e.preventDefault()
+                        main.removeClass('main-scroll')
+                        scrollTimer = requestAnimationFrame(function fn() {
+                            wrapper.scrollTop = 0;
+                            if (Math.round(scrollAnim) < deltaY * 4 && scrollHeight < 0) {
+                                if (deltaY * 4 - scrollAnim >= 80) {
+                                    scrollAnim += 5;
+                                    scrollHeight += 5;
+                                }else if (deltaY * 4 - scrollAnim >= 50) {
+                                    scrollAnim += 4;
+                                    scrollHeight += 4;
+                                }else if (deltaY * 4 - scrollAnim >= 30){
+                                    scrollAnim += 3;
+                                    scrollHeight += 3;
+                                } else {
+                                    scrollAnim += 1;
+                                    scrollHeight += 1;
+                                }
+                                requestAnimationFrame(fn)
+                            } else {
+                                scrollAnim = 0;
+                                if (scrollHeight > 0) {
+                                    mainScroll = false
+                                    scrollHeight = 0
+                                }
+                                cancelAnimationFrame(scrollTimer)
+                            }
+                            main.css({
+                                'transform': 'translateY(' + scrollHeight + 'px)'
+                            })
+                        })
+                    }
+                }, false)
+
+                // 触摸结束
+                wrapper.addEventListener('touchend', function (e) {
+                    e.stopPropagation()
+                    var deltaY = e.changedTouches[0].pageY - startY;
+                    if (wrapper.scrollTop === 0 && scrollHeight === 0) {
+                        // 再次获取触摸的高度
+                        var height = $('.swiper-slide').eq(banner.activeIndex).height();
+                        endTimer = requestAnimationFrame(function fn() {
+                            if (height > swiperH) {
+                                height -= 5.6
+                                $('.swiper-slide').eq(banner.activeIndex).css({
+                                    'height': height + 'px',
+                                    'transform': 'scale(' + height / swiperH + ')',
+                                    'transition-timing-function': 'cubic-bezier(0.375, 0.015, 0.750, 0.750)'
+                                })
+                                requestAnimationFrame(fn)
+                            } else {
+                                $('.swiper-slide').eq(banner.activeIndex).css({
+                                    'height': swiperH + 'px',
+                                    'transform': 'scale(1)',
+                                    'transition-timing-function': 'cubic-bezier(0.250, 0.250, 0.750, 0.750)'
+                                })
+                                e.preventDefault()
+                                cancelAnimationFrame(endTimer)
+                            }
+                        })
+                    }
+                }, false)
+            }
+            listenerGlobalScroll()
+
+        })
+    </script>
+
 </html>

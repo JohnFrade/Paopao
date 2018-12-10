@@ -153,6 +153,10 @@ ul, li {
     display: -ms-flexbox;
     display: flex
 }
+.global-flex-wrap{
+    -webkit-flex-wrap:wrap;
+    flex-wrap: wrap;
+}
 .global-flex-1{
     -webkit-box-flex: 1;
     -webkit-flex: 1;
