@@ -1,0 +1,75 @@
+body, html { -webkit-overflow-scrolling: touch; color: #333; background: #fff; }
+
+div { -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.album-container { padding: 0 .6rem; }
+
+.album-container .postion-middle { position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }
+
+.album-container .float-clear:after { content: ''; display: block; clear: both; }
+
+.album-container .float-left { float: left; }
+
+.album-container .float-right { float: right; }
+
+.album-container .album-number-wrp { font-size: 1.2rem; font-weight: 700; line-height: 2.9rem; padding: 0 .6rem; }
+
+.album-container .album-rule-tips { font-size: .7rem; color: #666; width: 2.6rem; line-height: 1.2rem; text-align: center; background: white; -webkit-box-shadow: 0 0.15rem 0.3rem rgba(0, 0, 0, 0.1); box-shadow: 0 0.15rem 0.3rem rgba(0, 0, 0, 0.1); border-radius: 0.6rem 0 0 0.6rem; position: absolute; right: 0; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); border: 0.05rem solid #f2f2f2; }
+
+.album-container .album-status-bar { position: fixed; width: 100%; top: 0; left: 0; background: #fff; z-index: 300; }
+
+.album-container .album-list-wrp { padding-top: 2.9rem; }
+
+.album-container .album-list-wrp .album-item { position: relative; width: 5.5rem; height: 5.5rem; margin-bottom: 0.5rem; border-radius: 0.4rem; }
+
+.album-container .album-list-wrp .album-item .album-image-bg { width: 100%; height: 100%; border-radius: 0.4rem; }
+
+.album-container .album-list-wrp .album-item .album-radio { width: 0.8rem; height: 0.8rem; border: 0.05rem solid white; -webkit-box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.05); box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.05); border-radius: 50%; position: absolute; right: 0.1rem; top: 0.1rem; background: #999999; opacity: 0.4; z-index: 200; }
+
+.album-container .album-list-wrp .album-item .album-radio-active { background: #ffc96b; opacity: 1; }
+
+.album-container .album-list-wrp .album-item .album-radio-active::after { content: '\00a0'; display: inline-block; border: 2px solid #fff; border-top-width: 0; border-right-width: 0; width: 0.3rem; height: 0.2rem; left: .14rem; top: .14rem; position: absolute; -webkit-transform: rotate(-50deg); transform: rotate(-50deg); }
+
+.album-container .album-list-wrp li:nth-child(3n-1) { margin: 0 0.5rem; }
+
+.album-container .album-list-wrp .album-vcr-bg { background: rgba(0, 0, 0, 0.4); height: 100%; position: absolute; width: 100%; top: 0; z-index: 100; border-radius: 0.4rem; }
+
+.album-container .album-list-wrp .album-vcr-tips { font-size: 0.5rem; color: #fff; position: absolute; bottom: 0.2rem; }
+
+.album-container .album-list-wrp .album-vcr-tips-time { right: 0.2rem; }
+
+.album-container .album-list-wrp .album-vcr-tips-text { left: 0.2rem; }
+
+.album-container .album-list-wrp .alum-acr-play-logo { width: 1.6rem; height: 1.6rem; background: #fff; border-radius: 50%; }
+
+.album-container .album-list-wrp .alum-acr-play-logo img { width: 0.5rem; height: 0.7rem; position: absolute; top: 50%; left: 0.65rem; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+
+.album-container .album-btn-group-wrp { font-size: 0.8rem; text-align: center; height: 3.8rem; position: fixed; width: 100%; bottom: 0; left: 0; z-index: 400; background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.02)), to(white)); background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.02), white); background-image: linear-gradient(top, rgba(255, 255, 255, 0.02), white); }
+
+.album-container .album-btn-group-wrp .album-btn-group-vcr { width: 8.5rem; line-height: 2.6rem; background: -webkit-gradient(linear, left top, right top, from(#ffbb01), to(#ff8000)); background: -webkit-linear-gradient(left, #ffbb01 0%, #ff8000 100%); background: linear-gradient(90deg, #ffbb01 0%, #ff8000 100%); opacity: 1; border-radius: 2.75rem; color: #fff; position: absolute; left: .6rem; }
+
+.album-container .album-btn-group-wrp .album-btn-group-vcr .album-btn-label { width: 1.6rem; line-height: 0.7rem; background: #ff302d; border: 0.05rem solid #ff302d; opacity: 1; border-radius: 0.4rem 0.4rem 0.4rem 0; color: #fff; font-size: 0.5rem; position: absolute; left: 6.9rem; bottom: 2.4rem; }
+
+.album-container .album-btn-group-wrp .album-btn-group-photo { width: 8.5rem; line-height: 2.6rem; background: white; border: 0.05rem solid #945dff; opacity: 1; border-radius: 2.75rem; color: #945DFF; position: absolute; right: .6rem; }
+
+.album-container .album-remind-wrp { text-align: center; position: fixed; top: 14.5rem; width: 100%; }
+
+.album-container .album-remind-wrp div:nth-child(1) { font-size: .8rem; font-weight: 700; margin-bottom: 0.4rem; }
+
+.album-container .album-remind-wrp div:nth-child(2) { font-size: .6rem; font-weight: 700; color: #999; }
+
+.album-container .album-rule-wrp { position: fixed; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2); left: 0; top: 0; z-index: 500; }
+
+.album-container .album-rule-wrp .album-rule-content { width: 15rem; background: #fff; border-radius: 0.4rem; position: absolute; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); top: 3.3rem; }
+
+.album-container .album-rule-wrp .album-rule-content .album-rule-top { padding: 0 1.8rem 1rem; }
+
+.album-container .album-rule-wrp .album-rule-content p { color: #666; font-size: 0.7rem; line-height: 1rem; margin-bottom: 0.6rem; }
+
+.album-container .album-rule-wrp .album-rule-content p .strong { color: #009CFF; }
+
+.album-container .album-rule-wrp .album-rule-title { text-align: center; font-size: 1.2rem; font-weight: 700; padding: 1rem 0 1.4rem 0; }
+
+.album-container .album-rule-wrp .album-rule-confirm-btn { line-height: 2.2rem; text-align: center; font-size: 0.8rem; border-top: 0.05rem solid #e5e5e5; }
+
+/*# sourceMappingURL=L:/working/city/WorkCode/appointment/album.css.map */
