@@ -44,7 +44,7 @@ div { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 .album-container .album-list-wrp .alum-acr-play-logo img { width: 0.5rem; height: 0.7rem; position: absolute; top: 50%; left: 0.65rem; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
 
-.album-container .album-btn-group-wrp { font-size: 0.8rem; text-align: center; height: 3.8rem; position: fixed; width: 100%; bottom: 0; left: 0; z-index: 400; background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.02)), to(white)); background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.02), white); background-image: linear-gradient(top, rgba(255, 255, 255, 0.02), white); }
+.album-container .album-btn-group-wrp { font-size: 0.8rem; text-align: center; height: 3.8rem; position: fixed; width: 100%; bottom: 0; left: 0; z-index: 400; background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(242, 242, 242, 0.01)), to(#f2f2f2)); background-image: -webkit-linear-gradient(top, rgba(242, 242, 242, 0.01), #f2f2f2); background-image: linear-gradient(top, rgba(242, 242, 242, 0.01), #f2f2f2); }
 
 .album-container .album-btn-group-wrp .album-btn-group-vcr { width: 8.5rem; line-height: 2.6rem; background: -webkit-gradient(linear, left top, right top, from(#ffbb01), to(#ff8000)); background: -webkit-linear-gradient(left, #ffbb01 0%, #ff8000 100%); background: linear-gradient(90deg, #ffbb01 0%, #ff8000 100%); opacity: 1; border-radius: 2.75rem; color: #fff; position: absolute; left: .6rem; }
 
