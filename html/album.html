@@ -9,10 +9,29 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/album.css">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./album.css">
     <title>相册</title>
-    <script src="../js/rem.js"></script>
+    <script>
+        (function (doc, win) {
+            var docEl,
+                clientWidth;
+            docEl = doc.documentElement;
+            resizeEvt = "orientationchange" in window
+                ? "orientationchange"
+                : "resize";
+            recalc = function () {
+                clientWidth = docEl.clientWidth;
+                if (!clientWidth)
+                    return;
+                docEl.style.fontSize = 20 * (clientWidth / 375) + "px";
+            };
+            if (!doc.addEventListener)
+                return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
 </head>
 
 <body>
@@ -31,10 +50,10 @@
         <!-- 已上传时候的显示 -->
         <ul class="album-list-wrp float-clear">
             <li class="album-item float-left">
-                <img class="album-image-bg" src="../img/fo.jpg">
+                <img class="album-image-bg" src="./fo.jpg">
                 <div class="album-vcr-bg">
                     <div class="alum-acr-play-logo postion-middle">
-                        <img src="../img/play-logo.png">
+                        <img src="./play-logo.png">
                     </div>
                     <div class="album-vcr-tips album-vcr-tips-text">点击播放</div>
                     <div class="album-vcr-tips album-vcr-tips-time">00:05</div>
@@ -42,23 +61,101 @@
                 <div class="album-radio"></div>
             </li>
             <li class="album-item float-left">
-                <img class="album-image-bg" src="../img/fo.jpg">
+                <img class="album-image-bg" src="./fo.jpg">
                 <div class="album-radio album-radio-active"></div>
             </li>
             <li class="album-item float-left">
-                <img class="album-image-bg" src="../img/fo.jpg">
+                <img class="album-image-bg" src="./fo.jpg">
                 <div class="album-radio"></div>
             </li>
             <li class="album-item float-left">
-                    <img class="album-image-bg" src="../img/fo.jpg">
-                    <div class="album-radio album-radio-active"></div>
-                </li>
-                <li class="album-item float-left">
-                    <img class="album-image-bg" src="../img/fo.jpg">
-                    <div class="album-radio"></div>
-                </li>
-           
-            
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio album-radio-active"></div>
+            </li>
+            <li class="album-item float-left">
+                <img class="album-image-bg" src="./fo.jpg">
+                <div class="album-radio"></div>
+            </li>
         </ul>
         <!-- 未上传时候的显示 -->
         <div class="album-remind-wrp" style="display: none">
@@ -93,8 +190,10 @@
         <div class="album-btn-group-wrp float-clear">
             <div class="album-btn-group-vcr float-left">
                 <span>VCR短视频</span>
-                <div class="album-btn-label">赚钱</div>
-            </div>          
+                <div class="album-btn-label">
+                    赚钱
+                </div>
+            </div>
             <div class="album-btn-group-photo float-right">
                 上传照片
             </div>
