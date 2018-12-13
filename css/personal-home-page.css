@@ -29,7 +29,14 @@
     max-width: 640px;
     height: 100vh;
     background: #fff;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+canvas{
+    position: absolute;
+    top: -8.2%;
+    right: 5rem
 }
 
 header {
@@ -44,12 +51,11 @@ main {
     left: 0;
     margin: 0 auto;
     max-width: 640px;
-    padding-bottom: 7.75rem;
+    padding-bottom: 2.25rem;
     background:#fff;
     top: 31.25rem;
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
     z-index: 99
 }
 .main-scroll{
@@ -65,6 +71,14 @@ main {
 .personal-banner-swiper .swiper-wrapper {
     transform-origin: 50% 50%;
     transition: all .68s cubic-bezier(0.375, 0.015, 0.750, 0.750)
+}
+
+.swiper-wrapper-blur{
+    -webkit-filter: blur(.5rem);
+    -moz-filter: blur(.5rem);
+    -ms-filter: blur(.5rem);
+    -o-filter: blur(.5rem);
+    filter: blur(.5rem)
 }
 
 .video-content,
@@ -116,11 +130,37 @@ main {
     fill: #fff
 }
 
-.personal-ablum-count,
-.personal-banner-tab-wrapper {
+.ablum-mask-wrapper,.ablum-mask{
     position: absolute;
-    bottom: 1rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
+.ablum-mask-wrapper{
+    z-index: 98
+}
+.ablum-mask{
+    background: rgba(0, 0, 0, .16)
+}
+.ablum-mask-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 12.333333334rem;
+    height: 3.666666666667rem;
+    line-height: 3.6666666666rem;
+    font-weight: 500;
+    font-size: 1.33333333333rem;
+    text-align: center;
+    border-radius: 44px;
+    background: #fff
+}
+
 
 .personal-ablum-count,
 .personal-banner-tab-wrapper {
@@ -129,13 +169,13 @@ main {
     height: 1.333333333333rem;
     border-radius: 16px;
     overflow: hidden;
-    z-index: 99
 }
 
 .personal-ablum-count {
     width: 2.666666667rem;
     right: 1.333333333rem;
     background: rgba(0, 0, 0, .4);
+    z-index: 97
 }
 
 .personal-ablum-count-text {
@@ -147,7 +187,12 @@ main {
     left: 0;
     margin: 0 auto;
     width: 6.6666666667rem;
-    background: #fff
+    background: #fff;
+    z-index: 99
+}
+
+.personal-banner-tab-single{
+    width: 3.33333333334rem
 }
 
 .personal-banner-nav {
@@ -182,11 +227,6 @@ main {
     fill: #fff
 }
 
-.personal-banner-nav-item:first-of-type .tag-text {
-    padding-right: .8rem;
-    text-align: right;
-    box-sizing: border-box
-}
 
 .personal-banner-slider {
     position: absolute;
@@ -254,36 +294,63 @@ main {
 }
 
 .personal-professional .icon-tag {
+    position: relative;
+    top: 2px;
     color: #999
 }
 
 .personal-btn {
+    position: relative;
     height: 2.5rem;
     width: 3.33333333333rem;
     margin-bottom: .33333333333rem;
     border-radius: 30px;
 }
 
-.personal-love-btn {
-    background: #fb4d4a
-}
-
-.personal-add-btn {
-    background: #945DFF
-}
-
 .personal-love-btn .personal-btn-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: auto;
     width: 1.166666667rem;
     height: 1.33333333rem;
-    fill: #fff
+    fill: #fff;
+    z-index: 2
 }
-
 .personal-add-btn .personal-btn-icon {
     margin: auto;
     width: 1.33333333rem;
     height: 1.33333333rem;
     fill: #fff
+}
+.personal-love-btn{
+    background: #fb4d4a;
+}
+.personal-add-btn {
+    background: #945DFF
+}
+.personal-secret-love{
+    background: #f2f2f2
+}
+
+.personal-secret-love .personal-btn-icon{
+    fill: #fb4d4a;
+    animation: fillHeart .56s linear both
+}
+
+@keyframes fillHeart {
+    0% {
+        stroke-dashoffset: 36;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.personal-adding{
+    background: #ccc
 }
 
 
@@ -324,9 +391,9 @@ main {
     width: 9.03333333333rem;
     height: 2rem;
     font-size: .833333333333rem;
-    color: #fff;
+    color: #FFC96B;
     border-radius: 24px;
-    background: linear-gradient(90deg, rgba(255, 187, 1, 1) 0%, rgba(255, 128, 0, 1) 100%)
+    border:1px solid #FFC96B
 }
 
 .icon-no-vip {
@@ -390,30 +457,42 @@ main {
 }
 .my-accept{
     width: 100%;
-    padding: 0 1rem
+    padding: 0 1rem;
+    overflow: hidden
+}
+.my-accept .block-title{
+    padding-bottom: 1.5rem
 }
 .my-accept-list{
-    padding-bottom: 2rem;
-    white-space: nowrap;
-    font-size: 0;
-    overflow: hidden
+    position: relative;
+    padding-bottom: 1rem;
+    white-space: nowrap
+}
+.my-accept-list::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -2rem;
+    width: 9.5rem;
+    height: 7.5rem;
+    background: linear-gradient(to left,rgba(255,255,255,.8),rgba(255,255,255,.1));
+    filter: blur(2px);
+    z-index: 10;
+    box-shadow: 5px 0 5px -5px rgba(255, 255, 255, .5),
+                -5px 0 5px -5px rgba(255, 255, 255, .5);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    
 }
 .my-accept-item{
     display: inline-block;
     position: relative;
     width: 7.5rem;
     height: 7.5rem;
-    border-radius: 50%;
-    background: #f2f2f2
+    border-radius: 50%
 }
 .my-accept-item:not(:last-of-type){
     margin-right: 1rem
-}
-.my-accept-img{
-    position: absolute;
-    transform: translate(25%, 25%);
-    width: 5rem;
-    height: 5rem;
 }
 .my-accept-count{
     position: absolute;
@@ -435,11 +514,11 @@ main {
     right: 0;
     left: 0;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2.66666666667rem;
     width: 100%;
     max-width: 640px;
     height: 7.75rem;
-    background-image: linear-gradient(rgba(242, 242, 242, 0.8), rgba(242, 242, 242, 1));
+    background-image: linear-gradient(-180deg,rgba(255,255,255,0) 0%,#f2f2f2 70%);
     z-index: 999
 }
 
@@ -518,4 +597,87 @@ main {
     width: 2.75rem;
     height: 2.5rem;
     fill: #fff
+}
+/* 礼物 */
+.personal-gift-wrapper{
+    display: none;
+    position:fixed;
+    z-index:1000;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+}
+.personal-gift-mask{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background:rgba(0, 0, 0, 0.6);
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s
+}
+.personal-gift-content{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: 0;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 640px;
+    background: #fff;
+    border-top-left-radius: 1.333333333337rem;
+    border-top-right-radius: 1.333333333337rem;
+}
+.personal-gift-title{
+    padding: 1rem 0 1.3333333333333rem;
+    color: #333;
+    font-size: 1.33333333333rem;
+    font-weight: 700
+}
+.icon-close-wrapper{
+    padding:0 .25rem .5rem;
+    width: 1.33333333333rem;
+    height: 1.3333333333rem;
+}
+.icon-close{
+    width: 100%;
+    height: 100%;
+    fill: #333
+}
+.gift-item{
+    margin-bottom: 2rem;
+    width: 25%;
+    text-align: center
+}
+.gift-img-wrapper{
+    position: relative;
+    width: 6.58rem;
+    height: 6.58rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+.gift-item-title{
+    margin-bottom: 1rem;
+    font-size: 1.1666666667rem;
+    color: #333
+}
+.gift-price{
+    font-size: 1rem;
+    color: #999
+}
+.open-gift-vip{
+    display: block;
+    padding-bottom: 2.25rem;
+    text-align: center;
+    font-size: 1rem
+}
+.open-gift-vip .icon-arrow-right{
+    position: static;
+    vertical-align: middle
 }

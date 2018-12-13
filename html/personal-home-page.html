@@ -18,7 +18,8 @@
         <div id="global-wrapper">
             <header>
                 <div class="swiper-container personal-banner-swiper">
-                    <div class="swiper-wrapper">
+                    <!-- 设置了付费swiper-wrapper-blur -->
+                    <div class="swiper-wrapper swiper-wrapper-blur">
                         <!-- VCR -->
                         <div class="swiper-slide personal-banner-item">
                             <div class="video-content global-relative">
@@ -51,7 +52,7 @@
                                 <svg class="icon-vcr" aria-hidden="true">
                                     <use xlink:href="../img/personal-home-page.svg#icon-play"></use>
                                 </svg>
-                                <div class="tag-text">VCR</div>
+                                <div class="tag-text" style="left:-42%">VCR</div>
                             </div>
                             <div class="personal-banner-nav-item global-flex-1">
                                 <div class="tag-text">相册</div>
@@ -62,6 +63,14 @@
                     <!-- 轮播图相册计数 -->
                     <div class="personal-ablum-count">
                         <i class="tag-text personal-ablum-count-text">16/16</i>
+                    </div>
+                    <!-- 付费查看相册 -->
+                    <div class="ablum-mask-wrapper">
+                        <div class="ablum-mask"></div>
+                        <!-- <img class="ablum-mask" src="../img/bg.png"> -->
+                        <a href="javascript:void(0);" class="global-btn ablum-mask-btn">
+                            支付<span class="font-red">￥1</span>查看
+                        </a>
                     </div>
                 </div>
             </header>
@@ -84,7 +93,9 @@
                         </div>
                     </div>
                     <div class="personal-btn-wrapper" style="margin-right:1.333333333rem">
-                        <button class="global-btn global-flex personal-btn personal-love-btn">
+                        
+                        <!-- personal-secret-love -->
+                        <button class="personal-btn personal-love-btn">
                             <svg class="personal-btn-icon" aria-hidden="true">
                                 <use xlink:href="../img/personal-home-page.svg#icon-love"></use>
                             </svg>
@@ -92,7 +103,8 @@
                         <p>暗恋TA</p>
                     </div>
                     <div class="personal-btn-wrapper">
-                        <button class="global-btn global-flex personal-btn personal-add-btn">
+                        <!-- personal-adding 正在申请-->
+                        <button class="global-flex personal-btn personal-add-btn personal-adding">
                             <svg class="personal-btn-icon" aria-hidden="true">
                                 <use xlink:href="../img/personal-home-page.svg#icon-add"></use>
                             </svg>
@@ -134,15 +146,6 @@
                         <div class="my-info-tag-name">联系方式</div>
                         <p style="display:none">188 1234 1542</p>
                         <button class="global-flex global-flex-center global-flex-justify-center persoan-no-vip-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 10" class="icon-no-vip">
-                                <defs>
-                                    <linearGradient id="color" x1="0%" y1="0%" x2="0%" y2="100%">
-                                        <stop offset="6%" stop-color="#fff"></stop>
-                                        <stop offset="100%" stop-color="rgba(255,196,59,1)"></stop>
-                                    </linearGradient>
-                                </defs>
-                                <polygon points="9 0 3 0 0 3 6 10 12 3 9 0" fill="url(#color)"/>
-                            </svg>
                             请开通VIP查看
                         </button>
                     </div>
@@ -172,25 +175,25 @@
                     <h2 class="block-title">收到的礼物（55）</h2>
                     <ul class="my-accept-list">
                         <li class="my-accept-item global-flex">
-                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <img src="../img/gift-heart.png" class="global-img">
                             <div class="my-accept-count">
                                 25
                             </div>
                         </li>
                         <li class="my-accept-item global-flex">
-                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <img src="../img/gift-cake.png" class="global-img">
                             <div class="my-accept-count">
                                 25
                             </div>
                         </li>
                         <li class="my-accept-item global-flex">
-                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <img src="../img/gift-present.png" class="global-img">
                             <div class="my-accept-count">
                                 25
                             </div>
                         </li>
                         <li class="my-accept-item global-flex">
-                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544336808336&di=b98f7640009d514b479bfea1f220ca28&imgtype=0&src=http%3A%2F%2Fimg14.360buyimg.com%2Fn0%2Fg15%2FM0A%2F1D%2F1C%2FrBEhWFK0dwMIAAAAAAb9H4I0JIkAAHC5ACHu2YABv03581.jpg" class="my-accept-img">
+                            <img src="../img/gift-birthday-cake.png" class="global-img">
                             <div class="my-accept-count">
                                 25
                             </div>
@@ -216,9 +219,88 @@
                 </svg>
             </a>
         </footer>
+        <!-- 礼物 -->
+        <div class="personal-gift-wrapper anim">
+            <div class="personal-gift-mask"></div>
+            <div class="personal-gift-content global-box">
+                <div class="global-flex global-flex-center global-flex-between personal-gift-title">
+                    <span>送她礼物</span>
+                    <div class="icon-close-wrapper global-box">
+                        <svg class="icon-close" aria-hidden="true">
+                            <use xlink:href="../img/global.svg#icon-close"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="gift-list global-flex global-flex-wrap  ">
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-rose.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">玫瑰花</h6>
+                        <p class="gift-item-price">￥1.0</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-cake.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">蛋糕</h6>
+                        <p class="gift-item-price">￥3.0</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-ring.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">戒指</h6>
+                        <p class="gift-item-price">￥9.99</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-birthday-cake.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">生日蛋糕</h6>
+                        <p class="gift-item-price">￥5.20</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-present.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">小礼物</h6>
+                        <p class="gift-item-price">￥1.0</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-eternal.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">天长地久</h6>
+                        <p class="gift-item-price">￥5.20</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-dog.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">宠物狗</h6>
+                        <p class="gift-item-price">￥6.66</p>
+                    </a>
+                    <a href="javascript:void(0);" class="gift-item">
+                        <div class="gift-img-wrapper">
+                            <img src="../img/gift-heart.png" class="global-img">
+                        </div>
+                        <h6 class="gift-item-title">爱心</h6>
+                        <p class="gift-item-price">13.14</p>
+                    </a>
+                </div>
+                <a href="javascript:void(0);" class="font-blue open-gift-vip">
+                    开通会员，礼物一律8折
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </body>
     <script src="../js/jquery-2.1.4.js"></script>
     <script src="../js/swiper.js"></script>
+    <script src="../js/love.js"></script>
     <script>
         // requestAnimationFrame兼容
         (function () {
@@ -240,6 +322,99 @@
             }
         })();
         $(function () {
+            // 初始化canvas
+            var stage = new BubbleHearts();
+
+            //屏蔽右键菜单防止pc盗图
+            // document.oncontextmenu = function(event) {
+            //     if (window.event) {
+            //         event = window.event;
+            //     }
+            //     try {
+            //         var the = event.srcElement;
+            //         if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+            //             return false;
+            //         }
+            //         return true;
+            //     } catch (e) {
+            //         return false;
+            //     }
+            // }
+            // 暗恋
+            var assets = [
+	            '../img/heart-2.png',
+	            '../img/heart-3.png'
+            ];
+            function preLoadImg(arr) {
+                arr = (typeof arr !== "object") ? [arr] : arr;
+                var newImgs = [],
+                    loadIndex = 0;
+                var loadDone = function () {}
+                function loadCount(){
+                    loadIndex++;
+                    if(loadIndex === arr.length){
+                        loadDone(newImgs)
+                    }
+                }
+                for(var i = 0,len = arr.length;i<len;i++){
+                    newImgs[i] = new Image();
+                    newImgs[i].src = arr[i]
+                    newImgs[i].onload = function() {
+                        loadCount()
+                    }
+                    newImgs[i].onerror = function(){
+                        loadCount()
+                    }
+                }
+                return {
+                    all:function(f){
+                        loadDone = f || loadDone
+                    }
+                }
+            }
+            preLoadImg(assets).all(function(imgArr){
+                assets = imgArr;
+                var canvas = stage.canvas;
+                    canvas.width = 120;
+	                canvas.height = 160;
+	                canvas.style['width'] = '60px';
+	                canvas.style['height'] = '80px';
+                    document.querySelector('main').appendChild(canvas);
+
+                var random = {
+                    uniform: function(min, max) {
+			            return min + (max - min) * Math.random();
+		            },
+		            uniformDiscrete: function(i, j) {
+			            return i + Math.floor((j - i + 1) * random.uniform(0, 1));
+		            }
+                };
+
+                $('.personal-love-btn').on('click',function() {
+                    $(this).addClass('personal-secret-love');
+                    stage.bubble(assets[random.uniformDiscrete(0,1)]);
+                    setTimeout(() => {
+                        stage.bubble(assets[random.uniformDiscrete(0,1)])
+                    },300)
+                })
+            })
+
+            // 礼物
+            $('.footer-item-gift').on('click',function(){
+                $(".personal-gift-wrapper").show()
+                $('.personal-gift-mask').removeClass('fadeOut').addClass('fadeIn')
+                $('.personal-gift-content').removeClass('sliderOutDown').addClass('sliderFromDown')
+            })
+            
+
+            $('.icon-close').on('click',function() {
+                $(".personal-gift-wrapper").show()
+                $('.personal-gift-mask').removeClass('fadeIn').addClass('fadeOut')
+                $('.personal-gift-content').removeClass('sliderFromDown').addClass('sliderOutDown')
+                setTimeout(function(){
+                    $(".personal-gift-wrapper").hide()
+                },560)
+            })
             // banner对象
             var bannerObj = {
                 index: 0, // 当前banner

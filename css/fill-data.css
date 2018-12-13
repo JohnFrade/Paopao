@@ -55,7 +55,7 @@ input[type="number"]{
     border-radius: 24px
 }
 #paopao-personal-data .global-btn-round-sm{
-    margin-right: 1rem
+    margin-right: .83333333333rem
 }
 #paopao-personal-data .paopao-personal-data-type .global-btn-round-sm:last-of-type{
     margin-right: unset

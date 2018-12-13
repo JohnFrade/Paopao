@@ -378,6 +378,7 @@ ul, li {
 
 /* 开通会员 */
 .global-vip-signs{
+    margin-left: .5rem;
     width: 2rem;
     height: 1.16666666666rem;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAcCAMAAAAQssz4AAAATlBMVEUAAAD/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/////3KX/zXj/9eb/47n/0YT//Pf/8d7/7tX/58P/6sz/2Jv/1JD/+O//4K/eUGcMAAAACnRSTlMAyOk+89yKYiVIkjzwxgAAASBJREFUOMudlNuWgyAMRcULViKCd/3/Hx0EkgozQ7HnoQ1ruSE5IRSkirNS/KmS8aqI1TYiqaYNPn8x8VHsdcumFBkqKa9OZKrz+dS5QO2yYiJbzPqDq37DSPfSrmTvpIm4vCI/jxGjGXYJg9kCvCaJ7hqHiF7gdIEcB+EBZU9YzcKrKjgBO8wuUKAQ6P1eGAh+L3kapfsHHQE9LFS26xntbKTNSf8CZSHekuPkuDMGZiAHi3vXZrgMHIxbQdHnDBP1zqaEOkFdta9vwGlcJV2osM/HcDmyRSfooNf8DqywWyioIRDHxmErlg1UCqjc1SANxwo6ATR0+agVxtoE0MbXWwOoBMB+D5CUGOBPMEDPR9QTddaAdk+fme8essdP5Q9onDEL9NGgdwAAAABJRU5ErkJggg==) 0% 0%;
@@ -484,8 +485,8 @@ ul, li {
 }
 
 .sliderOutDown {
-    -webkit-animation: sliderOutDown .56s cubic-bezier(0.475, 0.090, 0.720, 0.595) both;
-    animation: sliderOutDown .56s cubic-bezier(0.475, 0.090, 0.720, 0.595) both
+    -webkit-animation: sliderOutDown .56s cubic-bezier(0.465, 0.850, 0.760, 1.000) both;
+    animation: sliderOutDown .56s cubic-bezier(0.465, 0.850, 0.760, 1.000) both
 }
 
 @keyframes sliderFromLeft {

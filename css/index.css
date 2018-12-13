@@ -1,39 +1,61 @@
 /* 公共 */
-.paopao-tag,.paopao-item-tag{
-    position: relative;
-    margin-right: 4px;
-    margin-bottom: 4px;
-    min-width: 2.666666667rem;
-    height: 1.1666666667rem;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 10px;
-}
 .paopao-tag{
-    color: #fff;
+    position: absolute;
+    top: -1.25rem;
+    padding: 0 1rem;
+    height: 2.3333333333333rem;
+    line-height: 2.3333333333333rem;
+    font-size:1.75rem;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
 }
-.paopao-item-tag{
-    color: #666
+.paopao-tag-text{
+    display: table-cell;
+    vertical-align:middle;
+    width: 100%;
+    text-align: center
+}
+
+.icon-sexual-wrapper{
+    position: relative;
+    height: 1.1666666666667rem;
+    width: 2.666666666667rem;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 16px
 }
 .icon-sexual{
-    position: relative;
-    left:-.5rem;
-    vertical-align: middle;
-    width: .83333333333rem;
-    height: .83333333333rem
+    position: absolute;
+    top:0;
+    bottom: 0;
+    margin: auto 0;
+    left:.25rem;
+    width: 1.33333333333rem;
+    height: 1.33333333333rem;
+    transform: scale(.5)
 }
-.paopao-tag i,.paopao-item-tag i{
+.icon-sexual-wrapper i{
     display: block;
-    position: relative;
-    top: -.25rem;
+    position: absolute;
+    width: 3rem;
+    top: -18%;
+    left: .65rem;
     line-height: 1;
     font-size: 1.66666666666rem;
     transform: scale(.5);
 }
-.icon-sexual-wrapper i{
-    top: -106%;
-    left: 20%;
+.paopao-item-recommend{
+    margin-left: 4px;
+    width: 2.6666666667rem;
+    height: 1.166666666667rem;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAcCAMAAADm+0lgAAAAPFBMVEUAAAD/iWr/iGv/iGr/hmn/iWv/iWr/iWr/iGn/iWv/////7+v/+Pb/49z/vaz/qJL/tKD/xrj/mYD/1sy44lLvAAAACXRSTlMAw+5AJNt8r17mOfbuAAABfklEQVQ4y6WViY7rIAxFQ0IWG5v1///14bwhxLQzapWjykgkXK8l04XdzDrDB8yr2ew0shj4CrOo49bA1xh7cy+hf828XOeh8kDB3v1nn2UJWX5691y0wv8sdrjhMcibmIAYLgL69lCx9wS0gNiEGQSmChJdC0NHkljfCDgnUUQQYkqpIKcKY6k2QmcdAmB2yBwCnu66t0DnMU8BBuy0KQFH6Fw4PRUxvj1JPX3FNhl4ScGjRB9bCq4iwo2ixmlaXwQyOSXAFUK+SKCKAG8E4ulOTGxtLL8N0zSPAoVyQMfsxAQQMtU9+sFrAZ1Cjg6xQLinIOcxQ/ZCIqeLuaoiBkTCAINAIMQWH3EGhdFtTMGfAvcaJKSCqhS6jfa1jaBqUDh7hOIEpGpYD9I4yjqFtgmJBdHkokd5Oj4R6H9KzTFVzBuB4n0R4/8WMOOFUpgwy4sNugmI5jAEdrzSErM/Gxeh0QUcotNNXJ5eqs+u9d0+/7Bo7LGbzz5tZj+6939mdz95m1AlPgAAAABJRU5ErkJggg==) no-repeat;
+    background-size: cover
 }
+
 .index-btn{
     color:#fff;
     font-weight: 500;
@@ -110,26 +132,22 @@
     background-size: cover
 }
 .paopao-announce-swiper{
-    height:1.33333333333rem;
+    height:18px;
     font-size: 1rem;
     color: #333;
     overflow: hidden
 }
-.paopao-announce-swiper .swiper-slide{
-    height: 14px;
-}
-.paopao-announce .paopao-item-tag{
+.paopao-announce .paopao-announce-vote{
+    width: 42px;
+    height:18px;
     margin-right: .5rem;
-    margin-bottom: 0;
-    color: #945DFF
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAcCAMAAADm+0lgAAAARVBMVEUAAACVXv+TXP+UXf+UXP+UW/+TXP+SWv////+UXf+8mv/x6f/Kr/+vhv/m2f+hcf/Wwf/49P+ZZf+pfP/Epv+3kf/cyv8gmbxYAAAACHRSTlMA7TvZwotdHvv2s6YAAAG9SURBVDjLpZXbkqwgDEXFS3dCAuHq/3/qETw9DThV087sB6XUrNpJMExfmrd1UfiB1LJu8zTqoSRZ8vCBPNkk6tGFz0u0cEs2LnMTrxhui9UXYRYLv5CV/4SnauLJ3SCoZwUse2sM6yuuorJOelCCl/al1j/DBcAoh7A6y6YoiDES6rL5Pj+KAfoGIMUGNqkJ16eD6LAwR3gr6YhaE6QWYIvvELWOoay6gsd52toOZiNoDIHkBuAwvwEZXWd4m1YLlxRyDSXM7CqA3ilQD7BrKcEI4LCfCUXJFZCYg2E2gTmhG4qg/Agg3zOt7tQ59uoK0GjNSz/uKq+GFPaIcfelZEXIJ9Q0SkMfuyJSwIBn9pWGJ9y6Rhb6IvZtZOIK8MEdF8l1TYPanNM2zXEs4tl7CzlUAxoH6X4jTcqOgIoOBndoHSS5OrCq/EzmO4ANaBqn4oGl3Pu+mDrYVncBkEbh8PraSdlZLNVYbLrm1nGgMEs4nmcMfHgvFA9WUHvYrZGKjsE1A2Ucac6YHSBH5+E0IgcnUTErLz9M/UirBLXDbe2qGcvPNdO9cMrrsz9YFuPIfxbsyZnlfbD88Wj7Bz1mPU2Hab9rAAAAAElFTkSuQmCC) no-repeat;
+    background-size:contain
 }
-.paopao-announce .paopao-item-tag::after{
-    border-color: #945DFF
+.paopao-announce p{
+    max-width: 85%
 }
-.paopao-announce .paopao-item-tag i{
-    width: 200%;
-    left: -50%;
-}
+
 /* 交友圈 */
 #paopao-circle{
     margin-bottom: .833333333rem;
@@ -139,6 +157,7 @@
     padding: 1rem 1rem 0 1rem;
 }
 .icon-arrow-right{
+    margin-left:.33333333333rem;
     width: 1rem;
     height: 1.0833333333rem
 }
@@ -162,18 +181,13 @@
 .paopao-circle-item-username{
     max-width: 60%
 }
-.paopao-circle-item-content .global-vip-signs{
-    margin-left: 4px
+.paopao-circle-item-top{
+    margin-bottom: .666666666667rem
 }
 .deliver-time{
     margin-left: auto;
     font-size: 1rem;
     color: #999;
-}
-.paopao-circle-item-content .icon-sexual-wrapper{
-    width: 2rem;
-    max-width: 3rem;
-    font-weight: 700;
 }
 .circle-ablum-item{
     position: relative;
@@ -388,12 +402,33 @@
     padding: .6666666667rem 0
 }
 .paopao-item-type{
+    position: relative;
     width: 100%;
     height:2.7rem
 }
-.paopao-item-type .paopao-item-num-tag{
-    width:5rem;
+.paopao-tag-wrapper{
+    position: relative;
+    margin-right: 1rem;
+    width: 6rem;
+    height: 1.1666666667rem;
+    overflow: hidden;
 }
+.paopao-tag:nth-child(1){
+    left:-5rem
+}
+.paopao-tag:nth-child(2){
+    left:-3%
+}
+.paopao-tag:nth-child(3){
+    left:40%;
+}
+.paopao-tag:nth-child(4){
+    top: .5rem;
+    left:-3.2rem
+}
+
+
+
 .paopao-item-type .paopao-item-num-tag i{
     width: 200%;
     left: -50%;
@@ -401,9 +436,6 @@
 .paopao-item-username {
     max-width: 65%;
     white-space: nowrap;
-}
-.paopao-item-name-wrapper .paopao-tag{
-    margin-left: .5rem
 }
 
 .paopao-item-tag::after{
@@ -496,7 +528,7 @@
 /* 开通会员 */
 .paopao-vip-btn{
     position: fixed;
-    top: 52.78761062%;
+    top: 68.78761062%;
     right:1rem;
     padding: 1px 1rem 1px 0;
     background:linear-gradient(90deg,rgba(255,186,107,1) 0%,rgba(243,130,30,1) 100%);
