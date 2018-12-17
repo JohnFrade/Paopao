@@ -1,8 +1,10 @@
-html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, a, em, img, strong, sub, sup, i, dl, dt, dd, ol, ul, li, form, label, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, figure, figcaption, footer, header, menu, nav, section, audio, video, input, textarea { margin: 0; padding: 0; border: 0; font-weight: normal; vertical-align: baseline; }
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, a, em, img, strong, sub, sup, i, dl, dt, dd, ol, ul, li, form, label, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, figure, figcaption, footer, header, menu, nav, section, audio, video, input, textarea { margin: 0; padding: 0; border: 0; font-weight: normal; vertical-align: baseline; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-html, body { width: 100%; height: 100%; background: #F3F4F6; -webkit-overflow-scrolling: touch; }
+html, body { width: 100%; height: 100%; background: #FFFFFF; -webkit-overflow-scrolling: touch; }
 
 body { line-height: 1; -webkit-text-size-adjust: none; -webkit-tap-highlight-color: transparent; }
+
+::-webkit-scrollbar { display: none; }
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, menu, nav, section { display: block; }
@@ -22,5 +24,7 @@ input::-webkit-search-cancel-button { display: none; }
 textarea { -webkit-appearance: none; outline: none; resize: none; background: #fff; }
 
 button { background: none; border: 0; }
+
+img { vertical-align: middle; }
 
 /*# sourceMappingURL=L:/working/city/WorkCode/appointment/reset.css.map */

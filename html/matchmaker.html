@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/matchmaker.css">
+    <title>媒婆入驻</title>
+    <script>
+        (function (doc, win) {
+            var docEl,
+                clientWidth;
+            docEl = doc.documentElement;
+            resizeEvt = "orientationchange" in window
+                ? "orientationchange"
+                : "resize";
+            recalc = function () {
+                clientWidth = docEl.clientWidth;
+                if (!clientWidth)
+                    return;
+                docEl.style.fontSize = 20 * (clientWidth / 375) + "px";
+            };
+            if (!doc.addEventListener)
+                return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
+</head>
+
+<body>
+    <div class="matchmaker-container">
+        <div class="matchmaker-title common-margin-b">
+            填写资料
+        </div>
+        <div class="matchmaker-content-wrp">
+            <div class="float-clear matchmaker-avatar-wrp common-margin-b">
+                <div class="matchmaker-content-title float-left">头像</div>
+                <img class="matchmaker-avatar float-left" src="http://i.vzan.cc/image/png/2018/3/2/10245611242cce16f048b2a80ebf7fc408f247.png@!640x210"
+                />
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">
+                    昵称
+                    <span class="strong-dot">*</span>
+                </div>
+                <input class="common-ft-bold matchmaker-content-r matchmaker-tb-middle" type="text" value="陈欣宝" />
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">
+                    店铺资质
+                    <span class="strong-dot">*</span>
+                </div>
+                <div class="matchmaker-content-r">
+                    <div class="matchmaker-register matchmaker-register-l matchmaker-register-active">
+                        企业
+                    </div>
+                    <div class="matchmaker-register  matchmaker-register-r">
+                        非企业
+                    </div>
+                </div>
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">职业</div>
+                <input class="matchmaker-content-r common-ft-bold" type="text" value="请输入你的职业/公司名" />
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">手机号码
+                    <span class="strong-dot">*</span>
+                </div>
+                <input class="matchmaker-content-r common-ft-bold" type="text" value="请输入手机号码" />
+                <div class="matchmaker-validate-btn common-ft-bold">
+                    验证
+                </div>
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">验证码
+                    <span class="strong-dot">*</span>
+                </div>
+                <input class="matchmaker-content-r matchmaker-validate-code common-ft-bold" type="text" value="123442" />
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz common-margin-b">
+                <div class="matchmaker-content-title matchmaker-tb-middle">
+                    微信二维码
+                </div>
+                <div class="matchmaker-qrcode-status matchmaker-tb-middle common-ft-bold">
+                    已上传
+                </div>
+                <div class="common-ft-bold matchmaker-qrcodo-check common-ft-bold">
+                    查看
+                </div>
+            </div>
+            <div class="matchmaker-content-item matchmaker-poz">
+                <div class="matchmaker-content-title matchmaker-tb-middle">
+                    常驻地址
+                    <span class="strong-dot">*</span>
+                </div>
+                <textarea id="j-addressAreatext"  class="matchmaker-content-r common-ft-bold" rows="6"></textarea>
+                <div class="matchmaker-position-wrp common-width-100">
+                    <img class="matchmaker-position-logo" src="../img/position.png">
+                    <span>
+                        获取位置
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="matchmaker-next-btn-default">
+            <!-- 全部填完加 matchmaker-next-btn-active 这个类名 -->
+            下一步
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("j-addressAreatext").value = "请输入常用地址" 
+</script>
+
+</html>

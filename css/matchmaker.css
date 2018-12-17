@@ -1,0 +1,71 @@
+body, html { -webkit-overflow-scrolling: touch; color: #333; background: #fff; }
+
+div, input, img { -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.matchmaker-poz { position: relative; }
+
+.matchmaker-tb-middle { position: absolute; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+
+.matchmaker-centre-middle { position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); }
+
+.matchmaker-container { padding: 0.6rem 0.6rem 0; }
+
+.matchmaker-container .common-width-100 { width: 100%; }
+
+.matchmaker-container .common-margin-b { margin-bottom: 1.3rem; }
+
+.matchmaker-container .common-ft-bold { font-weight: 700; }
+
+.matchmaker-container .float-clear:after { content: ''; display: block; clear: both; }
+
+.matchmaker-container .float-left { float: left; }
+
+.matchmaker-container .float-right { float: right; }
+
+.matchmaker-container .matchmaker-title { font-size: 1.2rem; font-weight: 700; padding-bottom: 0.3rem; }
+
+.matchmaker-container .matchmaker-content-wrp { margin-bottom: 5rem; }
+
+.matchmaker-container .matchmaker-content-wrp input { font-size: 0.7rem; padding-top: .04rem; }
+
+.matchmaker-container .matchmaker-content-wrp textarea { padding-top: .04rem; font-size: 0.7rem; text-align: left; max-height: 5rem !important; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-content-title { font-size: 0.7rem; color: #999999; width: 5.4rem; }
+
+.matchmaker-container .matchmaker-content-wrp .strong-dot { color: #FF2D58; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-avatar-wrp { line-height: 3rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-avatar { width: 3rem; height: 3rem; border-radius: 50%; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-content-item { height: 1rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-content-r { position: absolute; left: 5.4rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-content-r .matchmaker-register-l { position: absolute; left: 0; -webkit-transform-origin: 0% 0%; transform-origin: 0% 0%; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-content-r .matchmaker-register-r { position: absolute; left: 4.6rem; -webkit-transform-origin: 0% 0%; transform-origin: 0% 0%; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-register { text-align: center; width: 8rem; line-height: 2.4rem; font-size: 1.4rem; background: #f2f2f2; border-radius: 1.2rem; -webkit-transform: scale(0.5); transform: scale(0.5); }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-register + .matchmaker-register { margin-left: 0.6rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-register-active { background: #ff2d58; color: #fff; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-validate-btn, .matchmaker-container .matchmaker-content-wrp .matchmaker-qrcodo-check { width: 6.9rem; line-height: 2.4rem; text-align: center; background: white; border: 0.05rem solid #cccccc; border-radius: 1.2rem; font-size: 1.4rem; position: absolute; top: 0; right: 0; font-weight: 700; -webkit-transform: translateY(-50%) scale(0.5); transform: translateY(-50%) scale(0.5); -webkit-transform-origin: 100% 100%; transform-origin: 100% 100%; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-qrcode-status { position: absolute; left: 5.4rem; font-size: 0.7rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-position-logo { width: 1.2rem; height: 1.1rem; margin-top: -0.18rem; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-position-wrp { text-align: center; font-size: 1rem; position: absolute; right: 0; width: 7.8rem; line-height: 2rem; background: #f2f2f2; border-radius: 1rem; -webkit-transform: scale(0.5); transform: scale(0.5); -webkit-transform-origin: 100% 0%; transform-origin: 100% 0%; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-position-wrp span { color: #666; }
+
+.matchmaker-container .matchmaker-content-wrp .matchmaker-validate-code { text-decoration: underline; }
+
+.matchmaker-container .matchmaker-next-btn-default { width: 17.55rem; height: 2.6rem; line-height: 2.6rem; text-align: center; background: #f2f2f2; border-radius: 2.75rem; font-size: 0.8rem; color: #999; }
+
+.matchmaker-container .matchmaker-next-btn-active { background: -webkit-linear-gradient(359deg, #ff3a37 0%, #ff0090 100%); background: linear-gradient(91deg, #ff3a37 0%, #ff0090 100%); -webkit-box-shadow: 0 0.2rem 0.5rem rgba(255, 48, 45, 0.4); box-shadow: 0 0.2rem 0.5rem rgba(255, 48, 45, 0.4); color: #fff; }
+
+/*# sourceMappingURL=L:/working/city/WorkCode/appointment/matchmaker.css.map */
