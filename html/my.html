@@ -33,7 +33,7 @@
                             </div>
                         </figcaption>
                     </figure>
-                    <button class="global-btn my-album-btn">相册</button>
+                    <button class="global-btn my-album-btn" onclick="goToAlum()">相册</button>
                 </div>
                 <nav class="global-flex my-nav-list global-border global-border-bottom">
                     <li class="global-flex-1 my-nav-item">
@@ -242,19 +242,24 @@
             }
         })();
 
+        function goToAlum() {
+            window.location.href = './album.html'
+        }
+
+
         function footerLink() {
             var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
             url = ''
             footerList.forEach(function (item, index) {
                 item.onclick = function () {
                     if (index === 0) {
-                        url = 'http://192.168.10.227:3000/html/index.html'
+                        url = './index.html'
                     } else if (index === 1) {
-
+                        url = './dating.html'
                     } else if (index === 2) {
 
                     } else if (index === 3) {
-                        url = 'http://192.168.10.227:3000/html/my.html'
+                        url = './my.html'
                     }
                     window.open(url)
                 }

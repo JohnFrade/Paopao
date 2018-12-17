@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </header>
-            <main class="global-box">
+            <main class="global-box banner-hide">
                 <section class="global-flex personal-info global-flex-center">
                     <div class="global-flex-1">
                         <h2 class="personal-name font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈</h2>
@@ -326,20 +326,20 @@
             var stage = new BubbleHearts();
 
             //屏蔽右键菜单防止pc盗图
-            // document.oncontextmenu = function(event) {
-            //     if (window.event) {
-            //         event = window.event;
-            //     }
-            //     try {
-            //         var the = event.srcElement;
-            //         if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
-            //             return false;
-            //         }
-            //         return true;
-            //     } catch (e) {
-            //         return false;
-            //     }
-            // }
+            document.oncontextmenu = function(event) {
+                if (window.event) {
+                    event = window.event;
+                }
+                try {
+                    var the = event.srcElement;
+                    if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                        return false;
+                    }
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
             // 暗恋
             var assets = [
 	            '../img/heart-2.png',
@@ -587,6 +587,7 @@
 
             // 监听全局滚动
             function listenerGlobalScroll() {
+                return false;
                 var startY = 0,
                     mainScroll = false,
                     moveTimer = null, //触摸移动的定时器

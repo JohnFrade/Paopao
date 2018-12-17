@@ -29,9 +29,7 @@
     max-width: 640px;
     height: 100vh;
     background: #fff;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch
+    overflow: hidden
 }
 canvas{
     position: absolute;
@@ -40,6 +38,7 @@ canvas{
 }
 
 header {
+    display: none;
     position: relative;
     width: 100%;
     background: #fff
@@ -51,7 +50,7 @@ main {
     left: 0;
     margin: 0 auto;
     max-width: 640px;
-    padding-bottom: 2.25rem;
+    padding-bottom: 5.25rem;
     background:#fff;
     top: 31.25rem;
     width: 100%;
@@ -59,6 +58,12 @@ main {
     z-index: 99
 }
 .main-scroll{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+.banner-hide{
+    position: static;
+    top: 0;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch
 }
