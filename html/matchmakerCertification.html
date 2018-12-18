@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/matchmakerCertification.css">
+    <title>媒婆入驻</title>
+    <script>
+        (function (doc, win) {
+            var docEl,
+                clientWidth;
+            docEl = doc.documentElement;
+            resizeEvt = "orientationchange" in window
+                ? "orientationchange"
+                : "resize";
+            recalc = function () {
+                clientWidth = docEl.clientWidth;
+                if (!clientWidth)
+                    return;
+                docEl.style.fontSize = 20 * (clientWidth / 375) + "px";
+            };
+            if (!doc.addEventListener)
+                return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
+</head>
+
+<body>
+    <div class="matchmaker-certification-container">
+        <div class="matchmaker-certification-title common-poz">
+            <div class="common-ft-bold">实名认证</div>
+            <div class="matchmaker-certification-question" id="j-certificationBtn">
+                <div class="matchmaker-centre-middle">?</div>
+            </div>
+        </div>
+        <div>
+            <div class="matchmaker-certification-idcard-wrp matchmaker-certification-idcard-wrp-top">
+                <div class="matchmaker-certification-tips-wrp">
+                    <span class="matchmaker-certification-idcard">上传身份证照</span>
+                    <span class="matchmaker-certification-idcard-tips">模糊，看不清的照片，将不被审核通过</span>
+                </div>
+                <div class="float-clear">
+                    <div class="img-wrp float-left common-poz">
+                        <img class="bg" src="../img/id-card-face.png" alt="">
+                        <!-- 上传了照片加.bg-upload 这个class 身份证百分百显示 -->
+                        <img class="logo" src="../img/photo.png" alt="">
+                    </div>
+                    <div class="img-wrp float-left common-poz">
+                        <img class="bg" src="../img/id-card-back.png" alt="">
+                        <img class="logo" src="../img/photo.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="matchmaker-certification-idcard-wrp common-margin-b-32">
+                <div class="matchmaker-certification-tips-wrp">
+                    <span class="matchmaker-certification-idcard">上传手持身份证照</span>
+                </div>
+                <div class="flex flex-center">
+                    <div class="img-hander-wrp  common-poz">
+                        <img class="bg" src="../img/id-card-hander.png" alt="">
+                        <img class="logo" src="../img/photo.png" alt="">
+                        <!-- 上传了照片加.bg-upload 这个class 身份证百分百显示 -->
+                    </div>
+                    <div class="tips-wrp">
+                        <div class="title">
+                            注意:
+                        </div>
+                        <div class="content-top">
+                            上传的照片需要清晰，且不遮挡 住脸部，身份证的重要息。
+                        </div>
+                        <div class="content-bottom">
+                            为了您的信息安全，您上传的证件照片，将会自动打上水印，防止不法分子盗用。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="matchmaker-business-licence-wrp">
+                <span class="common-ft-bold">
+                    营业执照信息
+                </span>
+                <span>
+                    基本信息选择了企业
+                </span>
+            </div>
+            <div class="matchmaker-business-licence-img common-poz common-margin-b-32">
+                <img class="bg" src="../img/licence.png" alt="">
+                <img class="logo" src="../img/photo.png" alt="">
+                <!-- 上传了照片加.bg-upload 这个class 身份证百分百显示 -->
+            </div>
+            <div class="float-clear">
+                <div class="back-btn float-left">上一步</div>
+                <div class="submit-btn float-left">
+                    <!-- 可以提交或付费入驻的时候 加submit-btn-active这个类名 -->
+                    提交审核
+                </div>
+            </div>
+        </div>
+
+        <div class="layer-model" style="display: none" id="j-certificationContent">
+            <div class="layer-content">
+                <div class="layer-content-title common-ft-bold">
+                    为什么要实名认证
+                </div>
+                <div class="layer-content-main">
+                    作为一个严肃婚恋平台，我们希望红娘用户完成身份实名认证。对于以结婚为目的的用户，我们希望创建一个无酒托，婚托，等诈骗行为目的婚恋环境。
+                </div>
+                <div class="layer-content-wran">
+                    为了您的信息安全，您上传的证件照片，将会自动打上水印，防止不法分子盗用。
+                </div>
+            </div>
+        </div>
+
+        <div class="layer-model" style="display: none;">
+            <div class="pay-wrp">
+                <div class="pay-top">
+                    <img src="../img/pay-top.png" alt="">
+                </div>
+                <div class="pay-botom">
+                    <div class="flex flex-wrap pay-botom-item-wrp">
+
+                        <div class="pay-item pay-item-active j-payItem">
+                            <div>
+                                <span class="month-num">3</span>
+                                <span class="month-text">个月</span>
+                            </div>
+                            <div>
+                                <div class="pay-money-m">￥14</div>
+                                <div class="pay-money-d">￥1/天</div>
+                            </div>
+                            <div class="right-arrow">
+
+                            </div>
+                        </div>
+                        <div class="pay-item j-payItem">
+                            <div>
+                                <span class="month-num">3</span>
+                                <span class="month-text">个月</span>
+                            </div>
+                            <div>
+                                <div class="pay-money-m">￥14</div>
+                                <div class="pay-money-d">￥1/天</div>
+                            </div>
+                            <div class="right-arrow">
+
+                            </div>
+                        </div>
+                        <div class="pay-item j-payItem">
+                            <div>
+                                <span class="month-num">3</span>
+                                <span class="month-text">个月</span>
+                            </div>
+                            <div>
+                                <div class="pay-money-m">￥14</div>
+                                <div class="pay-money-d">￥1/天</div>
+                            </div>
+                            <div class="right-arrow">
+
+                            </div>
+                        </div>
+                        <div class="pay-item  j-payItem">
+                            <div>
+                                <span class="month-num">3</span>
+                                <span class="month-text">个月</span>
+                            </div>
+                            <div>
+                                <div class="pay-money-m">￥14</div>
+                                <div class="pay-money-d">￥1/天</div>
+                            </div>
+                            <div class="right-arrow">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pay-btn">
+                        付费入驻
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var certificationBtn = document.getElementById("j-certificationBtn");
+    var certificationContent = document.getElementById("j-certificationContent");
+    var isShowCertificationContent = false;
+    var payItem = document.querySelectorAll(".j-payItem");
+
+    for (var i = 0, lth = payItem.length; i < lth; i++) {
+        payItem[i].addEventListener("touchend", choosePayItem)
+    }
+
+    function choosePayItem() {
+        console.log("ffff")
+        for (var i = 0, lth = payItem.length; i < lth; i++) {
+            payItem[i].className = payItem[i].className.replace(/(?:^|\s)pay-item-active(?!\S)/g, '')
+        }
+        this.className += " pay-item-active"
+    }
+
+
+
+    function showCertificationLayer() {
+        certificationContent.style.display = isShowCertificationContent ? "none" : "block";
+        isShowCertificationContent = !isShowCertificationContent;
+    }
+    certificationBtn.addEventListener('touchend', showCertificationLayer)
+    certificationContent.addEventListener('touchend', showCertificationLayer)
+
+</script>
+
+</html>
