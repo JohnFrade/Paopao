@@ -1,61 +1,3 @@
-/* 公共 */
-.paopao-tag{
-    position: absolute;
-    top: -1.25rem;
-    padding: 0 1rem;
-    height: 2.3333333333333rem;
-    line-height: 2.3333333333333rem;
-    font-size:1.75rem;
-    border: 1px solid #ccc;
-    border-radius: 24px;
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-    -webkit-transform-origin: 100% 100%;
-    transform-origin: 100% 100%
-}
-.paopao-tag-text{
-    display: table-cell;
-    vertical-align:middle;
-    width: 100%;
-    text-align: center
-}
-
-.icon-sexual-wrapper{
-    position: relative;
-    height: 1.1666666666667rem;
-    width: 2.666666666667rem;
-    color: #fff;
-    font-weight: 500;
-    border-radius: 16px
-}
-.icon-sexual{
-    position: absolute;
-    top:0;
-    bottom: 0;
-    margin: auto 0;
-    left:.25rem;
-    width: 1.33333333333rem;
-    height: 1.33333333333rem;
-    transform: scale(.5)
-}
-.icon-sexual-wrapper i{
-    display: block;
-    position: absolute;
-    width: 3rem;
-    top: -18%;
-    left: .65rem;
-    line-height: 1;
-    font-size: 1.66666666666rem;
-    transform: scale(.5);
-}
-.paopao-item-recommend{
-    margin-left: 4px;
-    width: 2.6666666667rem;
-    height: 1.166666666667rem;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAcCAMAAADm+0lgAAAAPFBMVEUAAAD/iWr/iGv/iGr/hmn/iWv/iWr/iWr/iGn/iWv/////7+v/+Pb/49z/vaz/qJL/tKD/xrj/mYD/1sy44lLvAAAACXRSTlMAw+5AJNt8r17mOfbuAAABfklEQVQ4y6WViY7rIAxFQ0IWG5v1///14bwhxLQzapWjykgkXK8l04XdzDrDB8yr2ew0shj4CrOo49bA1xh7cy+hf828XOeh8kDB3v1nn2UJWX5691y0wv8sdrjhMcibmIAYLgL69lCx9wS0gNiEGQSmChJdC0NHkljfCDgnUUQQYkqpIKcKY6k2QmcdAmB2yBwCnu66t0DnMU8BBuy0KQFH6Fw4PRUxvj1JPX3FNhl4ScGjRB9bCq4iwo2ixmlaXwQyOSXAFUK+SKCKAG8E4ulOTGxtLL8N0zSPAoVyQMfsxAQQMtU9+sFrAZ1Cjg6xQLinIOcxQ/ZCIqeLuaoiBkTCAINAIMQWH3EGhdFtTMGfAvcaJKSCqhS6jfa1jaBqUDh7hOIEpGpYD9I4yjqFtgmJBdHkokd5Oj4R6H9KzTFVzBuB4n0R4/8WMOOFUpgwy4sNugmI5jAEdrzSErM/Gxeh0QUcotNNXJ5eqs+u9d0+/7Bo7LGbzz5tZj+6939mdz95m1AlPgAAAABJRU5ErkJggg==) no-repeat;
-    background-size: cover
-}
-
 .index-btn{
     color:#fff;
     font-weight: 500;
@@ -401,6 +343,14 @@
 .paopao-item-name-wrapper{
     padding: .6666666667rem 0
 }
+.global-bg-orange{
+    color: #fff;
+    border-color: #FFC96B
+}
+.global-bg-light-pink{
+    color: #fff;
+    border-color: #FF896B
+}
 .paopao-item-type{
     position: relative;
     width: 100%;
@@ -427,13 +377,12 @@
     left:-3.2rem
 }
 
-
-
 .paopao-item-type .paopao-item-num-tag i{
     width: 200%;
     left: -50%;
 }
 .paopao-item-username {
+    margin-right: 4px;
     max-width: 65%;
     white-space: nowrap;
 }
