@@ -222,7 +222,7 @@ ul, li {
     position: absolute
 }
 
-.global-relative{
+.global-relative,.global-border,.global-border-all{
     position: relative
 }
 
@@ -353,13 +353,66 @@ ul, li {
 .global-fix-layer{
     background:#fff
 }
+.global-tag{
+    position: relative;
+    margin-right: 4px;
+    padding: 0 .5rem;
+    height: 1.1666666666667rem;
+    font-size: .83333333334rem;
+    color: transparent
+}
+.global-tag-text{
+    position: absolute;
+    line-height: 137.5%;
+    font-size: 1.666666667rem;
+    color: #666;
+    text-align: center;
+    border-radius: 24px
+}
+.global-sexual-woman,.global-sexual-man{
+    position: relative;
+    margin: 0 .3333333333rem .33333333333rem 0;
+    height: 1.1666666666667rem;
+    width: 2.666666666667rem;
+    color: #fff;
+    border-radius: 16px;
+    overflow: hidden
+}
+.global-sexual-woman{
+    background: #FF6BE1
+}
+.global-sexual-man{
+    background: #009CFF
+}
+.global-icon-sexual{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    margin: auto 0;
+    left:6.25%;
+    font-weight: 600;
+    width: 1.3333333333rem;
+    height: 1.33333333333rem;
+    transform: scale(.5)
+}
+.global-sexual-text{
+    display: block;
+    position: absolute;
+    top: -50%;
+    width: 137.5%;
+    height: 200%;
+    text-align: center;
+    line-height: 150%;
+    font-size: 1.66666666666rem;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+}
 
-.global-border{
-    position: relative
+.global-border::before,.global-border-all::before{
+    content: '';
+    position: absolute
 }
 .global-border::before{
-    content: '';
-    position: absolute;
     left: 0;
     width: 100%;
     height: 1px;
@@ -368,6 +421,17 @@ ul, li {
     transform-origin: 0 100%;
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5)
+}
+.global-tag-text,.global-border-all::before{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ccc;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
 }
 .global-border-top::before{
     top: 0
@@ -602,6 +666,7 @@ ul, li {
     font-size:1.3333333333rem;
     color:#333
 }
+
 /* 自适应缩放比例 */
 @media screen and (min-width:320px) {
     html {

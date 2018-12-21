@@ -38,7 +38,7 @@ canvas{
 }
 
 header {
-    display: none;
+    /* display: none; */
     position: relative;
     width: 100%;
     background: #fff

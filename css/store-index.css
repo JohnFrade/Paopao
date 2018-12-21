@@ -1,0 +1,185 @@
+.store-header{
+    width: 100%;
+    height: 19.16666666667rem;
+    background:linear-gradient(180deg,rgba(255,58,55,1) 0%,rgba(255,0,144,1) 100%)
+}
+.store-header{
+    color: #fff
+}
+
+.store-header-top{
+    padding: 2rem 1rem 1.333333333rem 2rem
+}
+.store-avatar{
+    margin-right: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius:50%;
+    overflow: hidden
+}
+.store-name{
+    padding: .41666666667rem 0 1rem;
+    font-size: 1.3333333rem;
+    font-weight: 700
+}
+.store-data-btn{
+    position: relative;
+    margin: auto 0 .5rem auto;
+    width:6.666666667rem;
+    font-size:1.1666666667rem;
+    font-weight:500;
+    line-height:2.5rem;
+    color: #fff;
+}
+.store-data-btn::after{
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    transform: scale(.5)
+}
+.store-header-bottom{
+    font-size: 1.1666666666rem;
+    text-align: center
+}
+.store-data{
+    margin-bottom: .5rem;
+    font-size: 1.3333333333rem
+}
+
+.store-turnover{
+    margin: -5.6666666667rem auto 2rem;
+    width: 93.333333333%;
+    height:13.333333333334rem;
+    background:#fff;
+    box-shadow:0px 4px 20px rgba(0,0,0,0.1);
+    border-radius:.6666666667rem;
+}
+.store-turnover-top{
+    padding: 1rem;
+    color: #999
+}
+.store-turnover-name{
+    font-size: 1.3333333333rem;
+    font-weight: 700;
+    color: #333
+}
+.icon-arrow-right{
+    position: relative;
+    top: 2px;
+    width: .833333333333rem;
+    height: 1rem;
+    fill: #ccc
+}
+.store-turnover-item{
+    padding-top: 2.08333333333rem;
+    text-align: center;
+    font-size:1rem;
+    color: #999
+}
+.store-turnover-data{
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 700;
+    font-size:2.75rem
+}
+.store-turnover-data::before{
+    content: '￥';
+    font-size: 1.3333333333rem;
+    color: #333
+}
+.store-turnover-item:first-of-type .store-turnover-data{
+    color: #FF2D58
+}
+.store-turnover-item:first-of-type  .store-turnover-data::before{
+    color: #FF2D58
+}
+.store-item{
+    padding: 1rem;
+    background: #fff
+}
+.store-item:last-of-type{
+    margin-top: 1rem
+}
+.store-item-signs{
+    margin-right: 1rem;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: .5rem;
+    overflow: hidden
+}
+.store-item-content{
+    box-sizing: border-box;
+    padding-right: 2rem
+}
+.store-item-name{
+    margin-bottom: .5rem;
+    font-size: 1.3333333333rem;
+    color: #333
+}
+.store-item-tag{
+    margin-left: 4px;
+    width:4.5rem;
+    height: 1.333333333rem;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.333333333rem;
+    color: #fff;
+    border-radius:20px;
+    background: #999
+}
+.store-item-text{
+    font-size: 1rem;
+    color: #999
+}
+.store-item-btn{
+    width: 5rem;
+    height: 2rem;
+    text-align: center;
+    line-height:2rem;
+    font-size:1.1666667rem ;
+    color: #fff;
+    font-weight: 500;
+    background: #FFC96B;
+    border-radius: 24px
+}
+.store-item::before{
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 2.4rem)
+}
+.store-item .store-item-signs{
+    background: #FFC96B
+}
+.store-item:not(:first-of-type) .store-item-signs{
+    background: #f2f2f2
+}
+.icon-single-manage{
+    margin: auto;
+    width:2rem ;
+    height: 1.83333333333rem;
+    fill: #fff
+}
+.icon-charge-set{
+    margin: auto;
+    width:2rem ;
+    height: 1.83333333333rem;
+    fill: #ccc
+}
+.icon-invite{
+    margin: auto;
+    width:2rem ;
+    height: 1.83333333333rem;
+    fill: #ccc
+}
+.store-item:not(:first-of-type) .store-item-name{
+    color: #999
+}
+.store-item:not(:first-of-type) .store-item-btn{
+    background: #ccc
+}

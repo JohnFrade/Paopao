@@ -16,10 +16,23 @@
     </head>
 
     <body>
+        <header>
+            <!-- 交友没有这个提示 -->
+            <p class="dating-tips">平等原则：必填选项填写完毕，才可以进入相亲模块噢！</p>
+            <div class="global-flex global-flex-center nav-wrapper">
+                <nav class="nav global-flex">                    <a href="javascript:void(0);" class="global-flex-1 nav-item ">交友</a>
+                    <a href="javascript:void(0);" class="global-flex-1 nav-item nav-active">相亲</a>
+                </nav>
+                <button class="global-btn data-save-btn">保存</button>
+            </div>
+        </header>
         <div id="paopao-personal-data" class="global-box anim">
-            <div class="global-flex global-flex-center global-flex-between my-data-block-title">
+            <!-- <div class="global-flex global-flex-center global-flex-between my-data-block-title">
                 <h2 class="public-block-title">完善资料</h2>
                 <button class="global-btn my-data-save-btn">保存</button>
+            </div> -->
+            <div class="global-flex global-flex-center my-data-block-title">
+                <h2 class="public-block-title">完善资料</h2>
             </div>
             <div class="global-flex global-flex-center paopao-personal-data-item">
                 <div class="data-tag-name">
@@ -46,7 +59,7 @@
                     手机号码正确但是没发送 validate-ready
                     验证号码发送以后 validate-send
                  -->
-                <button class="global-btn global-btn-round-sm validate-btn validate-ready">验证</button>
+                <button class="global-btn global-btn-round-sm validate-btn validate-ready validate-send">验证</button>
             </div>
             <div class="global-flex global-flex-center paopao-personal-data-item paopao-validate-code">
                 <div class="data-tag-name">
