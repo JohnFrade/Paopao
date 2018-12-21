@@ -359,8 +359,7 @@ ul, li {
     padding: 0 .5rem;
     height: 1.1666666666667rem;
     font-size: .83333333334rem;
-    color: transparent;
-    overflow: hidden;
+    color: transparent
 }
 .global-tag-text{
     position: absolute;
@@ -403,7 +402,7 @@ ul, li {
     width: 137.5%;
     height: 200%;
     text-align: center;
-    line-height: 137.5%;
+    line-height: 150%;
     font-size: 1.66666666666rem;
     -webkit-transform: scale(.5);
     transform: scale(.5);

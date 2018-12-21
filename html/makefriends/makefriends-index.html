@@ -7,9 +7,9 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
     <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/makefriends-index.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/makefriends-index.css">
+    <link rel="stylesheet" href="../../css/footer.css">
     <title>交友圈</title>
 </head>
 <body id="app">
@@ -96,7 +96,7 @@
             </ul>
         </main>
     </div>
-    <footer>
+    <footer id="footer">
         <ul class="global-flex">
             <li class="global-flex-1">
                 <a href="javascript:void(0);" class="global-flex global-flex-center">
@@ -137,7 +137,6 @@
     <script>
         var app = new Vue({
             el:'#app',
-            render:
             components:{
                 
             },
@@ -146,11 +145,11 @@
                     circleList:[]
                 }
             },
-            beforeMount() {
-                
-            },
             watch:{
 
+            },
+            beforeMount() {
+                console.log(110)
             },
             mounted() {
                 
