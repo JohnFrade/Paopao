@@ -38,7 +38,7 @@
 
 body { background: #f2f2f2; }
 
-.matrimonial-agency-container { background: #fff; padding: 0.6rem; }
+.matrimonial-agency-container { background: #fff; padding: 0.6rem; margin-bottom: .6rem; }
 
 .matrimonial-agency-container .swiper-container { width: 17.55rem; height: 5.8rem; border-radius: 0.4rem; margin-bottom: 0.6rem; }
 
@@ -62,14 +62,6 @@ body { background: #f2f2f2; }
 
 .matrimonial-agency-container .matrimonial-agency-recommend-content img { width: 100%; height: 100%; background: transparent; border-radius: 0.4rem; position: absolute; left: 0; bottom: 0; z-index: 100; }
 
-.matrimonial-agency-title { height: 1.65rem; line-height: 1.65rem; font-size: 1.2rem; margin-bottom: 0.6rem; }
-
-.matrimonial-agency-title .matrimonial-agency-title-right { font-size: 0.6rem; color: #999; }
-
-.matrimonial-agency-title .matrimonial-agency-title-right div { padding-right: 0.4rem; }
-
-.matrimonial-container { padding-top: 0.5rem; }
-
 .matrimonial-container .matrimonial-content-item .top { padding-bottom: 0.8rem; }
 
 .matrimonial-container .matrimonial-content-item .image { width: 4rem; height: 4rem; border-radius: 0.3rem; }
@@ -80,7 +72,7 @@ body { background: #f2f2f2; }
 
 .matrimonial-container .matrimonial-content-item + .matrimonial-content-item { border-top: 1px solid #E5E5E5; padding-top: 0.8rem; }
 
-.matrimonial-container .matrimonial-content { background: #fff; padding: 0.6rem; }
+.matrimonial-container .matrimonial-content { background: #fff; padding: 0 0.6rem; }
 
 .matrimonial-container .matrimonial-content .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; margin-right: 0.6rem; }
 
@@ -99,5 +91,25 @@ body { background: #f2f2f2; }
 .matrimonial-container .matrimonial-content .group-info div:first-child { font-size: 0.8rem; font-weight: 700; line-height: 1.1rem; }
 
 .matrimonial-container .matrimonial-content .group-info div:nth-child(2) { font-size: 0.5rem; line-height: 0.5rem; }
+
+.matrimonial-agency-title { height: 1.65rem; line-height: 1.65rem; font-size: 1.2rem; margin-bottom: 0.6rem; }
+
+.matrimonial-agency-title .matrimonial-agency-title-right { font-size: 0.6rem; color: #999; }
+
+.matrimonial-agency-title .matrimonial-agency-title-right div { padding-right: 0.4rem; }
+
+.matrimonial-agency-title-bot { background: #fff; line-height: 1.65rem; font-size: 1.2rem; padding: 0.6rem; }
+
+.matrimonial-agency-title-wrp { background: #f2f2f2; }
+
+.scroll-transition { -webkit-transition: .2s all; transition: .2s all; }
+
+.scroll-title-active { position: fixed; width: 100%; top: 0; left: 0; background: #fff; z-index: 1000; padding-top: 0; }
+
+.scroll-transition { -webkit-transition: .2s all; transition: .2s all; }
+
+.scroll-top { padding-top: 2.85rem; }
+
+.up-btn { position: fixed; top: 80%; right: .32rem; width: 1.5rem; height: 1rem; }
 
 /*# sourceMappingURL=L:/working/city/WorkCode/appointment/matrimonialAgency.css.map */
