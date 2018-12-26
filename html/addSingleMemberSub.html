@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./addSingleMemberSub.css">
+    <link rel="stylesheet" href="./weui-picker.css">
+    <title>添加单身团成员</title>
+    <script>
+        (function (doc, win) {
+            var docEl,
+                clientWidth;
+            docEl = doc.documentElement;
+            resizeEvt = "orientationchange" in window
+                ? "orientationchange"
+                : "resize";
+            recalc = function () {
+                clientWidth = docEl.clientWidth;
+                if (!clientWidth)
+                    return;
+                docEl.style.fontSize = 20 * (clientWidth / 375) + "px";
+            };
+            if (!doc.addEventListener)
+                return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
+</head>
+
+<body>
+    <div class="container float-clear">
+        <div class="mate-condition">
+            <div class="flex flex-center title-wrp">
+                <div class="title">择偶条件</div>
+                <div class="optional">选填</div>
+            </div>
+            <div>
+                <div class="single-member-info-item flex flex-center flex-between">
+                    <div class="sub-title">
+                        房产信息
+                    </div>
+                    <div class="flex flex-center change-btn single-member-info-item-right">
+                        <div class="change-btn-boy change-btn-active">无购房</div>
+                        <!-- 选中添加change-btn-active 这个 类 -->
+                        <div class="change-btn-girl">已购房</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-center flex-between single-member-info-item">
+                <div class="sub-title">
+                    月收入                 
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item-right">
+                    <div id="j-salary" class="text">请选择收入</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="./global.svg#icon-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex flex-center flex-between single-member-info-item">
+                <div class="sub-title">
+                    年龄
+                   
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item-right">
+                    <div id="j-age" class="text">请选择年龄要求</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="./global.svg#icon-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex flex-center flex-between single-member-info-item">
+                <div class="sub-title">
+                    身高
+                
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item-right">
+                    <div id="j-height" class="text">请选择身高要求</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="./global.svg#icon-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex flex-center flex-between single-member-info-item">
+                <div class="sub-title">
+                    学历
+                
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item-right">
+                    <div id="j-education" class="text">请选择学历要求</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="./global.svg#icon-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex flex-center flex-between single-member-info-item">
+                <div class="sub-title">
+                    家乡
+             
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item-right">
+                    <div id="j-homeTown" class="text">请选择家乡要求</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="./global.svg#icon-arrow-right"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="flex flex-center title-wrp">
+                <div class="title">媒婆说</div>
+                <div class="optional">选填</div>
+            </div>
+            <div class="monologue-wrp">
+                <div class="monologue-textarea">
+                    <textarea id="j-monologueTextarea"></textarea>
+                </div>
+                <div class="font-num flex flex-center flex-between">
+                    <div>
+                        <span>50</span>
+                        <span>/</span>
+                        <span>60</span>
+                    </div>
+                    <div class="others">看看别人怎么说</div>
+                </div>
+            </div>
+        </div>
+        <div class="example-wrp float-clear">
+            <div class="example-title">
+                示例:
+            </div>
+            <div class="content">
+                小宇是个严谨而认真的耿直boy，他赚得不 少，花得少。毛病不多，优点多。
+            </div>
+            <div class="example-change-btn-wrp">
+                <div class="example-change-btn">换一个</div>
+            </div>
+        </div>
+    </div>
+    <div class="sumbit-wrp flex flex-center flex-between">
+        <!-- <div class="sumbit-btn-wrp flex flex-center"> -->
+        <div class="save">保存</div>
+        <div class="upload">上传</div>
+    <!-- </div> -->
+    </div>
+    <script src="./zepto.min.js"></script>
+    <script src="./zepto.weui.js"></script>
+    <script src="./picker.min.js"></script>
+    <script src="./picker.city.js"></script>
+</body>
+
+</html>
+<script>  
+    $(function () {
+        $("#j-age").click(function () {
+            weui.picker([{
+                label: '10',
+                value: 0
+            }, {
+                label: '20',
+                value: 1
+            }, {
+                label: '30',
+                value: 2
+            }, {
+                label: '40',
+                value: 3
+            }, {
+                label: '50',
+                value: 4
+            }], {
+                    defaultValue: [0],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+        });
+        $("#j-height").click(function () {
+            weui.picker([{
+                label: '10cm',
+                value: 0
+            }, {
+                label: '20cm',
+                value: 1
+            }, {
+                label: '30cm',
+                value: 2
+            }, {
+                label: '40cm',
+                value: 3
+            }, {
+                label: '50cm',
+                value: 4
+            }], {
+                    defaultValue: [0],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+        });
+        $("#j-homeTown").cityPicker({
+            title: "选择省市地区",
+            showDistrict: false,
+            onChange: function (picker, values, displayValues) {
+                console.log(values)
+            }
+        });
+        $("#j-education").click(function () {
+            weui.picker([{
+                label: '律师',
+                value: 0
+            }, {
+                label: '老师',
+                value: 1
+            }, {
+                label: 'IT农民',
+                value: 2
+            }, {
+                label: '保安',
+                value: 3
+            }, {
+                label: '模特',
+                value: 4
+            }], {
+                    defaultValue: [0],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+        });
+        $("#j-salary").click(function () {
+            weui.picker([{
+                label: '3000～5000',
+                value: 0
+            }, {
+                label: '5000～8000',
+                value: 1
+            }, {
+                label: '8000～12000',
+                value: 2
+            }, {
+                label: '12000～15000',
+                value: 3
+            }, {
+                label: '20000以上',
+                value: 4
+            }], {
+                    defaultValue: [4],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+        });
+
+    })
+</script>

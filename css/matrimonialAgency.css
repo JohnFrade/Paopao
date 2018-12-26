@@ -1,0 +1,115 @@
+.flex { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; }
+
+.flex-col { -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; }
+
+.flex-center { -webkit-box-align: center; -webkit-align-items: center; -ms-flex-align: center; align-items: center; }
+
+.flex-end { -webkit-box-align: end; -webkit-align-items: flex-end; -ms-flex-align: end; align-items: flex-end; }
+
+.flex-between { -webkit-box-pack: justify; -webkit-justify-content: space-between; -ms-flex-pack: justify; justify-content: space-between; }
+
+.flex-around { -webkit-justify-content: space-around; -ms-flex-pack: distribute; justify-content: space-around; }
+
+.flex-wrap { -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-flow: no-wrap; -ms-flex-flow: no-wrap; flex-flow: no-wrap; }
+
+.justify-center { -webkit-box-pack: center; -webkit-justify-content: center; -ms-flex-pack: center; justify-content: center; }
+
+.flex-col-end { -webkit-box-pack: end; -webkit-justify-content: flex-end; -ms-flex-pack: end; justify-content: flex-end; }
+
+.swiper-container { width: 600px; height: 300px; }
+
+.common-width-100 { width: 100%; }
+
+.common-ft-bold { font-weight: 700; }
+
+.common-poz { position: relative; }
+
+.common-arrow-right { width: 0.4rem; height: 0.65rem; }
+
+.common-icon-sexual { width: 0.7rem; height: 0.7rem; }
+
+.float-clear:after { content: ''; display: block; clear: both; }
+
+.float-left { float: left; }
+
+.float-right { float: right; }
+
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+body { background: #f2f2f2; }
+
+.matrimonial-agency-container { background: #fff; padding: 0.6rem; margin-bottom: .6rem; }
+
+.matrimonial-agency-container .swiper-container { width: 17.55rem; height: 5.8rem; border-radius: 0.4rem; margin-bottom: 0.6rem; }
+
+.matrimonial-agency-container .swiper-container img { width: 100%; height: 100%; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-wrp { padding-bottom: 1.2rem; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content { width: 100%; background: #fff; height: 6rem; overflow-y: hidden; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-main { overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding-bottom: .5rem; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-item { width: 6rem; height: 6rem; display: inline-block; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-item .personal-info-wrp { position: absolute; bottom: 0.2rem; left: 0.4rem; z-index: 200; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-item .personal-info-wrp .sexual-wrp { text-align: center; width: 3.2rem; line-height: 1.4rem; background: #ff6be1; border-radius: 0.8rem; font-size: 1rem; color: #fff; -webkit-transform: scale(0.5); transform: scale(0.5); -webkit-transform-origin: 0% 100%; transform-origin: 0% 100%; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-item .personal-info-wrp .address { width: 5.2rem; line-height: 1.4rem; background: rgba(255, 255, 255, 0.8); text-align: center; font-size: 1rem; color: #666666; border-radius: 0.8rem; -webkit-transform: scale(0.5); transform: scale(0.5); -webkit-transform-origin: -50% 100%; transform-origin: -50% 100%; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content .matrimonial-agency-recommend-item + .matrimonial-agency-recommend-item { margin-left: 0.6rem; }
+
+.matrimonial-agency-container .matrimonial-agency-recommend-content img { width: 100%; height: 100%; background: transparent; border-radius: 0.4rem; position: absolute; left: 0; bottom: 0; z-index: 100; }
+
+.matrimonial-container .matrimonial-content-item .top { padding-bottom: 0.8rem; }
+
+.matrimonial-container .matrimonial-content-item .image { width: 4rem; height: 4rem; border-radius: 0.3rem; }
+
+.matrimonial-container .matrimonial-content-item .image + .image { margin-left: 0.5rem; }
+
+.matrimonial-container .matrimonial-content-item .img-wrp { padding-bottom: 0.6rem; }
+
+.matrimonial-container .matrimonial-content-item + .matrimonial-content-item { border-top: 1px solid #E5E5E5; padding-top: 0.8rem; }
+
+.matrimonial-container .matrimonial-content { background: #fff; padding: 0 0.6rem; }
+
+.matrimonial-container .matrimonial-content .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; margin-right: 0.6rem; }
+
+.matrimonial-container .matrimonial-content .name { font-size: 0.8rem; width: 8rem; }
+
+.matrimonial-container .matrimonial-content .company-name { font-size: 0.7rem; color: #666; padding-top: 0.7rem; margin-right: 0.5rem; }
+
+.matrimonial-container .matrimonial-content .text { padding-top: 0.2rem; }
+
+.matrimonial-container .matrimonial-content .label { width: 3.2rem; line-height: 1.4rem; background: white; border: 1px solid #ffc96b; border-radius: 0.9rem; -webkit-transform: scale(0.5); transform: scale(0.5); text-align: center; color: #FFC96B; -webkit-transform-origin: 0% 92%; transform-origin: 0% 92%; }
+
+.matrimonial-container .matrimonial-content .btn { width: 8rem; line-height: 3rem; background: white; border: 1px solid #cccccc; border-radius: 2.2rem; font-size: 1.4rem; text-align: center; -webkit-transform-origin: 100% 30%; transform-origin: 100% 30%; position: absolute; right: 0; top: 50%; -webkit-transform: translateY(-50%) scale(0.5); transform: translateY(-50%) scale(0.5); }
+
+.matrimonial-container .matrimonial-content .group-info { width: 3rem; height: 2rem; background: white; border: 1px solid #cccccc; border-radius: 0.3rem; text-align: center; color: #666; position: absolute; right: 0; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+
+.matrimonial-container .matrimonial-content .group-info div:first-child { font-size: 0.8rem; font-weight: 700; line-height: 1.1rem; }
+
+.matrimonial-container .matrimonial-content .group-info div:nth-child(2) { font-size: 0.5rem; line-height: 0.5rem; }
+
+.matrimonial-agency-title { height: 1.65rem; line-height: 1.65rem; font-size: 1.2rem; margin-bottom: 0.6rem; }
+
+.matrimonial-agency-title .matrimonial-agency-title-right { font-size: 0.6rem; color: #999; }
+
+.matrimonial-agency-title .matrimonial-agency-title-right div { padding-right: 0.4rem; }
+
+.matrimonial-agency-title-bot { background: #fff; line-height: 1.65rem; font-size: 1.2rem; padding: 0.6rem; }
+
+.matrimonial-agency-title-wrp { background: #f2f2f2; }
+
+.scroll-transition { -webkit-transition: .2s all; transition: .2s all; }
+
+.scroll-title-active { position: fixed; width: 100%; top: 0; left: 0; background: #fff; z-index: 1000; padding-top: 0; }
+
+.scroll-transition { -webkit-transition: .2s all; transition: .2s all; }
+
+.scroll-top { padding-top: 2.85rem; }
+
+.up-btn { position: fixed; top: 80%; right: .32rem; width: 1.5rem; height: 1rem; }
+
+/*# sourceMappingURL=L:/working/city/WorkCode/appointment/matrimonialAgency.css.map */

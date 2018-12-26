@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/addSingleMember.css">
+    <link rel="stylesheet" href="./css/weui-picker.css">
+    <title>添加单身团成员</title>
+    <script>
+        (function (doc, win) {
+            var docEl,
+                clientWidth;
+            docEl = doc.documentElement;
+            resizeEvt = "orientationchange" in window
+                ? "orientationchange"
+                : "resize";
+            recalc = function () {
+                clientWidth = docEl.clientWidth;
+                if (!clientWidth)
+                    return;
+                docEl.style.fontSize = 20 * (clientWidth / 375) + "px";
+            };
+            if (!doc.addEventListener)
+                return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener("DOMContentLoaded", recalc, false);
+        })(document, window);
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="single-member-info">
+            <div class="main-title">
+                基本信息
+            </div>
+            <div class="photo-wrp flex flex-center flex-between">
+                <div class="sub-title">
+                    相册
+                    <span>*</span>
+                </div>
+                <div class="photo-content flex flex-center">
+                    <div class="add-photo-btn">
+                        <div class="photo-num">
+                            <span>4</span>
+                            <span>/</span>
+                            <span>9</span>
+                        </div>
+                    </div>
+                    <div class="photo-item-wrp">
+                        <div class="photo-self-wrp">
+                            <div class="photo-item">
+                                <img class="photo-self" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545203368297&di=8caa20173abf180caaffd654911a2ee5&imgtype=0&src=http%3A%2F%2Fp4.music.126.net%2FEB15DiP80kYdk1caNMwYgQ%3D%3D%2F7749357952998601.jpg"
+                                    alt="">
+                                        <div class="photo-item-bg">
+                                        <div class="photo-item-radio photo-item-radio-active"></div>
+                                </div>
+                            
+                            </div>
+                            <!-- <div class="photo-item">
+                                <img class="photo-self" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545203368297&di=8caa20173abf180caaffd654911a2ee5&imgtype=0&src=http%3A%2F%2Fp4.music.126.net%2FEB15DiP80kYdk1caNMwYgQ%3D%3D%2F7749357952998601.jpg"
+                                    alt="">
+                            </div>
+                            <div class="photo-item">
+                                <img class="photo-self" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545203368297&di=8caa20173abf180caaffd654911a2ee5&imgtype=0&src=http%3A%2F%2Fp4.music.126.net%2FEB15DiP80kYdk1caNMwYgQ%3D%3D%2F7749357952998601.jpg"
+                                    alt="">
+                            </div>
+                            <div class="photo-item">
+                                <img class="photo-self" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545203368297&di=8caa20173abf180caaffd654911a2ee5&imgtype=0&src=http%3A%2F%2Fp4.music.126.net%2FEB15DiP80kYdk1caNMwYgQ%3D%3D%2F7749357952998601.jpg"
+                                    alt="">
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-member-info-main">
+                <div class="single-member-info-item flex flex-center flex-between">
+                    <div class="sub-title">
+                        昵称
+                        <span>*</span>
+                    </div>
+                    <input class="input-box common-ft-bold" value="请输入TA的昵称" type="text" />
+                </div>
+                <div class="single-member-info-item flex flex-center flex-between">
+                    <div class="sub-title">
+                        性别
+                        <span>*</span>
+                    </div>
+                    <div class="flex flex-center change-btn single-member-info-item-right">
+                        <div class="change-btn-boy change-btn-active">帅哥</div>
+                        <!-- 选中添加change-btn-active 这个 类 -->
+                        <div class="change-btn-girl">美女</div>
+                    </div>
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item">
+                    <div class="sub-title">
+                        出生日期
+                        <span>*</span>
+                    </div>
+                    <div class="flex flex-center flex-between single-member-info-item-right">
+                        <div id="j-pickerBirth" class="text">请选择出生日期</div>
+                        <svg class="icon-arrow-right" aria-hidden="true">
+                            <use xlink:href="./global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item">
+                    <div class="sub-title">
+                        家乡
+                        <span>*</span>
+                    </div>
+                    <div class="flex flex-center flex-between single-member-info-item-right">
+                        <div id="j-homeTown" class="text">请选择TA的家乡</div>
+                        <svg class="icon-arrow-right" aria-hidden="true">
+                            <use xlink:href="./global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item">
+                    <div class="sub-title">
+                        学历
+                        <span>*</span>
+                    </div>
+                    <div class="flex flex-center flex-between single-member-info-item-right">
+                        <div id="j-education" class="text">请选择学历</div>
+                        <svg class="icon-arrow-right" aria-hidden="true">
+                            <use xlink:href="./global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex flex-center flex-between single-member-info-item">
+                    <div class="sub-title">
+                        月收入
+                        <span>*</span>
+                    </div>
+                    <div class="flex flex-center flex-between single-member-info-item-right">
+                        <div id="j-salary" class="text">请选择收入</div>
+                        <svg class="icon-arrow-right" aria-hidden="true">
+                            <use xlink:href="./global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="single-member-info-item flex flex-center flex-between">
+                    <div class="sub-title">
+                        车辆信息                    
+                    </div>
+                    <div class="flex flex-center change-btn single-member-info-item-right">
+                        <div class="change-btn-boy change-btn-active">无购车</div>
+                        <!-- 选中添加change-btn-active 这个 类 -->
+                        <div class="change-btn-girl">已购车</div>
+                    </div>
+                </div>
+                <div class="single-member-info-item flex flex-center flex-between">
+                    <div class="sub-title">
+                        房产信息              
+                    </div>
+                    <div class="flex flex-center change-btn single-member-info-item-right">
+                        <div class="change-btn-boy change-btn-active">无购房</div>
+                        <!-- 选中添加change-btn-active 这个 类 -->
+                        <div class="change-btn-girl">已购房</div>
+                    </div>
+                </div>
+            </div>
+            <div class="monologue-wrp">
+                <div class="monologue-title">内心独白</div>
+                <div class="monologue-textarea">
+                    <textarea id="j-monologueTextarea"></textarea>                   
+                </div>                
+                <div class="font-num">
+                        <span>50</span><span>/</span><span>60</span>
+                    </div>
+            </div>            
+        </div>
+        <div class="matchmaker-next-btn-default">
+                <!-- 全部填完加 matchmaker-next-btn-active 这个类名 -->
+                下一步
+        </div>
+    </div>
+
+    <script src="./js/zepto.min.js"></script>
+    <script src="./js/zepto.weui.js"></script>
+    <script src="./js/picker.min.js"></script>
+    <script src="./js/picker.city.js"></script>
+</body>
+
+</html>
+<script>
+    $(function () {
+        $("#j-pickerBirth").click(function () {
+            weui.datePicker({
+                start: 1960,
+                end: new Date().getFullYear(),
+                defaultValue: [1995, 8],
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    console.log(result);
+                }
+            });
+        });
+        $("#j-homeTown").cityPicker({
+            title: "选择省市地区",
+            showDistrict: false,
+            onChange: function (picker, values, displayValues) {
+                console.log(values)
+            }
+        });
+        $("#j-education").click(function () {
+            weui.picker([{
+                label: '律师',
+                value: 0
+            }, {
+                label: '老师',
+                value: 1
+            }, {
+                label: 'IT农民',
+                value: 2
+            }, {
+                label: '保安',
+                value: 3
+            }, {
+                label: '模特',
+                value: 4
+            }], {
+                    defaultValue: [0],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    },
+                });
+        });
+        $("#j-salary").click(function () {
+            weui.picker([{
+                label: '3000～5000',
+                value: 0
+            }, {
+                label: '5000～8000',
+                value: 1
+            }, {
+                label: '8000～12000',
+                value: 2
+            }, {
+                label: '12000～15000',
+                value: 3
+            }, {
+                label: '20000以上',
+                value: 4
+            }], {
+                    defaultValue: [4],
+                    onChange: function (result) {
+                        console.log(result);
+                    },
+                    onConfirm: function (result) {
+                        console.log(result);
+                    }
+                });
+        });
+       
+    })
+</script>
