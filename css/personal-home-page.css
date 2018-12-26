@@ -24,37 +24,35 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    position: absolute;
     width: 100%;
     max-width: 640px;
     height: 100vh;
+    padding-bottom: 5.25rem;
     background: #fff;
-    overflow: hidden
+    overflow: hidden 
 }
 canvas{
     position: absolute;
-    top: -8.2%;
-    right: 5rem
+    top: 58.5%;
+    right: 5rem;
+    z-index: 99
 }
 
 header {
-    /* display: none; */
     position: relative;
+    height: 31.25rem;
     width: 100%;
-    background: #fff
+    background: #333
 }
 
 main {
-    position: fixed;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    max-width: 640px;
-    padding-bottom: 5.25rem;
-    background:#fff;
-    top: 31.25rem;
+    position: relative;
+    top: -31.25rem;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     z-index: 99
 }
 .main-scroll{
@@ -68,7 +66,7 @@ main {
     -webkit-overflow-scrolling: touch
 }
 
-.personal-banner-swiper {
+.personal-banner-swiper,.header{
     width: 100%;
     height: 31.25rem
 }
@@ -93,6 +91,8 @@ main {
 }
 
 .banner-video{
+    width:100%;
+    height:100%;
     object-fit: cover;
     object-position: center center
 }
@@ -193,7 +193,7 @@ main {
     margin: 0 auto;
     width: 6.6666666667rem;
     background: #fff;
-    z-index: 99
+    z-index: 2
 }
 
 .personal-banner-tab-single{
@@ -204,6 +204,7 @@ main {
     position: absolute;
     width: 100%;
     height: 100%;
+    cursor:pointer;
     z-index: 2;
 }
 
@@ -250,7 +251,6 @@ main {
 
 /* 个人信息 */
 .personal-info {
-    margin-bottom: .833333333333rem;
     padding: 1.25rem 1rem 2.083333333rem;
     background: #fff
 }
@@ -463,6 +463,7 @@ main {
 .my-accept{
     width: 100%;
     padding: 0 1rem;
+    background: #fff;
     overflow: hidden
 }
 .my-accept .block-title{

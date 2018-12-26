@@ -24,7 +24,7 @@
                         <div class="swiper-slide personal-banner-item">
                             <div class="video-content global-relative">
                                 <!-- x5-video-player-type="h5" 启用H5播放器,是wechat安卓版特性-->
-                                <video class="banner-video" poster="http://image13.m1905.cn/uploadfile/2015/0803/20150803030748137367.jpg" src="http://mvvideo11.meitudata.com/5a8ab099b40447414_H264_11_5.mp4?k=557d85b680d2e2bcfa25a4a4a6a1e0d2&t=5c10e712" playsinline="true" webkit-playsinline="true"  x-webkit-airplay="allow" x5-video-player-type="h5" preload="auto"></video>
+                                <video x5-video-player-fullscreen="true" webkit-playsinline="true" playsinline="true" x5-playsinline="true" x-webkit-airplay="allow" preload="auto" class="banner-video" poster="http://image13.m1905.cn/uploadfile/2015/0803/20150803030748137367.jpg" src="http://mvvideo10.meitudata.com/5c04171473d8e6vgnfdeom7573_H264_1_557b1c4b4bc85b.mp4?k=76fe17968fbf17ba7dc3901ab99293a2&t=5c208d24" ></video>
                                 <!-- 播放 -->
                                 <div class="play-status-wrapper global-flex global-box">
                                     <svg class="icon-play">
@@ -65,7 +65,7 @@
                         <i class="tag-text personal-ablum-count-text">16/16</i>
                     </div>
                     <!-- 付费查看相册 -->
-                    <div class="ablum-mask-wrapper">
+                    <div class="ablum-mask-wrapper" style="display: none">
                         <div class="ablum-mask"></div>
                         <!-- <img class="ablum-mask" src="../img/bg.png"> -->
                         <a href="javascript:void(0);" class="global-btn ablum-mask-btn">
@@ -74,15 +74,14 @@
                     </div>
                 </div>
             </header>
-            <main class="global-box">
+            <main>
+                <div class="header"></div>
                 <section class="global-flex personal-info global-flex-center">
                     <div class="global-flex-1">
                         <h2 class="personal-name font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈</h2>
                         <div class="global-flex global-flex-center">
                             <div class="icon-sexual-wrapper global-bg-pink">
-                                <!-- global-bg-blue -->
                                 <svg class="icon-sexual">
-                                    <!-- icon-man -->
                                     <use xlink:href="../img/global.svg#icon-female"></use>
                                 </svg>
                                 <i class="tag-text">19</i>
@@ -587,118 +586,127 @@
 
             // 监听全局滚动
             function listenerGlobalScroll() {
-                
+                // return false;
                 var startY = 0,
                     mainScroll = false,
-                    moveTimer = null, //触摸移动的定时器
-                    endTimer = null, // 触摸结束定时器
-                    scrollTimer = null, // 滚动定时器
-                    wrapper = document.querySelector('#global-wrapper'),
-                    swiperH = $('.personal-banner-swiper').height(), // swiper的高度
-                    scrollHeight = 0,
-                    scrollAnim = 0;
+                    moveTimer = 0;
+                    // moveTimer = null, //触摸移动的定时器
+                    // endTimer = null, // 触摸结束定时器
+                    // scrollTimer = null, // 滚动定时器
+                    // wrapper = document.querySelector('#global-wrapper'),
+                    wrapper = document.querySelector('main'),
+                    swiperH = $('.personal-banner-swiper').height(); // swiper的高度
+                    // scrollAnim = 0;
 
                 var main = $('main');
                 // 触摸开始
                 wrapper.addEventListener('touchstart', function (e) {
-                    clearTimeout(moveTimer);
-                    cancelAnimationFrame(scrollTimer);
-                    cancelAnimationFrame(endTimer);
+                    moveTimer = +new Date().getTime()
+                    console.log(moveTimer)
+                    // clearTimeout(moveTimer);
+                    // cancelAnimationFrame(scrollTimer);
+                    // cancelAnimationFrame(endTimer);
                     startY = e.changedTouches[0].pageY
                 }, false)
 
                 // 触摸移动
                 wrapper.addEventListener('touchmove', function (e) {
-                    cancelAnimationFrame(scrollTimer)
-                    var deltaY = e.changedTouches[0].pageY - startY;
-                    // 向上拖动放大swiper
-                    if (deltaY >= 0 && wrapper.scrollTop == 0 && scrollHeight == 0 && !mainScroll) {
-                        e.preventDefault();
-                        moveTimer = setTimeout(() => {
+                    if(+new Date().getTime() - moveTimer >= 10){
+                        e.stopPropagation()
+                        // cancelAnimationFrame(scrollTimer)
+                       var deltaY = e.changedTouches[0].pageY - startY;
+                       // 向上拖动放大swiper
+                       if (deltaY >= 0 && wrapper.scrollTop == 0) {
+                            e.preventDefault();
+                            // moveTimer = setTimeout(() => {
                             var scaleRate = ((swiperH + deltaY / 4.2) / swiperH)
                             $('.swiper-slide').eq(banner.activeIndex).css({
                                 'height': swiperH + (deltaY / 4.2) + 'px',
                                 'transform': 'scale(' + scaleRate + ')',
                                 'transition-timing-function': 'cubic-bezier(0.620, 0.055, 0.810, 0.665)'
                             })
-                        }, 16.6)
-                    // 向下滑动
-                    } else if (deltaY < 0 && -scrollHeight < swiperH && !mainScroll) {
-                        e.preventDefault();
-                        if(deltaY > - 22) return false;
-                        deltaY = deltaY < -128?-128:deltaY;
-                        scrollTimer = requestAnimationFrame(function fn() {
-                            if (Math.round(scrollAnim) > deltaY * 4 && -scrollHeight < swiperH) {
-                                if (scrollAnim - deltaY * 4 >= 80) {
-                                    scrollAnim -= 5;
-                                    scrollHeight -= 5;
-                                }else if (scrollAnim - deltaY * 4 >= 50) {
-                                    scrollAnim -= 4;
-                                    scrollHeight -= 4;
-                                }else if (scrollAnim - deltaY * 4 >= 20) {
-                                    scrollAnim -= 3;
-                                    scrollHeight -= 3;
-                                }else {
-                                    scrollAnim -= 1;
-                                    scrollHeight -= 1;
-                                }
-                                requestAnimationFrame(fn)
-                            } else {
-                                wrapper.scrollTop = 0
-                                if (-scrollHeight > swiperH) {
-                                    mainScroll = false
-                                    main.addClass('main-scroll')
-                                    videoObj.pause()
-                                    scrollHeight = -swiperH
-                                }
-                                scrollAnim = 0;
-                                cancelAnimationFrame(scrollTimer)
-                            }
-                            main.css({
-                                'transform': 'translateY(' + scrollHeight + 'px)'
-                            })
-                        })
-                    // 向上滑动
-                    }else if (deltaY >= 0 && scrollHeight < 0 && main.scrollTop() === 0) {
-                        e.preventDefault()
-                        main.removeClass('main-scroll')
-                        scrollTimer = requestAnimationFrame(function fn() {
-                            wrapper.scrollTop = 0;
-                            if (Math.round(scrollAnim) < deltaY * 4 && scrollHeight < 0) {
-                                if (deltaY * 4 - scrollAnim >= 80) {
-                                    scrollAnim += 5;
-                                    scrollHeight += 5;
-                                }else if (deltaY * 4 - scrollAnim >= 50) {
-                                    scrollAnim += 4;
-                                    scrollHeight += 4;
-                                }else if (deltaY * 4 - scrollAnim >= 30){
-                                    scrollAnim += 3;
-                                    scrollHeight += 3;
-                                } else {
-                                    scrollAnim += 1;
-                                    scrollHeight += 1;
-                                }
-                                requestAnimationFrame(fn)
-                            } else {
-                                scrollAnim = 0;
-                                if (scrollHeight > 0) {
-                                    mainScroll = false
-                                    scrollHeight = 0
-                                }
-                                cancelAnimationFrame(scrollTimer)
-                            }
-                            main.css({
-                                'transform': 'translateY(' + scrollHeight + 'px)'
-                            })
-                        })
+                        // }, 16.6)
+                        }
                     }
-                }, false)
+                },false)
+                //     // 向下滑动
+                //     } else if (deltaY < 0 && -scrollHeight < swiperH && !mainScroll) {
+                //         e.preventDefault();
+                //         if(deltaY > - 22) return false;
+                //         deltaY = deltaY < -128?-128:deltaY;
+                //         scrollTimer = requestAnimationFrame(function fn() {
+                //             if (Math.round(scrollAnim) > deltaY * 4 && -scrollHeight < swiperH) {
+                //                 if (scrollAnim - deltaY * 4 >= 80) {
+                //                     scrollAnim -= 5;
+                //                     scrollHeight -= 5;
+                //                 }else if (scrollAnim - deltaY * 4 >= 50) {
+                //                     scrollAnim -= 4;
+                //                     scrollHeight -= 4;
+                //                 }else if (scrollAnim - deltaY * 4 >= 20) {
+                //                     scrollAnim -= 3;
+                //                     scrollHeight -= 3;
+                //                 }else {
+                //                     scrollAnim -= 1;
+                //                     scrollHeight -= 1;
+                //                 }
+                //                 requestAnimationFrame(fn)
+                //             } else {
+                //                 wrapper.scrollTop = 0
+                //                 if (-scrollHeight > swiperH) {
+                //                     mainScroll = false
+                //                     main.addClass('main-scroll')
+                //                     videoObj.pause()
+                //                     scrollHeight = -swiperH
+                //                 }
+                //                 scrollAnim = 0;
+                //                 cancelAnimationFrame(scrollTimer)
+                //             }
+                //             main.css({
+                //                 'transform': 'translateY(' + scrollHeight + 'px)'
+                //             })
+                //         })
+                //     // 向上滑动
+                //     }else if (deltaY >= 0 && scrollHeight < 0 && main.scrollTop() === 0) {
+                //         e.preventDefault()
+                //         main.removeClass('main-scroll')
+                //         scrollTimer = requestAnimationFrame(function fn() {
+                //             wrapper.scrollTop = 0;
+                //             if (Math.round(scrollAnim) < deltaY * 4 && scrollHeight < 0) {
+                //                 if (deltaY * 4 - scrollAnim >= 80) {
+                //                     scrollAnim += 5;
+                //                     scrollHeight += 5;
+                //                 }else if (deltaY * 4 - scrollAnim >= 50) {
+                //                     scrollAnim += 4;
+                //                     scrollHeight += 4;
+                //                 }else if (deltaY * 4 - scrollAnim >= 30){
+                //                     scrollAnim += 3;
+                //                     scrollHeight += 3;
+                //                 } else {
+                //                     scrollAnim += 1;
+                //                     scrollHeight += 1;
+                //                 }
+                //                 requestAnimationFrame(fn)
+                //             } else {
+                //                 scrollAnim = 0;
+                //                 if (scrollHeight > 0) {
+                //                     mainScroll = false
+                //                     scrollHeight = 0
+                //                 }
+                //                 cancelAnimationFrame(scrollTimer)
+                //             }
+                //             main.css({
+                //                 'transform': 'translateY(' + scrollHeight + 'px)'
+                //             })
+                //         })
+                //     }
+                // }, false)
 
                 // 触摸结束
                 wrapper.addEventListener('touchend', function (e) {
-                    e.stopPropagation()
+                    // e.stopPropagation()
                     var deltaY = e.changedTouches[0].pageY - startY;
-                    if (wrapper.scrollTop === 0 && scrollHeight === 0) {
+                    // && scrollHeight === 0
+                    if (wrapper.scrollTop === 0) {
                         // 再次获取触摸的高度
                         var height = $('.swiper-slide').eq(banner.activeIndex).height();
                         endTimer = requestAnimationFrame(function fn() {

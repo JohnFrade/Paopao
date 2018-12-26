@@ -1,173 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
-    <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/makefriends-index.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-    <title>交友圈</title>
-</head>
-<body id="app">
-    <div class="global-wrapper">
-        <header>
-            <nav class="block-nav">
-                <ul>
-                    <li>全部</li>
-                    <li>我关注的</li>
-                    <li>附近</li>
-                </ul>
-                <button class="global-btn">
-                    <svg aria-hidden="true" class="">
-                        <use xlink:href=""></use>
-                    </svg>
-                </button>
-            </nav>
-            <nav class="block-sub-nav">
-                <ul>
-                    <li>全部</li>
-                    <li>健身</li>
-                    <li>旅游</li>
-                    <li>情感</li>
-                    <li>宠物</li>
-                    <li>摄影</li>
-                    <li>吐槽</li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <ul class="item-list">
-                <li class="item global-border global-border-bottom">
-                    <div class="global-flex item-top">
-                        <div class="item-avatar">
-                            <img src="" alt="" class="global-img">
-                        </div>
-                        <div class="global-flex-1">
-                            <div>
-                                <h2></h2>
-                                <div></div>
-                            </div>
-                            <div class="global-flex">
-                                <div class="global-tag"></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                        <svg class="" aria-hidden="true">
-                            <use xlink:href=""></use>
-                        </svg>
-                    </div>
-                    <div class="item-content">
-                        <!-- 语音 -->
-                        <button></button>
-                        <!-- 文字 -->
-                        <div class="">
 
-                        </div>
-                        <!-- 照片 -->
-                        <ul class="item-ablum">
-                            <li>
-                                <img src="" alt="">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/footer.css">
+        <link rel="stylesheet" href="../../css/makefriends-index.css">
+        <title>交友圈</title>
+    </head>
+
+    <body>
+         <!-- ref="wrapper" -->
+         <div id="global-wrapper" ref="wrapper" style="display:none">
+                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0}">
+                    <div v-for="(blockNavItem,blockNavIndex) of blockNav" v-show="blockNavIndex === blockIndex">
+                        <ul class="circle-list">
+                            <li v-ofr="circleItem of circleList" class="circle-item global-border global-border-bottom">
+                                <div class="global-flex circle-item-top">
+                                    <div class="circle-item-avatar">
+                                        <img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike220%2C5%2C5%2C220%2C73/sign=4210e4dcb4096b63951456026d5aec21/9213b07eca806538448187e09ddda144ac3482dd.jpg"
+                                            alt="" class="global-img">
+                                    </div>
+                                    <div class="global-flex-1 global-flex global-flex-column global-flex-between">
+                                        <div class="global-flex global-flex-center">
+                                            <h5 class="circle-item-username font-ellipsis font-ellipsis-1">Kimi小可爱</h5>
+                                            <div class="global-tag">
+                                                VIP
+                                                <div class="global-tag-text global-bg-orange">VIP</div>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex">
+                                            <!-- 这里要控制不同标签的颜色 需要对返回的数据进行处理 -->
+                                            <div class="global-tag circle-type">
+                                                健身<div class="global-tag-text">健身</div>
+                                            </div>
+                                            <div class="global-tag circle-time">
+                                                2天前<div class="global-tag-text">2天前</div>
+                                            </div>
+                                            <div class="global-tag circle-viewer">
+                                                浏览5486<div class="global-tag-text">浏览5486</div>
+                                            </div>
+                                            <div class="global-tag circle-distance global-align-right">
+                                                19.7km<div class="global-tag-text">19.7km</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <svg class="icon-more" aria-hidden="true" @click="showCircleLayer">
+                                        <use xlink:href=""></use>
+                                    </svg>
+                                </div>
+                                <div class="circle-item-content">
+                                    <!-- 语音 -->
+                                    <button class="circle-item-voice global-flex global-flex-center">
+                                        <svg class="icon-microphone" aria-hidden="true">
+                                            <use xlink:href="../../img/index.svg#icon-microphone"></use>
+                                        </svg>
+                                        <svg class="icon-voice" aria-hidden="true">
+                                            <use xlink:href="../../img/index.svg#icon-voice"></use>
+                                        </svg>
+                                        <span class="global-align-right">10s</span>
+                                    </button>
+                                    <!-- 文字 -->
+                                    <div class="circle-item-text">
+                                        <!-- font-ellipsis-3 -->
+                                        <p class="font-ellipsis font-ellipsis-3">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+                                            voluptatibus,
+                                            magnam perspiciatis obcaecati dolore maiores, id libero, enim ipsa ratione
+                                            ducimus cupiditate impedit reiciendis soluta? Iure alias iusto labore
+                                            dignissimos!
+                                            Impedit laboriosam natus quidem illum dolorum esse in veritatis eligendi
+                                            perspiciatis officia, aspernatur maxime. Quae maiores distinctio saepe
+                                            repellat
+                                            vitae autem sapiente quam ab. Eveniet repellat maiores accusamus harum
+                                            tenetur!
+                                        </p>
+                                        <a href="javascript:;" class="circle-item-read-btn">全文</a>
+                                    </div>
+                                    <!-- 照片 -->
+                                    <ul class="circle-item-ablum">
+                                        <!-- 一张图片是ablum-one -->
+                                        <!-- 多张图片是ablum-more -->
+                                        <!-- <li class="ablum-item ablum-more">
+                                                    <img src="http://img4.duitang.com/uploads/item/201407/26/20140726141237_32faQ.png"
+                                                        alt="">
+                                                </li> -->
+                                    </ul>
+                                    <!-- 定位 -->
+                                    <div class="circle-item-location global-flex global-flex-center">
+                                        <svg aria-hidden="true" class="icon-location">
+                                            <use xlink:href=""></use>
+                                        </svg>
+                                        <p class="circle-item-location-text font-ellipsis font-ellipsis-1">广州Four
+                                            season
+                                            hotel 2701约定你</p>
+                                    </div>
+                                </div>
+                                <div class="global-flex global-flex-between global-flex-center circle-item-bottom">
+                                    <div class="global-flex global-flex-center">
+                                        <svg aria-hidden="true" class="icon-comment">
+                                            <use xlink:link=""></use>
+                                        </svg>
+                                        2555
+                                    </div>
+                                    <div class="global-flex global-flex-center">
+                                        <svg aria-hidden="true" class="icon-like">
+                                            <use xlink:link=""></use>
+                                        </svg>
+                                        2955
+                                    </div>
+                                </div>
                             </li>
                         </ul>
-                        <!-- 定位 -->
-                        <div class="item-location">
-                            <svg></svg>
-                        </div>
+                        <!-- 正在加载 -->
+                        <img src="../../img/loading.svg" class="is-loading" v-show="isLoading[blockIndex]">
+                        <!-- 加载全部 -->
+                        <p class="load-all" v-show="loadingAll[blockIndex]">暂无更多</p>
                     </div>
-                    <div class="global-flex global-flex-between">
-                        <div>
-                            <svg aria-hidden="true">
-                                <use xlink:link=""></use>
-                            </svg>
-                        </div>
-                        <div>
-                            <svg aria-hidden="true">
-                                <use xlink:link=""></use>
-                            </svg>
-                        </div>
+                </main>
+            </div>
+        <div id="app">
+            <header class="header" v-if="init">
+                <nav class="block-nav global-flex">
+                    <ul class="global-flex-1 global-flex global-flex-end">
+                        <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}" @click.stop="switchNav(0)">
+                            {{blockNavItem}}
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0);" class="global-btn publish-btn">
+                        <svg aria-hidden="true" class="icon-publish">
+                            <use xlink:href="../../img/global.svg#icon-publish"></use>
+                        </svg>
+                    </a>
+                </nav>
+                <nav class="block-sub-nav global-border global-border-bottom" v-show="blockIndex === 0 && subNavList.length > 0">
+                    <ul class="block-sub-nav-content">
+                        <li ref="scrollNav" class="block-sub-item" v-for="(subNavItem,subNavIndex) of subNavList" :class="{'block-sub-active':blockSubIndex === subNavIndex}"
+                            @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
+                    </ul>
+                </nav>
+            </header>
+            <footer id="footer">
+                <nav class="global-flex footer-item-wrapper">
+                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active">
+                        <svg class="icon-footer" aria-hidden="true">
+                            <use xlink:href="../../img/global.svg#icon-index"></use>
+                        </svg>
+                        <p>首页</p>
+                    </a>
+                    <a href="../dating.html" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column">
+                        <svg class="icon-footer" aria-hidden="true">
+                            <use xlink:href="../../img/global.svg#icon-date"></use>
+                        </svg>
+                        <p>相亲</p>
+                    </a>
+                    <a href="javascript:void(0);" class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                        <svg class="icon-footer" aria-hidden="true">
+                            <use xlink:href="../../img/global.svg#icon-rank"></use>
+                        </svg>
+                        <p>排行榜</p>
+                    </a>
+                    <a href="../my.html" class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                        <svg class="icon-footer" aria-hidden="true">
+                            <use xlink:href="../../img/global.svg#icon-my"></use>
+                        </svg>
+                        <p>我的</p>
+                    </a>
+                </nav>
+            </footer>
+            <!-- 拉黑 举报 删除弹层 -->
+            <div class="circle-layer" v-show="circleLayer" ref="mask">
+                <div class="circle-mask" :class="maskAnim"></div>
+                <div class="circle-layer-content" :class="contentAnim">
+                    <div v-if="!admin" class="circle-layer-admin">
+                        <button class="global-btn circle-layer-item global-border global-border-bottom">删除</button>
+                        <button class="global-btn circle-layer-item">拉黑</button>
                     </div>
-                </li>
-            </ul>
-        </main>
-    </div>
-    <footer id="footer">
-        <ul class="global-flex">
-            <li class="global-flex-1">
-                <a href="javascript:void(0);" class="global-flex global-flex-center">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-index"></use>
-                    </svg>
-                    <p>首页</p>
-                </a>
-            </li>
-            <li class="global-flex-1">
-                <a href="javascript:void(0);" class="global-flex global-flex-center">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-index"></use>
-                    </svg>
-                    <p>相亲</p>
-                </a>
-            </li>
-            <li class="global-flex-1">
-                <a href="javascript:void(0);" class="global-flex global-flex-center">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-index"></use>
-                    </svg>
-                    <p>排行榜</p>
-                </a>
-            </li>
-            <li class="global-flex-1">
-                <a href="javascript:void(0);" class="global-flex global-flex-center">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-index"></use>
-                    </svg>
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </footer>
-</body>
+                    <button class="global-btn circle-layer-item circle-layer-report" v-else>举报</button>
+                    <button class="global-btn circle-layer-item circle-layer-cancel" @click.stop="hideCircleLayer">取消</button>
+                </div>
+            </div>
+        </div>
+    </body>
     <script src="../../js/vue.min.js"></script>
+    <script src="../../js/axios.min.js"></script>
     <script>
+        // mock的地址
+        var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/circle';
+
+        // requestAnimationFrame兼容
+        (function () {
+            if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+                window.requestAnimationFrame = function (callback) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                    var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return timer
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (timer) {
+                    clearTimeout(timer)
+                };
+            }
+        })();
+
         var app = new Vue({
-            el:'#app',
-            components:{
-                
-            },
-            data:function() {
+            el: '#app',
+            data: function () {
                 return {
-                    circleList:[]
+                    init: false,
+                    admin: false, // 是否是管理员
+                    blockIndex: 0, // 当前板块
+                    blockSubIndex: 0, // 当前子版块
+                    blockNav: ['全部', '我关注的', '附近的人'], // 板块导航
+                    loadingALL: [], // 加载全部
+                    isLoading: [], // 正在加载
+                    pageIndex: [], // 页数
+                    subNavList: [], // 子导航
+                    circleList: [], // 交友圈列表
+                    circleLayer: false, // 蒙层开关
+                    maskAnim: '', // 蒙层动画
+                    contentAnim: '', // 蒙层内容动画
                 }
             },
-            watch:{
-
+            watch: {
+                blockIndex: {
+                    handler: function (val, oldVal) {
+                        console.log(val)
+                    }
+                },
+                blockSubIndex: {
+                    handler: function (val, oldVal) {
+                        this.$set(this.isLoading, 0, false)
+                        this.$set(this.loadingALL, 0, false)
+                        this.$set(this.pageIndex, 0, 1)
+                    }
+                },
+                circleLayer: {
+                    handler: function (val, oldVal) {
+                        if (val) {
+                            this.maskAnim = 'fadeIn'
+                            this.contentAnim = 'sliderFromDown'
+                        } else if (oldVal) {
+                            this.maskAnim = ''
+                            this.contentAnim = ''
+                        }
+                    }
+                }
             },
             beforeMount() {
-                console.log(110)
+                this.initData()
+                this.getSubNavList()
+                this.loadCircleItem()
             },
             mounted() {
-                
+                this.init = true
+                this.initSubNav('offsetLeft')
+                this.disabledMaskMove()
+                // this.globalScroll()
             },
-            methods:{
+            methods: {
+                // 全局滚动
+                globalScroll() {
+                    var wrapper = this.$refs.wrapper;
+                    var scrollTop = 0;
+                    // console.log(wrapper)
+                    wrapper.addEventListener('scroll', function (e) {
+                        // console.log(e);
+                        var timeStamp = +new Date();
+                    })
+                },
+                initData: function () {
+                    var self = this;
+                    this.blockNav.forEach(function (item, index) {
+                        self.isLoading.push(false)
+                        self.loadingALL.push(false)
+                        self.pageIndex.push(1)
+                    })
+                },
                 // 获取子版块导航 
-                getSubNavList:function(){
-
+                getSubNavList: function () {
+                    var self = this;
+                    axios.get(https + '?type=99').then(function (res) {
+                        if (res.data.data.success) {
+                            self.subNavList = res.data.data.subNavList;
+                            self.initSubNav()
+                        }
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                // 初始化子版块导航
+                initSubNav: function (attr) {
+                    if (this.subNavList.length > 0) {
+                        console.log(this.$refs.scrollNav)
+                        this.subNavScrollArr = this.$refs.scrollNav.reduce(function (arr, cur, index) {
+                            arr.push = cur[attr];
+                            return arr
+                        }, [])
+                    }
                 },
                 // 切换板块
-                switchNav:function(){
-
+                switchNav: function (val) {
+                    if (this.blockIndex !== val) {
+                        this.blockIndex = val
+                    }
                 },
                 // 切换子版块
-                switchSubNav:function(){
+                switchSubNav: function (val) {
+                    if (this.subNavIndex !== val) {
+                        this.navScroll('offsetLeft', val, this.blockIndex)
+                        this.blockSubIndex = val
+                    }
+                },
+                // 导航滚动
+                navScroll: function (attr, index, before) {
+                    var self = this;
+                    var startPosition = this.subNavScrollArr[before];
+                    var curPosition = this.$refs.scrollNav.parentNode;
+                    console.log(curPosition);
+                    var direction = index > before ? 1 : -1;
+                    var rate = (index - before) / 2;
+                    var speedRange = {
+                        0.5: 7.85,
+                        1: 4.85,
+                        1.5: 4.05,
+                        2: 3.25
+                    }
+                    var startAnimation = function (endPosition) {
+                        var timer = requestAnimationFrame(function fn() {
+                            startPosition += ((endPosition - startPosition) * direction >= 15 ?
+                                (speedRange[Math.abs(rate)] * rate) : 3 * direction)
+                            if ((direction == 1 && startPosition <= endPosition) || (direction ==
+                                    -1 && startPosition >= endPosition)) {
+                                curPosition[attr] = startPosition;
+                                timer = requestAnimationFrame(fn);
+                            } else {
+                                curPosition[attr] = endPosition;
+                                cancelAnimationFrame(timer);
+                            }
+                        })
+                    }
+                    if (direction === 1 && index > 1) {
+                        startAnimation(this.subNavScrollArr[index - 2])
+                    } else if (direction === -1) {
+                        startAnimation(this.subNavScrollArr[index - 2] >= 0 ? this.subNavScrollArr[index -
+                            2] : 0)
+                    }
+                },
+                // 加载交友圈列表
+                loadCircleItem: function () {
 
+                },
+                disabledMaskMove() {
+                    // this.$refs.mask.addEventListener('touchmove',function(e){
+                    //     e.preventDefault()
+                    // })
+                },
+                showCircleLayer() {
+                    this.circleLayer = !this.circleLayer
+                },
+                // 拉黑 删除 举报执行此回调
+                hideCircleLayer() {
+                    this.maskAnim = 'fadeOut';
+                    this.contentAnim = 'sliderOutDown'
+                    setTimeout(() => {
+                        this.circleLayer = false
+                    }, 320)
                 }
             }
         })
     </script>
+
 </html>

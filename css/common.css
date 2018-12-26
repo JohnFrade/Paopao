@@ -605,8 +605,8 @@ ul, li {
 }
 
 .fadeOut {
-    -webkit-animation: fadeOut .56s cubic-bezier(0.000, 0.505, 0.500, 1.000) both;
-    animation: fadeOut .56s cubic-bezier(0.000, 0.505, 0.500, 1.000) both
+    -webkit-animation: fadeOut .36s cubic-bezier(0.000, 0.505, 0.500, 1.000) both;
+    animation: fadeOut .36s cubic-bezier(0.000, 0.505, 0.500, 1.000) both
 }
 
 .loading-list-icon{
