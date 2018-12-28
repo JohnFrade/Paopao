@@ -354,7 +354,8 @@
 .paopao-item-type{
     position: relative;
     width: 100%;
-    height:2.7rem
+    height:2.65rem;
+    overflow: hidden
 }
 .paopao-tag-wrapper{
     position: relative;

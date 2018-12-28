@@ -44,7 +44,11 @@
     margin: 0 auto;
     width: 100%;
     max-width: 640px;
-    z-index: 2
+    z-index: 2;
+    transition:transform .32s
+}
+.hide-block-nav{
+    transform: translateY(-3.6666666666667rem)
 }
 
 .block-nav{
@@ -106,6 +110,7 @@
 .block-sub-item{
     display: inline-block;
     padding: 0 1rem;
+    max-width:5.8333333333333rem;
     line-height: 3.3333333333rem;
     font-size: 1.1666666666667rem;
 }
@@ -113,10 +118,15 @@
     color: #333;
     font-weight:700
 }
+.icon-fold{
+    width:3.3333333333rem;
+    height:3.3333333333rem;
+    background: #945DFF
+}
 
 .main{
     /* padding-top: 3.66666666666rem; */
-    padding: 4.5rem 0 .83333333333rem;
+    padding-top: 4.5rem;
     width: 100%
 }
 .main-sub-nav{
@@ -253,7 +263,7 @@
     max-width: 90%
 }
 .circle-item-bottom{
-    padding-bottom: 1.66666666667rem;
+    padding-bottom: 1.166666666667rem;
     color: #999
 }
 .icon-comment,.icon-like{
@@ -265,17 +275,30 @@
 .icon-comment{
     width: 1.166666666667rem
 }
-.icon-like{
-    width: 1.166666666667rem
+.icon-liked{
+    fill:#FFC96B;
+    animation: likeAnim .48s cubic-bezier(0.445, 0.165, 0.825, 0.770) both
 }
+@keyframes likeAnim{
+    50%{
+        transform: scale(1.6)
+    }
+    to{
+        transform: unset
+    }
+}
+/* .icon-like{
+    width: 1.166666666667rem
+} */
 .is-loading{
     display: block;
     margin: 0 auto;
-    width: .3333333333rem;
+    padding-top: 1.666666666667rem;
+    width: 3.3333333333rem;
     height: 3.3333333333rem;
 }
 .load-all{
-    padding-top: 1.666666666667rem;
+    padding: 1.666666666667rem 0;
     text-align: center;
     color: #999;
     font-size: .8333333333333rem
@@ -308,7 +331,7 @@
 .circle-layer-item{
     width: 100%;
     font-size: 1.3333333333333rem;
-    line-height: 4.083333333333rem;
+    line-height: 4.333333333333rem;
     text-align: center;
     color: rgb(47, 139, 245);
     background: #fff

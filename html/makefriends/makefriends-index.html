@@ -15,16 +15,40 @@
     </head>
 
     <body>
-         <!-- ref="wrapper" -->
-         <div id="global-wrapper" ref="wrapper" style="display:none">
-                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0}">
+        <div id="app" v-if="init">
+            <header class="header" :class="hideBlockNav">
+                <nav class="block-nav global-flex">
+                    <ul class="global-flex-1 global-flex global-flex-end">
+                        <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}" @click.stop="switchNav(blockNavIndex)">
+                            {{blockNavItem}}
+                        </li>
+                    </ul>
+                    <a href="javascript:void(0);" class="global-btn publish-btn">
+                        <svg aria-hidden="true" class="icon-publish">
+                            <use xlink:href="../../img/global.svg#icon-publish"></use>
+                        </svg>
+                    </a>
+                </nav>
+                <nav class="global-flex block-sub-nav global-border global-border-bottom" v-show="blockIndex === 0 && subNavList.length > 0">
+                    <ul class="global-flex-1 block-sub-nav-content" ref="scrollParent">
+                        <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList" :class="{'block-sub-active':blockSubIndex === subNavIndex}"
+                            @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
+                    </ul>
+                    <svg aria-hidden="true" class="icon-fold" v-show="hideBlockNav === 'hide-block-nav'" @click.stop="showBlockNav">
+                        <use xlink:href=""></use>
+                    </svg>
+                </nav>
+            </header>
+            <div id="global-wrapper" ref="wrapper">
+                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}">
                     <div v-for="(blockNavItem,blockNavIndex) of blockNav" v-show="blockNavIndex === blockIndex">
                         <ul class="circle-list">
-                            <li v-ofr="circleItem of circleList" class="circle-item global-border global-border-bottom">
+                            <!-- v-for="(circleItem,circleIndex) of circleList[blockIndex]" -->
+                            <li class="circle-item global-border global-border-bottom" v-for="(circleItem,circleIndex) of [1,2,3]">
                                 <div class="global-flex circle-item-top">
                                     <div class="circle-item-avatar">
                                         <img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike220%2C5%2C5%2C220%2C73/sign=4210e4dcb4096b63951456026d5aec21/9213b07eca806538448187e09ddda144ac3482dd.jpg"
-                                            alt="" class="global-img">
+                                                    alt="" class="global-img">
                                     </div>
                                     <div class="global-flex-1 global-flex global-flex-column global-flex-between">
                                         <div class="global-flex global-flex-center">
@@ -48,7 +72,6 @@
                                             <div class="global-tag circle-distance global-align-right">
                                                 19.7km<div class="global-tag-text">19.7km</div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <svg class="icon-more" aria-hidden="true" @click="showCircleLayer">
@@ -70,16 +93,7 @@
                                     <div class="circle-item-text">
                                         <!-- font-ellipsis-3 -->
                                         <p class="font-ellipsis font-ellipsis-3">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-                                            voluptatibus,
-                                            magnam perspiciatis obcaecati dolore maiores, id libero, enim ipsa ratione
-                                            ducimus cupiditate impedit reiciendis soluta? Iure alias iusto labore
-                                            dignissimos!
-                                            Impedit laboriosam natus quidem illum dolorum esse in veritatis eligendi
-                                            perspiciatis officia, aspernatur maxime. Quae maiores distinctio saepe
-                                            repellat
-                                            vitae autem sapiente quam ab. Eveniet repellat maiores accusamus harum
-                                            tenetur!
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeatvoluptatibus,magnam perspiciatis obcaecati dolore maiores, id libero, enim ipsa rationeducimus cupiditate impedit reiciendis soluta? Iure alias iusto laboredignissimos!Impedit laboriosam natus quidem illum dolorum esse in veritatis eligendiperspiciatis officia, aspernatur maxime. Quae maiores distinctio saeperepellatvitae autem sapiente quam ab. Eveniet repellat maiores accusamus harumtenetur!
                                         </p>
                                         <a href="javascript:;" class="circle-item-read-btn">全文</a>
                                     </div>
@@ -87,19 +101,16 @@
                                     <ul class="circle-item-ablum">
                                         <!-- 一张图片是ablum-one -->
                                         <!-- 多张图片是ablum-more -->
-                                        <!-- <li class="ablum-item ablum-more">
-                                                    <img src="http://img4.duitang.com/uploads/item/201407/26/20140726141237_32faQ.png"
-                                                        alt="">
-                                                </li> -->
+                                        <li class="ablum-item ablum-more">
+                                                <img src="http://img4.duitang.com/uploads/item/201407/26/20140726141237_32faQ.png" alt="">
+                                            </li>
                                     </ul>
                                     <!-- 定位 -->
                                     <div class="circle-item-location global-flex global-flex-center">
                                         <svg aria-hidden="true" class="icon-location">
                                             <use xlink:href=""></use>
                                         </svg>
-                                        <p class="circle-item-location-text font-ellipsis font-ellipsis-1">广州Four
-                                            season
-                                            hotel 2701约定你</p>
+                                        <p class="circle-item-location-text font-ellipsis font-ellipsis-1">广州Four seasonhotel 2701约定你</p>
                                     </div>
                                 </div>
                                 <div class="global-flex global-flex-between global-flex-center circle-item-bottom">
@@ -109,9 +120,9 @@
                                         </svg>
                                         2555
                                     </div>
-                                    <div class="global-flex global-flex-center">
-                                        <svg aria-hidden="true" class="icon-like">
-                                            <use xlink:link=""></use>
+                                    <div class="global-flex global-flex-center anim" @click.stop="like(circleIndex)">
+                                        <svg aria-hidden="true" class="icon-like" :class="{ 'icon-liked':testLike}">
+                                            <use xlink:href="../../img/circle.svg#icon-like"></use>
                                         </svg>
                                         2955
                                     </div>
@@ -121,34 +132,13 @@
                         <!-- 正在加载 -->
                         <img src="../../img/loading.svg" class="is-loading" v-show="isLoading[blockIndex]">
                         <!-- 加载全部 -->
-                        <p class="load-all" v-show="loadingAll[blockIndex]">暂无更多</p>
+                        <p class="load-all" v-show="loadingAll[blockIndex]">～暂无更多～</p>
                     </div>
                 </main>
             </div>
-        <div id="app">
-            <header class="header" v-if="init">
-                <nav class="block-nav global-flex">
-                    <ul class="global-flex-1 global-flex global-flex-end">
-                        <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}" @click.stop="switchNav(0)">
-                            {{blockNavItem}}
-                        </li>
-                    </ul>
-                    <a href="javascript:void(0);" class="global-btn publish-btn">
-                        <svg aria-hidden="true" class="icon-publish">
-                            <use xlink:href="../../img/global.svg#icon-publish"></use>
-                        </svg>
-                    </a>
-                </nav>
-                <nav class="block-sub-nav global-border global-border-bottom" v-show="blockIndex === 0 && subNavList.length > 0">
-                    <ul class="block-sub-nav-content">
-                        <li ref="scrollNav" class="block-sub-item" v-for="(subNavItem,subNavIndex) of subNavList" :class="{'block-sub-active':blockSubIndex === subNavIndex}"
-                            @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
-                    </ul>
-                </nav>
-            </header>
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
-                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active">
+                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active" @click.stop="backTop">
                         <svg class="icon-footer" aria-hidden="true">
                             <use xlink:href="../../img/global.svg#icon-index"></use>
                         </svg>
@@ -188,8 +178,13 @@
             </div>
         </div>
     </body>
+    <script src="../../js/jweixin-1.0.0.js"></script>
     <script src="../../js/vue.min.js"></script>
     <script src="../../js/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript">
+        var vConsole = new VConsole();
+    </script>
     <script>
         // mock的地址
         var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/circle';
@@ -214,6 +209,28 @@
             }
         })();
 
+        // 滚动防节流函数
+        function throttle(interval) {
+            var timer, 
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    console.log(1111111)
+                    timer = setTimeout(function(){
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
+                } else {
+                    console.log(222222)
+                    timer = setTimeout(function() {
+                        fn && fn()
+                    },interval)
+                }
+            }
+        }
+
         var app = new Vue({
             el: '#app',
             data: function () {
@@ -223,11 +240,13 @@
                     blockIndex: 0, // 当前板块
                     blockSubIndex: 0, // 当前子版块
                     blockNav: ['全部', '我关注的', '附近的人'], // 板块导航
-                    loadingALL: [], // 加载全部
+                    loadingAll: [], // 加载全部
                     isLoading: [], // 正在加载
                     pageIndex: [], // 页数
                     subNavList: [], // 子导航
                     circleList: [], // 交友圈列表
+                    hideBlockNav:'', // 隐藏导航的class
+                    testLike:false, // 点赞
                     circleLayer: false, // 蒙层开关
                     maskAnim: '', // 蒙层动画
                     contentAnim: '', // 蒙层内容动画
@@ -236,13 +255,16 @@
             watch: {
                 blockIndex: {
                     handler: function (val, oldVal) {
-                        console.log(val)
+                        if(this.circleList[this.blockIndex].length == 0){
+                            this.loadCircleItem()
+                        }
                     }
                 },
                 blockSubIndex: {
                     handler: function (val, oldVal) {
-                        this.$set(this.isLoading, 0, false)
-                        this.$set(this.loadingALL, 0, false)
+                        this.$set(this.circleList,0,[]);
+                        this.$set(this.isLoading, 0, false);
+                        this.$set(this.loadingAll, 0, false);
                         this.$set(this.pageIndex, 0, 1)
                     }
                 },
@@ -258,34 +280,77 @@
                     }
                 }
             },
-            beforeMount() {
+            created() {
                 this.initData()
                 this.getSubNavList()
-                this.loadCircleItem()
             },
             mounted() {
-                this.init = true
-                this.initSubNav('offsetLeft')
-                this.disabledMaskMove()
-                // this.globalScroll()
+                var self = this
+                this.init = true;
+                // $refs绑定数据延时
+                setTimeout(() =>{
+                    self.globalScroll()
+                    self.disabledMaskMove()
+                },168)
             },
             methods: {
                 // 全局滚动
-                globalScroll() {
+                globalScroll:function() {
+                    var scrollTop = 0,
+                        self = this, 
+                        wrapper = this.$refs.wrapper;
+                    var globalScroll = throttle(30);
+                    wrapper.addEventListener('scroll', function (e) {    
+                        globalScroll(function(){
+                            if(self.blockIndex === 0 && self.subNavList.length > 0){
+                                if(e.target.scrollTop - scrollTop > 10 && self.hideBlockNav !== 'hide-block-nav'){
+                                    self.hideBlockNav = 'hide-block-nav'
+                                }
+                                scrollTop = e.target.scrollTop
+                            }
+                            if(e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
+                                self.loadCircleItem()
+                            }
+                        })
+                    })
+                },
+                // 返回顶部
+                backTop:function() {
+                    var self = this;
                     var wrapper = this.$refs.wrapper;
-                    var scrollTop = 0;
-                    // console.log(wrapper)
-                    wrapper.addEventListener('scroll', function (e) {
-                        // console.log(e);
-                        var timeStamp = +new Date();
+                    function getScrollAnimNum(scrollTop){
+                        scrollTop = scrollTop >= 12000?12000:scrollTop;
+                        switch (true) {
+                            case scrollTop >= 8000:
+                                return 400
+                                break;
+                            case scrollTop >= 5000 && scrollTop < 8000:
+                                return 300
+                                break;
+                            case scrollTop >= 1500 && scrollTop < 5000:
+                                return 150
+                                break;
+                            default: 
+                                return 50
+                        }
+                    }
+                    var timer = requestAnimationFrame(function fn() {
+                        if(wrapper.scrollTop > 0){
+                            wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
+                            requestAnimationFrame(fn)
+                        }else{
+                            wrapper.scrollTop = 0
+                            cancelAnimationFrame(timer)
+                        }
                     })
                 },
                 initData: function () {
                     var self = this;
                     this.blockNav.forEach(function (item, index) {
                         self.isLoading.push(false)
-                        self.loadingALL.push(false)
+                        self.loadingAll.push(false)
                         self.pageIndex.push(1)
+                        self.circleList.push([])
                     })
                 },
                 // 获取子版块导航 
@@ -294,7 +359,10 @@
                     axios.get(https + '?type=99').then(function (res) {
                         if (res.data.data.success) {
                             self.subNavList = res.data.data.subNavList;
-                            self.initSubNav()
+                            // axios异步取数据有延时
+                            setTimeout(function(){
+                                self.initSubNav('offsetLeft');
+                            },168)
                         }
                     }).catch(function (err) {
                         console.log(err);
@@ -303,9 +371,8 @@
                 // 初始化子版块导航
                 initSubNav: function (attr) {
                     if (this.subNavList.length > 0) {
-                        console.log(this.$refs.scrollNav)
                         this.subNavScrollArr = this.$refs.scrollNav.reduce(function (arr, cur, index) {
-                            arr.push = cur[attr];
+                            arr.push(cur[attr]);
                             return arr
                         }, [])
                     }
@@ -316,31 +383,41 @@
                         this.blockIndex = val
                     }
                 },
+                showBlockNav() {
+                    this.hideBlockNav = ''
+                },
+                // 检测定位
+                getLocation() {
+                    wx.getLocation({
+                        type: 'wgs84',
+                        success: function(res){
+                            alert(res)
+                            console.log(res)
+                        },
+                        fail: function(res) {
+                            console.log(res)
+                        }
+                    })
+                },
                 // 切换子版块
                 switchSubNav: function (val) {
                     if (this.subNavIndex !== val) {
-                        this.navScroll('offsetLeft', val, this.blockIndex)
+                        this.navScroll('scrollLeft', val, this.blockSubIndex)
                         this.blockSubIndex = val
                     }
                 },
                 // 导航滚动
                 navScroll: function (attr, index, before) {
                     var self = this;
-                    var startPosition = this.subNavScrollArr[before];
-                    var curPosition = this.$refs.scrollNav.parentNode;
-                    console.log(curPosition);
+                    var startPosition = this.subNavScrollArr[before-2] || 0;
+                    var curPosition = this.$refs.scrollParent;
                     var direction = index > before ? 1 : -1;
                     var rate = (index - before) / 2;
-                    var speedRange = {
-                        0.5: 7.85,
-                        1: 4.85,
-                        1.5: 4.05,
-                        2: 3.25
-                    }
+                    var speedRange = 6.85
                     var startAnimation = function (endPosition) {
                         var timer = requestAnimationFrame(function fn() {
                             startPosition += ((endPosition - startPosition) * direction >= 15 ?
-                                (speedRange[Math.abs(rate)] * rate) : 3 * direction)
+                                (3.65 * rate) : 2.25 * direction)
                             if ((direction == 1 && startPosition <= endPosition) || (direction ==
                                     -1 && startPosition >= endPosition)) {
                                 curPosition[attr] = startPosition;
@@ -351,7 +428,10 @@
                             }
                         })
                     }
-                    if (direction === 1 && index > 1) {
+                    if(direction === 1 && index > 2){
+                        // console.log(startPosition)
+                        // console.log(index)
+                        // console.log(this.subNavScrollArr[index - 2])
                         startAnimation(this.subNavScrollArr[index - 2])
                     } else if (direction === -1) {
                         startAnimation(this.subNavScrollArr[index - 2] >= 0 ? this.subNavScrollArr[index -
@@ -360,12 +440,40 @@
                 },
                 // 加载交友圈列表
                 loadCircleItem: function () {
-
+                    var self = this;
+                    wx.getNetworkType({
+                        success: function (res) {
+                            // alert(res.networkType);
+                            console.log(res);
+                            if(!self.loadingAll[self.blockIndex] && !self.isLoading[self.blockIndex]){
+                                self.$set(self.isLoading,self.blockIndex,true);
+                                // axios.get()
+                            }
+                        },
+                        fail: function (res) {
+                            console.log(res)
+                            // alert(JSON.stringify(res));
+                        }
+                    });
+                    // this.getLocation()
+                },
+                // 点赞
+                like:function(index){
+                    console.log(index)
+                    this.testLike = true;
+                    /*
+                        var circleItem = this.circleList[this.blockIndex][index]; 
+                        axios.post().then(function(response){
+                            this.$set(circleItem,'like',!circleItem)
+                        }).catch(function(err){
+                            console.log(err)
+                        })
+                    */
                 },
                 disabledMaskMove() {
-                    // this.$refs.mask.addEventListener('touchmove',function(e){
-                    //     e.preventDefault()
-                    // })
+                    this.$refs.mask.addEventListener('touchmove',function(e){
+                        e.preventDefault()
+                    })
                 },
                 showCircleLayer() {
                     this.circleLayer = !this.circleLayer
