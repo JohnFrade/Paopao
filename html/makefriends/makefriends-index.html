@@ -30,7 +30,7 @@
                     </a>
                 </nav>
                 <nav class="global-flex block-sub-nav global-border global-border-bottom" v-show="blockIndex === 0 && subNavList.length > 0">
-                    <ul class="global-flex-1 block-sub-nav-content" ref="scrollParent">
+                    <ul class="global-flex-1 block-sub-nav-content anim" ref="scrollParent">
                         <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList" :class="{'block-sub-active':blockSubIndex === subNavIndex}"
                             @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
                     </ul>
@@ -40,8 +40,21 @@
                 </nav>
             </header>
             <div id="global-wrapper" ref="wrapper">
-                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}">
+                <div class="global-flex global-flex-center global-flex-justify-center refresh-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}" v-show="refresh.show">
+                    <div class="icon-refresh-wrapper">
+                        <svg aria-hidden="true" class="icon-refresh" :class="{'icon-refresh-load':refresh.release}" v-show="!refresh.load">
+                            <use xlink:href="../../img/circle.svg#icon-refresh"></use>
+                        </svg>
+                        <img src="../../img/loading.svg" class="icon-loading" v-show="refresh.load">
+                    </div>
+                    <div v-show="!refresh.load">{{refresh.release?'释放刷新':'下拉刷新'}}</div>
+                    <div v-show="refresh.load">加载中...</div>
+                </div>
+                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}" :style="{transform:'translateY('+refresh.moveLen+'px)'}">
                     <div v-for="(blockNavItem,blockNavIndex) of blockNav" v-show="blockNavIndex === blockIndex">
+                        <div class="open-network-wrapper" v-show="!netWorkStatus[blockIndex]">
+                            <p>请检查Wifi或者无线局域网是否开启</p>
+                        </div>
                         <ul class="circle-list">
                             <!-- v-for="(circleItem,circleIndex) of circleList[blockIndex]" -->
                             <li class="circle-item global-border global-border-bottom" v-for="(circleItem,circleIndex) of [1,2,3]">
@@ -176,6 +189,8 @@
                     <button class="global-btn circle-layer-item circle-layer-cancel" @click.stop="hideCircleLayer">取消</button>
                 </div>
             </div>
+            <!-- 请求超时 -->
+            <div class="tips">请求超时</div>
         </div>
     </body>
     <script src="../../js/jweixin-1.0.0.js"></script>
@@ -217,13 +232,11 @@
                 var currentTime = +new Date();
                 clearTimeout(timer);
                 if (currentTime - startTime >= interval) {
-                    console.log(1111111)
                     timer = setTimeout(function(){
                         fn && fn()
                         startTime = currentTime;
                     }, interval)
                 } else {
-                    console.log(222222)
                     timer = setTimeout(function() {
                         fn && fn()
                     },interval)
@@ -237,6 +250,12 @@
                 return {
                     init: false,
                     admin: false, // 是否是管理员
+                    refresh:{
+                        show:false,           // 显示上拉加载
+                        moveLen:0,           // 触摸移动长度
+                        release:false,       // 满足释放加载
+                        load:false           // 松手加载
+                    },
                     blockIndex: 0, // 当前板块
                     blockSubIndex: 0, // 当前子版块
                     blockNav: ['全部', '我关注的', '附近的人'], // 板块导航
@@ -245,6 +264,11 @@
                     pageIndex: [], // 页数
                     subNavList: [], // 子导航
                     circleList: [], // 交友圈列表
+                    netWorkStatus:[],// 网络状态
+                    location:{ // 附近的人坐标
+                        lat:0,
+                        lng:0
+                    },
                     hideBlockNav:'', // 隐藏导航的class
                     testLike:false, // 点赞
                     circleLayer: false, // 蒙层开关
@@ -266,6 +290,7 @@
                         this.$set(this.isLoading, 0, false);
                         this.$set(this.loadingAll, 0, false);
                         this.$set(this.pageIndex, 0, 1)
+                        this.loadCircleItem()
                     }
                 },
                 circleLayer: {
@@ -297,11 +322,64 @@
                 // 全局滚动
                 globalScroll:function() {
                     var scrollTop = 0,
+                        timer = 0,
+                        startY = 0,
                         self = this, 
                         wrapper = this.$refs.wrapper;
+
                     var globalScroll = throttle(30);
-                    wrapper.addEventListener('scroll', function (e) {    
+
+                    wrapper.addEventListener('touchstart',function(e){
+                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
+                            timer = +new Date();
+                            startY = e.changedTouches[0].pageY;
+                        }
+                    },false)
+                    wrapper.addEventListener('touchmove',function(e){
+                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
+                            var deltaY = (e.changedTouches[0].pageY - startY);
+                            if(wrapper.offsetTop === 0 && deltaY > 0){
+                                if(+new Date() - timer >= 16.6 && !self.refresh.release){
+                                    self.refresh.show = true;
+                                    deltaY = deltaY>=68?68:deltaY;
+                                    if(self.blockIndex === 0){
+                                        if(self.hideBlockNav === 'hide-block-nav'){
+                                            self.refresh.moveLen = deltaY / 2
+                                        }else{
+                                            self.refresh.moveLen = deltaY * 1.5;
+                                        }
+                                    }else{
+                                        self.refresh.moveLen = deltaY / 2;
+                                    }
+
+                                    if(deltaY >= 68){
+                                        self.refresh.release = true;
+                                    }else{
+                                        self.refresh.moveLen = 0
+                                    }
+                                }
+                            }
+                        }
+                    },false)
+                    // 释放结束
+                    wrapper.addEventListener('touchend',function(e){
+                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
+                            if(self.refresh.release && !self.refresh.load){
+                                self.refresh.load = true
+                                // self.loadCircleItem()
+                                setTimeout(() => {
+                                    self.refresh.moveLen = 0;
+                                    self.refresh.release = false;
+                                    self.refresh.load = false;
+                                    self.refresh.show = false;
+                                },1500)
+                            }
+                        }
+                    },false)
+
+                    wrapper.addEventListener('scroll', function (e) {
                         globalScroll(function(){
+                            // 子导航存在搜索板块导航
                             if(self.blockIndex === 0 && self.subNavList.length > 0){
                                 if(e.target.scrollTop - scrollTop > 10 && self.hideBlockNav !== 'hide-block-nav'){
                                     self.hideBlockNav = 'hide-block-nav'
@@ -312,7 +390,7 @@
                                 self.loadCircleItem()
                             }
                         })
-                    })
+                    },false)
                 },
                 // 返回顶部
                 backTop:function() {
@@ -331,7 +409,7 @@
                                 return 150
                                 break;
                             default: 
-                                return 50
+                                return 100
                         }
                     }
                     var timer = requestAnimationFrame(function fn() {
@@ -347,6 +425,7 @@
                 initData: function () {
                     var self = this;
                     this.blockNav.forEach(function (item, index) {
+                        self.netWorkStatus.push(true)
                         self.isLoading.push(false)
                         self.loadingAll.push(false)
                         self.pageIndex.push(1)
@@ -388,13 +467,19 @@
                 },
                 // 检测定位
                 getLocation() {
+                    var self = this;
                     wx.getLocation({
                         type: 'wgs84',
                         success: function(res){
-                            alert(res)
+                            console.log('success')
                             console.log(res)
+                            self.location = {
+                                lat:res.latitude,
+                                lng:res.longitude
+                            }
                         },
                         fail: function(res) {
+                            console.log('fail')
                             console.log(res)
                         }
                     })
@@ -416,8 +501,8 @@
                     var speedRange = 6.85
                     var startAnimation = function (endPosition) {
                         var timer = requestAnimationFrame(function fn() {
-                            startPosition += ((endPosition - startPosition) * direction >= 15 ?
-                                (3.65 * rate) : 2.25 * direction)
+                            startPosition += ((endPosition - startPosition) * direction >= 30 ?
+                                (6.25 * rate) : 3.25 * direction)
                             if ((direction == 1 && startPosition <= endPosition) || (direction ==
                                     -1 && startPosition >= endPosition)) {
                                 curPosition[attr] = startPosition;
@@ -443,16 +528,23 @@
                     var self = this;
                     wx.getNetworkType({
                         success: function (res) {
-                            // alert(res.networkType);
-                            console.log(res);
                             if(!self.loadingAll[self.blockIndex] && !self.isLoading[self.blockIndex]){
-                                self.$set(self.isLoading,self.blockIndex,true);
-                                // axios.get()
+                                if(self.blockIndex === 2 && self.location.lat === 0 && self.location.lng === 0){
+
+                                }else{
+                                    self.$set(self.isLoading,self.blockIndex,true);
+                                    self.$set(self.netWorkStatus,self.blockIndex,true)
+                                    /*
+                                        axios.get()
+                                    */
+                                }
                             }
                         },
                         fail: function (res) {
-                            console.log(res)
-                            // alert(JSON.stringify(res));
+                            // 首次加载会出现无网的图
+                            if(res.errMsg === 'getNetworkType:fail' && self.circleList[self.blockIndex].length === 0){
+                                self.$set(self.netWorkStatus,self.blockIndex,false)
+                            }
                         }
                     });
                     // this.getLocation()

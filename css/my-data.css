@@ -36,7 +36,8 @@ body{
     height: 200%;
     border: 1px solid #945dff;
     border-radius: .33333333rem;
-    transform:scale(.5)
+    transform:scale(.5);
+    z-index: -1
 }
 .nav-item{
     color: #945dff
