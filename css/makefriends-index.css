@@ -40,14 +40,14 @@
 body,#app{
     width: 100%;
     height: 100vh;
-    background: #f2f2f2;
-    overflow: hidden
+    overflow: hidden;
+    background: #f2f2f2
 }
 #global-wrapper {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    position: relative;
+    position:absolute;
     width: 100%;
     max-width: 640px;
     height: 100vh;
@@ -56,7 +56,14 @@ body,#app{
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
-
+/* .swiper-slide{
+    height: 100%;
+    overflow-y: scroll;
+    transition: transform .28s
+} */
+.sub-nav{
+    padding-top: 7.833333333333rem
+}
 .header{
     position: fixed;
     top: 0;
@@ -66,35 +73,53 @@ body,#app{
     width: 100%;
     max-width: 640px;
     z-index: 2;
-    transition:transform .32s
+    transition:transform .28s
 }
-.hide-block-nav{
-    transform: translateY(-3.6666666666667rem)
-}
-
 .block-nav{
     position: relative;
     box-sizing: border-box;
-    padding: 0 1rem;
+    padding-right: 1rem;
     height: 3.6666666666667rem;
-    line-height: 3.66666666667rem;
     background: #fff;
     box-shadow:0px 4px 7px rgba(0,0,0,0.05);
     z-index: 2;
+}
 
+.hide-block-nav{
+    transform: translateY(-3.6666666666667rem)
 }
 .block-item{
-    margin-right:2.666666667rem;
+    position: relative;
+    padding: 1rem 0 1rem;
+    margin-right:.666666667rem;
     text-align: left;
     font-size: 1.333333333rem;
-    transition: all .28s;
-    transform: translate3d(0,0,0);
+    transition: all .32s;
+    transform-origin: 0 100%;
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden
+    backface-visibility: hidden;
+    opacity: 1;
 }
-.block-active{
-    font-size: 2rem;
-    font-weight: 700
+.block-item:nth-of-type(1){
+    transform: translateX(42.5%)
+}
+.block-item:nth-of-type(2){
+    transform: translateX(47.5%)
+}
+.block-item:nth-of-type(3){
+    transform: translateX(52.5%)
+}
+.block-item:first-of-type.block-active{
+    transform: scale(1.5) translate(25%,12.5%);
+}
+.block-item:nth-of-type(2).block-active{
+    transform: scale(1.5) translate(20%,12.5%);
+}
+.block-item:nth-of-type(2).block-active + .block-item:nth-of-type(3){
+    transform: translateX(87.5%)
+}
+.block-item:nth-of-type(3).block-active{
+    transform: scale(1.5) translate(42.5%,12.5%);
 }
 .publish-btn{
     margin: auto 0;
@@ -110,7 +135,6 @@ body,#app{
 }
 /* 子导航 */
 .block-sub-nav{
-    position: relative;
     width: 100%;
     color: #999;
     height: 3.333333333333rem;
@@ -140,9 +164,11 @@ body,#app{
     font-weight:700
 }
 .icon-fold{
+    position: relative;
     width:3.3333333333rem;
     height:3.3333333333rem;
-    background: #945DFF
+    background: #945DFF;
+    z-index: 3
 }
 .refresh-wrapper{
     position: absolute;
@@ -151,7 +177,7 @@ body,#app{
     width: 100%;
     padding:1.6666666666rem 0;
     color: #999;
-    transition: transform .36s
+    transition: transform .28s
 }
 .icon-refresh-wrapper{
     margin-right: .5rem;
@@ -172,16 +198,10 @@ body,#app{
 .icon-refresh-load{
     transform: rotate(180deg)
 }
-.main{
-    /* padding-top: 3.66666666666rem; */
-    padding-top: 4.166666666666666rem;
-    width: 100%;
-    transition: transform .36s
-}
-.main-sub-nav{
-    /* padding-top: 7rem */
-    padding-top: 7.833333333333rem
-}
+/* .circle-list{
+    padding-top: 4.166666666666rem;
+    padding-bottom: .83333333333333rem
+} */
 .circle-item{
     padding: 0 1rem;
     background: #fff
@@ -252,7 +272,7 @@ body,#app{
     height:1rem;
 }
 /* 文字 */
-.circle-item-text{
+.circle-item-text-wrapper{
     position: relative;
     margin-bottom: 1rem;
     font-size: 1.16666666667rem;
@@ -286,10 +306,17 @@ body,#app{
 }
 .ablum-more{
     width: calc(33.3333333333% - .555555555555rem);
+    max-height: calc((100vw - 2rem)/3 - .5555555555rem);
+    overflow: hidden;
 }
 .ablum-item img{
+    vertical-align: top;
     width: 100%;
-    border-radius: .6666666667rem
+    border-radius: .33333333333rem
+}
+.ablum-item .default-img{
+    width: calc((100vw - 2rem)/3 - .5555555555rem);
+    height: calc((100vw - 2rem)/3 - .5555555555rem);
 }
 /* 定位 */
 .circle-item-location{
@@ -342,15 +369,15 @@ body,#app{
 .is-loading{
     display: block;
     margin: 0 auto;
-    padding-top: 1.666666666667rem;
+    padding-top: .83333333333333rem;
     width: 3.3333333333rem;
     height: 3.3333333333rem;
 }
 .load-all{
-    padding: 1.666666666667rem 0;
+    padding: .83333333333333rem 0 1.666666666667rem;
     text-align: center;
     color: #ccc;
-    font-size: .8333333333333rem
+    font-size: 1rem
 }
 .circle-layer{
     position:fixed;
@@ -411,11 +438,11 @@ body,#app{
     animation: hideTips .92s 1s cubic-bezier(0.565, 0.015, 0.800, 0.690) both
 }
 @keyframes hideTips{
-    20%{
-        transform: scale(.9)
+    25%{
+        transform: scale(.85)
     }
-    60%{
-        transform: scale(.9)
+    75%{
+        transform: scale(.85)
     }
     to{
         transform: scale(0)

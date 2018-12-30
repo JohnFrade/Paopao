@@ -3,11 +3,17 @@
 
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta name="msapplication-tap-highlight" content="no">
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta content="black" name="apple-mobile-web-app-status-bar-style">
-        <meta content="telephone=no" name="format-detection">
+        <meta name="screen-orientation" content="portrait">
         <meta content="email=no" name="format-detection">
+        <meta name="x5-orientation" content="portrait">
         <meta name="x5-page-mode" content="app">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="renderer" content="webkit">
+        <meta name="referrer" content="always">
+        <link rel="stylesheet" href="../../css/swiper.min.css">
         <link rel="stylesheet" href="../../css/common.css">
         <link rel="stylesheet" href="../../css/footer.css">
         <link rel="stylesheet" href="../../css/makefriends-index.css">
@@ -16,10 +22,12 @@
 
     <body>
         <div id="app" v-if="init">
-            <header class="header" :class="hideBlockNav">
-                <nav class="block-nav global-flex">
+            <header class="header anim" :class="hideBlockNav">
+                <!-- 板块导航 -->
+                <nav class="global-flex global-box block-nav">
                     <ul class="global-flex-1 global-flex global-flex-end">
-                        <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}" @click.stop="switchNav(blockNavIndex)">
+                        <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}"
+                            @click.stop="switchNav(blockNavIndex)">
                             {{blockNavItem}}
                         </li>
                     </ul>
@@ -29,20 +37,24 @@
                         </svg>
                     </a>
                 </nav>
-                <nav class="global-flex block-sub-nav global-border global-border-bottom" v-show="blockIndex === 0 && subNavList.length > 0">
+                <!-- 子导航 -->
+                <nav class="global-flex block-sub-nav global-border global-border-bottom" v-if="blockIndex === 0 && subNavList.length > 0">
                     <ul class="global-flex-1 block-sub-nav-content anim" ref="scrollParent">
-                        <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList" :class="{'block-sub-active':blockSubIndex === subNavIndex}"
-                            @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
+                        <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList"
+                            :class="{'block-sub-active':blockSubIndex === subNavIndex}" @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
                     </ul>
                     <svg aria-hidden="true" class="icon-fold" v-show="hideBlockNav === 'hide-block-nav'" @click.stop="showBlockNav">
                         <use xlink:href=""></use>
                     </svg>
                 </nav>
             </header>
-            <div id="global-wrapper" ref="wrapper">
-                <div class="global-flex global-flex-center global-flex-justify-center refresh-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}" v-show="refresh.show">
+            <div class="swiper-container" id="global-wrapper" ref="wrapper">
+                <!-- 下拉刷新 -->
+                <div class="global-flex global-flex-center global-flex-justify-center refresh-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}"
+                    v-show="refresh.show">
                     <div class="icon-refresh-wrapper">
-                        <svg aria-hidden="true" class="icon-refresh" :class="{'icon-refresh-load':refresh.release}" v-show="!refresh.load">
+                        <svg aria-hidden="true" class="icon-refresh" :class="{'icon-refresh-load':refresh.release}"
+                            v-show="!refresh.load">
                             <use xlink:href="../../img/circle.svg#icon-refresh"></use>
                         </svg>
                         <img src="../../img/loading.svg" class="icon-loading" v-show="refresh.load">
@@ -50,18 +62,20 @@
                     <div v-show="!refresh.load">{{refresh.release?'释放刷新':'下拉刷新'}}</div>
                     <div v-show="refresh.load">加载中...</div>
                 </div>
-                <main class="main" :class="{'main-sub-nav':blockIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}" :style="{transform:'translateY('+refresh.moveLen+'px)'}">
-                    <div v-for="(blockNavItem,blockNavIndex) of blockNav" v-show="blockNavIndex === blockIndex">
+                <div class="swiper-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}">
+                    <div class="swiper-slide" :class="{'sub-nav':blockNavIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}" v-for="(blockNavItem,blockNavIndex) of blockNav">
+                        <!-- 无网络状态 -->
                         <div class="open-network-wrapper" v-show="!netWorkStatus[blockIndex]">
                             <p>请检查Wifi或者无线局域网是否开启</p>
                         </div>
-                        <ul class="circle-list">
-                            <!-- v-for="(circleItem,circleIndex) of circleList[blockIndex]" -->
-                            <li class="circle-item global-border global-border-bottom" v-for="(circleItem,circleIndex) of [1,2,3]">
+                        <!-- list -->
+                        <ul class="circle-list" :class="'circle-list-'+blockNavIndex">
+                            <li class="circle-item global-border global-border-bottom" :class="{'circle-item-lazy':!lazyLoad[blockIndex][circleIndex]}"
+                                v-for="(circleItem,circleIndex) of circleList[blockNavIndex]">
                                 <div class="global-flex circle-item-top">
                                     <div class="circle-item-avatar">
                                         <img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike220%2C5%2C5%2C220%2C73/sign=4210e4dcb4096b63951456026d5aec21/9213b07eca806538448187e09ddda144ac3482dd.jpg"
-                                                    alt="" class="global-img">
+                                            alt="" class="global-img">
                                     </div>
                                     <div class="global-flex-1 global-flex global-flex-column global-flex-between">
                                         <div class="global-flex global-flex-center">
@@ -103,27 +117,30 @@
                                         <span class="global-align-right">10s</span>
                                     </button>
                                     <!-- 文字 -->
-                                    <div class="circle-item-text">
-                                        <!-- font-ellipsis-3 -->
-                                        <p class="font-ellipsis font-ellipsis-3">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeatvoluptatibus,magnam perspiciatis obcaecati dolore maiores, id libero, enim ipsa rationeducimus cupiditate impedit reiciendis soluta? Iure alias iusto laboredignissimos!Impedit laboriosam natus quidem illum dolorum esse in veritatis eligendiperspiciatis officia, aspernatur maxime. Quae maiores distinctio saeperepellatvitae autem sapiente quam ab. Eveniet repellat maiores accusamus harumtenetur!
+                                    <div class="circle-item-text-wrapper" v-show="!!circleItem.text">
+                                        <p class="font-ellipsis" :class="{'font-ellipsis-3':textHide[blockIndex][circleIndex],'circle-item-text':!getTextNode[blockIndex][circleIndex]}">
+                                            {{circleItem.text}}
                                         </p>
-                                        <a href="javascript:;" class="circle-item-read-btn">全文</a>
+                                        <a href="javascript:;" class="circle-item-read-btn" v-show="textHide[blockIndex][circleIndex]">全文</a>
                                     </div>
                                     <!-- 照片 -->
-                                    <ul class="circle-item-ablum">
-                                        <!-- 一张图片是ablum-one -->
-                                        <!-- 多张图片是ablum-more -->
-                                        <li class="ablum-item ablum-more">
-                                                <img src="http://img4.duitang.com/uploads/item/201407/26/20140726141237_32faQ.png" alt="">
-                                            </li>
+                                    <ul class="circle-item-ablum" v-show="!!circleItem.imgList &&circleItem.imgList.length > 0"
+                                        @click.stop="previewImg">
+                                        <li class="ablum-item" v-for="(imgItem,imgIndex) of circleItem.imgList" :class="circleItem.imgList.length>1?'ablum-more':'ablum-one'">
+                                            <!-- 这里要替换默认图片的路径 -->
+                                            <img src="../../img/default-img.png" class="default-img" v-show="!lazyLoad[blockIndex][circleIndex]">
+                                            <img :src="imgItem" :data-circleIndex="circleIndex" :data-imgIndex="imgIndex"
+                                                v-show="lazyLoad[blockIndex][circleIndex]">
+
+                                        </li>
                                     </ul>
                                     <!-- 定位 -->
                                     <div class="circle-item-location global-flex global-flex-center">
                                         <svg aria-hidden="true" class="icon-location">
                                             <use xlink:href=""></use>
                                         </svg>
-                                        <p class="circle-item-location-text font-ellipsis font-ellipsis-1">广州Four seasonhotel 2701约定你</p>
+                                        <p class="circle-item-location-text font-ellipsis font-ellipsis-1">广州Four
+                                            seasonhotel 2701约定你</p>
                                     </div>
                                 </div>
                                 <div class="global-flex global-flex-between global-flex-center circle-item-bottom">
@@ -147,11 +164,12 @@
                         <!-- 加载全部 -->
                         <p class="load-all" v-show="loadingAll[blockIndex]">～暂无更多～</p>
                     </div>
-                </main>
+                </div>
             </div>
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
-                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active" @click.stop="backTop">
+                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active"
+                        @click.stop="backTop">
                         <svg class="icon-footer" aria-hidden="true">
                             <use xlink:href="../../img/global.svg#icon-index"></use>
                         </svg>
@@ -190,9 +208,11 @@
                 </div>
             </div>
             <!-- 请求超时 -->
-            <div class="tips">请求超时</div>
+            <div class="tips" v-show="showTips">请求超时</div>
         </div>
     </body>
+    <script src="../../js/jquery-2.1.4.js"></script>
+    <script src="../../js/swiper.js"></script>
     <script src="../../js/jweixin-1.0.0.js"></script>
     <script src="../../js/vue.min.js"></script>
     <script src="../../js/axios.min.js"></script>
@@ -202,7 +222,7 @@
     </script>
     <script>
         // mock的地址
-        var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/circle';
+        var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/';
 
         // requestAnimationFrame兼容
         (function () {
@@ -224,22 +244,37 @@
             }
         })();
 
+        // 缩放函数
+        function getBasePixal() {
+            var winW = document.documentElement.clientWidth;
+            winW = winW > 640 ? 640 : winW;
+            if (winW >= 320 && winW < 360) {
+                return 10
+            } else if (winW >= 360 && winW < 414) {
+                return 12
+            } else if (winW >= 414 && winW < 640) {
+                return 14
+            } else if (winW >= 640) {
+                return 16
+            }
+        }
+
         // 滚动防节流函数
         function throttle(interval) {
-            var timer, 
+            var timer,
                 startTime = +new Date();
             return function (fn) {
                 var currentTime = +new Date();
                 clearTimeout(timer);
                 if (currentTime - startTime >= interval) {
-                    timer = setTimeout(function(){
+                    timer = setTimeout(function () {
                         fn && fn()
                         startTime = currentTime;
                     }, interval)
                 } else {
-                    timer = setTimeout(function() {
+                    timer = setTimeout(function () {
                         fn && fn()
-                    },interval)
+                    }, interval)
                 }
             }
         }
@@ -250,11 +285,11 @@
                 return {
                     init: false,
                     admin: false, // 是否是管理员
-                    refresh:{
-                        show:false,           // 显示上拉加载
-                        moveLen:0,           // 触摸移动长度
-                        release:false,       // 满足释放加载
-                        load:false           // 松手加载
+                    refresh: {
+                        show: false, // 显示上拉加载
+                        moveLen: 0, // 触摸移动长度
+                        release: false, // 满足释放加载
+                        load: false // 松手加载
                     },
                     blockIndex: 0, // 当前板块
                     blockSubIndex: 0, // 当前子版块
@@ -264,33 +299,58 @@
                     pageIndex: [], // 页数
                     subNavList: [], // 子导航
                     circleList: [], // 交友圈列表
-                    netWorkStatus:[],// 网络状态
-                    location:{ // 附近的人坐标
-                        lat:0,
-                        lng:0
+                    textHide: [], //文字溢出显示隐藏
+                    getTextNode: [], //获取文字节点
+                    lazyLoad: [], // 图片懒加载
+                    lazyLoadScrollTop: [], // 图片懒加载的dom节点高度
+                    netWorkStatus: [], // 网络状态
+                    location: { // 附近的人坐标
+                        lat: 0,
+                        lng: 0
                     },
-                    hideBlockNav:'', // 隐藏导航的class
-                    testLike:false, // 点赞
+                    hideBlockNav: '', // 隐藏导航的class
+                    testLike: false, // 点赞
                     circleLayer: false, // 蒙层开关
                     maskAnim: '', // 蒙层动画
                     contentAnim: '', // 蒙层内容动画
+                    showTips: false // 显示提示
                 }
             },
             watch: {
                 blockIndex: {
                     handler: function (val, oldVal) {
-                        if(this.circleList[this.blockIndex].length == 0){
+                        console.log(this.circleList)
+                        console.log(this.blockIndex)
+                        if (this.circleList[this.blockIndex].length == 0) {
                             this.loadCircleItem()
                         }
                     }
                 },
                 blockSubIndex: {
                     handler: function (val, oldVal) {
-                        this.$set(this.circleList,0,[]);
-                        this.$set(this.isLoading, 0, false);
-                        this.$set(this.loadingAll, 0, false);
-                        this.$set(this.pageIndex, 0, 1)
-                        this.loadCircleItem()
+                        if (val != oldVal) {
+                            var self = this;
+                            this.$nextTick(function () {
+                                //保证效果的流畅不能同步执行
+                                if (this.hideBlockNav !== 'hide-block-nav') {
+                                    this.hideBlockNav = 'hide-block-nav'
+                                    setTimeout(function () {
+                                        self.navScroll('scrollLeft', val, oldVal);
+                                    }, 320)
+                                } else {
+                                    self.navScroll('scrollLeft', val, oldVal);
+                                }
+                            })
+                            this.$set(this.circleList, 0, []);
+                            this.$set(this.textHide, 0, []);
+                            this.$set(this.getTextNode, 0, []);
+                            this.$set(this.lazyLoad, 0, []);
+                            this.$set(this.lazyLoadScrollTop, 0, []);
+                            this.$set(this.isLoading, 0, false);
+                            this.$set(this.loadingAll, 0, false);
+                            this.$set(this.pageIndex, 0, 1)
+                            this.loadCircleItem()
+                        }
                     }
                 },
                 circleLayer: {
@@ -305,124 +365,146 @@
                     }
                 }
             },
-            created() {
-                this.initData()
-                this.getSubNavList()
+            created: function () {
+                var self = this;
+                self.getSubNavList()
+                this.initData(function () {
+                    self.loadCircleItem()
+                })
             },
-            mounted() {
-                var self = this
+            mounted: function () {
+                var self = this;
                 this.init = true;
-                // $refs绑定数据延时
-                setTimeout(() =>{
-                    self.globalScroll()
-                    self.disabledMaskMove()
-                },168)
+                this.$nextTick(function () {
+                    self.swiper = new Swiper('.swiper-container', {
+                        loop: false, // 不循环
+                        speed: 500, // 速度500
+                        onSlideChangeStart: function (swiper) {
+                            self.blockIndex = swiper.activeIndex
+                        }
+                    })
+                    this.globalScroll()
+                    this.disabledMaskMove()
+                })
             },
             methods: {
                 // 全局滚动
-                globalScroll:function() {
+                globalScroll: function () {
                     var scrollTop = 0,
                         timer = 0,
                         startY = 0,
-                        self = this, 
+                        self = this,
                         wrapper = this.$refs.wrapper;
 
                     var globalScroll = throttle(30);
 
-                    wrapper.addEventListener('touchstart',function(e){
-                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
+                    wrapper.addEventListener('touchstart', function (e) {
+                        if (wrapper.offsetTop === 0) {
+                            // if (self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[
+                            //     self.blockIndex]) {
                             timer = +new Date();
                             startY = e.changedTouches[0].pageY;
+                            // }
                         }
-                    },false)
-                    wrapper.addEventListener('touchmove',function(e){
-                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
-                            var deltaY = (e.changedTouches[0].pageY - startY);
-                            if(wrapper.offsetTop === 0 && deltaY > 0){
-                                if(+new Date() - timer >= 16.6 && !self.refresh.release){
+                    }, false)
+                    wrapper.addEventListener('touchmove', function (e) {
+                        if (wrapper.offsetTop === 0) {
+                            var deltaY = (e.changedTouches[0].pageY - startY) * 0.618;
+                            if (wrapper.offsetTop === 0 && deltaY > 0) {
+                                if (+new Date() - timer >= 10 && !self.refresh.release) {
                                     self.refresh.show = true;
-                                    deltaY = deltaY>=68?68:deltaY;
-                                    if(self.blockIndex === 0){
-                                        if(self.hideBlockNav === 'hide-block-nav'){
+                                    deltaY = deltaY >= 68 ? 68 : deltaY;
+                                    if (self.blockIndex === 0) {
+                                        if (self.hideBlockNav === 'hide-block-nav') {
                                             self.refresh.moveLen = deltaY / 2
-                                        }else{
-                                            self.refresh.moveLen = deltaY * 1.5;
+                                        } else {
+                                            self.refresh.moveLen = deltaY * 1.35;
                                         }
-                                    }else{
+                                    } else {
                                         self.refresh.moveLen = deltaY / 2;
                                     }
-
-                                    if(deltaY >= 68){
+                                    if (deltaY >= 68) {
                                         self.refresh.release = true;
-                                    }else{
+                                    } else {
                                         self.refresh.moveLen = 0
                                     }
+                                } else {
+                                    e.preventDefault()
                                 }
                             }
+                            // }
                         }
-                    },false)
+                    }, false)
                     // 释放结束
-                    wrapper.addEventListener('touchend',function(e){
-                        if(self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[self.blockIndex]){
-                            if(self.refresh.release && !self.refresh.load){
+                    wrapper.addEventListener('touchend', function (e) {
+                        if (wrapper.offsetTop === 0) {
+                            // if (self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[
+                            //     self.blockIndex]) {
+                            if (self.refresh.release && !self.refresh.load) {
                                 self.refresh.load = true
-                                // self.loadCircleItem()
-                                setTimeout(() => {
+                                // 上拉加载
+                                setTimeout(function () {
                                     self.refresh.moveLen = 0;
                                     self.refresh.release = false;
                                     self.refresh.load = false;
                                     self.refresh.show = false;
-                                },1500)
+                                }, 1500)
                             }
+                            // }
                         }
-                    },false)
+                    }, false)
 
                     wrapper.addEventListener('scroll', function (e) {
-                        globalScroll(function(){
+                        globalScroll(function () {
+                            self.loadImg(e.target.scrollTop)
                             // 子导航存在搜索板块导航
-                            if(self.blockIndex === 0 && self.subNavList.length > 0){
-                                if(e.target.scrollTop - scrollTop > 10 && self.hideBlockNav !== 'hide-block-nav'){
+                            if (self.blockIndex === 0 && self.subNavList.length > 0) {
+                                if (e.target.scrollTop - scrollTop > 10 && self.hideBlockNav !==
+                                    'hide-block-nav') {
                                     self.hideBlockNav = 'hide-block-nav'
                                 }
                                 scrollTop = e.target.scrollTop
                             }
-                            if(e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
+                            if (e.target.scrollTop + e.target.clientHeight + 108 >= e.target
+                                .scrollHeight) {
                                 self.loadCircleItem()
                             }
                         })
-                    },false)
+                    }, false)
                 },
                 // 返回顶部
-                backTop:function() {
+                backTop: function () {
                     var self = this;
                     var wrapper = this.$refs.wrapper;
-                    function getScrollAnimNum(scrollTop){
-                        scrollTop = scrollTop >= 12000?12000:scrollTop;
+
+                    function getScrollAnimNum(scrollTop) {
                         switch (true) {
                             case scrollTop >= 8000:
-                                return 400
+                                return 1000
                                 break;
                             case scrollTop >= 5000 && scrollTop < 8000:
-                                return 300
+                                return 800
                                 break;
-                            case scrollTop >= 1500 && scrollTop < 5000:
+                            case scrollTop >= 2000 && scrollTop < 5000:
+                                return 450
+                                break;
+                            default:
                                 return 150
-                                break;
-                            default: 
-                                return 100
                         }
                     }
+                    wrapper.scrollTop = wrapper.scrollTop >= 12000 ? 12000 : wrapper.scrollTop;
                     var timer = requestAnimationFrame(function fn() {
-                        if(wrapper.scrollTop > 0){
+                        if (wrapper.scrollTop > 0) {
                             wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
                             requestAnimationFrame(fn)
-                        }else{
+                        } else {
                             wrapper.scrollTop = 0
                             cancelAnimationFrame(timer)
                         }
                     })
                 },
-                initData: function () {
+                // 初始化数据
+                initData: function (fn) {
                     var self = this;
                     this.blockNav.forEach(function (item, index) {
                         self.netWorkStatus.push(true)
@@ -430,18 +512,24 @@
                         self.loadingAll.push(false)
                         self.pageIndex.push(1)
                         self.circleList.push([])
+                        self.textHide.push([])
+                        self.getTextNode.push([])
+                        self.lazyLoad.push([])
+                        self.lazyLoadScrollTop.push([])
                     })
+                    self.maxTextH = Math.round(getBasePixal() * 1.666666666667) * 3;
+                    fn && fn()
                 },
                 // 获取子版块导航 
                 getSubNavList: function () {
                     var self = this;
-                    axios.get(https + '?type=99').then(function (res) {
+                    axios.get(https + 'circle?type=99').then(function (res) {
                         if (res.data.data.success) {
                             self.subNavList = res.data.data.subNavList;
                             // axios异步取数据有延时
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 self.initSubNav('offsetLeft');
-                            },168)
+                            }, 168)
                         }
                     }).catch(function (err) {
                         console.log(err);
@@ -460,8 +548,11 @@
                 switchNav: function (val) {
                     if (this.blockIndex !== val) {
                         this.blockIndex = val
+                        this.showBlockNav()
+                        this.swiper.slideTo(val, 500, false)
                     }
                 },
+                // 显示子导航
                 showBlockNav() {
                     this.hideBlockNav = ''
                 },
@@ -470,15 +561,15 @@
                     var self = this;
                     wx.getLocation({
                         type: 'wgs84',
-                        success: function(res){
+                        success: function (res) {
                             console.log('success')
                             console.log(res)
                             self.location = {
-                                lat:res.latitude,
-                                lng:res.longitude
+                                lat: res.latitude,
+                                lng: res.longitude
                             }
                         },
-                        fail: function(res) {
+                        fail: function (res) {
                             console.log('fail')
                             console.log(res)
                         }
@@ -487,22 +578,22 @@
                 // 切换子版块
                 switchSubNav: function (val) {
                     if (this.subNavIndex !== val) {
-                        this.navScroll('scrollLeft', val, this.blockSubIndex)
                         this.blockSubIndex = val
                     }
                 },
                 // 导航滚动
                 navScroll: function (attr, index, before) {
                     var self = this;
-                    var startPosition = this.subNavScrollArr[before-2] || 0;
+                    var startPosition = this.subNavScrollArr[before - 2] || 0;
                     var curPosition = this.$refs.scrollParent;
                     var direction = index > before ? 1 : -1;
                     var rate = (index - before) / 2;
-                    var speedRange = 6.85
+                    var abDirection = Math.abs(direction);
                     var startAnimation = function (endPosition) {
                         var timer = requestAnimationFrame(function fn() {
-                            startPosition += ((endPosition - startPosition) * direction >= 30 ?
-                                (6.25 * rate) : 3.25 * direction)
+                            startPosition += ((endPosition - startPosition) * abDirection) >=
+                                28 ?
+                                (3.55 * rate) : 2.75 * rate
                             if ((direction == 1 && startPosition <= endPosition) || (direction ==
                                     -1 && startPosition >= endPosition)) {
                                 curPosition[attr] = startPosition;
@@ -513,10 +604,7 @@
                             }
                         })
                     }
-                    if(direction === 1 && index > 2){
-                        // console.log(startPosition)
-                        // console.log(index)
-                        // console.log(this.subNavScrollArr[index - 2])
+                    if (direction === 1 && index > 2) {
                         startAnimation(this.subNavScrollArr[index - 2])
                     } else if (direction === -1) {
                         startAnimation(this.subNavScrollArr[index - 2] >= 0 ? this.subNavScrollArr[index -
@@ -526,31 +614,107 @@
                 // 加载交友圈列表
                 loadCircleItem: function () {
                     var self = this;
-                    wx.getNetworkType({
-                        success: function (res) {
-                            if(!self.loadingAll[self.blockIndex] && !self.isLoading[self.blockIndex]){
-                                if(self.blockIndex === 2 && self.location.lat === 0 && self.location.lng === 0){
+                    // wx.getNetworkType({
+                    //     success: function (res) {
+                    if (!self.loadingAll[self.blockIndex] && !self.isLoading[self.blockIndex]) {
+                        if (self.blockIndex === 2 && self.location.lat === 0 && self.location.lng === 0) {
 
-                                }else{
-                                    self.$set(self.isLoading,self.blockIndex,true);
-                                    self.$set(self.netWorkStatus,self.blockIndex,true)
-                                    /*
-                                        axios.get()
-                                    */
+                        } else {
+                            self.$set(self.isLoading, self.blockIndex, true);
+                            self.$set(self.netWorkStatus, self.blockIndex, true);
+                            axios.get(https + 'circleList').then(function (res) {
+                                if (res.data.success) {
+                                    console.log(res.data)
+                                    if (res.data.data.circleList.length >= 10) {
+                                        self.$set(self.pageIndex, self.blockIndex, ++self.pageIndex[
+                                            self.blockIndex])
+                                    } else {
+                                        self.$set(self.loadingAll, self.blockIndex, true);
+                                    }
+                                    if (res.data.data.circleList.length > 0) {
+                                        var circleList = self.circleList[self.blockIndex].concat(
+                                            res.data.data.circleList)
+                                        self.$set(self.circleList, self.blockIndex, circleList);
+                                        console.log(self.circleList)
+                                    }
+                                    self.$set(self.isLoading, self.blockIndex, false);
                                 }
-                            }
-                        },
-                        fail: function (res) {
-                            // 首次加载会出现无网的图
-                            if(res.errMsg === 'getNetworkType:fail' && self.circleList[self.blockIndex].length === 0){
-                                self.$set(self.netWorkStatus,self.blockIndex,false)
-                            }
+                            }).then(function () {
+                                if (self.circleList[self.blockIndex].length > 0) {
+                                    self.$nextTick(function () {
+                                        self.calcTextHeight()
+                                        self.getImgOffsetTop()
+                                    })
+                                }
+                            }).catch(function (err) {
+                                console.log(err)
+                            })
                         }
-                    });
+                    }
+                    //     },
+                    //     fail: function (res) {
+                    //         // 首次加载会出现无网的图
+                    //         if(res.errMsg === 'getNetworkType:fail' && self.circleList[self.blockIndex].length === 0){
+                    //             self.$set(self.netWorkStatus,self.blockIndex,false)
+                    //         }
+                    //     }
+                    // });
                     // this.getLocation()
                 },
+                // 计算文字高度
+                calcTextHeight: function () {
+                    var self = this;
+                    var cirTextArr = document.querySelectorAll('.circle-list-' + self.blockIndex +
+                        ' .circle-item-text');
+                    var getNodeArr = [],
+                        discard = [];
+                    cirTextArr.forEach(function (item, index) {
+                        self.maxTextH <= item.offsetHeight ? getNodeArr.push(true) : getNodeArr.push(
+                            false)
+                        discard.push(true)
+                    })
+                    self.$set(self.textHide, self.blockIndex, self.textHide[self.blockIndex].concat(
+                        getNodeArr))
+                    self.$set(self.getTextNode, self.blockIndex, self.getTextNode[self.blockIndex].concat(
+                        discard))
+                },
+                // 获取图片的位置
+                getImgOffsetTop: function () {
+                    var self = this;
+                    var ImgArr = document.querySelectorAll('.circle-list-' + self.blockIndex +
+                        ' .circle-item-lazy');
+                    var imgOffsetTopArr = [],
+                        imgLoadArr = [];
+                    ImgArr.forEach(function (item, index) {
+                        imgOffsetTopArr.push(item.offsetTop - 240);
+                        index === 0 ? imgLoadArr.push(true) : imgLoadArr.push(false)
+                    })
+                    self.$set(self.lazyLoadScrollTop, self.blockIndex, self.lazyLoadScrollTop[self.blockIndex]
+                        .concat(imgOffsetTopArr));
+                    self.$set(self.lazyLoad, self.blockIndex, self.lazyLoad[self.blockIndex].concat(
+                        imgLoadArr));
+                },
+                // 加载图片
+                loadImg: function (scrollTop) {
+                    var self = this;
+                    // 需要优化不然计算量太大
+                    this.lazyLoadScrollTop[this.blockIndex].forEach(function (item, index) {
+                        if (scrollTop >= item) {
+                            self.$set(self.lazyLoad[self.blockIndex], index, true)
+                        }
+                    })
+                },
+                // 图片预览
+                previewImg: function (e) {
+                    var self = this;
+                    var data = e.target.dataset;
+                    wx.previewImage({
+                        current: self.circleList[self.blockIndex][data.circleindex].imgList[data.imgindex],
+                        urls: self.circleList[self.blockIndex][data.circleindex].imgList
+                    });
+                },
                 // 点赞
-                like:function(index){
+                like: function (index) {
                     console.log(index)
                     this.testLike = true;
                     /*
@@ -562,20 +726,23 @@
                         })
                     */
                 },
+                // 禁止弹层触摸
                 disabledMaskMove() {
-                    this.$refs.mask.addEventListener('touchmove',function(e){
+                    this.$refs.mask.addEventListener('touchmove', function (e) {
                         e.preventDefault()
                     })
                 },
+                // 显示弹层
                 showCircleLayer() {
                     this.circleLayer = !this.circleLayer
                 },
                 // 拉黑 删除 举报执行此回调
                 hideCircleLayer() {
+                    var self = this;
                     this.maskAnim = 'fadeOut';
                     this.contentAnim = 'sliderOutDown'
-                    setTimeout(() => {
-                        this.circleLayer = false
+                    setTimeout(function () {
+                        self.circleLayer = false
                     }, 320)
                 }
             }
