@@ -22,10 +22,10 @@
 
     <body>
         <div id="app" v-if="init">
-            <header class="header anim" :class="hideBlockNav">
+            <header class="header" :class="hideBlockNav">
                 <!-- 板块导航 -->
                 <nav class="global-flex global-box block-nav">
-                    <ul class="global-flex-1 global-flex global-flex-end">
+                    <ul class="global-flex-1 global-flex global-flex-end anim">
                         <li v-for="(blockNavItem,blockNavIndex) of blockNav" class="block-item" :class="{'block-active':blockNavIndex === blockIndex}"
                             @click.stop="switchNav(blockNavIndex)">
                             {{blockNavItem}}
@@ -37,18 +37,8 @@
                         </svg>
                     </a>
                 </nav>
-                <!-- 子导航 -->
-                <nav class="global-flex block-sub-nav global-border global-border-bottom" v-if="blockIndex === 0 && subNavList.length > 0">
-                    <ul class="global-flex-1 block-sub-nav-content anim" ref="scrollParent">
-                        <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList"
-                            :class="{'block-sub-active':blockSubIndex === subNavIndex}" @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
-                    </ul>
-                    <svg aria-hidden="true" class="icon-fold" v-show="hideBlockNav === 'hide-block-nav'" @click.stop="showBlockNav">
-                        <use xlink:href=""></use>
-                    </svg>
-                </nav>
             </header>
-            <div class="swiper-container" id="global-wrapper" ref="wrapper">
+            <div class="swiper-container" :class="hideBlockNav">
                 <!-- 下拉刷新 -->
                 <div class="global-flex global-flex-center global-flex-justify-center refresh-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}"
                     v-show="refresh.show">
@@ -62,14 +52,26 @@
                     <div v-show="!refresh.load">{{refresh.release?'释放刷新':'下拉刷新'}}</div>
                     <div v-show="refresh.load">加载中...</div>
                 </div>
-                <div class="swiper-wrapper" :style="{transform:'translateY('+refresh.moveLen+'px)'}">
-                    <div class="swiper-slide" :class="{'sub-nav':blockNavIndex === 0 && subNavList.length > 0 && hideBlockNav !== 'hide-block-nav'}" v-for="(blockNavItem,blockNavIndex) of blockNav">
+                <div class="swiper-wrapper global-box" :style="{transform:'translateY('+refresh.moveLen+'px)'}">
+                    <!-- id="global-wrapper" ref="wrapper" -->
+                    <div class="swiper-slide global-wrapper global-box" ref="wrapper" v-for="(blockNavItem,blockNavIndex) of blockNav">
+                        <!-- 子导航 -->
+                        <nav class="global-flex block-sub-nav global-border global-border-bottom" v-if="subNavList.length > 0 && blockNavIndex === 0">
+                            <ul class="global-flex-1 block-sub-nav-content anim" ref="scrollParent">
+                                <li ref="scrollNav" class="block-sub-item font-ellipsis font-ellipsis-1" v-for="(subNavItem,subNavIndex) of subNavList"
+                                    :class="{'block-sub-active':blockSubIndex === subNavIndex}" @click.stop="switchSubNav(subNavIndex)">{{subNavItem.name}}</li>
+                            </ul>
+                            <svg aria-hidden="true" class="icon-fold" v-show="hideBlockNav === 'hide-block-nav'"
+                                @click.stop="showBlockNav">
+                                <use xlink:href=""></use>
+                            </svg>
+                        </nav>
                         <!-- 无网络状态 -->
                         <div class="open-network-wrapper" v-show="!netWorkStatus[blockIndex]">
                             <p>请检查Wifi或者无线局域网是否开启</p>
                         </div>
                         <!-- list -->
-                        <ul class="circle-list" :class="'circle-list-'+blockNavIndex">
+                        <ul class="circle-list" :class="['circle-list-'+blockNavIndex,{'has-sub-nav':blockIndex === 0 && subNavList.length > 0}]">
                             <li class="circle-item global-border global-border-bottom" :class="{'circle-item-lazy':!lazyLoad[blockIndex][circleIndex]}"
                                 v-for="(circleItem,circleIndex) of circleList[blockNavIndex]">
                                 <div class="global-flex circle-item-top">
@@ -124,14 +126,10 @@
                                         <a href="javascript:;" class="circle-item-read-btn" v-show="textHide[blockIndex][circleIndex]">全文</a>
                                     </div>
                                     <!-- 照片 -->
-                                    <ul class="circle-item-ablum" v-show="!!circleItem.imgList &&circleItem.imgList.length > 0"
+                                    <ul class="circle-item-ablum" v-if="!!circleItem.imgList &&circleItem.imgList.length > 0"
                                         @click.stop="previewImg">
-                                        <li class="ablum-item" v-for="(imgItem,imgIndex) of circleItem.imgList" :class="circleItem.imgList.length>1?'ablum-more':'ablum-one'">
-                                            <!-- 这里要替换默认图片的路径 -->
-                                            <img src="../../img/default-img.png" class="default-img" v-show="!lazyLoad[blockIndex][circleIndex]">
-                                            <img :src="imgItem" :data-circleIndex="circleIndex" :data-imgIndex="imgIndex"
-                                                v-show="lazyLoad[blockIndex][circleIndex]">
-
+                                        <li class="ablum-item" v-for="(imgItem,imgIndex) of circleItem.imgList" :class="[circleItem.imgList.length>1?'ablum-more':'ablum-one',{'default-img':!lazyLoad[blockIndex][circleIndex]}]">
+                                            <img :src="lazyLoad[blockIndex][circleIndex]?imgItem:''" :data-circleIndex="circleIndex" :data-imgIndex="imgIndex">
                                         </li>
                                     </ul>
                                     <!-- 定位 -->
@@ -173,7 +171,7 @@
                         <svg class="icon-footer" aria-hidden="true">
                             <use xlink:href="../../img/global.svg#icon-index"></use>
                         </svg>
-                        <p>首页</p>
+                        <p>交友圈</p>
                     </a>
                     <a href="../dating.html" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column">
                         <svg class="icon-footer" aria-hidden="true">
@@ -258,6 +256,24 @@
                 return 16
             }
         }
+        // 获取函数中位数
+        function getArrMid(arr) {
+            if (arr.length === 1) {
+                return {
+                    left: [],
+                    mid: arr[0],
+                    right: []
+                }
+            }else{
+                var mid = Math.floor(arr.length / 2);
+                return {
+                    loadLeft:false,
+                    left: arr.slice(0, mid),
+                    mid: arr[Math.floor(arr.length / 2)],
+                    right: arr.slice(mid, arr.length)
+                }
+            }
+        }
 
         // 滚动防节流函数
         function throttle(interval) {
@@ -301,8 +317,10 @@
                     circleList: [], // 交友圈列表
                     textHide: [], //文字溢出显示隐藏
                     getTextNode: [], //获取文字节点
+                    loadImgIndex: 0, // 当前懒加载的位置
                     lazyLoad: [], // 图片懒加载
-                    lazyLoadScrollTop: [], // 图片懒加载的dom节点高度
+                    lazyLoadIndex: [], // 当前板块懒加载的索引
+                    lazyLoadDomNum: [], // 图片懒加载的dom节点高度
                     netWorkStatus: [], // 网络状态
                     location: { // 附近的人坐标
                         lat: 0,
@@ -319,11 +337,21 @@
             watch: {
                 blockIndex: {
                     handler: function (val, oldVal) {
-                        console.log(this.circleList)
-                        console.log(this.blockIndex)
+                        var self = this,
+                            step = 0;
                         if (this.circleList[this.blockIndex].length == 0) {
-                            this.loadCircleItem()
+                            var timer = requestAnimationFrame(function fn() {
+                                if (step <= 30) {
+                                    ++step
+                                    requestAnimationFrame(fn)
+                                } else {
+                                    step = 0;
+                                    cancelAnimationFrame(timer);
+                                    self.loadCircleItem()
+                                }
+                            })
                         }
+                        this.globalScroll()
                     }
                 },
                 blockSubIndex: {
@@ -333,10 +361,10 @@
                             this.$nextTick(function () {
                                 //保证效果的流畅不能同步执行
                                 if (this.hideBlockNav !== 'hide-block-nav') {
-                                    this.hideBlockNav = 'hide-block-nav'
+                                    this.hideBlockNav = 'hide-block-nav';
                                     setTimeout(function () {
                                         self.navScroll('scrollLeft', val, oldVal);
-                                    }, 320)
+                                    }, 280)
                                 } else {
                                     self.navScroll('scrollLeft', val, oldVal);
                                 }
@@ -344,8 +372,9 @@
                             this.$set(this.circleList, 0, []);
                             this.$set(this.textHide, 0, []);
                             this.$set(this.getTextNode, 0, []);
+                            this.$set(this.lazyLoadIndex, 0, 0);
                             this.$set(this.lazyLoad, 0, []);
-                            this.$set(this.lazyLoadScrollTop, 0, []);
+                            this.$set(this.lazyLoadDomNum, 0, '');
                             this.$set(this.isLoading, 0, false);
                             this.$set(this.loadingAll, 0, false);
                             this.$set(this.pageIndex, 0, 1)
@@ -379,6 +408,16 @@
                     self.swiper = new Swiper('.swiper-container', {
                         loop: false, // 不循环
                         speed: 500, // 速度500
+                        // onTouchStart:function(swiper){
+                        //     if(self.blockIndex === 0 && self.hideBlockNav === 'hide-block-nav'){
+                        //         swiper.disableTouchControl()
+                        //     }
+                        // },
+                        // onTouchMove:function(swiper){
+                        //     if(self.blockIndex === 0 && self.hideBlockNav === 'hide-block-nav'){
+                        //         swiper.disableTouchControl()
+                        //     }
+                        // },
                         onSlideChangeStart: function (swiper) {
                             self.blockIndex = swiper.activeIndex
                         }
@@ -395,11 +434,10 @@
                         startY = 0,
                         self = this,
                         wrapper = this.$refs.wrapper;
+                    var scroll = throttle(50);
 
-                    var globalScroll = throttle(30);
-
-                    wrapper.addEventListener('touchstart', function (e) {
-                        if (wrapper.offsetTop === 0) {
+                    wrapper[self.blockIndex].addEventListener('touchstart', function (e) {
+                        if (wrapper[self.blockIndex].offsetTop === 0) {
                             // if (self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[
                             //     self.blockIndex]) {
                             timer = +new Date();
@@ -407,10 +445,11 @@
                             // }
                         }
                     }, false)
-                    wrapper.addEventListener('touchmove', function (e) {
-                        if (wrapper.offsetTop === 0) {
+                    wrapper[self.blockIndex].addEventListener('touchmove', function (e) {
+                        if (wrapper[self.blockIndex].offsetTop === 0) {
+                            console.log(wrapper[self.blockIndex].offsetTop)
                             var deltaY = (e.changedTouches[0].pageY - startY) * 0.618;
-                            if (wrapper.offsetTop === 0 && deltaY > 0) {
+                            if (wrapper[self.blockIndex].offsetTop === 0 && deltaY > 0) {
                                 if (+new Date() - timer >= 10 && !self.refresh.release) {
                                     self.refresh.show = true;
                                     deltaY = deltaY >= 68 ? 68 : deltaY;
@@ -436,8 +475,8 @@
                         }
                     }, false)
                     // 释放结束
-                    wrapper.addEventListener('touchend', function (e) {
-                        if (wrapper.offsetTop === 0) {
+                    wrapper[self.blockIndex].addEventListener('touchend', function (e) {
+                        if (wrapper[self.blockIndex].offsetTop === 0) {
                             // if (self.circleList[self.blockIndex].length === 0 && !self.netWorkStatus[
                             //     self.blockIndex]) {
                             if (self.refresh.release && !self.refresh.load) {
@@ -453,33 +492,35 @@
                             // }
                         }
                     }, false)
-
-                    wrapper.addEventListener('scroll', function (e) {
-                        globalScroll(function () {
-                            self.loadImg(e.target.scrollTop)
-                            // 子导航存在搜索板块导航
-                            if (self.blockIndex === 0 && self.subNavList.length > 0) {
-                                if (e.target.scrollTop - scrollTop > 10 && self.hideBlockNav !==
-                                    'hide-block-nav') {
+                    wrapper[self.blockIndex].addEventListener('scroll', function (e) {
+                        scroll(function () {
+                            if (e.target.scrollTop - scrollTop > 12) {
+                                if (self.hideBlockNav !== 'hide-block-nav') {
                                     self.hideBlockNav = 'hide-block-nav'
                                 }
-                                scrollTop = e.target.scrollTop
+                                if (e.target.scrollTop + e.target.clientHeight + 68>= e.target.scrollHeight){
+                                    self.loadCircleItem()
+                                }
+                                self.loadImg(e.target.scrollTop)
+                            } else {
+                                if (e.target.scrollTop - scrollTop < -20 && self.blockIndex >= 1) {
+                                    self.showBlockNav()
+                                }
                             }
-                            if (e.target.scrollTop + e.target.clientHeight + 108 >= e.target
-                                .scrollHeight) {
-                                self.loadCircleItem()
-                            }
+                            scrollTop = e.target.scrollTop
                         })
                     }, false)
                 },
                 // 返回顶部
                 backTop: function () {
                     var self = this;
-                    var wrapper = this.$refs.wrapper;
-
+                    var wrapper = this.$refs.wrapper[self.blockIndex];
                     function getScrollAnimNum(scrollTop) {
                         switch (true) {
-                            case scrollTop >= 8000:
+                            case scrollTop >= 12000:
+                                return 12000
+                            break
+                            case scrollTop >= 8000 && scrollTop < 12000:
                                 return 1000
                                 break;
                             case scrollTop >= 5000 && scrollTop < 8000:
@@ -492,16 +533,22 @@
                                 return 150
                         }
                     }
-                    wrapper.scrollTop = wrapper.scrollTop >= 12000 ? 12000 : wrapper.scrollTop;
-                    var timer = requestAnimationFrame(function fn() {
-                        if (wrapper.scrollTop > 0) {
-                            wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
-                            requestAnimationFrame(fn)
-                        } else {
-                            wrapper.scrollTop = 0
-                            cancelAnimationFrame(timer)
-                        }
-                    })
+                    
+                    if(wrapper.scrollTop > 0){
+                        wrapper.scrollTop = wrapper.scrollTop >= 15000 ? 15000 : wrapper.scrollTop;
+                        var timer = requestAnimationFrame(function fn() {
+                            if (wrapper.scrollTop > 0) {
+                                wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
+                                requestAnimationFrame(fn)
+                            } else {
+                                cancelAnimationFrame(timer)
+                                wrapper.scrollTop = 0
+                                if(self.blockIndex >= 1){
+                                    self.showBlockNav()
+                                }
+                            }
+                        })
+                    }
                 },
                 // 初始化数据
                 initData: function (fn) {
@@ -514,10 +561,12 @@
                         self.circleList.push([])
                         self.textHide.push([])
                         self.getTextNode.push([])
+                        self.lazyLoadIndex.push(0)
                         self.lazyLoad.push([])
-                        self.lazyLoadScrollTop.push([])
+                        self.lazyLoadDom
                     })
                     self.maxTextH = Math.round(getBasePixal() * 1.666666666667) * 3;
+                    self.winH = document.documentElement.clientHeight;
                     fn && fn()
                 },
                 // 获取子版块导航 
@@ -562,8 +611,6 @@
                     wx.getLocation({
                         type: 'wgs84',
                         success: function (res) {
-                            console.log('success')
-                            console.log(res)
                             self.location = {
                                 lat: res.latitude,
                                 lng: res.longitude
@@ -584,18 +631,23 @@
                 // 导航滚动
                 navScroll: function (attr, index, before) {
                     var self = this;
-                    var startPosition = this.subNavScrollArr[before - 2] || 0;
-                    var curPosition = this.$refs.scrollParent;
-                    var direction = index > before ? 1 : -1;
-                    var rate = (index - before) / 2;
-                    var abDirection = Math.abs(direction);
+                    var startPosition = this.subNavScrollArr[before - 2] || 0,
+                        curPosition = this.$refs.scrollParent[0];
+                    direction = index > before ? 1 : -1,
+                        rate = (index - before) / 2,
+                        speedRange = {
+                            0.5: 6.85,
+                            1: 4.85,
+                            1.5: 4.05,
+                            2: 3.25
+                        }
                     var startAnimation = function (endPosition) {
                         var timer = requestAnimationFrame(function fn() {
-                            startPosition += ((endPosition - startPosition) * abDirection) >=
-                                28 ?
-                                (3.55 * rate) : 2.75 * rate
-                            if ((direction == 1 && startPosition <= endPosition) || (direction ==
-                                    -1 && startPosition >= endPosition)) {
+                            startPosition += ((endPosition - startPosition) * direction >= 15 ?
+                                ((speedRange[Math.abs(rate)] || 3.25) * rate) : 1.5 *
+                                direction)
+                            if ((direction == 1 && startPosition < endPosition) || (direction ==
+                                    -1 && startPosition > endPosition)) {
                                 curPosition[attr] = startPosition;
                                 timer = requestAnimationFrame(fn);
                             } else {
@@ -624,26 +676,20 @@
                             self.$set(self.netWorkStatus, self.blockIndex, true);
                             axios.get(https + 'circleList').then(function (res) {
                                 if (res.data.success) {
-                                    console.log(res.data)
-                                    if (res.data.data.circleList.length >= 10) {
-                                        self.$set(self.pageIndex, self.blockIndex, ++self.pageIndex[
-                                            self.blockIndex])
-                                    } else {
-                                        self.$set(self.loadingAll, self.blockIndex, true);
-                                    }
                                     if (res.data.data.circleList.length > 0) {
-                                        var circleList = self.circleList[self.blockIndex].concat(
-                                            res.data.data.circleList)
-                                        self.$set(self.circleList, self.blockIndex, circleList);
-                                        console.log(self.circleList)
+                                        Array.prototype.push.apply(self.circleList[self.blockIndex],res.data.data.circleList)
+                                        if(res.data.data.circleList.length < 10){
+                                            self.$set(self.loadingAll, self.blockIndex, true)
+                                        }
                                     }
                                     self.$set(self.isLoading, self.blockIndex, false);
+                                    return res.data.data.circleList
                                 }
-                            }).then(function () {
-                                if (self.circleList[self.blockIndex].length > 0) {
+                            }).then(function (data) {
+                                if (data.length > 0) {
                                     self.$nextTick(function () {
+                                        self.getImgOffsetTop();
                                         self.calcTextHeight()
-                                        self.getImgOffsetTop()
                                     })
                                 }
                             }).catch(function (err) {
@@ -681,28 +727,76 @@
                 // 获取图片的位置
                 getImgOffsetTop: function () {
                     var self = this;
+                    if(this.lazyLoad[this.blockIndex].length > 0){
+                        this.$set(this.lazyLoadIndex,this.blockIndex,this.lazyLoad[this.blockIndex].length - 1)
+                        this.$set(this.lazyLoad[this.blockIndex],this.lazyLoad[this.blockIndex].length - 1,true)
+                    }
                     var ImgArr = document.querySelectorAll('.circle-list-' + self.blockIndex +
                         ' .circle-item-lazy');
                     var imgOffsetTopArr = [],
                         imgLoadArr = [];
                     ImgArr.forEach(function (item, index) {
-                        imgOffsetTopArr.push(item.offsetTop - 240);
-                        index === 0 ? imgLoadArr.push(true) : imgLoadArr.push(false)
+                        imgOffsetTopArr.push(item.offsetTop - (self.winH/4));
+                        if (self.lazyLoad[self.blockIndex].length === 0) {
+                            if(item.offsetTop < self.winH){
+                                self.lazyLoadIndex[self.blockIndex] = index
+                                imgLoadArr.push(true)
+                            }else{
+                                imgLoadArr.push(false)
+                            }
+                        }else{
+                            imgLoadArr.push(false);
+                        }
                     })
-                    self.$set(self.lazyLoadScrollTop, self.blockIndex, self.lazyLoadScrollTop[self.blockIndex]
-                        .concat(imgOffsetTopArr));
-                    self.$set(self.lazyLoad, self.blockIndex, self.lazyLoad[self.blockIndex].concat(
-                        imgLoadArr));
+                    Array.prototype.push.apply(this.lazyLoad[this.blockIndex],imgLoadArr);
+                    this.lazyLoadDomNum[this.blockIndex] = getArrMid(imgOffsetTopArr);
                 },
                 // 加载图片
                 loadImg: function (scrollTop) {
-                    var self = this;
-                    // 需要优化不然计算量太大
-                    this.lazyLoadScrollTop[this.blockIndex].forEach(function (item, index) {
-                        if (scrollTop >= item) {
-                            self.$set(self.lazyLoad[self.blockIndex], index, true)
+                    if (this.lazyLoadIndex[this.blockIndex] < this.lazyLoad[this.blockIndex].length) {
+                        var side = scrollTop < this.lazyLoadDomNum[this.blockIndex].mid ? 'left' : 'right';
+                        this.startLoadImg(scrollTop+(this.winH/2), side)
+                    }
+                },
+                // 开始加载图片
+                startLoadImg: function (scrollTop, side) {
+                    if(!loadLeft && side == 'right'){
+                        var arr = this.lazyLoadDomNum[this.blockIndex]['left'].concat(this.lazyLoadDomNum[this.blockIndex]['right'])
+                        console.log('ooo'+arr)
+                    }else {
+                        var arr = this.lazyLoadDomNum[this.blockIndex][side];
+                        console.log('xxx'+arr)
+                    }
+                    if (arr.length > 0) {
+                        var loadLeft = this.lazyLoadDomNum[this.blockIndex].loadLeft;
+                        console.log('进来了')
+                        console.log(side)
+                        console.log(this.lazyLoadDomNum[this.blockIndex].loadLeft)
+                        
+                        for (var i = 0, len = arr.length; i < len; i++) {
+                            if (scrollTop >= arr[i]) {
+                                this.$set(this.lazyLoad[this.blockIndex],++this.lazyLoadIndex[this.blockIndex],true);
+                                arr.shift();
+                                // if(side == 'right'){
+                                //     break;
+                                // }
+                            }else{
+                                if(!loadLeft && side == 'right'){
+                                    this.lazyLoadDomNum[this.blockIndex].loadLeft = true
+                                }
+                            }
                         }
-                    })
+                    }else{
+                        this.lazyLoadDomNum[this.blockIndex].loadLeft = {
+                            'right':true
+                        }[side]
+                    }
+                    //     if(side == 'left'){
+                    //         this.lazyLoadDomNum[this.blockIndex].loadLeft = true
+                    //     }else if (side == 'right'){
+                    //         this.lazyLoadDomNum[this.blockIndex].loadLeft = false
+                    //     }
+                    // }
                 },
                 // 图片预览
                 previewImg: function (e) {
@@ -738,12 +832,20 @@
                 },
                 // 拉黑 删除 举报执行此回调
                 hideCircleLayer() {
-                    var self = this;
+                    var self = this,
+                        step = 0;
                     this.maskAnim = 'fadeOut';
-                    this.contentAnim = 'sliderOutDown'
-                    setTimeout(function () {
-                        self.circleLayer = false
-                    }, 320)
+                    this.contentAnim = 'sliderOutDown';
+                    var timer = requestAnimationFrame(function fn() {
+                        if (step <= 19) {
+                            ++step;
+                            requestAnimationFrame(fn)
+                        } else {
+                            cancelAnimationFrame(timer);
+                            step = 0;
+                            self.circleLayer = false
+                        }
+                    })
                 }
             }
         })
