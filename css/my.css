@@ -2,14 +2,10 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    position: relative;
     width: 100%;
     max-width: 640px;
     height: 100vh;
-    padding-bottom:4.16666666667rem;
-    overflow-x: hidden;
-    overflow-y:scroll;
-    -webkit-overflow-scrolling: touch
+    overflow: hidden
 }
 /*头部信息 */
 .my-info{
@@ -21,9 +17,7 @@
     margin-right: 1rem;
     border-radius: 50%
 }
-.my-username-wrapper{
-    margin-bottom: .5rem
-}
+
 .my-username{
     max-width: 12.5rem;
     font-size: 2rem;
@@ -34,14 +28,12 @@
     position: relative;
     top: 2px;
 }
-.data-progress{
-    margin-left: 2px;
-    padding: 0 4px;
-    line-height: 1.4;
-    font-size:1rem;
-    color:#666;
-    font-weight: 500;
-    border-radius: 14px;
+
+.icon-edit{
+    margin-right: 4px;
+    width: 1.166666666667rem;
+    height: 1.1666666666667rem;
+    fill: #999
 }
 
 .my-album-btn{
@@ -57,19 +49,22 @@
     border-radius: 24px
 }
 .my-nav-list{
-    position: sticky;
-    top: 0;
     padding-bottom: 1rem;
-    font-size: 1.166666666667rem;
-    text-align: center
+    text-align: center;
 }
 .my-nav-list::before{
     border-color: #e5e5e5
 }
 .my-nav-item-data{
+    display: block;
     margin-bottom: .41666666667rem;
+    font-size: 1.3333333333333rem;
     font-weight: 700;
-    color:#333
+    color:#333;
+    cursor: pointer
+}
+.my-nav-list .font-999{
+    font-size: 1.166666666666rem
 }
 .new-visit-tips{
     position: absolute;
@@ -78,7 +73,6 @@
 /* 会员卡 */
 .vip-card-wrapper{
     padding: 1rem;
-    background: #fff
 }
 .vip-card{
     display: block;
@@ -87,7 +81,7 @@
     border-radius: .666666666667rem;
     overflow: hidden
 }
-.open-vip-btn{
+.my-vip-btn{
     position: absolute;
     top: .83333333333rem;
     right: 1.25rem;
@@ -95,17 +89,56 @@
     height: 2.5rem;
     line-height: 2.5rem;
     font-size: 1rem;
-    color: #ffc96b;
-    border:1px solid #ffc96b;
     border-radius: 2.5rem;
 }
-
-#main{
+.open-vip-btn{
+    color: #fff;
+    background:linear-gradient(90deg,rgba(148,93,255,1) 0%,rgba(207,42,255,1) 100%);
+    box-shadow:0px 3px 6px rgba(148,93,255,0.3)
+}
+.renew-btn{
+    color:#333 ;
+    background: #ffc96b
+}
+.vip-time{
     position: absolute;
+    right: 1.25rem;
+    top:3.916666666666rem;
+    color: #ffc96b;
+    font-size: .833333333333rem
+}
+#main{
+    box-sizing: border-box;
+    position:absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding-bottom: 6rem;
-    background: #f2f2f2;
-    transition: transform .48s cubic-bezier(0.215, 0.650, 0.425, 1.000)
+    height: 100vh;
+    padding-bottom: 4.083333333rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
+}
+#main::-webkit-scrollbar{
+    display: none
+}
+#main::-webkit-scrollbar-thumb{
+    background: transparent
+}
+.hide-mask{
+    position: relative;
+    top: -8rem;
+    width: 100%;
+    height: 43rem
+}
+#main-content{    
+    position: absolute;
+    top: 33rem;
+    width: 100%;
+    padding-bottom: 4.833333333333rem;
+    background: #f5f5f5;
+    z-index:500;
+    transition: transform .48s cubic-bezier(0.215, 0.650, 0.425, 1.000);    
 }
 /* 个人动态 */
 .my-active-news-wrapper{
@@ -133,21 +166,24 @@
 /* 我的 */
 .my-item{
     position: relative;
-    padding: 1rem 1.25rem 1rem 1rem;
+    padding: 1.333333333333rem 1.25rem 1.333333333333rem 1rem;
     font-size: 1.16666666667rem;
-    color: #666;
+    font-weight: 700;
+    color: #333;
     background: #fff
 }
-.my-item-wrapper:nth-last-of-type(2),.my-item-wrapper:last-of-type{
+.my-item-wrapper:nth-last-of-type(2){
     margin-top: .833333333333rem
 }
 .icon-my-item{
     margin-right: .666666666667rem;
     width: 1.333333333333rem;
-    height:1.333333333333rem
+    height:1.333333333333rem;
+    fill:#666
 }
-.gap-right{
-    padding-right: 1.1666666667rem
+.my-item .gap-right{
+    padding-right: 1.1666666667rem;
+    font-weight: 500
 }
 .icon-arrow-right{
     position: absolute;
@@ -163,3 +199,39 @@
     position: relative;
     top:1px
 }
+
+.my-invited{
+    position: fixed;
+    top:58%;
+    right:-2.7191666666rem;
+    width: 3.666666666666rem;
+    height: 4.7916666666rem;
+    transition: transform .48s
+}
+.show-invited{
+    transform: rotate(-30deg) translate(-50%)
+    /* animation: shake 4.8s linear both infinite */
+}
+/* @keyframes shake{
+    10%{
+        transform: rotate(-30deg) translate(-50%)
+    }
+    39.9%{
+        transform: rotate(-30deg) translate(-50%)
+    }
+    40%{
+        transform:translate(-50%,-12.5%) rotate(-30deg)
+    }
+    42%{
+        transform:translate(-50%,0) rotate(-30deg) 
+    }
+    44%{
+        transform:translate(-50%,-12.5%) rotate(-30deg)
+    }
+    44.1%{
+        transform: rotate(-30deg) translate(-50%)
+    }
+    100%{
+        transform: rotate(-30deg) translate(-50%)
+    }
+} */

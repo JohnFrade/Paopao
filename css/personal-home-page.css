@@ -76,6 +76,11 @@ main {
     transition: all .68s cubic-bezier(0.375, 0.015, 0.750, 0.750)
 }
 
+.personal-banner-item img{
+    width: 100%;
+    margin: auto 0
+}
+
 .swiper-wrapper-blur{
     -webkit-filter: blur(.5rem);
     -moz-filter: blur(.5rem);
