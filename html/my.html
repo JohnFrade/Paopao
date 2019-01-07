@@ -60,6 +60,7 @@
                     </a>
                 </nav>
                 <!-- 会员卡 -->
+                <!-- style="display:none" -->
                 <section id="vip-card" class="vip-card-wrapper">
                     <!-- 整个卡片都可以点击 -->
                     <a href="./vip-charge.html" class="vip-card global-relative mask-click">
@@ -73,6 +74,7 @@
             <main id="main">
                 <section class="hide-mask">
                 </section>
+                <!-- no-vip -->
                 <div id="main-content" class="anim">
                     <!-- 个人动态 -->
                     <section class="my-active-news-wrapper global-flex global-flex-center global-border global-border-top">
@@ -302,158 +304,161 @@
         }
 
         //触摸显示会员卡
-        function showVipCard() {
+        function showVipCard(isShow) {
             // 布尔值控制会员卡
-            // if (isShow) {
-            const wrapper = document.querySelector('#main')
-            hideWrapperScroll(wrapper)
-            // const el = document.querySelector('#main');
-            const el = document.querySelector('#main-content')
-            var timer = null,
-                beforeDeltaY = 0,
-                bounce = false,
-                step = 0,
-                step = 0,
-                touchEndP = 0, // 触摸的终点位置
-                startY = 0, // 起始触摸的位置
-                deltaY = 0, // 竖直触摸的距离
-                cardH = document.querySelector('#vip-card').offsetHeight;
-            var cardTranslateY = cardH * (-.645);
+            if (isShow) {
+                const wrapper = document.querySelector('#main')
+                hideWrapperScroll(wrapper)
+                // const el = document.querySelector('#main');
+                const el = document.querySelector('#main-content')
+                var timer = null,
+                    beforeDeltaY = 0,
+                    bounce = false,
+                    step = 0,
+                    step = 0,
+                    touchEndP = 0, // 触摸的终点位置
+                    startY = 0, // 起始触摸的位置
+                    deltaY = 0, // 竖直触摸的距离
+                    cardH = document.querySelector('#vip-card').offsetHeight;
+                var cardTranslateY = cardH * (-.645);
 
-            // 如果用Vue放在页面渲染完成之后执行showVipCard这个方法
-            el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)';
-            var foldTimer = requestAnimationFrame(function fn() {
-                if (step < 29) {
-                    ++step;
-                    requestAnimationFrame(fn)
-                } else {
-                    step = 0;
-                    document.querySelector('.my-invited').classList.add('show-invited');
-                    cancelAnimationFrame(foldTimer)
-                }
-            })
-            el.addEventListener('touchstart', function (e) {
-                if (wrapper.scrollTop == 0) {
-                    date = +new Date();
-                    cancelAnimationFrame(timer)
-                    startY = e.changedTouches;
-                }
-            }, false)
-
-            // 监听滚动方向
-            el.addEventListener('touchmove', function (e) {
-                e.stopPropagation();
-                if (wrapper.scrollTop == 0) {
-                    if (startY.length < 2) {
-                        deltaY = e.changedTouches[0].pageY - startY[0].pageY;
+                // 如果用Vue放在页面渲染完成之后执行showVipCard这个方法
+                el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)';
+                var foldTimer = requestAnimationFrame(function fn() {
+                    if (step < 29) {
+                        ++step;
+                        requestAnimationFrame(fn)
                     } else {
-                        for (var i = 0, len = e.changedTouches.length; i < len; i++) {
-                            if (distance > 0) {
-                                deltaY += e.changedTouches[i].pageY - startY[i].pageY;
-                            }
-                        }
+                        step = 0;
+                        document.querySelector('.my-invited').classList.add('show-invited');
+                        cancelAnimationFrame(foldTimer)
                     }
-                    if (deltaY > 0) {
-                        e.preventDefault();
-                        if (+new Date() - date >= 16.7) {
-                            // 向上滚动
-                            if (deltaY >= 10) {
-                                touchEndP = cardTranslateY + deltaY * (startY.length >= 2 ? .128 : .684);
-                                el.style.cssText = 'transform:translateY(' + touchEndP + 'px)';
-                            }
-                            date = +new Date();
-                        }
+                })
+                el.addEventListener('touchstart', function (e) {
+                    if (wrapper.scrollTop == 0) {
+                        date = +new Date();
+                        cancelAnimationFrame(timer)
+                        startY = e.changedTouches;
                     }
-                }
+                }, false)
 
-            }, false)
-            // 触摸结束复位
-            el.addEventListener('touchend', function (e) {
-                if (deltaY >= 10 && wrapper.scrollTop === 0 && +new Date() - date >= 10) {
-                    timer = requestAnimationFrame(function fn() {
-                        if (touchEndP >= cardTranslateY - 24 && !bounce) {
-                            // 大于卡片的高度才使用回弹
-                            if (deltaY > cardH) {
-                                if(touchEndP <= cardTranslateY){
-                                    touchEndP += -2.24;
-                                    if (touchEndP <= cardTranslateY - 24) {
-                                        bounce = true
-                                    }
-                                }else{
-                                    touchEndP += -6.84;
-                                }
-                            }else{
-                                if(touchEndP >= cardTranslateY){
-                                    touchEndP += -4.64;
-                                }else{
-                                    bounce = false
-                                    el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)';
-                                    cancelAnimationFrame(timer)
-                                }
-                            }
-                            el.style.cssText = 'transform:translateY(' + touchEndP + 'px)'
-                            
-                            requestAnimationFrame(fn)
-                        } else if (touchEndP < cardTranslateY && bounce) {
-                            touchEndP += .925;
-                            el.style.cssText = 'transform:translateY(' + touchEndP + 'px)'
-                            requestAnimationFrame(fn)
+                // 监听滚动方向
+                el.addEventListener('touchmove', function (e) {
+                    e.stopPropagation();
+                    if (wrapper.scrollTop == 0) {
+                        if (startY.length < 2) {
+                            deltaY = e.changedTouches[0].pageY - startY[0].pageY;
                         } else {
-                            bounce = false
-                            el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)';
-                            cancelAnimationFrame(timer)
+                            for (var i = 0, len = e.changedTouches.length; i < len; i++) {
+                                if (distance > 0) {
+                                    deltaY += e.changedTouches[i].pageY - startY[i].pageY;
+                                }
+                            }
                         }
-                    })
-                }
-            }, false)
-        }
-        showVipCard()
-
-
-        function maskClick() {
-            var mask = document.querySelector('.hide-mask');
-            var nodeArr = Array.prototype.slice.call(document.querySelectorAll('.mask-click'));
-            var getNodeArr = nodeArr.reduce(function(prev,cur,index){
-                var arr = [];
-                arr.push(nodeArr[index].offsetLeft)
-                arr.push(nodeArr[index].offsetTop)
-                arr.push(nodeArr[index].offsetLeft+nodeArr[index].offsetWidth)
-                arr.push(nodeArr[index].offsetTop+nodeArr[index].offsetHeight)
-                prev.push(arr)
-                return prev
-            },[])
-            mask.onclick = function(e){
-                var findIndex;
-                for(var i = 0,len = getNodeArr.length;i<len;i++){
-                    if((e.pageX >= getNodeArr[i][0] && e.pageX <= getNodeArr[i][2]) && (e.pageY >= getNodeArr[i][1] && e.pageY <= getNodeArr[i][3])){
-                        findIndex = i;
-                        break;
-                    }else{
-                        findIndex = -1
+                        if (deltaY > 0) {
+                            e.preventDefault();
+                            if (+new Date() - date >= 16.7) {
+                                // 向上滚动
+                                if (deltaY >= 10) {
+                                    touchEndP = cardTranslateY + deltaY * (startY.length >= 2 ? .128 : .684);
+                                    el.style.cssText = 'transform:translateY(' + touchEndP + 'px)';
+                                }
+                                date = +new Date();
+                            }
+                        }
                     }
-                }
-                switch(findIndex){
-                    case 0:
-                    break
-                    case 1:
-                    break
-                    case 2:
-                    break
-                    case 3:
-                    break
-                    case 4:
-                    break
-                    case 5:
-                    break
-                    case 6:
-                    break
-                    case 7:
-                        window.location.href='../html/vip-charge.html'
-                    break
-                }
+
+                }, false)
+                // 触摸结束复位
+                el.addEventListener('touchend', function (e) {
+                    if (deltaY >= 10 && wrapper.scrollTop === 0 && +new Date() - date >= 10) {
+                        timer = requestAnimationFrame(function fn() {
+                            if (touchEndP >= cardTranslateY - 24 && !bounce) {
+                                // 大于卡片的高度才使用回弹
+                                if (deltaY > cardH) {
+                                    if (touchEndP <= cardTranslateY) {
+                                        touchEndP += -2.24;
+                                        if (touchEndP <= cardTranslateY - 24) {
+                                            bounce = true
+                                        }
+                                    } else {
+                                        touchEndP += -6.84;
+                                    }
+                                } else {
+                                    if (touchEndP >= cardTranslateY) {
+                                        touchEndP += -4.64;
+                                    } else {
+                                        bounce = false
+                                        el.style.cssText = 'transform:translateY(' + cardTranslateY +
+                                            'px)';
+                                        cancelAnimationFrame(timer)
+                                    }
+                                }
+                                el.style.cssText = 'transform:translateY(' + touchEndP + 'px)'
+
+                                requestAnimationFrame(fn)
+                            } else if (touchEndP < cardTranslateY && bounce) {
+                                touchEndP += .925;
+                                el.style.cssText = 'transform:translateY(' + touchEndP + 'px)'
+                                requestAnimationFrame(fn)
+                            } else {
+                                bounce = false
+                                el.style.cssText = 'transform:translateY(' + cardTranslateY + 'px)';
+                                cancelAnimationFrame(timer)
+                            }
+                        })
+                    }
+                }, false)
             }
         }
-        maskClick()
+        showVipCard(1)
+
+
+            function maskClick() {
+                var mask = document.querySelector('.hide-mask');
+                var nodeArr = Array.prototype.slice.call(document.querySelectorAll('.mask-click'));
+                var getNodeArr = nodeArr.reduce(function (prev, cur, index) {
+                    var arr = [];
+                    arr.push(nodeArr[index].offsetLeft)
+                    arr.push(nodeArr[index].offsetTop)
+                    arr.push(nodeArr[index].offsetLeft + nodeArr[index].offsetWidth)
+                    arr.push(nodeArr[index].offsetTop + nodeArr[index].offsetHeight)
+                    prev.push(arr)
+                    return prev
+                }, [])
+                mask.onclick = function (e) {
+                    var findIndex;
+                    for (var i = 0, len = getNodeArr.length; i < len; i++) {
+                        if ((e.pageX >= getNodeArr[i][0] && e.pageX <= getNodeArr[i][2]) && (e.pageY >= getNodeArr[
+                                i][1] && e.pageY <= getNodeArr[i][3])) {
+                            findIndex = i;
+                            break;
+                        } else {
+                            findIndex = -1
+                        }
+                    }
+                    switch (findIndex) {
+                        case 0:
+                            break
+                        case 1:
+                            break
+                        case 2:
+                            break
+                        case 3:
+                            break
+                        case 4:
+                            break
+                        case 5:
+                            break
+                        case 6:
+                            break
+                        case 7:
+                            window.location.href = '../html/vip-charge.html'
+                            break
+                    }
+                }
+            }
+            maskClick()
     </script>
 
 </html>

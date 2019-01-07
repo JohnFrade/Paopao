@@ -27,6 +27,27 @@
     background: #fff;
 }
 
+.swiper-container{
+    box-sizing: border-box;
+    /* width: 84.533333333333%; */
+    width: 100%;
+    height: 69.6629213483%;
+    padding:0 15.46666666666%;
+    /* background: #945DFF; */
+    margin-bottom: 2rem;
+}
+
+.swiper-slide{
+    margin: auto 0;
+    height: 90%;
+    transform-origin: 100% 0;
+}
+.swiper-slide-active{
+    transition: transform .32s;
+    transform: scale(1.111111111) translate(5.555555555%,-5.555555555%);
+    box-shadow:0 0 10px rgba(0,0,0,.1)
+}
+
 .poster-rules{ 
     position: absolute;
     top: 1.33333333333rem;
@@ -42,18 +63,29 @@
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px
 }
-.poster-wrapper{
-    position: relative;
-    margin: 0 auto 2rem;
-    width: 69.333333334%;
-    max-width: 390px;
-    height: 69.6629213483%;
-    box-shadow:0 0 10px rgba(0,0,0,.1)
+.loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+.loading img{
+    margin: auto;
+    width: 4.1666666667rem;
+    height: 4.1666666667rem
 }
 #posterCanvas{
+    position: absolute;
+    top: 0;
+    left: 15.46666666667%;
+    width: 69.333333334%;
+    max-width: 390px;
+    height: 100%;
     font-family: 'ljsh';
-    background:#fff;
     opacity: 0;
+    z-index: 2;
+    
 }
 .poster-wrapper .global-img{
     position: absolute;
@@ -62,6 +94,7 @@
     /* opacity: 0; */
     z-index: 2
 }
+
 .poster-btn-wrapper{
     margin: 0 auto;
     width: 69.333333334%
@@ -73,9 +106,20 @@
     font-weight: 500
 }
 .poster-btn-lf{
+    position: relative;
     color: #333;
-    border: 1px solid #ccc;
     background:rgba(255,255,255,1);
+}
+.poster-btn-lf::after{
+    content: '';
+    position: absolute;
+    top:-50%;
+    left:-50%;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #ccc;
+    border-radius: 45px;
+    transform: scale(.5)
 }
 .poster-btn-rg{
     color: #fff;
@@ -83,7 +127,6 @@
 }
 
 .poster-rules-layer{
-    display: none;
     position:fixed;
     z-index:1000;
     top:0;

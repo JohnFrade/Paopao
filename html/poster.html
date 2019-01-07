@@ -8,287 +8,406 @@
         <meta content="telephone=no" name="format-detection">
         <meta content="email=no" name="format-detection">
         <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/swiper.min.css">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/poster.css">
         <title>日签卡</title>
     </head>
 
     <body>
-        <div id="global-wrapper">
-            
-            <button class="global-btn poster-rules">规则</button>
-            <p class="poster-tips">长按保存图片，分享给朋友</p>
-            <div class="poster-wrapper">
-                <img src="" class="global-img" crossOrigin="Anonymous" />
-                <canvas id="posterCanvas"></canvas>
+        <div id="app" v-if="init">
+            <div id="global-wrapper">
+                <button class="global-btn poster-rules" @click.stop="tapShowRules">规则</button>
+                <p class="poster-tips">长按保存图片，分享给朋友</p>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- poster-wrapper -->
+                        <div class="swiper-slide" v-for="(item,index) of imgList">
+                            <div class="loading global-flex" v-if="!imgArr[index] && !loadStatus[index]">
+                                <img src="../img/spinner.svg" alt="">
+                            </div>
+                            <img crossOrigin="Anonymous" :src="imgArr[index]" class="global-img" v-else/>
+                        </div>
+                    </div>
+                    <canvas id="posterCanvas"></canvas>
+                </div>
+                <div class="global-flex global-flex-between poster-btn-wrapper">
+                    <button class="global-btn global-btn-round-lg poster-btn-lf">重置默认图</button>
+                    <button class="global-btn global-btn-round-lg poster-btn-rg">修改图片</button>
+                </div>
             </div>
-            
-            <div class="global-flex global-flex-between poster-btn-wrapper">
-                <button class="global-btn global-btn-round-lg poster-btn-lf">重置默认图</button>
-                <button class="global-btn global-btn-round-lg poster-btn-rg">修改图片</button>
-            </di>
-            
-        </div>
-        <div class="poster-rules-layer">
-            <div class="poster-rules-mask"></div>
-            <div class="poster-rules-content global-box">
-                <h1 class="poster-rules-title">规则</h1>
-                <p>
-                    1. 日签转发给朋友，TA通过识别二维码进入社区。注册之后消费的第一笔，你将会获得他所消费额度的<span class="font-blue">20%</span>的分成
-                </p>
-                <p>
-                    2. 提现金额达到<span class="font-blue">1元以上</span>才可以，在《我的》-《申请提现》
-                </p>
-                <button class="global-btn poster-layer-btn global-border global-border-top">确定</button>
+            <div class="poster-rules-layer" v-show="showRules">
+                <div class="poster-rules-mask"></div>
+                <div class="poster-rules-content global-box">
+                    <h1 class="poster-rules-title">规则</h1>
+                    <p>
+                        1. 日签转发给朋友，TA通过识别二维码进入社区。注册之后消费的第一笔，你将会获得他所消费额
+                        <span class="font-blue">20%</span>的分成
+                    </p>
+                    <p>
+                        2. 提现金额达到
+                        <span class="font-blue">1元以上</span>才可以，在《我的》-《申请提现》
+                    </p>
+                    <button class="global-btn poster-layer-btn global-border global-border-top" @click.stop="tapShowRules">确定</button>
+                </div>
             </div>
         </div>
     </body>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/swiper.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <!-- 移动端控制台 -->
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript">
+        var vConsole = new VConsole();
+    </script>
     <script>
-        // setTimeout(() => {
-            var imgArr = ['../img/test.jpg', '../img/code.png'];
+        var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/';
 
-            // 加载图片
-            function preLoadImg(arr) {
-                arr = (typeof arr != "object") ? [arr] : arr;
-                var newImgs = [],
-                    loadIndex = 0;
-                var loadDone = function () {}
+        // 加载图片
+        function preLoadImg(arr) {
+            arr = (typeof arr != "object") ? [arr] : arr;
+            var newImgs = [],
+                loadIndex = 0;
+            var loadDone = function () {}
+            function loadCount() {
+                loadIndex++;
+                if (loadIndex === arr.length) {
+                    loadDone(newImgs)
+                }
+            }
+            for (var i = 0, len = arr.length; i < len; i++) {
+                newImgs[i] = new Image();
+                newImgs[i].src = arr[i]
+                newImgs[i].onload = function () {
+                    loadCount()
+                }
+                newImgs[i].onerror = function () {
+                    loadCount()
+                }
+            }
+            return {
+                all: function (f) {
+                    loadDone = f || loadDone
+                }
+            }
+        }
+        // 获取缩放比例
+        function getBasePixal() {
+            var winW = document.documentElement.clientWidth;
+            winW = winW >= 640 ? 640 : winW;
+            if (winW >= 320 && winW < 360) {
+                return 10
+            } else if (winW >= 360 && winW < 414) {
+                return 12
+            } else if (winW >= 414 && winW < 480) {
+                return 14
+            } else if (winW >= 480) {
+                return 16
+            }
+        }
+        // 获取canvas的尺寸
+        function getCanvasSize(parentEle) {
+            if (!!ele) return false;
+            var ele = document.querySelector(parentEle);
+            return {
+                w: (ele.offsetWidth + 8) * 2,
+                h: (ele.offsetHeight + 8) * 2
+            }
+        }
 
-                function loadCount() {
-                    loadIndex++;
-                    if (loadIndex === arr.length) {
-                        loadDone(newImgs)
-                    }
-                }
-                for (var i = 0, len = arr.length; i < len; i++) {
-                    newImgs[i] = new Image();
-                    newImgs[i].src = arr[i]
-                    newImgs[i].onload = function () {
-                        loadCount()
-                    }
-                    newImgs[i].onerror = function () {
-                        loadCount()
-                    }
-                }
+        var app = new Vue({
+            el: '#app',
+            data: function () {
                 return {
-                    all: function (f) {
-                        loadDone = f || loadDone
-                    }
+                    init: true,             // 初始化
+                    showRules: false,       // 显示规则
+                    code:'',                // 二维码
+                    imgList:[],             // 图片
+                    imgArr:[],              // 生成的图片
+                    loadStatus:[],          // 加载状态
+                    currentIndex:0          // 当前索引
                 }
-
-            }
-            // 获取缩放比例
-            function getBasePixal() {
-                var winW = document.documentElement.clientWidth;
-                winW = winW >= 640 ? 640 : winW;
-                if (winW >= 320 && winW < 360) {
-                    return 10
-                } else if (winW >= 360 && winW < 414) {
-                    return 12
-                } else if (winW >= 414 && winW < 480) {
-                    return 14
-                } else if (winW >= 480) {
-                    return 16
-                }
-            }
-
-            // 获取canvas的尺寸
-            function getCanvasSize(parentEle) {
-                if (!!ele) return false;
-                var ele = document.querySelector(parentEle);
-                return {
-                    w: (ele.offsetWidth + 8) * 2,
-                    h: (ele.offsetHeight + 8) * 2
-                }
-            }
+            },
+            created:function() {
+                this.getCode()
+                this.getImgList()
+            },
+            mounted: function () {
+                var self = this;
+                this.init = true;
+                // preLoadImg(imgArr).all(function (imgArr) {
+                //     self.drawPoster('.poster-wrapper', imgArr, {
+                //         day: '15',
+                //         month: '十二月',
+                //         fortune: '宜打球', // 三个字
+                //         title: '打球',  // 两个字
+                //         text: '天气真好，我却坐在这里写代码',
+                //         author: 'John Frade',
+                //         platform: '全国相亲交友平台'
+                //     })
+                // })
+            },
             // 绘制海报
-            function drawPoster(parentEle, imgArr, content) {
-                // 文字换行
-                function wrapText(ctx, text, fontSize) {
-                    var textLen = Math.ceil(text.length / 14); // 一行最多14个
-                    ctx.fillStyle = '#333';
-                    ctx.font = fontSize + 'px bold PingFang SC';
-                    if (textLen == 1) {
-                        ctx.fillText(text, (8 / 260) * parent.w, (352 / 434) * parent.h);
-                    } else if (textLen == 2) {
-                        for (var i = 0; i < textLen; i++) {
-                            var fillText = text.slice(i * 14, (i + 1) * 14);
-                            ctx.fillText(fillText, (8 / 260) * parent.w, ((340 + (fontSize * i / 0.83333334)) /
-                                434) * parent.h);
-                        }
-                    } else if (textLen == 3) {
-                        for (var i = 0; i < textLen; i++) {
-                            var fillText = text.slice(i * 14, (i + 1) * 14);
-                            ctx.fillText(fillText, (8 / 260) * parent.w, ((322 + (fontSize * i / 0.83333334)) /
-                                434) * parent.h);
-                        }
-                    }
-
-                }
-
-                // 绘制敬语
-                function drawFortune(ctx, text, fontSize) {
-                    ctx.font = fontSize + 'px normal PingFang SC';
-                    ctx.textBaseline = 'middle';
-                    for (var i = 0; i < text.length; i++) {
-                        var fillText = text.slice(i, (i + 1));
-                        if (i == 0) {
-                            ctx.fillStyle = '#333';
-                            ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, (211 / 408) *
-                                parent.h);
-                        } else {
-                            ctx.fillStyle = '#F68C2E';
-                            ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, ((211 + (
-                                fontSize * i) * 2 / 3) / 408) * parent.h);
-                        }
-                    }
-                }
-
-                // 绘制月份
-                function drawMonth(ctx, text, fontSize) {
-                    ctx.fillStyle = '#333';
-                    ctx.textBaseline = 'middle';
-                    ctx.font = fontSize + 'px normal PingFang SC';
-                    for (var i = 0; i < text.length; i++) {
-                        var fillText = text.slice(i, (i + 1));
-                        if (text.length == 2 && i == 1) {
-                            i = 2
-                        }
-                        ctx.fillText(fillText, ((217 + (fontSize / 2)) / 260) * parent.w, ((211 + (fontSize * i) *
-                            2 / 3) / 408) * parent.h);
-                    }
-                }
-
-                var canvas = document.getElementById("posterCanvas");
-
-                var ctx = canvas.getContext("2d");
-
-                // 获取父级的尺寸
-                var parent = getCanvasSize(parentEle);
-                var fontSize = getBasePixal() * 2;
-
-                canvas.setAttribute("width", parent.w);
-                canvas.setAttribute("height", parent.h);
-                canvas.style.width = (parent.w) / 2 + 'px';
-                canvas.style.height = (parent.h) / 2 + 'px';
-
-                ctx.clearRect(0, 0, parent.w, parent.h)
-                ctx.fillStyle = "#fff";
-                ctx.fillRect(0, 0, parent.w, parent.h)
-
-                // 绘制banner
-                ctx.drawImage(imgArr[0], (8 / 260) * parent.w, (8 / 260) * parent.w, (244 / 260) * parent.w, (
-                    244 / 260) * parent.w);
-
-                // 标签矩形
-                ctx.fillStyle = '#fff';
-                ctx.lineWidth = .5;
-                ctx.strokeStyle = '#eaeaea';
-                ctx.fillRect((183 / 260) * parent.w, (163 / 434) * parent.h, (64 / 260) * parent.w, (118 / 434) *
-                    parent.h);
-                ctx.strokeRect((182.5 / 260) * parent.w, (162.5 / 434) * parent.h, (64 / 260) * parent.w, (121 /
-                    434) * parent.h)
-
-
-                // 标签矩形天数
-                ctx.fillStyle = '#333';
-                ctx.textBaseline = 'middle';
-                ctx.font = fontSize * 4 + 'px bold PingFang SC';
-                ctx.textAlign = 'center'
-                ctx.fillText(content.day, ((190 + fontSize) / 260) * parent.w, (187 / 434) * parent.h);
-
-                // 绘制矩形分隔线
-                ctx.lineWidth = .5;
-                ctx.strokeStyle = '#f2f2f2';
-                ctx.shadowColor = "#fff";
-                ctx.moveTo((217 / 260) * parent.w, (217 / 434) * parent.h)
-                ctx.lineTo((217 / 260) * parent.w, (273 / 434) * parent.h)
-                ctx.stroke()
-
-                // 绘制敬语
-                drawFortune(ctx, content.fortune, fontSize * 1.25)
-
-                // 绘制月份
-                drawMonth(ctx, content.month, fontSize * 1.25)
-
-                // 标签双引号
-                ctx.fillStyle = '#999';
-                ctx.font = fontSize * 2 + 'px bold PingFang SC';
-                ctx.textBaseline = 'middle';
-                ctx.textAlign = 'right';
-                ctx.fillText('“', (192 / 260) * parent.w, ((135 + fontSize) / 434) * parent.h);
-                ctx.textAlign = 'left';
-                ctx.fillText('”', (236 / 260) * parent.w, ((287 + fontSize / 2) / 434) * parent.h);
-
-                // 绘制标题
-                ctx.fillStyle = '#333';
-                ctx.textAlign = 'start';
-                ctx.font = fontSize * 2 + 'px ljsh';
-                ctx.fillText(content.title, (8 / 260) * parent.w, ((272 + fontSize) / 434) * parent.h);
-                ctx.save();
-
-                // 绘制文字
-                wrapText(ctx, content.text, fontSize * 0.8333333334);
-
-                // 绘制二维码边框
-                ctx.strokeStyle = '#eaeaea';
-                ctx.lineWidth = 1;
-                ctx.strokeRect((183 / 260) * parent.w, (315 / 434) * parent.h, fontSize * 5.3333333333333,
-                    fontSize * 5.3333333333333);
-
-                // 绘制二维码
-                ctx.drawImage(imgArr[1], (185 / 260) * parent.w, (317 / 434) * parent.h, fontSize * 5, fontSize *
-                    5);
-
-                // 绘制作者
-                ctx.fillStyle = '#F68C2E';
-                ctx.font = fontSize * .66666666667 + 'px PingFang SC';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(content.author, (8 / 260) * parent.w, (392 / 434) * parent.h);
-
-                // 二维码
-                ctx.fillStyle = '#666';
-                ctx.font = fontSize * .66666666667 + 'px PingFang SC';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('识别二维码看一看', (183.5 / 260) * parent.w, (392 / 434) * parent.h);
-
-                // 分割线
-                ctx.beginPath();
-                ctx.lineWidth = .5;
-                ctx.strokeStyle = '#e5e5e5';
-                ctx.shadowColor = "#fff";
-                ctx.moveTo(0, (404 / 434) * parent.h)
-                ctx.lineTo(parent.w + 8, (404 / 434) * parent.h)
-                ctx.stroke()
-
-                // 交友平台
-                ctx.fillStyle = '#999';
-                ctx.font = fontSize * .66666666667 * 2 + 'px PingFang SC';
-                ctx.scale(.5, .5, (parent.w - ctx.measureText(content.platform).width) / 2, (420 / 434) *
-                    parent.h);
-                ctx.translate((parent.w) / 2, (420 / 434) * parent.h)
-                ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2, (420 /
-                    434) * parent.h);
-
-                // canvas 转base64
-                var src = canvas.toDataURL('image/jpeg', 1);
-                // ctx.save();
-                document.querySelector('.global-img').setAttribute("src", src);
-            }
-
-            preLoadImg(imgArr).all(function (imgArr) {
-                setTimeout(function(){
-                    drawPoster('.poster-wrapper', imgArr, {
-                        day: '15',
-                        month: '十二月',
-                        fortune: '宜打球', // 三个字
-                        title: '打球',
-                        text: '天气真好，我却坐在这里写代码',
-                        author: 'John Frade',
-                        platform: '全国相亲交友平台'
+            methods: {
+                // 获取二维码
+                getCode:function() {
+                    var self = this;
+                    axios.get(https + 'code').then(function (res) {
+                        console.log(res)
+                        // if(res.data.success){
+                            self.code = res.data.code
+                        // }
+                        
+                    }).catch(function (err) {
+                        console.log(err);
                     })
-                },200)
-            })
+                },
+                // 获取图片
+                getImgList:function(){
+                    var self = this;
+                    axios.get(https + 'poster').then(function (res) {
+                        console.log(res)
+                        if(res.data.success){
+                            self.imgList = res.data.data.imgList;
+                            self.$nextTick(function() {
+                                self.initSwiper();
+                                self.initData()
+                            })
+                        }
+                    }).catch(function (err) {
+                        console.log(err);
+                    })
+                },
+                // 初始化swiper
+                initSwiper:function() {
+                    if(this.imgList.length > 0){
+                        var self = this;
+                        self.swiper = new Swiper('.swiper-container', {
+                            width:240,
+                            loop: false, // 不循环
+                            speed: 500,  // 速度500
+                            // slidesOffsetAfter : 50,
+                            slidesPerView : 1,
+                            spaceBetween : 8,
+                            onSlideChangeStart: function (swiper) {
+                                // self.blockIndex = swiper.activeIndex
+                                alert(swiper.width)
+                            }
+                        })
+                    }
+                },
+                // 初始化数据
+                initData:function(){
+                    if(this.imgList.length > 0){
+                        for(var i = 0,len = this.imgList.length;i<len;i++){
+                            this.loadStatus.push(false)
+                        }
+                    }
+                },
+                // 规则
+                tapShowRules: function () {
+                    this.showRules = !this.showRules
+                },
+                // 绘制海报
+                drawPoster: function (parentEle, imgArr, content) {
+                    // 绘制敬语
+                    function drawFortune(ctx, text, fontSize) {
+                        ctx.font = fontSize + 'px normal PingFang SC';
+                        ctx.textBaseline = 'middle';
+                        for (var i = 0; i < text.length; i++) {
+                            var fillText = text.slice(i, (i + 1));
+                            if (i == 0) {
+                                ctx.fillStyle = '#333';
+                                ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, (211 /
+                                        408) *
+                                    parent.h);
+                            } else {
+                                ctx.fillStyle = '#F68C2E';
+                                ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, ((211 +(fontSize * i) * 2 / 3) / 408) * parent.h);
+                            }
+                        }
+                    }
+
+                    // 绘制月份
+                    function drawMonth(ctx, text, fontSize) {
+                        ctx.fillStyle = '#333';
+                        ctx.textBaseline = 'middle';
+                        ctx.font = fontSize + 'px normal PingFang SC';
+                        for (var i = 0; i < text.length; i++) {
+                            var fillText = text.slice(i, (i + 1));
+                            if (text.length == 2 && i == 1) {
+                                i = 2
+                            }
+                            ctx.fillText(fillText, ((217 + (fontSize / 2)) / 260) * parent.w, ((211 + (
+                                    fontSize * i) *
+                                2 / 3) / 408) * parent.h);
+                        }
+                    }
+
+                    // 文字换行
+                    function wrapText(ctx, text, fontSize) {
+                        var textLen = Math.ceil(text.length / 14); // 一行最多14个
+                        ctx.fillStyle = '#333';
+                        ctx.font = fontSize + 'px bold PingFang SC';
+                        switch(textLen){
+                            case 1:
+                                ctx.fillText(text, (8 / 260) * parent.w, (352 / 434) * parent.h);
+                            break;
+                            case 2:
+                                for (var i = 0; i < textLen; i++) {
+                                    var fillText = text.slice(i * 14, (i + 1) * 14);
+                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((340 + (fontSize * i / 0.83333334)) /434) * parent.h);
+                                }
+                            break;
+                            case 3:
+                                for (var i = 0; i < textLen; i++) {
+                                    var fillText = text.slice(i * 14, (i + 1) * 14);
+                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((322 + (fontSize * i /
+                                        0.83333334)) /434) * parent.h);
+                                }
+                            break
+                        }
+                    }
+
+                    var canvas = document.getElementById("posterCanvas");
+                    var ctx = canvas.getContext("2d");
+
+                    // 获取父级的尺寸
+                    var parent = getCanvasSize(parentEle);
+                    canvas.setAttribute("width", parent.w);
+                    canvas.setAttribute("height", parent.h);
+
+                    // 
+                    var fontSize = getBasePixal() * 2;
+                    canvas.style.width = (parent.w) / 2 + 'px';
+                    canvas.style.height = (parent.h) / 2 + 'px';
+                    
+                    // 清空画布
+                    ctx.clearRect(0, 0, parent.w, parent.h)
+
+                    // 开始绘制
+                    ctx.fillStyle = "#fff";
+                    ctx.fillRect(0, 0, parent.w, parent.h)
+
+                    // 绘制banner
+                    ctx.drawImage(imgArr[0], (8 / 260) * parent.w, (8 / 260) * parent.w, (244 / 260) *
+                        parent.w, (
+                            244 / 260) * parent.w);
+
+                    // 标签矩形
+                    ctx.fillStyle = '#fff';
+                    ctx.lineWidth = .5;
+                    ctx.strokeStyle = '#eaeaea';
+                    ctx.fillRect((183 / 260) * parent.w, (163 / 434) * parent.h, (64 / 260) * parent.w, (
+                            118 / 434) *
+                        parent.h);
+                    ctx.strokeRect((182.5 / 260) * parent.w, (162.5 / 434) * parent.h, (64 / 260) * parent.w,
+                        (121 /
+                            434) * parent.h)
+
+
+                    // 标签矩形天数
+                    ctx.fillStyle = '#333';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = fontSize * 4 + 'px bold PingFang SC';
+                    ctx.textAlign = 'center'
+                    ctx.fillText(content.day, ((190 + fontSize) / 260) * parent.w, (187 / 434) * parent.h);
+
+                    // 绘制矩形分隔线
+                    ctx.lineWidth = .5;
+                    ctx.strokeStyle = '#f2f2f2';
+                    ctx.shadowColor = "#fff";
+                    ctx.moveTo((217 / 260) * parent.w, (217 / 434) * parent.h)
+                    ctx.lineTo((217 / 260) * parent.w, (273 / 434) * parent.h)
+                    ctx.stroke()
+
+                    // 绘制敬语
+                    drawFortune(ctx, content.fortune, fontSize * 1.25)
+
+                    // 绘制月份
+                    drawMonth(ctx, content.month, fontSize * 1.25)
+
+                    // 标签双引号
+                    ctx.fillStyle = '#999';
+                    ctx.font = fontSize * 2 + 'px bold PingFang SC';
+                    ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('“', (192 / 260) * parent.w, ((135 + fontSize) / 434) * parent.h);
+                    ctx.textAlign = 'left';
+                    ctx.fillText('”', (236 / 260) * parent.w, ((287 + fontSize / 2) / 434) * parent.h);
+
+                    // 绘制标题
+                    ctx.fillStyle = '#333';
+                    ctx.textAlign = 'start';
+                    ctx.font = fontSize * 2 + 'px ljsh';
+                    ctx.fillText(content.title, (8 / 260) * parent.w, ((272 + fontSize) / 434) * parent.h);
+                    ctx.save();
+
+                    // 绘制文字
+                    wrapText(ctx, content.text, fontSize * 0.8333333334);
+
+                    // 绘制二维码边框
+                    ctx.strokeStyle = '#eaeaea';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect((183 / 260) * parent.w, (315 / 434) * parent.h, fontSize *
+                        5.3333333333333,
+                        fontSize * 5.3333333333333);
+
+                    // 绘制二维码
+                    ctx.drawImage(imgArr[1], (185 / 260) * parent.w, (317 / 434) * parent.h, fontSize * 5,
+                        fontSize *
+                        5);
+
+                    // 绘制作者
+                    ctx.fillStyle = '#F68C2E';
+                    ctx.font = fontSize * .66666666667 + 'px PingFang SC';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(content.author, (8 / 260) * parent.w, (392 / 434) * parent.h);
+
+                    // 二维码
+                    ctx.fillStyle = '#666';
+                    ctx.font = fontSize * .66666666667 + 'px PingFang SC';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('识别二维码看一看', (183.5 / 260) * parent.w, (392 / 434) * parent.h);
+
+                    // 分割线
+                    ctx.beginPath();
+                    ctx.lineWidth = .5;
+                    ctx.strokeStyle = '#e5e5e5';
+                    ctx.shadowColor = "#fff";
+                    ctx.moveTo(0, (404 / 434) * parent.h)
+                    ctx.lineTo(parent.w + 8, (404 / 434) * parent.h)
+                    ctx.stroke()
+
+                    // 交友平台
+                    ctx.fillStyle = '#999';
+                    ctx.font = fontSize * .66666666667 * 2 + 'px PingFang SC';
+                    ctx.scale(.5, .5, (parent.w - ctx.measureText(content.platform).width) / 2, (420 / 434) *
+                        parent.h);
+                    ctx.translate((parent.w) / 2, (420 / 434) * parent.h)
+                    ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2,
+                        (420 /
+                            434) * parent.h);
+
+                    // canvas 转base64
+                    var src = canvas.toDataURL('image/jpeg', 1);
+                    ctx.save();
+
+                    document.querySelector('.global-img').setAttribute("src", src);
+                },
+                // 修改图片
+                changeCover:function() {
+
+                },
+                // 重置默认图
+                resetCover:function() {
+
+                }
+            },
+            
+        })
     </script>
 
 </html>
