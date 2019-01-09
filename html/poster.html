@@ -20,9 +20,8 @@
                 <button class="global-btn poster-rules" @click.stop="tapShowRules">规则</button>
                 <p class="poster-tips">长按保存图片，分享给朋友</p>
                 <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <!-- poster-wrapper -->
-                        <div class="swiper-slide" v-for="(item,index) of imgList">
+                    <div class="swiper-wrapper anim">
+                        <div class="swiper-slide global-flex" v-for="(item,index) of imgList">
                             <div class="loading global-flex" v-if="!imgArr[index] && !loadStatus[index]">
                                 <img src="../img/spinner.svg" alt="">
                             </div>
@@ -58,10 +57,10 @@
     <script src="../js/vue.min.js"></script>
     <script src="../js/axios.min.js"></script>
     <!-- 移动端控制台 -->
-    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
     <script type="text/javascript">
         var vConsole = new VConsole();
-    </script>
+    </script> -->
     <script>
         var https = 'https://www.easy-mock.com/mock/5c2085ceb9d2c65175338f8c/example/paopao/';
 
@@ -108,20 +107,45 @@
             }
         }
         // 获取canvas的尺寸
-        function getCanvasSize(parentEle) {
-            if (!!ele) return false;
-            var ele = document.querySelector(parentEle);
+        function getCanvasSize() {
+            var winW = document.documentElement.clientWidth;
+                winW = Math.round(((winW >= 640 ? 640 : winW) * 0.6506666666666666));
+            var winH = document.documentElement.clientHeight;
+                winH = Math.round(winH * 0.693200663349917);
+            var outline = Math.round(winW * 0.06557377049180328);
             return {
-                w: (ele.offsetWidth + 8) * 2,
-                h: (ele.offsetHeight + 8) * 2
+                outline:outline,
+                w: (winW + outline) * 4,
+                h: (winH + outline) * 4
             }
+        }
+        // 修正月份
+        function fixMonth(month){
+            return {
+                0:'一',
+                1:'二',
+                2:'三',
+                3:'四',
+                4:'五',
+                5:'六',
+                6:'七',
+                7:'八',
+                8:'九',
+                9:'十',
+                10:'十一',
+                11:'十二'
+            }[month] + '月'
+        }
+        // 修正天数
+        function  fixDay(day){
+            return day > 9?day:'0'+day
         }
 
         var app = new Vue({
             el: '#app',
             data: function () {
                 return {
-                    init: true,             // 初始化
+                    init: false,             // 初始化
                     showRules: false,       // 显示规则
                     code:'',                // 二维码
                     imgList:[],             // 图片
@@ -131,33 +155,26 @@
                 }
             },
             created:function() {
-                this.getCode()
-                this.getImgList()
-            },
-            mounted: function () {
                 var self = this;
-                this.init = true;
-                // preLoadImg(imgArr).all(function (imgArr) {
-                //     self.drawPoster('.poster-wrapper', imgArr, {
-                //         day: '15',
-                //         month: '十二月',
-                //         fortune: '宜打球', // 三个字
-                //         title: '打球',  // 两个字
-                //         text: '天气真好，我却坐在这里写代码',
-                //         author: 'John Frade',
-                //         platform: '全国相亲交友平台'
-                //     })
-                // })
+                this.getCode(function() {
+                    self.getImgList()
+                })
             },
             // 绘制海报
             methods: {
                 // 获取二维码
-                getCode:function() {
+                getCode:function(fn) {
                     var self = this;
                     axios.get(https + 'code').then(function (res) {
                         console.log(res)
                         // if(res.data.success){
-                            self.code = res.data.code
+                            var codeImg = new Image();
+                            // codeImg.src = res.data.code;
+                            codeImg.src = '../img/code.png'
+                            codeImg.onload = function() {
+                                self.code = codeImg;
+                                fn && fn()
+                            }
                         // }
                         
                     }).catch(function (err) {
@@ -171,9 +188,18 @@
                         console.log(res)
                         if(res.data.success){
                             self.imgList = res.data.data.imgList;
+                            self.init = true;
                             self.$nextTick(function() {
+                                self.initData();
                                 self.initSwiper();
-                                self.initData()
+                                setTimeout(function(){
+                                    self.loadImg();
+                                    if(self.imgList.length > 1){
+                                       setTimeout(function() {
+                                            self.loadImg(self.currentIndex + 1);
+                                        },168)
+                                    }
+                                },300)
                             })
                         }
                     }).catch(function (err) {
@@ -184,16 +210,19 @@
                 initSwiper:function() {
                     if(this.imgList.length > 0){
                         var self = this;
+                        var winW = document.documentElement.clientWidth;
+                        winW = winW >= 640?640:winW;
                         self.swiper = new Swiper('.swiper-container', {
-                            width:240,
                             loop: false, // 不循环
-                            speed: 500,  // 速度500
-                            // slidesOffsetAfter : 50,
-                            slidesPerView : 1,
-                            spaceBetween : 8,
+                            speed: 480,
+                            autoHeight: false,
+                            centeredSlides : true,      // 居中
+                            slideToClickedSlide:true,   //点击的居中
                             onSlideChangeStart: function (swiper) {
-                                // self.blockIndex = swiper.activeIndex
-                                alert(swiper.width)
+                                self.currentIndex = swiper.activeIndex;
+                                if(!self.loadStatus[swiper.activeIndex+1] && swiper.activeIndex+1 < self.loadStatus.length){
+                                    self.loadImg(swiper.activeIndex + 1)
+                                }
                             }
                         })
                     }
@@ -201,7 +230,19 @@
                 // 初始化数据
                 initData:function(){
                     if(this.imgList.length > 0){
+                        var date = new Date();
+                        var month = fixMonth(date.getMonth());
+                        var day = fixDay(date.getDate());
                         for(var i = 0,len = this.imgList.length;i<len;i++){
+                            Object.assign(this.imgList[i],{
+                                'Tag':'宜'+this.imgList[i].Tag,
+                                // 'Image':[this.imgList[i].Image],
+                                'Image':['../img/test.jpg'],
+                                'title':this.imgList[i].Content.slice(0,2),
+                                'month':month,
+                                'day':day,
+                                'platform':'微赞相亲交友平台'
+                            });
                             this.loadStatus.push(false)
                         }
                     }
@@ -211,7 +252,8 @@
                     this.showRules = !this.showRules
                 },
                 // 绘制海报
-                drawPoster: function (parentEle, imgArr, content) {
+                drawPoster: function (currentIndex,img) {
+                    var content = this.imgList[currentIndex];
                     // 绘制敬语
                     function drawFortune(ctx, text, fontSize) {
                         ctx.font = fontSize + 'px normal PingFang SC';
@@ -220,12 +262,12 @@
                             var fillText = text.slice(i, (i + 1));
                             if (i == 0) {
                                 ctx.fillStyle = '#333';
-                                ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, (211 /
+                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, (186 /
                                         408) *
                                     parent.h);
                             } else {
                                 ctx.fillStyle = '#F68C2E';
-                                ctx.fillText(fillText, ((217 - (fontSize * 3 / 5)) / 260) * parent.w, ((211 +(fontSize * i) * 2 / 3) / 408) * parent.h);
+                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, ((186 +(fontSize * i) / 3) / 408) * parent.h);
                             }
                         }
                     }
@@ -240,9 +282,8 @@
                             if (text.length == 2 && i == 1) {
                                 i = 2
                             }
-                            ctx.fillText(fillText, ((217 + (fontSize / 2)) / 260) * parent.w, ((211 + (
-                                    fontSize * i) *
-                                2 / 3) / 408) * parent.h);
+                            ctx.fillText(fillText, ((203 + (fontSize / 4)) / 260) * parent.w, ((185 + (
+                                    fontSize * i) /3) / 408) * parent.h);
                         }
                     }
 
@@ -251,126 +292,133 @@
                         var textLen = Math.ceil(text.length / 14); // 一行最多14个
                         ctx.fillStyle = '#333';
                         ctx.font = fontSize + 'px bold PingFang SC';
-                        switch(textLen){
-                            case 1:
-                                ctx.fillText(text, (8 / 260) * parent.w, (352 / 434) * parent.h);
-                            break;
-                            case 2:
+                        // switch(textLen){
+                        //     case 1:
+                        //         ctx.fillText(text, (8 / 260) * parent.w, (342 / 434) * parent.h);
+                        //     break;
+                        //     case 2:
+                        //         for (var i = 0; i < textLen; i++) {
+                        //             var fillText = text.slice(i * 14, (i + 1) * 14);
+                        //             ctx.fillText(fillText, (8 / 260) * parent.w, ((330 + (fontSize * i / (0.83333334 * 2))) /434) * parent.h);
+                        //         }
+                        //     break;
+                        //     case 3:
                                 for (var i = 0; i < textLen; i++) {
                                     var fillText = text.slice(i * 14, (i + 1) * 14);
-                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((340 + (fontSize * i / 0.83333334)) /434) * parent.h);
+                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((312 + (fontSize * i /(0.83333334 * 2))) /434) * parent.h);
                                 }
-                            break;
-                            case 3:
-                                for (var i = 0; i < textLen; i++) {
-                                    var fillText = text.slice(i * 14, (i + 1) * 14);
-                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((322 + (fontSize * i /
-                                        0.83333334)) /434) * parent.h);
-                                }
-                            break
-                        }
+                        //     break
+                        // }
                     }
 
                     var canvas = document.getElementById("posterCanvas");
                     var ctx = canvas.getContext("2d");
 
                     // 获取父级的尺寸
-                    var parent = getCanvasSize(parentEle);
-                    canvas.setAttribute("width", parent.w);
+                    var parent = getCanvasSize();
+                    canvas.setAttribute("width", parent.w - parent.outline*4);
                     canvas.setAttribute("height", parent.h);
 
                     // 
                     var fontSize = getBasePixal() * 2;
-                    canvas.style.width = (parent.w) / 2 + 'px';
+                    canvas.style.width = (parent.w - parent.outline*4) / 2 + 'px';
                     canvas.style.height = (parent.h) / 2 + 'px';
-                    
+
                     // 清空画布
                     ctx.clearRect(0, 0, parent.w, parent.h)
 
                     // 开始绘制
                     ctx.fillStyle = "#fff";
-                    ctx.fillRect(0, 0, parent.w, parent.h)
+                    // ctx.fillStyle = "orange";
+                    ctx.fillRect(0, 0, parent.w, parent.h);
 
                     // 绘制banner
-                    ctx.drawImage(imgArr[0], (8 / 260) * parent.w, (8 / 260) * parent.w, (244 / 260) *
-                        parent.w, (
-                            244 / 260) * parent.w);
+                    ctx.drawImage(!img?content.Image[0]:img, parent.outline*2, parent.outline*2, parent.w-parent.outline*8, parent.w-parent.outline*8);
+
+                    // 绘制直角三角形
+                    ctx.beginPath();
+                    ctx.moveTo(parent.outline*2,parent.w-parent.outline*6);
+                    ctx.lineTo(parent.w-parent.outline*6,parent.w-parent.outline*6);
+                    ctx.lineTo(parent.w-parent.outline*6,(214 / 260) * parent.w);
+                    ctx.fill();
+                    ctx.closePath();
 
                     // 标签矩形
+                    ctx.beginPath();
                     ctx.fillStyle = '#fff';
-                    ctx.lineWidth = .5;
+                    ctx.lineWidth = 1;
                     ctx.strokeStyle = '#eaeaea';
-                    ctx.fillRect((183 / 260) * parent.w, (163 / 434) * parent.h, (64 / 260) * parent.w, (
-                            118 / 434) *
+                    ctx.fillRect((169 / 260) * parent.w, (147 / 434) * parent.h, (64 / 260) * parent.w, (
+                            112 / 434) *
                         parent.h);
-                    ctx.strokeRect((182.5 / 260) * parent.w, (162.5 / 434) * parent.h, (64 / 260) * parent.w,
-                        (121 /
+                    ctx.strokeRect((168.5 / 260) * parent.w, (146.5 / 434) * parent.h, (64 / 260) * parent.w,
+                        (116 /
                             434) * parent.h)
 
 
                     // 标签矩形天数
                     ctx.fillStyle = '#333';
                     ctx.textBaseline = 'middle';
-                    ctx.font = fontSize * 4 + 'px bold PingFang SC';
+                    ctx.font = 'bold '+fontSize * 6 + 'px PingFangSC-Semibold';
                     ctx.textAlign = 'center'
-                    ctx.fillText(content.day, ((190 + fontSize) / 260) * parent.w, (187 / 434) * parent.h);
+                    ctx.fillText(content.day, ((177 + fontSize) / 260) * parent.w, (166 / 434) * parent.h);
 
                     // 绘制矩形分隔线
-                    ctx.lineWidth = .5;
-                    ctx.strokeStyle = '#f2f2f2';
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#ccc';
                     ctx.shadowColor = "#fff";
-                    ctx.moveTo((217 / 260) * parent.w, (217 / 434) * parent.h)
-                    ctx.lineTo((217 / 260) * parent.w, (273 / 434) * parent.h)
+                    ctx.moveTo((203 / 260) * parent.w, (188 / 434) * parent.h)
+                    ctx.lineTo((203 / 260) * parent.w, (246 / 434) * parent.h)
                     ctx.stroke()
 
                     // 绘制敬语
-                    drawFortune(ctx, content.fortune, fontSize * 1.25)
+                    drawFortune(ctx, content.Tag, fontSize * 2.5)
 
                     // 绘制月份
-                    drawMonth(ctx, content.month, fontSize * 1.25)
+                    drawMonth(ctx, content.month, fontSize * 2.5)
 
                     // 标签双引号
                     ctx.fillStyle = '#999';
-                    ctx.font = fontSize * 2 + 'px bold PingFang SC';
+                    ctx.font = fontSize * 4 + 'px bold PingFang SC';
                     ctx.textBaseline = 'middle';
                     ctx.textAlign = 'right';
-                    ctx.fillText('“', (192 / 260) * parent.w, ((135 + fontSize) / 434) * parent.h);
+                    ctx.fillText('“', (178 / 260) * parent.w, ((120 + fontSize) / 434) * parent.h);
                     ctx.textAlign = 'left';
-                    ctx.fillText('”', (236 / 260) * parent.w, ((287 + fontSize / 2) / 434) * parent.h);
+                    ctx.fillText('”', (220 / 260) * parent.w, ((270 + fontSize / 3) / 434) * parent.h);
 
                     // 绘制标题
                     ctx.fillStyle = '#333';
                     ctx.textAlign = 'start';
-                    ctx.font = fontSize * 2 + 'px ljsh';
-                    ctx.fillText(content.title, (8 / 260) * parent.w, ((272 + fontSize) / 434) * parent.h);
+                    ctx.font = fontSize * 6 + 'px ljsh';
+                    ctx.fillText(content.title, parent.outline*2, ((257 + fontSize/2) / 434) * parent.h);
                     ctx.save();
 
                     // 绘制文字
-                    wrapText(ctx, content.text, fontSize * 0.8333333334);
+                    wrapText(ctx, content.Content, fontSize * 0.8333333334 * 2);
 
                     // 绘制二维码边框
                     ctx.strokeStyle = '#eaeaea';
                     ctx.lineWidth = 1;
-                    ctx.strokeRect((183 / 260) * parent.w, (315 / 434) * parent.h, fontSize *
-                        5.3333333333333,
-                        fontSize * 5.3333333333333);
+                    ctx.strokeRect((170 / 260) * parent.w, (305 / 434) * parent.h, fontSize *
+                        5.3333333333333*2,
+                        fontSize * 5.3333333333333*2);
 
                     // 绘制二维码
-                    ctx.drawImage(imgArr[1], (185 / 260) * parent.w, (317 / 434) * parent.h, fontSize * 5,
+                    ctx.drawImage(this.code, (172 / 260) * parent.w, (307 / 434) * parent.h, fontSize * 10,
                         fontSize *
-                        5);
+                        10);
 
                     // 绘制作者
                     ctx.fillStyle = '#F68C2E';
-                    ctx.font = fontSize * .66666666667 + 'px PingFang SC';
+                    ctx.font = fontSize * .66666666667*2 + 'px PingFang SC';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(content.author, (8 / 260) * parent.w, (392 / 434) * parent.h);
+                    ctx.fillText(content.Author, (8 / 260) * parent.w, (382 / 434) * parent.h);
 
                     // 二维码
                     ctx.fillStyle = '#666';
-                    ctx.font = fontSize * .66666666667 + 'px PingFang SC';
+                    ctx.font = fontSize * .66666666667*2 + 'px PingFang SC';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('识别二维码看一看', (183.5 / 260) * parent.w, (392 / 434) * parent.h);
+                    ctx.fillText('识别二维码看一看', (170.5 / 260) * parent.w, (382 / 434) * parent.h);
 
                     // 分割线
                     ctx.beginPath();
@@ -383,27 +431,37 @@
 
                     // 交友平台
                     ctx.fillStyle = '#999';
-                    ctx.font = fontSize * .66666666667 * 2 + 'px PingFang SC';
+                    ctx.font = fontSize * .66666666667 * 4 + 'px PingFang SC';
                     ctx.scale(.5, .5, (parent.w - ctx.measureText(content.platform).width) / 2, (420 / 434) *
                         parent.h);
-                    ctx.translate((parent.w) / 2, (420 / 434) * parent.h)
+                    ctx.translate((parent.w) / 2, (418 / 434) * parent.h)
                     ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2,
                         (420 /
                             434) * parent.h);
+                    ctx.save();
 
                     // canvas 转base64
                     var src = canvas.toDataURL('image/jpeg', 1);
-                    ctx.save();
 
-                    document.querySelector('.global-img').setAttribute("src", src);
+                    this.$set(this.imgArr,currentIndex,src)
+                    this.$set(this.loadStatus,currentIndex,true);
+                },
+                // 加载图片
+                loadImg:function(currentIndex) {
+                    var self = this;
+                    currentIndex = currentIndex?currentIndex:this.currentIndex;
+                    preLoadImg(this.imgList[currentIndex].Image).all(function (imgArr) {
+                        self.$set(self.imgList[currentIndex],'Image',imgArr);
+                        self.drawPoster(currentIndex);
+                    })
                 },
                 // 修改图片
                 changeCover:function() {
-
+                    // 把索引和imgsrc 传入进去
                 },
                 // 重置默认图
                 resetCover:function() {
-
+                    self.drawPoster(this.currentIndex);
                 }
             },
             
