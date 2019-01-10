@@ -16,18 +16,18 @@
 
     <body>
         <div id="global-wrapper" class="anim">
-            <header id="header" class="global-bg-fff global-relative">
+            <header id="header" class="global-relative">
                 <div class="my-info global-relative">
-                    <figure class="global-flex global-flex-center">
+                    <figure class="global-flex">
                         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
                             class="my-avatar mask-click">
-                        <figcaption style="width:15rem">
+                        <figcaption style="width:15rem" class="global-flex global-flex-column">
                             <div class="my-username-wrapper global-flex global-flex-center">
                                 <div class="my-username font-ellipsis font-ellipsis-1">xxxxxx</div>
                                 <div class="global-vip-signs"></div>
                             </div>
-                            <div class="font-12 font-999" style="margin-bottom:1.5rem">UID:451550</div>
-                            <a href="./my-data.html" class="global-flex global-flex-center font-999 font-14 mask-click">
+                            <div class="font-12">UID:451550</div>
+                            <a href="./my-data.html" class="global-flex global-flex-center font-14 mask-click global-align-top">
                                 <svg class="icon-edit" aria-hidden="true">
                                     <use xlink:href="../img/my.svg#icon-edit"></use>
                                 </svg>
@@ -37,28 +37,6 @@
                     </figure>
                     <button class="global-btn my-album-btn mask-click" onclick="goToAlum()">相册</button>
                 </div>
-                <nav class="global-flex my-nav-list">
-                    <a class="global-flex-1 my-nav-item mask-click" href="www.baidu.com">
-                        <p class="my-nav-item-data">24</p>
-                        <p class="font-999">好友</p>
-                    </a>
-                    <a class="global-flex-1 my-nav-item mask-click">
-                        <p class="my-nav-item-data">24</p>
-                        <p class="font-999">关注</p>
-                    </a>
-                    <a class="global-flex-1 my-nav-item mask-click">
-                        <p class="my-nav-item-data">24</p>
-                        <p class="font-999">暗恋我的</p>
-                    </a>
-                    <a class="global-flex-1 my-nav-item mask-click">
-                        <p class="my-nav-item-data">
-                            24
-                        </p>
-                        <p class="font-999 global-relative">
-                            访客<sup class="new-visit-tips font-red">•</sup>
-                        </p>
-                    </a>
-                </nav>
                 <!-- 会员卡 -->
                 <!-- style="display:none" -->
                 <section id="vip-card" class="vip-card-wrapper">
@@ -66,21 +44,40 @@
                     <a href="./vip-charge.html" class="vip-card global-relative mask-click">
                         <img src="../img/vip-card.png" class="global-img">
                         <!-- 开通会员open-vip-btn 续费会员 renew-btn-->
-                        <button class="global-btn my-vip-btn open-vip-btn">开通会员</button>
+                        <button class="global-btn my-vip-btn open-vip-btn renew-btn">开通会员</button>
                         <div class="vip-time">过期：2019.01.15</div>
                     </a>
                 </section>
             </header>
             <main id="main">
-                <section class="hide-mask">
-                </section>
+                <!-- <section class="hide-mask">
+                </section> -->
                 <!-- no-vip -->
-                <div id="main-content" class="anim">
+                <!-- <div id="main-content" class="anim"> -->
+                        <nav class="global-flex my-nav-list">
+                                <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center" href="www.baidu.com">
+                                    <p class="my-nav-item-data">24</p>
+                                    <p class="font-999">好友</p>
+                                </a>
+                                <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                                    <p class="my-nav-item-data">24</p>
+                                    <p class="font-999">关注</p>
+                                </a>
+                                <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                                    <p class="my-nav-item-data">24</p>
+                                    <p class="font-999">暗恋你</p>
+                                </a>
+                                <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                                    <p class="my-nav-item-data">
+                                        24
+                                    </p>
+                                    <p class="font-999 global-relative">
+                                        访客<sup class="new-visit-tips font-red">•</sup>
+                                    </p>
+                                </a>
+                            </nav>
                     <!-- 个人动态 -->
-                    <section class="my-active-news-wrapper global-flex global-flex-center global-border global-border-top">
-                        <div class="font-bold font-14 my-active-news-block-name">
-                            个人动态
-                        </div>
+                    <section class="my-active-news-wrapper global-flex global-flex-center">
                         <!-- 最多显示三张 -->
                         <ul class="my-active-news-list global-flex">
                             <li class="my-active-news-item">
@@ -99,10 +96,10 @@
                         <div class="my-active-news-item" style="display:none">
                             <img src="" class="global-img">
                         </div>
-                        <div class="global-align-right font-12 font-999" style="padding-right:1rem">63动态</div>
-                        <svg class="icon-arrow-right" aria-hidden="true">
+                        <div class="font-12 font-999 ative-news-count">63动态</div>
+                        <!-- <svg class="icon-arrow-right" aria-hidden="true">
                             <use xlink:href="../img/global.svg#icon-arrow-right"></use>
-                        </svg>
+                        </svg> -->
                     </section>
                     <section>
                         <ul class="my-list">
@@ -211,7 +208,7 @@
                             </li>
                         </ul>
                     </section>
-                </div>
+                <!-- </div> -->
             </main>
         </div>
         <footer id="footer">
@@ -271,6 +268,9 @@
             window.location.href = './album.html'
         }
 
+        setTimeout(function() {
+            document.querySelector('.my-invited').classList.add('show-invited');
+        },500)
 
         function footerLink() {
             var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
@@ -330,7 +330,6 @@
                         requestAnimationFrame(fn)
                     } else {
                         step = 0;
-                        document.querySelector('.my-invited').classList.add('show-invited');
                         cancelAnimationFrame(foldTimer)
                     }
                 })
@@ -411,7 +410,7 @@
                 }, false)
             }
         }
-        showVipCard(1)
+        // showVipCard(1)
 
 
             function maskClick() {
@@ -458,7 +457,7 @@
                     }
                 }
             }
-            maskClick()
+            // maskClick()
     </script>
 
 </html>

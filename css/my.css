@@ -5,11 +5,16 @@
     width: 100%;
     max-width: 640px;
     height: 100vh;
-    overflow: hidden
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
 }
 /*头部信息 */
 .my-info{
-    padding: 1rem 1.25rem 2rem 1rem
+    padding: 1rem 1.25rem 1.33333333333rem 1rem;
+    color: #fff;
+    background: #945DFF
+    
 }
 .my-avatar{
     width:7.5rem;
@@ -19,21 +24,28 @@
 }
 
 .my-username{
+    margin-bottom: .5rem;
     max-width: 12.5rem;
     font-size: 2rem;
     line-height: 1;
-    color: #945dff
+    /* color: #945dff */
+    color: #fff
 }
 .my-username-wrapper .global-vip-signs{
     position: relative;
     top: 2px;
 }
 
+figcaption a{
+    padding-bottom: .333333333333rem;
+    color: #fff
+}
 .icon-edit{
     margin-right: 4px;
     width: 1.166666666667rem;
     height: 1.1666666666667rem;
-    fill: #999
+    /* fill: #999 */
+    fill: #fff
 }
 
 .my-album-btn{
@@ -45,26 +57,9 @@
     font-size: 1.1666666667rem;
     font-weight: 400;
     color: #333;
-    border: 1px solid #ccc;
+    background: #fff;
+    border: 1px solid #fff;
     border-radius: 24px
-}
-.my-nav-list{
-    padding-bottom: 1rem;
-    text-align: center;
-}
-.my-nav-list::before{
-    border-color: #e5e5e5
-}
-.my-nav-item-data{
-    display: block;
-    margin-bottom: .41666666667rem;
-    font-size: 1.3333333333333rem;
-    font-weight: 700;
-    color:#333;
-    cursor: pointer
-}
-.my-nav-list .font-999{
-    font-size: 1.166666666666rem
 }
 .new-visit-tips{
     position: absolute;
@@ -72,19 +67,21 @@
 }
 /* 会员卡 */
 .vip-card-wrapper{
-    padding: 1rem;
+    background: #945DFF
 }
 .vip-card{
     display: block;
     width: 100%;
-    height: 16.666666666667rem;
-    border-radius: .666666666667rem;
+    height: 5.333333333333rem;
+    /* height: 16.666666666667rem; */
+    /* border-radius: .666666666667rem; */
     overflow: hidden
 }
 .my-vip-btn{
+    box-sizing: border-box;
     position: absolute;
-    top: .83333333333rem;
-    right: 1.25rem;
+    top: 1.33333333333rem;
+    right: 2rem;
     width: 6rem;
     height: 2.5rem;
     line-height: 2.5rem;
@@ -92,32 +89,32 @@
     border-radius: 2.5rem;
 }
 .open-vip-btn{
-    color: #fff;
-    background:linear-gradient(90deg,rgba(148,93,255,1) 0%,rgba(207,42,255,1) 100%);
-    box-shadow:0px 3px 6px rgba(148,93,255,0.3)
+    color: #333;
+    background:linear-gradient(90deg,#ecaa66 0%,#fedc9c 100%)
 }
 .renew-btn{
-    color:#333 ;
-    background: #ffc96b
+    color:#ecaa66;
+    background: #000;
+    border: 1px solid #ecaa66
 }
 .vip-time{
     position: absolute;
-    right: 1.25rem;
-    top:3.916666666666rem;
+    right: 8.5rem;
+    top:2.166666666667rem;
     color: #ffc96b;
     font-size: .833333333333rem
 }
 #main{
-    box-sizing: border-box;
-    position:absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    padding-bottom: 4.083333333rem;
-    overflow-x: hidden;
+    /* box-sizing: border-box; */
+    /* position:absolute; */
+    /* top: 0; */
+    /* left: 0; */
+    /* width: 100%; */
+    /* height: 100vh; */
+    padding-bottom: 5.083333333rem;
+    /* overflow-x: hidden;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch
+    -webkit-overflow-scrolling: touch */
 }
 #main::-webkit-scrollbar{
     display: none
@@ -125,36 +122,57 @@
 #main::-webkit-scrollbar-thumb{
     background: transparent
 }
-.hide-mask{
+/* .hide-mask{
     position: relative;
     top: -8rem;
     width: 100%;
     height: 43rem
-}
-#main-content{
+} */
+/* #main-content{
     position: absolute;
-    top: 33rem;
+    top: 18.5rem;
     width: 100%;
     padding-bottom: 4.833333333333rem;
     background: #f5f5f5;
     z-index:500;
     transition: transform .48s cubic-bezier(0.215, 0.650, 0.425, 1.000);    
-}
+} */
 #main-content.no-vip{
     top: 15rem;
+}
+.my-nav-list{
+    padding:.6666666667rem 0 1.5rem;
+    text-align: center;
+    background: #fff
+}
+.my-nav-item-data{
+    display: block;
+    margin-right: .3333333333rem;
+    font-size: 1.666666666667rem;
+    font-weight: 700;
+    color:#333;
+    cursor: pointer
+}
+.my-nav-list .font-999{
+    font-size: 1rem
 }
 /* 个人动态 */
 .my-active-news-wrapper{
     position: relative;
-    padding: 2rem 1.25rem 2rem 1rem;
-    margin-bottom: .83333333333rem;
-    background: #fff
+    padding: 0 1rem;
+    background: #fff;
 }
 .my-active-news-wrapper::before{
     top: -1px
 }
 .my-active-news-block-name{
     margin-right: 2.2rem
+}
+.my-active-news-list{
+    width: 100%;
+    padding: 1rem;
+    border-radius: .666666667rem;
+    background: #f5f5f5
 }
 .my-active-news-item{
     width: 4.8rem;
@@ -164,6 +182,14 @@
 }
 .my-active-news-item:not(:last-of-type){
     margin-right: .41666666667rem
+}
+.ative-news-count{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 2rem;
+    margin: auto 0;
+    height: 1rem;
 }
 
 /* 我的 */
