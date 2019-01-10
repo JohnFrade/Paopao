@@ -170,7 +170,7 @@
                         // if(res.data.success){
                             var codeImg = new Image();
                             // codeImg.src = res.data.code;
-                            codeImg.src = '../img/code.png'
+                            codeImg.src = '../img/code.png';
                             codeImg.onload = function() {
                                 self.code = codeImg;
                                 fn && fn()
@@ -190,16 +190,14 @@
                             self.imgList = res.data.data.imgList;
                             self.init = true;
                             self.$nextTick(function() {
-                                self.initData();
                                 self.initSwiper();
-                                setTimeout(function(){
-                                    self.loadImg();
-                                    if(self.imgList.length > 1){
-                                       setTimeout(function() {
-                                            self.loadImg(self.currentIndex + 1);
-                                        },168)
-                                    }
-                                },300)
+                                self.initData();
+                                self.loadImg();
+                                if(self.imgList.length > 1){
+                                    setTimeout(function() {
+                                        self.loadImg(self.currentIndex + 1);
+                                    },168)
+                                }
                             })
                         }
                     }).catch(function (err) {
@@ -245,6 +243,9 @@
                             });
                             this.loadStatus.push(false)
                         }
+
+                        console.log(this.imgList);
+                        console.log(this.loadStatus)
                     }
                 },
                 // 规则
@@ -262,12 +263,12 @@
                             var fillText = text.slice(i, (i + 1));
                             if (i == 0) {
                                 ctx.fillStyle = '#333';
-                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, (186 /
+                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, (192 /
                                         408) *
                                     parent.h);
                             } else {
                                 ctx.fillStyle = '#F68C2E';
-                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, ((186 +(fontSize * i) / 3) / 408) * parent.h);
+                                ctx.fillText(fillText, ((202 - (fontSize * 3 / 10)) / 260) * parent.w, ((192 +(fontSize * i) / 3) / 408) * parent.h);
                             }
                         }
                     }
@@ -282,13 +283,14 @@
                             if (text.length == 2 && i == 1) {
                                 i = 2
                             }
-                            ctx.fillText(fillText, ((203 + (fontSize / 4)) / 260) * parent.w, ((185 + (
+                            ctx.fillText(fillText, ((203 + (fontSize / 4)) / 260) * parent.w, ((192 + (
                                     fontSize * i) /3) / 408) * parent.h);
                         }
                     }
 
                     // 文字换行
                     function wrapText(ctx, text, fontSize) {
+                        text = text.slice(2);
                         var textLen = Math.ceil(text.length / 14); // 一行最多14个
                         ctx.fillStyle = '#333';
                         ctx.font = fontSize + 'px bold PingFang SC';
@@ -305,7 +307,7 @@
                         //     case 3:
                                 for (var i = 0; i < textLen; i++) {
                                     var fillText = text.slice(i * 14, (i + 1) * 14);
-                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((312 + (fontSize * i /(0.83333334 * 2))) /434) * parent.h);
+                                    ctx.fillText(fillText, (8 / 260) * parent.w, ((302 + (fontSize * i /(0.83333334 * 2))) /434) * parent.h);
                                 }
                         //     break
                         // }
@@ -333,6 +335,7 @@
                     ctx.fillRect(0, 0, parent.w, parent.h);
 
                     // 绘制banner
+                    console.log(content)
                     ctx.drawImage(!img?content.Image[0]:img, parent.outline*2, parent.outline*2, parent.w-parent.outline*8, parent.w-parent.outline*8);
 
                     // 绘制直角三角形
@@ -351,7 +354,7 @@
                     ctx.fillRect((169 / 260) * parent.w, (147 / 434) * parent.h, (64 / 260) * parent.w, (
                             112 / 434) *
                         parent.h);
-                    ctx.strokeRect((168.5 / 260) * parent.w, (146.5 / 434) * parent.h, (64 / 260) * parent.w,
+                    ctx.strokeRect((168.5 / 260) * parent.w, (147 / 434) * parent.h, (64 / 260) * parent.w,
                         (116 /
                             434) * parent.h)
 
@@ -367,8 +370,8 @@
                     ctx.lineWidth = 1;
                     ctx.strokeStyle = '#ccc';
                     ctx.shadowColor = "#fff";
-                    ctx.moveTo((203 / 260) * parent.w, (188 / 434) * parent.h)
-                    ctx.lineTo((203 / 260) * parent.w, (246 / 434) * parent.h)
+                    ctx.moveTo((203 / 260) * parent.w, (198 / 434) * parent.h)
+                    ctx.lineTo((203 / 260) * parent.w, (254 / 434) * parent.h)
                     ctx.stroke()
 
                     // 绘制敬语
@@ -391,20 +394,19 @@
                     ctx.textAlign = 'start';
                     ctx.font = fontSize * 6 + 'px ljsh';
                     ctx.fillText(content.title, parent.outline*2, ((257 + fontSize/2) / 434) * parent.h);
-                    ctx.save();
-
+                    
                     // 绘制文字
                     wrapText(ctx, content.Content, fontSize * 0.8333333334 * 2);
 
                     // 绘制二维码边框
                     ctx.strokeStyle = '#eaeaea';
                     ctx.lineWidth = 1;
-                    ctx.strokeRect((170 / 260) * parent.w, (305 / 434) * parent.h, fontSize *
+                    ctx.strokeRect((170 / 260) * parent.w, (295 / 434) * parent.h, fontSize *
                         5.3333333333333*2,
                         fontSize * 5.3333333333333*2);
 
                     // 绘制二维码
-                    ctx.drawImage(this.code, (172 / 260) * parent.w, (307 / 434) * parent.h, fontSize * 10,
+                    ctx.drawImage(this.code, (172 / 260) * parent.w, (297 / 434) * parent.h, fontSize * 10,
                         fontSize *
                         10);
 
@@ -412,33 +414,40 @@
                     ctx.fillStyle = '#F68C2E';
                     ctx.font = fontSize * .66666666667*2 + 'px PingFang SC';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(content.Author, (8 / 260) * parent.w, (382 / 434) * parent.h);
+                    ctx.fillText(content.Author, (8 / 260) * parent.w, (367 / 434) * parent.h);
 
                     // 二维码
                     ctx.fillStyle = '#666';
                     ctx.font = fontSize * .66666666667*2 + 'px PingFang SC';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('识别二维码看一看', (170.5 / 260) * parent.w, (382 / 434) * parent.h);
+                    ctx.fillText('识别二维码看一看', (170.5 / 260) * parent.w, (367 / 434) * parent.h);
 
                     // 分割线
                     ctx.beginPath();
                     ctx.lineWidth = .5;
                     ctx.strokeStyle = '#e5e5e5';
                     ctx.shadowColor = "#fff";
-                    ctx.moveTo(0, (404 / 434) * parent.h)
-                    ctx.lineTo(parent.w + 8, (404 / 434) * parent.h)
+                    ctx.moveTo(0, (389 / 434) * parent.h)
+                    ctx.lineTo(parent.w + 8, (389 / 434) * parent.h)
                     ctx.stroke()
 
                     // 交友平台
                     ctx.fillStyle = '#999';
-                    ctx.font = fontSize * .66666666667 * 4 + 'px PingFang SC';
+                    ctx.font = fontSize * .833333333334 * 4 + 'px PingFang SC';
                     ctx.scale(.5, .5, (parent.w - ctx.measureText(content.platform).width) / 2, (420 / 434) *
                         parent.h);
                     ctx.translate((parent.w) / 2, (418 / 434) * parent.h)
                     ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2,
-                        (420 /
+                        (393 /
                             434) * parent.h);
-                    ctx.save();
+                            
+                    ctx.fillStyle = '#999';
+                    var tips = '本地靠谱的相亲交友平台';
+                    ctx.font = fontSize * .66666666667 * 4 + 'px PingFang SC';
+                    ctx.fillText(tips, (parent.w - ctx.measureText(tips).width) / 2,
+                        (422 /
+                            434) * parent.h);
+                    
 
                     // canvas 转base64
                     var src = canvas.toDataURL('image/jpeg', 1);
@@ -461,10 +470,9 @@
                 },
                 // 重置默认图
                 resetCover:function() {
-                    self.drawPoster(this.currentIndex);
+                    this.drawPoster(this.currentIndex);
                 }
-            },
-            
+            }
         })
     </script>
 
