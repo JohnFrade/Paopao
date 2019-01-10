@@ -424,28 +424,28 @@
 
                     // 分割线
                     ctx.beginPath();
-                    ctx.lineWidth = .5;
-                    ctx.strokeStyle = '#e5e5e5';
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#ccc';
                     ctx.shadowColor = "#fff";
-                    ctx.moveTo(0, (389 / 434) * parent.h)
-                    ctx.lineTo(parent.w + 8, (389 / 434) * parent.h)
+                    ctx.moveTo(parent.outline*2, (389 / 434) * parent.h)
+                    ctx.lineTo(parent.w - parent.outline*6, (389 / 434) * parent.h)
                     ctx.stroke()
 
                     // 交友平台
-                    ctx.fillStyle = '#999';
-                    ctx.font = fontSize * .833333333334 * 4 + 'px PingFang SC';
+                    // ctx.fillStyle = '#999';
+                    // ctx.font = fontSize * .833333333334 * 4 + 'px PingFang SC';
                     ctx.scale(.5, .5, (parent.w - ctx.measureText(content.platform).width) / 2, (420 / 434) *
                         parent.h);
                     ctx.translate((parent.w) / 2, (418 / 434) * parent.h)
-                    ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2,
-                        (393 /
-                            434) * parent.h);
+                    // ctx.fillText(content.platform, (parent.w - ctx.measureText(content.platform).width) / 2,
+                    //     (393 /
+                    //         434) * parent.h);
                             
                     ctx.fillStyle = '#999';
                     var tips = '本地靠谱的相亲交友平台';
-                    ctx.font = fontSize * .66666666667 * 4 + 'px PingFang SC';
+                    ctx.font = fontSize * .833333333334 * 4 + 'px PingFang SC';
                     ctx.fillText(tips, (parent.w - ctx.measureText(tips).width) / 2,
-                        (422 /
+                        (405 /
                             434) * parent.h);
                     
 
