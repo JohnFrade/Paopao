@@ -79,7 +79,7 @@
                     <!-- 个人动态 -->
                     <section class="my-active-news-wrapper global-flex global-flex-center">
                         <!-- 最多显示三张 -->
-                        <ul class="my-active-news-list global-flex">
+                        <ul class="my-active-news-list global-flex" style="display:none">
                             <li class="my-active-news-item">
                                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
                                     class="global-img">
@@ -93,8 +93,8 @@
                                     class="global-img">
                             </li>
                         </ul>
-                        <div class="my-active-news-item" style="display:none">
-                            <img src="" class="global-img">
+                        <div class="my-active-news-item">
+                            <img src="../img/default-img.png" class="global-img">
                         </div>
                         <div class="font-12 font-999 ative-news-count">63动态</div>
                         <!-- <svg class="icon-arrow-right" aria-hidden="true">
@@ -413,7 +413,7 @@
         // showVipCard(1)
 
 
-            function maskClick() {
+        function maskClick() {
                 var mask = document.querySelector('.hide-mask');
                 var nodeArr = Array.prototype.slice.call(document.querySelectorAll('.mask-click'));
                 var getNodeArr = nodeArr.reduce(function (prev, cur, index) {

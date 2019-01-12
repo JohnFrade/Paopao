@@ -21,7 +21,41 @@
     <body>
         <div id="global-wrapper">
             <!-- banner 泡泡数据 公告 -->
-            <header>
+            <header id="header" class="global-bg-fff">
+                <!-- 公告 -->
+                <div class="paopao-announce global-flex global-box global-flex-center">
+                    <svg class="icon-announce" aria-hidden="true">
+                        <use xlink:hef=""></use>
+                    </svg>
+                    <div class="swiper-container paopao-announce-swiper global-flex-1">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="javascript:;" class="global-flex global-flex-center">
+                                    <div class="global-tag">
+                                        投票<i class="global-tag-text">投票</i>
+                                    </div>
+                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="javascript:;" class="global-flex global-flex-center">
+                                    <div class="global-tag">
+                                        投票<i class="global-tag-text">投票</i>
+                                    </div>
+                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon-close-wrp">
+                        <div class="icon-close-content global-flex">
+                            <svg class="icon-close" aria-hidden="true">
+                                <use xlink:hef=""></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- 轮播图 -->
                 <div class="swiper-container paopao-banner-swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -36,185 +70,55 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="global-flex global-flex-center paopao-visit-data-wrapper font-12">
-                    <svg class="icon-data">
-                        <use xlink:href="../img/index.svg#icon-data"></use>
-                    </svg>
-                    <div style="margin-right:1.666666667rem">
-                        用户 <span class="paopao-visit-data-num">5.91万</span>
-                    </div>
-                    <div>
-                        访问 <span class="paopao-visit-data-num">19.56万</span>
-                    </div>
-                    <button class="global-align-right global-btn paopao-follow">关注</button>
-                </div>
-                <!-- 公告 -->
-                <div class="paopao-announce global-flex global-flex-center">
-                    <div class="paopao-announce-tag"></div>
-                    <div class="swiper-container paopao-announce-swiper global-flex-1">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <a href="javascript:;" class="global-flex global-flex-center">
-                                    <div class="paopao-announce-vote"></div>
-                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="javascript:;" class="global-flex global-flex-center">
-                                    <div class="paopao-announce-vote"></div>
-                                    <p class="font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇</p>
-                                </a>
-                            </div>
+                <!-- 路由导航 -->
+                <nav class="global-flex paopao-page-nav">
+                    <a href="javascript:void(0);" class="global-flex-1 page-nav-item">
+                        <div class="page-nav-icon-wrp global-flex">
+                            <svg aria-hidden="true" class="page-nav-icon">
+                                <use xlink:href=""></use>
+                            </svg>
                         </div>
-                    </div>
-                </div>
-            </header>
-            <!-- 交友圈banner -->
-            <section id="paopao-circle">
-                <div class="global-flex global-flex-between global-flex-center paopao-circle-title-wrapper">
-                    <h2 style="font-size:2rem">交友圈</h2>
-                    <a href="./makefriends/makefriends-index.html" class="global-flex global-flex-center font-999 font-14">
-                        更多动态
-                        <svg aria-hidden="true" class="icon-arrow-right">
-                            <use xlink:href="../img/global.svg#icon-arrow-right"></use>
-                        </svg>
+                        <p>排行榜</p>
                     </a>
-                </div>
-                <div class="swiper-container paopao-circle-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide paopao-circle-swiper-item">
-                            <div class="paopao-circle-item-top global-flex">
-                                <div class="paopao-circle-item-cover">
-                                    <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
-                                        class="global-img">
-                                </div>
-                                <div class="global-flex-1 global-flex global-flex-column paopao-circle-item-content">
-                                    <div class="global-flex global-flex-center paopao-circle-item-top">
-                                        <!-- 男的话是没有font-purple这个class的 -->
-                                        <div class="paopao-circle-item-username font-purple font-14 font-bold">诶哦大法的事哦发</div>
-                                        <div class="global-tag">
-                                            VIP <i class="global-tag-text global-bg-orange">VIP</i>
-                                        </div>
-                                        <div class="deliver-time">3天前</div>
-                                    </div>
-                                    
-                                    <div class="global-sexual-man">
-                                        <svg class="global-icon-sexual">
-                                            <use xlink:href="../img/global.svg#icon-man"></use>
-                                        </svg>
-                                        <i class="global-sexual-text">20</i>
-                                    </div>
-                                    <!-- <div class="circle-ablum-item">
-                                        <svg></svg>
-                                    </div> -->
-                                </div>
-                            </div>
-                            <div class="global-flex global-flex-center">
-                                <div class="icon-chat-wrapper global-bg-pink global-flex">
-                                    <svg class="icon-chat" aria-hidden="true">
-                                        <use xlink:href="../img/index.svg#icon-chat"></use>
-                                    </svg>
-                                </div>
-                                <button class="global-flex global-flex-center paopao-circle-btn global-flex">
-                                    <svg class="icon-microphone" aria-hidden="true">
-                                        <use xlink:href="../img/index.svg#icon-microphone"></use>
-                                    </svg>
-                                    <svg class="icon-voice" aria-hidden="true">
-                                        <use xlink:href="../img/index.svg#icon-voice"></use>
-                                    </svg>
-                                    <span class="global-align-right">10s</span>
-                                </button>
-                                <!-- <div class="global-flex-1 global-relative font-12">
-                                    <p class="font-ellipsis font-ellipsis-2">开朗大方开朗大方公开反对可能规范点可能会共和国法律 很可能法规和两个方面你的功夫 </p>
-                                    <a href="javascript:void(0);" class="paopao-circle-article-check">全文</a>
-                                </div> -->
-                            </div>
+                    <a href="javascript:void(0);" class="global-flex-1 page-nav-item">
+                        <div class="page-nav-icon-wrp global-flex">
+                            <svg aria-hidden="true" class="page-nav-icon">
+                                <use xlink:href=""></use>
+                            </svg>
                         </div>
-                        <div class="swiper-slide paopao-circle-swiper-item">
-                            <div class="paopao-circle-item-top global-flex">
-                                <div class="paopao-circle-item-cover">
-                                    <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
-                                        class="global-img">
-                                </div>
-                                <div class="global-flex-1 global-flex global-flex-column paopao-circle-item-content">
-                                    <div class="global-flex global-flex-center paopao-circle-item-top">
-                                        <!-- 男的话是没有font-purple这个class的 -->
-                                        <div class="paopao-circle-item-username font-purple font-14 font-bold">诶哦大法的事哦发</div>
-                                        <div class="global-tag">
-                                            推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
-                                        </div>
-                                        <div class="deliver-time">3天前</div>
-                                    </div>
-                                    <!-- 男global-bg-blue 女 global-bg-pink-->
-                                    <div class="global-sexual-woman">
-                                        <svg class="global-icon-sexual">
-                                            <use xlink:href="../img/global.svg#icon-man"></use>
-                                        </svg>
-                                        <i class="global-sexual-text">20</i>
-                                    </div>
-                                    <ul class="global-align-top circle-ablum-list global-flex">
-                                        <li class="circle-ablum-item">
-                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
-                                                class="global-img">
-                                        </li>
-                                        <li class="circle-ablum-item">
-                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
-                                                class="global-img">
-                                        </li>
-                                        <!-- 数量大于3张 第三张有遮罩阴影 -->
-                                        <li class="circle-ablum-item">
-                                            <img src="http://img0.imgtn.bdimg.com/it/u=1618549514,428420170&fm=26&gp=0.jpg"
-                                                class="global-img">
-                                            <div class="circle-ablum-item-mask">
-                                                +5
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="global-flex global-flex-center">
-                                <div class="icon-chat-wrapper global-bg-pink global-flex">
-                                    <svg class="icon-chat" aria-hidden="true">
-                                        <use xlink:href="../img/index.svg#icon-chat"></use>
-                                    </svg>
-                                </div>
-                                <!-- <button class="global-flex global-flex-center paopao-circle-btn global-flex">
-                                        <svg class="icon-microphone" aria-hidden="true">
-                                            <use xlink:href="../img/index.svg#icon-microphone"></use>
-                                        </svg>
-                                        <svg class="icon-voice" aria-hidden="true">
-                                            <use xlink:href="../img/index.svg#icon-voice"></use>
-                                        </svg>
-                                        <span class="global-align-right">10s</span>
-                                    </button> -->
-                                <div class="global-flex-1 global-relative font-12">
-                                    <p class="font-ellipsis font-ellipsis-2">开朗大方开朗大方公开反对可能规范点可能会共和国法律 很可能法规和两个方面你的功夫
-                                    </p>
-                                    <a href="javascript:void(0);" class="paopao-circle-article-check">全文</a>
-                                </div>
-                            </div>
+                        <p>交友圈</p>
+                    </a>
+                    <a href="javascript:void(0);" class="global-flex-1 page-nav-item page-nav-item-disabled">
+                        <div class="page-nav-icon-wrp global-flex">
+                            <svg aria-hidden="true" class="page-nav-icon">
+                                <use xlink:href=""></use>
+                            </svg>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <!-- 板块导航 -->
-            <div class="paopao-nav-wrapper global-flex global-flex-end global-box">
-                <nav class="paopao-nav global-flex-1 global-flex global-flex-center">
-                    <li class="paopao-nav-item paopao-nav-active">
-                        <div class="paopao-nav-text">推荐</div>
-                    </li>
-                    <li class="global-relative global-flex global-flex-center paopao-nav-item">
-                        <div class="paopao-nav-text">上首页</div>
-                        <div class="paopao-tag-hot"></div>
-                    </li>
+                        <p>活动</p>
+                    </a>
+                    <a href="javascript:void(0);" class="global-flex-1 page-nav-item page-nav-item-disabled">
+                        <div class="page-nav-icon-wrp global-flex">
+                            <svg aria-hidden="true" class="page-nav-icon">
+                                <use xlink:href=""></use>
+                            </svg>
+                        </div>
+                        <p>树洞</p>
+                    </a>
                 </nav>
-                <button class="global-button global-align-right global-flex global-flex-center paopao-selected-nav-btn">
-                    <svg class="icon-selected" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-selected"></use>
-                    </svg>
-                    <div class="paopao-nav-text">筛选</div>
-                </button>
+            </header>
+            <!-- 板块导航 -->
+            <div class="block-nav-wrp anim">
+                <!-- fix-block-nav -->
+                <nav class="block-nav global-flex global-flex-center global-box">
+                    <a href="javascript:;" class="block-nav-item block-nav-active">推荐</a>
+                    <a href="javascript:;" class="block-nav-item">附近的人</a>
+                    <button class="global-btn recommend-nav-btn">
+                        我要曝光
+                        <div class="global-tag">
+                            热门<i class="global-tag-text">热门</i>
+                        </div>
+                    </button>
+                </nav>
             </div>
             <!-- 板块内容 -->
             <main id="main" class="global-bg-fff global-relative">
@@ -276,7 +180,7 @@
                                     </div>
                                     <div class="global-flex global-flex-center paopao-item-name-wrapper">
                                         <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        
+
                                     </div>
                                     <div class="global-flex global-flex-wrap paopao-item-type">
                                         <div class="global-sexual-woman">
@@ -306,21 +210,21 @@
                                         <i class="global-vip-signs"></i>
                                     </div>
                                     <div class="global-flex global-flex-wrap paopao-item-type">
-                                            <div class="global-sexual-man">
-                                                    <svg class="global-icon-sexual">
-                                                        <use xlink:href="../img/global.svg#icon-man"></use>
-                                                    </svg>
-                                                    <i class="global-sexual-text">20</i>
-                                                </div>
-                                                <div class="global-tag">
-                                                    幽默<i class="global-tag-text">幽默</i>
-                                                </div>
-                                                <div class="global-tag">
-                                                    幽默<i class="global-tag-text">幽默</i>
-                                                </div>
-                                                <div class="global-tag">
-                                                    幽默<i class="global-tag-text">幽默</i>
-                                                </div>
+                                        <div class="global-sexual-man">
+                                            <svg class="global-icon-sexual">
+                                                <use xlink:href="../img/global.svg#icon-man"></use>
+                                            </svg>
+                                            <i class="global-sexual-text">20</i>
+                                        </div>
+                                        <div class="global-tag">
+                                            幽默<i class="global-tag-text">幽默</i>
+                                        </div>
+                                        <div class="global-tag">
+                                            幽默<i class="global-tag-text">幽默</i>
+                                        </div>
+                                        <div class="global-tag">
+                                            幽默<i class="global-tag-text">幽默</i>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -370,6 +274,27 @@
                     <p>7项专属特权</p>
                 </div>
             </button>
+            <!--  -->
+
+             <!-- 侧边栏 -->
+            <a href="javascript:void(0);" id="aside">
+                <svg aria-hidden="true">
+                    <use xlink:href=""></use>
+                </svg>
+                顶部
+            </a>
+            
+                
+                <!-- <div class="">
+                    <div>    
+                    </div>
+                    <div>    
+                    </div>
+                    <div>
+                    </div>
+                    <div>    
+                    </div>
+                </div> -->
         </div>
         <footer id="footer">
             <nav class="global-flex footer-item-wrapper">
@@ -459,11 +384,11 @@
                 </svg>
             </div>
             <div class="global-flex global-flex-center paopao-personal-data-item global-relative">
-                    <div class="data-tag-name">个性标签</div>
-                    <a href="javascript:;" id="pickerHoroscope" class="picker-text global-flex-1">默认根据生日选星座</a>
-                    <svg class="icon-arrow-right" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
-                    </svg>
+                <div class="data-tag-name">个性标签</div>
+                <a href="javascript:;" id="pickerHoroscope" class="picker-text global-flex-1">默认根据生日选星座</a>
+                <svg class="icon-arrow-right" aria-hidden="true">
+                    <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                </svg>
             </div>
             <button class="global-btn global-btn-round-lg save-data">保存</button>
         </div>
@@ -513,7 +438,7 @@
 
             // banner
             var paopaoBannerSwiper = new Swiper('.paopao-banner-swiper', {
-                speed:500,
+                speed: 500,
                 loop: true,
                 autoplayDisableOnInteraction: false,
                 autoplay: 3000
@@ -542,9 +467,9 @@
                     timer = null;
                 wrapper.addEventListener('scroll', function (e) {
                     var timer = setTimeout(() => {
-                        if (wrapper.scrollTop >= navObj.navOffsetTop){
+                        if (wrapper.scrollTop >= navObj.navOffsetTop) {
                             navObj.startScroll = true
-                        }else{
+                        } else {
                             navObj.startScroll = false
                         }
                         var curScrollTop = e.target.scrollTop;
@@ -589,32 +514,34 @@
                     var scrollRate,
                         navOffsetTop = this.navOffsetTop;
                     // return new Promise(function(resolve,reject){
-                        if (wrapper.scrollTop < navOffsetTop) {
-                            var timer = requestAnimationFrame(function fn() {
-                                if (navOffsetTop - wrapper.scrollTop >= 20) {
-                                    scrollRate = 15;
-                                } else if (navOffsetTop - wrapper.scrollTop < 20 && navOffsetTop - wrapper.scrollTop >=
-                                    1) {
-                                    scrollRate = 2;
-                                } else if (navOffsetTop - wrapper.scrollTop < 1 && navOffsetTop - wrapper.scrollTop >
-                                    0) {
-                                    scrollRate = .1;
-                                }
-                                if (wrapper.scrollTop <= navOffsetTop) {
-                                    wrapper.scrollTop += scrollRate;
-                                    requestAnimationFrame(fn)
-                                } else {
-                                    setTimeout(() => {
-                                        wrapper.scrollTop = navOffsetTop
-                                        navObj.startScroll = true
-                                        cancelAnimationFrame(timer);
-                                        callback && callback(true)
-                                    },16.6)
-                                }
-                            })
-                        }else{
-                            callback && callback(true)
-                        }
+                    if (wrapper.scrollTop < navOffsetTop) {
+                        var timer = requestAnimationFrame(function fn() {
+                            if (navOffsetTop - wrapper.scrollTop >= 20) {
+                                scrollRate = 15;
+                            } else if (navOffsetTop - wrapper.scrollTop < 20 && navOffsetTop -
+                                wrapper.scrollTop >=
+                                1) {
+                                scrollRate = 2;
+                            } else if (navOffsetTop - wrapper.scrollTop < 1 && navOffsetTop -
+                                wrapper.scrollTop >
+                                0) {
+                                scrollRate = .1;
+                            }
+                            if (wrapper.scrollTop <= navOffsetTop) {
+                                wrapper.scrollTop += scrollRate;
+                                requestAnimationFrame(fn)
+                            } else {
+                                setTimeout(() => {
+                                    wrapper.scrollTop = navOffsetTop
+                                    navObj.startScroll = true
+                                    cancelAnimationFrame(timer);
+                                    callback && callback(true)
+                                }, 16.6)
+                            }
+                        })
+                    } else {
+                        callback && callback(true)
+                    }
                     // }).catch(function(err){
                     //     console.log(err)
                     // })
@@ -633,8 +560,8 @@
                         item.onclick = function (e) {
                             e.stopPropagation()
                             if (index == navObj.index) return
-                            navObj.scrollTo(function(done){
-                                if(done){
+                            navObj.scrollTo(function (done) {
+                                if (done) {
                                     navObj.before = navObj.index
                                     item.classList.add(cla)
                                     navObj.navArr[navObj.before].classList.remove(cla)
@@ -643,12 +570,12 @@
                                 }
                             })
                             // navObj.scrollTo().then(function(done){
-                                
+
                             // })
                         }
                     })
                 } else {
-                    navObj.scrollTo(function(){
+                    navObj.scrollTo(function () {
                         fn && fn(cla)
                     })
                     // navObj.scrollTo().then(function(done) {
@@ -726,7 +653,7 @@
 
             // 加载paopao列表页
             function loadPaopaoItem(fn) {
-                navObj.blockArr[navObj.index].addEventListener('scroll', function(e) {
+                navObj.blockArr[navObj.index].addEventListener('scroll', function (e) {
                     if (!navObj.isLoadingArr[navObj.index] && !navObj.isLoadingArr[navObj.index]) {
                         if (e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
                             fn && fn()
@@ -741,17 +668,18 @@
 
             function showSelected() {
                 $('.paopao-selected-nav-btn').on('click', function () {
-                    if($('.paopao-selected-content').hasClass('sliderFromTop')){
+                    if ($('.paopao-selected-content').hasClass('sliderFromTop')) {
                         hideSelected()
-                    }else{
+                    } else {
                         // navObj.scrollTo().then(function(done){
                         //     $('.paopao-selected-wrapper').fadeIn(300)
                         //     $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
                         // })
-                        navObj.scrollTo(function(done){
-                            if(done){
+                        navObj.scrollTo(function (done) {
+                            if (done) {
                                 $('.paopao-selected-wrapper').fadeIn(300)
-                                $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
+                                $('.paopao-selected-content').removeClass('sliderOutTop').addClass(
+                                    'sliderFromTop')
                             }
                         })
                     }
@@ -773,7 +701,7 @@
                 hideSelected()
             })
             // 筛选层阻止冒泡
-            function forbidSelected(){
+            function forbidSelected() {
                 $('.paopao-selected-content').on('click', function (e) {
                     e.stopPropagation()
                 })
@@ -781,7 +709,7 @@
             forbidSelected()
 
             //阻止遮罩层可以上下滚动
-            function preventSelectedLayerMove(){
+            function preventSelectedLayerMove() {
                 var startY = 0,
                     startX = 0;
                 var select = document.querySelector('.paopao-selected-content')
@@ -793,14 +721,14 @@
                     var deltaY = e.changedTouches[0].clientY - startY;
                     var deltaX = e.changedTouches[0].clientX - startX
                     //计算位置有缓慢的延时
-                    if(Math.abs(deltaY) > 10){
+                    if (Math.abs(deltaY) > 10) {
                         e.preventDefault()
                         return false
                     }
                 }, false);
             }
             preventSelectedLayerMove()
-            
+
 
             // 执行填写资料
             function showPersonView() {
@@ -812,28 +740,28 @@
                 })
             }
 
-            setTimeout(() => {
-                // 新用户第一次进来需要填写资料
-                showPersonView()
-                // // 这里只是模拟效果
-                // setTimeout(() =>{
-                //     $('#paopao-personal-data').hide()
-                // },5000)
-            },1000)
+            // setTimeout(() => {
+            // 新用户第一次进来需要填写资料
+            // showPersonView()
+            // // 这里只是模拟效果
+            // setTimeout(() =>{
+            //     $('#paopao-personal-data').hide()
+            // },5000)
+            // },1000)
 
             // 底部链接跳转
             function footerLink() {
                 var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
                 url = ''
-                footerList.forEach(function(item,index){
-                    item.onclick = function() {
-                        if(index === 0){
+                footerList.forEach(function (item, index) {
+                    item.onclick = function () {
+                        if (index === 0) {
                             url = 'http://192.168.10.227:3000/html/index.html'
-                        }else if(index === 1){
+                        } else if (index === 1) {
                             url = 'http://192.168.10.227:3000/html/dating.html'
-                        }else if(index === 2){
+                        } else if (index === 2) {
 
-                        }else if(index === 3){
+                        } else if (index === 3) {
                             url = 'http://192.168.10.227:3000/html/my.html'
                         }
                         window.open(url)
@@ -847,7 +775,7 @@
                 weui.datePicker({
                     start: 1960,
                     end: new Date().getFullYear(),
-                    defaultValue:[1995,8],     // 年月
+                    defaultValue: [1995, 8], // 年月
                     onChange: function (result) {
                         console.log(result);
                     },
@@ -867,9 +795,9 @@
             });
             // 这里用于测试模拟是否可以改变值
             setTimeout(() => {
-                $("#home-city").picker("setValue",["320000", "320100"])
-            },4000)
-            
+                $("#home-city").picker("setValue", ["320000", "320100"])
+            }, 4000)
+
 
             // 选择职业
             document.querySelector('#pickerHoroscope').addEventListener('click', function () {
@@ -889,7 +817,7 @@
                     label: '射手',
                     value: 4
                 }], {
-                    defaultValue:[4],
+                    defaultValue: [4],
                     onChange: function (result) {
                         //console.log(item, index);
                         console.log(result);
@@ -900,7 +828,7 @@
                 });
             });
 
-            const winW = document.documentElement.clientWidth*.72
+            const winW = document.documentElement.clientWidth * .72
             // 筛选弹层            
             var heightRange = $('.range-height-slider').jRange({
                 from: 135,
@@ -909,8 +837,8 @@
                 format: '%s',
                 width: winW,
                 showLabels: false,
-                isRange : true,
-                onstatechange:function(val){
+                isRange: true,
+                onstatechange: function (val) {
 
                 }
             });
@@ -921,8 +849,8 @@
                 format: '%s',
                 width: winW,
                 showLabels: false,
-                isRange : true,
-                onstatechange:function(val){
+                isRange: true,
+                onstatechange: function (val) {
                     // input上面两个value值相等的时候会叠在一起 文案变成默认
                     console.log(val)
                 }
@@ -934,29 +862,29 @@
                 format: '%s',
                 width: winW,
                 showLabels: false,
-                isRange : true,
-                onstatechange:function(val){
+                isRange: true,
+                onstatechange: function (val) {
 
                 }
             });
 
-            $('.save-data').on('click',function() {
+            $('.save-data').on('click', function () {
                 globalDialog('提交保存后，性别将无法修改，请谨慎操作')
-            })  
+            })
 
-            function globalDialog(text){
+            function globalDialog(text) {
                 $('.global-dialog-tips').fadeIn(300).find('.dialog-text').text(text)
                 // $('.dialog-tips-content').on('click',function(e){
                 //     e.stopPropagation()
                 //     e.preventDefault()
                 // })
-                $('.dialog-btn').on('click',function() {
+                $('.dialog-btn').on('click', function () {
                     $('.global-dialog-tips').fadeOut(300)
                 })
             }
 
             // 没开通vip点击vip
-            $('.paopao-item').on('click',function(){
+            $('.paopao-item').on('click', function () {
                 globalDialog('开通VIP，并完善资料才可以查看相亲用户资料噢~！')
             })
         })
