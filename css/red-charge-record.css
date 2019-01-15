@@ -1,0 +1,82 @@
+body{
+    background: #fff
+}
+
+.record-top{
+    padding: 1rem;
+    font-size: 1rem;
+    color: #999;
+    background: #f2f2f2
+}
+.record-top h3{
+    margin-right: .5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    
+}
+.red-list .global-border-bottom:not(:last-of-type)::before{
+    left: 23%;
+    width: 77%;
+}
+.red-list .global-border-bottom:last-of-type::before{
+    border-color: transparent
+}
+.red-item{
+    padding: 1rem
+}
+.red-item-top{
+    font-size: 1.16666666667rem;
+    font-weight: 700;
+    margin-bottom: 1.08333333333rem
+}
+.user-name{
+    max-width: 60%
+}
+
+.red-item-bottom{
+    font-size: 1rem;
+    color: #999
+}
+
+.red-type{
+    margin-right: 1rem;
+    width: 4.1666666666rem;
+    height: 4.1666666666rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+.red-type-text{
+    margin: auto;
+    text-align: center;
+    font-size: 1.333333333333rem;
+    font-weight: 700
+}
+.red-type-charge .red-type{
+    color: #E5BE74;
+    background:linear-gradient(90deg,rgba(72,72,72,1),rgba(26,26,26,1));
+}
+.red-type-back .red-type{
+    color: #fff;
+    background: #FB4D4A
+}
+.red-item-money{
+    margin-left: auto;
+    font-size: 1.3333333333rem;
+    background: transparent
+}
+.red-type-charge .red-item-top{
+    color: #333
+}
+.red-type-back .red-item-top,.red-type-back .red-item-money{
+    color:#FB4D4A;
+}
+
+.red-type-signs{
+    margin-left: .5rem;
+    width: 1.83333333333rem;
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 4px;
+    line-height: 1.35
+}

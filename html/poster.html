@@ -108,10 +108,14 @@
         }
         // 获取canvas的尺寸
         function getCanvasSize() {
+            var u = navigator.userAgent;
             var winW = document.documentElement.clientWidth;
                 winW = Math.round(((winW >= 640 ? 640 : winW) * 0.6506666666666666));
             var winH = document.documentElement.clientHeight;
                 winH = Math.round(winH * 0.693200663349917);
+                if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+                    winH = winH*1.08;
+                }
             var outline = Math.round(winW * 0.06557377049180328);
             return {
                 outline:outline,
@@ -234,8 +238,8 @@
                         for(var i = 0,len = this.imgList.length;i<len;i++){
                             Object.assign(this.imgList[i],{
                                 'Tag':'宜'+this.imgList[i].Tag,
-                                // 'Image':[this.imgList[i].Image],
-                                'Image':['../img/test.jpg'],
+                                'Image':['https://j.vzan.cc/content/friend/20190103/img/inviting-single-11.png'],
+                                // 'Image':['../img/test.jpg'],
                                 'title':this.imgList[i].Content.slice(0,2),
                                 'month':month,
                                 'day':day,
@@ -460,6 +464,7 @@
                     var self = this;
                     currentIndex = currentIndex?currentIndex:this.currentIndex;
                     preLoadImg(this.imgList[currentIndex].Image).all(function (imgArr) {
+                        console.log(imgArr)
                         self.$set(self.imgList[currentIndex],'Image',imgArr);
                         self.drawPoster(currentIndex);
                     })

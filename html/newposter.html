@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <title>日签卡</title>
+    <style>
+        .container { width: 69.3333333333%; height: 71.97346600331676%; margin-bottom: 2.5rem; overflow: unset }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="img-post" src="" alt="" crossOrigin="anonymous"/>
+        <canvas id="posterCanvas"></canvas>
+    </div>
+    <script type="text/javascript">
+        var imgs = ["https://j.vzan.cc/content/friend/20190103/img/inviting-single-11.png","https://j.vzan.cc/content/friend/20190103/img/inviting-line.png"];
+        var newImgs = [];
+
+        // 加载图片
+        function preLoadImg(arr) {
+            arr = (typeof arr != "object") ? [arr] : arr;
+            var newImgs = [],
+                loadIndex = 0;
+            var loadDone = function () { }
+            function loadCount() {
+                loadIndex++;
+                if (loadIndex === arr.length) {
+                    loadDone(newImgs)
+                }
+            }
+            for (var i = 0, len = arr.length; i < len; i++) {
+                newImgs[i] = new Image();
+                newImgs[i].src = arr[i];
+                newImgs[i].crossOrigin = "Anonymous";
+                newImgs[i].setAttribute('crossOrigin', 'anonymous');
+                newImgs[i].onload = function () {
+                    loadCount()
+                }
+                newImgs[i].onerror = function () {
+                    loadCount()
+                }
+            }
+            return {
+                all: function (f) {
+                    loadDone = f || loadDone
+                }
+            }
+        }
+        // 获取缩放比例
+        function getBasePixal() {
+            var winW = document.documentElement.clientWidth;
+            winW = winW >= 640 ? 640 : winW;
+            if (winW >= 320 && winW < 360) {
+                return 10
+            } else if (winW >= 360 && winW < 414) {
+                return 12
+            } else if (winW >= 414 && winW < 480) {
+                return 14
+            } else if (winW >= 480) {
+                return 16
+            }
+        }
+        // 获取canvas的尺寸
+        function getCanvasSize() {
+            var winW = document.documentElement.clientWidth;
+            winW = Math.round(((winW >= 640 ? 640 : winW) * 0.6506666666666666));
+            var winH = document.documentElement.clientHeight;
+            winH = Math.round(winH * 0.693200663349917);
+            var outline = Math.round(winW * 0.06557377049180328);
+            return {
+                outline: outline,
+                w: (winW + outline) * 4,
+                h: (winH + outline) * 4
+            }
+        }
+
+        function drawPoster() {
+            var canvas = document.getElementById("posterCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // 获取父级的尺寸
+            var parent = getCanvasSize();
+            console.log(parent)
+            canvas.setAttribute("width", parent.w - parent.outline * 4);
+            canvas.setAttribute("height", parent.h);
+
+            //文字大小
+            var fontSize = getBasePixal() * 2;
+            canvas.style.width = (parent.w - parent.outline * 4) / 2 + 'px';
+            canvas.style.height = (parent.h) / 2 + 'px';
+
+            // 清空画布
+            ctx.clearRect(0, 0, parent.w, parent.h)
+
+            // 开始绘制
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0, 0, parent.w, parent.h);
+
+            // 绘制banner
+            var banner = newImgs[0];
+            ctx.drawImage(banner, parent.outline * 2, parent.outline * 2, parent.w - parent.outline * 8, (parent.h - parent.outline * 8) / 4);
+
+            // 绘制标题
+            ctx.fillStyle = '#000';
+            ctx.textAlign = 'middle';
+            ctx.textBaseline = 'middle';
+            ctx.font = fontSize * 1.6 + 'px PingFang SC';
+            var title = "欢迎加入我的单身团";
+            ctx.fillText(title, (parent.w - ctx.measureText(title).width) / 2, (parent.h - parent.outline * 8) / 4 + fontSize * 4);
+
+            // 绘制二维码边框
+            var qrcode = newImgs[2];
+            ctx.strokeStyle = '#eaeaea';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(.25 * parent.w + (qrcode.width / 2), (135 / 434) * parent.h, fontSize * 5.3333333333333 * 2, fontSize * 5.3333333333333 * 2);
+
+            // 绘制二维码          
+            ctx.drawImage(qrcode, .25 * parent.w + (qrcode.width / 2) + 10, (137 / 434) * parent.h, fontSize * 10, fontSize * 10);
+
+            //绘制分割线
+            var line = newImgs[1];
+            ctx.drawImage(line, parent.outline * 2, (210 / 434) * parent.h, parent.w - parent.outline * 8, line.height);
+
+            // 绘制底部
+            ctx.fillStyle = '#FB4D4A';
+            ctx.font = fontSize * .66666666667 * 2 + 'px PingFang SC';
+            ctx.textBaseline = 'middle';
+            var qrtxt = "长按识别二维码，填写资料";
+            ctx.fillText(qrtxt, (parent.w - ctx.measureText(qrtxt).width) / 2, (235 / 434) * parent.h);
+
+            ctx.fillStyle = '#999';
+            var tips = '加入我的单身团，加大脱单几率';
+            ctx.font = fontSize * .833333333334 * 2 + 'px PingFang SC';
+            ctx.fillText(tips, (parent.w - ctx.measureText(tips).width) / 2, (250 / 434) * parent.h);
+
+           var src = canvas.toDataURL('image/jpeg', 1);
+           document.getElementById('img-post').setAttribute('src',src)
+            //console.log(src)
+        }
+        window.onload = function () {
+            preLoadImg(imgs).all(function (n) {
+                newImgs = n;
+                var codeImg = new Image();
+                codeImg.setAttribute('crossOrigin', 'anonymous');
+                codeImg.src = 'https://j.vzan.cc/content/friend/20190103/img/inviting-single-11.png';
+                console.log(newImgs)
+                codeImg.onload = function () {
+                    newImgs.push(codeImg)
+                    drawPoster();
+                }
+            });
+            
+        }
+    </script>
+
+</body>
+</html>

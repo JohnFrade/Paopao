@@ -9,8 +9,6 @@
         <meta content="email=no" name="format-detection">
         <meta name="x5-page-mode" content="app">
         <link rel="stylesheet" href="../css/swiper.min.css">
-        <link rel="stylesheet" href="../css/fill-data.css">
-        <link rel="stylesheet" href="../css/jquery.range.css">
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/footer.css">
@@ -23,7 +21,7 @@
                 <!-- banner 泡泡数据 公告 -->
                 <header id="header" class="global-bg-fff">
                     <!-- 公告 -->
-                    <div class="paopao-announce global-flex global-box global-flex-center">
+                    <div class="paopao-announce global-flex global-box global-flex-center" v-if="">
                         <svg class="icon-announce" aria-hidden="true">
                             <use xlink:hef=""></use>
                         </svg>
@@ -366,22 +364,7 @@
                 }
             }
         }
-
-        // banner
-        var paopaoBannerSwiper = new Swiper('.paopao-banner-swiper', {
-            speed: 500,
-            loop: true,
-            autoplayDisableOnInteraction: false,
-            autoplay: 3000
-        })
-
-        // 公告
-        var paopaoAnnounceSwiper = new Swiper('.paopao-announce-swiper', {
-            direction: 'vertical',
-            loop: true,
-            autoplayDisableOnInteraction: false,
-            autoplay: 2500
-        })
+        
 
         var app = new Vue({
             el:'#app',
@@ -398,6 +381,8 @@
             mounted:function() {
                 this.init = true
                 this.$nextTick(function() {
+                    this.initBanner()
+                    this.initAnnounce()
                     this.getNavOffsetTop()
                 })
             },
@@ -405,6 +390,36 @@
                 
             },
             methods:{
+                // 初始化banner
+                initBanner:function() {
+                    this.bannerSwiper = new Swiper('.paopao-banner-swiper', {
+                        speed: 500,
+                        loop: true,
+                        autoplayDisableOnInteraction: false,
+                        autoplay: 3000
+                    })
+                },
+                // 初始化公告
+                initAnnounce:function() {
+                    this.announceSwiper = new Swiper('.paopao-announce-swiper', {
+                        direction: 'vertical',
+                        loop: true,
+                        autoplayDisableOnInteraction: false,
+                        autoplay: 2500
+                    })
+                },
+                // 隐藏公告
+                hideAnnounce:function(){
+
+                },
+                // 冻结全部的头部swiper
+                freezeHeaderSwiper:function() {
+
+                },
+                // 恢复轮播
+                recoverSwiper:function() {
+
+                },
                 // 全局滚动
                 globalScroll:function(fn) {
                     var self = this,
@@ -417,6 +432,7 @@
                             // 固定导航
                             if(scrollTop >= self.blockNavOffsetTop){
                                 if(!self.fixedNav){
+                                    self.freezeHeaderSwiper()
                                     self.fixedNav()
                                 }
                                 if((scrollTop >= self.blockNavOffsetTop + 300) && (scrollTop - startTop >= 10) && !self.showBackTopBtn){
@@ -429,6 +445,7 @@
                             }else{
                                 if(self.fixedNav){
                                     self.fixedNav()
+                                    self.recoverSwiper()
                                 }
                             }
                             // 加载更多
@@ -445,7 +462,7 @@
                     this.blockNavOffsetTop = this.$refs.blockNav
                     console.log(this.blockNavOffsetTop)
                 },
-                // 
+                // 导航吸顶
                 fixedNav:function() {
                     this.hasFixed = !this.hasFixed
                 },
@@ -456,443 +473,14 @@
                 // 返回顶部
                 showBackTop:function(){
                     this.showBackTopBtn = !this.showBackTopBtn
+                },
+                // 板块切换
+                switchBlockNav:function(e){
+                    if(e !== this.blockNavIndex){
+                        this.blockNavIndex = e
+                    }
                 }
             }
 
         })
-
-        // $(function () {
-        //     // 全局变量
-        //     var wrapper = document.querySelector('#global-wrapper');
-
-
-        //     // 全局滚动事件
-        //     function globalScroll() {
-        //         var paopaoVipBtn = document.querySelector('.paopao-vip-btn');
-        //         var scrollTop = 0,
-        //             timer = null;
-        //         wrapper.addEventListener('scroll', function (e) {
-        //             var timer = setTimeout(() => {
-        //                 if (wrapper.scrollTop >= navObj.navOffsetTop) {
-        //                     navObj.startScroll = true
-        //                 } else {
-        //                     navObj.startScroll = false
-        //                 }
-        //                 var curScrollTop = e.target.scrollTop;
-        //                 if (curScrollTop - scrollTop >= 20) {
-        //                     paopaoVipBtn.classList.remove('show-paopao-vip-btn')
-        //                 } else {
-        //                     if (curScrollTop - scrollTop <= -20) {
-        //                         paopaoVipBtn.classList.add('show-paopao-vip-btn')
-        //                         navObj.startScroll = false
-        //                         hideSelected()
-        //                     }
-        //                 }
-        //                 scrollTop = curScrollTop
-        //             }, 68)
-        //         })
-        //     }
-        //     globalScroll()
-
-        //     let navObj = {
-        //         before: 0, // 前一个索引
-        //         index: 0, // 当前的索引
-        //         startScroll: false, // 开始滚动
-        //         navOffsetTop: 0, // 导航距离顶部的距离
-        //         navArr: [], // 导航Arr
-        //         blockArr: [], // 板块
-        //         isLoadingArr: [], // 正在加载
-        //         loadAllArr: [], // 加载完成
-        //         transformArr: function (arr) {
-        //             return Array.prototype.slice.call(arr)
-        //         },
-        //         init: function () {
-        //             var doc = document;
-        //             this.navArr = this.transformArr(doc.querySelectorAll('.paopao-nav-item'))
-        //             for (var i = 0, len = this.navArr.length; i < len; i++) {
-        //                 this.isLoadingArr.push(false)
-        //                 this.loadAllArr.push(false)
-        //             }
-        //             this.blockArr = this.transformArr(doc.querySelectorAll('.paopao-block'))
-        //             this.navOffsetTop = doc.querySelector('.paopao-nav-wrapper').offsetTop;
-        //         },
-        //         scrollTo(callback) {
-        //             var scrollRate,
-        //                 navOffsetTop = this.navOffsetTop;
-        //             // return new Promise(function(resolve,reject){
-        //             if (wrapper.scrollTop < navOffsetTop) {
-        //                 var timer = requestAnimationFrame(function fn() {
-        //                     if (navOffsetTop - wrapper.scrollTop >= 20) {
-        //                         scrollRate = 15;
-        //                     } else if (navOffsetTop - wrapper.scrollTop < 20 && navOffsetTop -
-        //                         wrapper.scrollTop >=
-        //                         1) {
-        //                         scrollRate = 2;
-        //                     } else if (navOffsetTop - wrapper.scrollTop < 1 && navOffsetTop -
-        //                         wrapper.scrollTop >
-        //                         0) {
-        //                         scrollRate = .1;
-        //                     }
-        //                     if (wrapper.scrollTop <= navOffsetTop) {
-        //                         wrapper.scrollTop += scrollRate;
-        //                         requestAnimationFrame(fn)
-        //                     } else {
-        //                         setTimeout(() => {
-        //                             wrapper.scrollTop = navOffsetTop
-        //                             navObj.startScroll = true
-        //                             cancelAnimationFrame(timer);
-        //                             callback && callback(true)
-        //                         }, 16.6)
-        //                     }
-        //                 })
-        //             } else {
-        //                 callback && callback(true)
-        //             }
-        //             // }).catch(function(err){
-        //             //     console.log(err)
-        //             // })
-        //         }
-        //     }
-
-        //     navObj.init()
-
-            // 导航切换
-            // moveSwitch 手势切换
-            // fn 回调函数
-            // function switchPaoPaoNav(moveSwitch, fn) {
-            //     var cla = 'paopao-nav-active';
-            //     if (!moveSwitch) {
-            //         navObj.navArr.forEach(function (item, index) {
-            //             item.onclick = function (e) {
-            //                 e.stopPropagation()
-            //                 if (index == navObj.index) return
-            //                 navObj.scrollTo(function (done) {
-            //                     if (done) {
-            //                         navObj.before = navObj.index
-            //                         item.classList.add(cla)
-            //                         navObj.navArr[navObj.before].classList.remove(cla)
-            //                         navObj.index = index
-            //                         fn && fn(index)
-            //                     }
-            //                 })
-                            // navObj.scrollTo().then(function(done){
-
-                            // })
-                //         }
-                //     })
-                // } else {
-                //     navObj.scrollTo(function () {
-                //         fn && fn(cla)
-                //     })
-                    // navObj.scrollTo().then(function(done) {
-                    //     fn && fn(cla)
-                    // })
-            //     }
-            // }
-
-            // 板块切换
-            // var paopaoBlockSwiper = new Swiper('.paopao-block-swiper', {
-            //     autoplay: false,
-            //     speed: 720,
-            //     touchAngle: 30,
-                // shortSwipes : false,
-            //     resistanceRatio: 0.9,
-            //     touchMoveStopPropagation: false,
-            //     passiveListeners: false,
-            //     onSlideChangeStart: function (swiper) {
-            //         switchPaoPaoNav(true, function (cla) {
-            //             hideSelectedBtn(swiper.activeIndex)
-            //             navObj.navArr[swiper.activeIndex].classList.add(cla)
-            //             navObj.navArr[swiper.previousIndex].classList.remove(cla)
-            //             navObj.index = swiper.activeIndex
-            //             navObj.before = swiper.previousIndex
-            //         })
-            //     }
-            // })
-
-            // function hideSelectedBtn(index) {
-                // 上首页隐藏筛选
-                // if (index == 1) {
-                    // $('.paopao-selected-nav-btn').hide()
-                // } else if (index == 0) {
-                    // $('.paopao-selected-nav-btn').show()
-            //     }
-            // }
-
-            // switchPaoPaoNav(false, function (index) {
-            //     hideSelected()
-            //     hideSelectedBtn(index)
-            //     paopaoBlockSwiper.slideTo(index, 700, false)
-            // })
-
-            // 板块滚动
-            // function blockScroll() {
-            //     // 检测导航位置
-            //     var startY = 0;
-            //     var block = document.querySelector('.paopao-block-swiper')
-            //     block.addEventListener('touchstart', function (e) {
-            //         startY = e.changedTouches[0].pageY
-            //     }, false);
-
-            //     block.addEventListener('touchmove', function (e) {
-            //         e.stopPropagation()
-            //         var deltaY = e.changedTouches[0].pageY - startY;
-            //         if (navObj.index == 1 && deltaY < 0) {
-            //             navObj.scrollTo()
-            //             e.preventDefault()
-            //             return false
-            //         }
-            //         if (navObj.index == 0 && deltaY < 0 && !navObj.startScroll) {
-            //             e.preventDefault()
-            //             return false
-            //         }
-            //     }, false);
-            //     block.addEventListener('touchend', function (e) {
-            //         var deltaY = e.changedTouches[0].pageY - startY;
-            //         if (navObj.index == 0 && deltaY < -20) {
-            //             navObj.scrollTo()
-            //         }
-            //     })
-
-            // }
-            // blockScroll()
-
-            // 加载paopao列表页
-            // function loadPaopaoItem(fn) {
-            //     navObj.blockArr[navObj.index].addEventListener('scroll', function (e) {
-            //         if (!navObj.isLoadingArr[navObj.index] && !navObj.isLoadingArr[navObj.index]) {
-            //             if (e.target.scrollTop + e.target.clientHeight + 68 >= e.target.scrollHeight) {
-            //                 fn && fn()
-            //             }
-            //         }
-            //     })
-            // }
-            // loadPaopaoItem(function () {
-            //     console.log('加载数据啦')
-            // })
-
-            // function showSelected() {
-            //     $('.paopao-selected-nav-btn').on('click', function () {
-            //         if ($('.paopao-selected-content').hasClass('sliderFromTop')) {
-            //             hideSelected()
-            //         } else { 
-            //             // navObj.scrollTo().then(function(done){
-            //             //     $('.paopao-selected-wrapper').fadeIn(300)
-            //             //     $('.paopao-selected-content').removeClass('sliderOutTop').addClass('sliderFromTop')
-            //             // })
-            //             navObj.scrollTo(function (done) {
-            //                 if (done) {
-            //                     $('.paopao-selected-wrapper').fadeIn(300)
-            //                     $('.paopao-selected-content').removeClass('sliderOutTop').addClass(
-            //                         'sliderFromTop')
-            //                 }
-            //             })
-            //         }
-            //     })
-            // }
-            // showSelected()
-
-
-            //隐藏筛选弹层
-        //     function hideSelected() {
-        //         $('.paopao-selected-content').removeClass('sliderFromTop').addClass('sliderOutTop')
-        //         setTimeout(() => {
-        //             $('.paopao-selected-wrapper').fadeOut()
-        //         }, 420)
-        //     }
-
-        //     // 点击遮罩层关闭筛选层
-        //     $('.paopao-selected-wrapper').on('click', function () {
-        //         hideSelected()
-        //     })
-        //     // 筛选层阻止冒泡
-        //     function forbidSelected() {
-        //         $('.paopao-selected-content').on('click', function (e) {
-        //             e.stopPropagation()
-        //         })
-        //     }
-        //     forbidSelected()
-
-        //     //阻止遮罩层可以上下滚动
-        //     function preventSelectedLayerMove() {
-        //         var startY = 0,
-        //             startX = 0;
-        //         var select = document.querySelector('.paopao-selected-content')
-        //         select.addEventListener('touchstart', function (e) {
-        //             startY = e.changedTouches[0].clientY;
-        //             startX = e.changedTouches[0].clientX
-        //         }, false);
-        //         select.addEventListener('touchmove', function (e) {
-        //             var deltaY = e.changedTouches[0].clientY - startY;
-        //             var deltaX = e.changedTouches[0].clientX - startX
-        //             //计算位置有缓慢的延时
-        //             if (Math.abs(deltaY) > 10) {
-        //                 e.preventDefault()
-        //                 return false
-        //             }
-        //         }, false);
-        //     }
-        //     preventSelectedLayerMove()
-
-
-        //     // 执行填写资料
-        //     function showPersonView() {
-        //         var personView = $('#paopao-personal-data')
-        //         personView.show()
-        //         Array.prototype.slice.apply(personView.children()).forEach(function (item, index) {
-        //             item.classList.add("show-personal-data-item")
-        //             item.style.cssText = 'animation-delay:' + (.0825 * (index + 2)) + 's'
-        //         })
-        //     }
-
-        //     // setTimeout(() => {
-        //     // 新用户第一次进来需要填写资料
-        //     // showPersonView()
-        //     // // 这里只是模拟效果
-        //     // setTimeout(() =>{
-        //     //     $('#paopao-personal-data').hide()
-        //     // },5000)
-        //     // },1000)
-
-        //     // 底部链接跳转
-        //     function footerLink() {
-        //         var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
-        //         url = ''
-        //         footerList.forEach(function (item, index) {
-        //             item.onclick = function () {
-        //                 if (index === 0) {
-        //                     url = 'http://192.168.10.227:3000/html/index.html'
-        //                 } else if (index === 1) {
-        //                     url = 'http://192.168.10.227:3000/html/dating.html'
-        //                 } else if (index === 2) {
-
-        //                 } else if (index === 3) {
-        //                     url = 'http://192.168.10.227:3000/html/my.html'
-        //                 }
-        //                 window.open(url)
-        //             }
-        //         })
-        //     }
-        //     footerLink()
-
-        //     // 出生年月
-        //     document.querySelector('#pickerBirth').addEventListener('click', function () {
-        //         weui.datePicker({
-        //             start: 1960,
-        //             end: new Date().getFullYear(),
-        //             defaultValue: [1995, 8], // 年月
-        //             onChange: function (result) {
-        //                 console.log(result);
-        //             },
-        //             onConfirm: function (result) {
-        //                 console.log(result);
-        //             }
-        //         });
-        //     });
-
-        //     // 选择省市地区
-        //     $("#home-city").cityPicker({
-        //         title: "选择省市地区",
-        //         showDistrict: false,
-        //         onChange: function (picker, values, displayValues) {
-        //             console.log(values)
-        //         }
-        //     });
-        //     // 这里用于测试模拟是否可以改变值
-        //     setTimeout(() => {
-        //         $("#home-city").picker("setValue", ["320000", "320100"])
-        //     }, 4000)
-
-
-        //     // 选择职业
-        //     document.querySelector('#pickerHoroscope').addEventListener('click', function () {
-        //         weui.picker([{
-        //             label: '白羊',
-        //             value: 0
-        //         }, {
-        //             label: '天蝎',
-        //             value: 1
-        //         }, {
-        //             label: '巨蟹',
-        //             value: 2
-        //         }, {
-        //             label: '摩羯',
-        //             value: 3
-        //         }, {
-        //             label: '射手',
-        //             value: 4
-        //         }], {
-        //             defaultValue: [4],
-        //             onChange: function (result) {
-        //                 //console.log(item, index);
-        //                 console.log(result);
-        //             },
-        //             onConfirm: function (result) {
-        //                 console.log(result);
-        //             }
-        //         });
-        //     });
-
-        //     const winW = document.documentElement.clientWidth * .72
-        //     // 筛选弹层            
-        //     var heightRange = $('.range-height-slider').jRange({
-        //         from: 135,
-        //         to: 200,
-        //         step: 1,
-        //         format: '%s',
-        //         width: winW,
-        //         showLabels: false,
-        //         isRange: true,
-        //         onstatechange: function (val) {
-
-        //         }
-        //     });
-        //     var ageRange = $('.range-age-slider').jRange({
-        //         from: 18,
-        //         to: 65,
-        //         step: 1,
-        //         format: '%s',
-        //         width: winW,
-        //         showLabels: false,
-        //         isRange: true,
-        //         onstatechange: function (val) {
-        //             // input上面两个value值相等的时候会叠在一起 文案变成默认
-        //             console.log(val)
-        //         }
-        //     });
-        //     var salaryRange = $('.range-salary-slider').jRange({
-        //         from: 3000,
-        //         to: 20000,
-        //         step: 100,
-        //         format: '%s',
-        //         width: winW,
-        //         showLabels: false,
-        //         isRange: true,
-        //         onstatechange: function (val) {
-
-        //         }
-        //     });
-
-        //     $('.save-data').on('click', function () {
-        //         globalDialog('提交保存后，性别将无法修改，请谨慎操作')
-        //     })
-
-        //     function globalDialog(text) {
-        //         $('.global-dialog-tips').fadeIn(300).find('.dialog-text').text(text)
-        //         // $('.dialog-tips-content').on('click',function(e){
-        //         //     e.stopPropagation()
-        //         //     e.preventDefault()
-        //         // })
-        //         $('.dialog-btn').on('click', function () {
-        //             $('.global-dialog-tips').fadeOut(300)
-        //         })
-        //     }
-
-        //     // 没开通vip点击vip
-        //     $('.paopao-item').on('click', function () {
-        //         globalDialog('开通VIP，并完善资料才可以查看相亲用户资料噢~！')
-        //     })
-        // })
     </script>
-
-</html>
