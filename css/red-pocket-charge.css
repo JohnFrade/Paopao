@@ -17,7 +17,7 @@
     color: #fff
 }
 .header-content .total{
-    margin: auto;
+    margin-top: 1.3333333333rem;
     font-weight: 700;
     font-size: 2.5rem;
 }
@@ -122,6 +122,7 @@
 .charge-record{
     display: block;
     margin: 0 auto;
+    padding-bottom: 3rem;
     width: 4.88888888rem;
     font-size:1.166666667rem;
     color: #009CFF;
@@ -178,6 +179,9 @@
     font-size: 1.3333333333rem;
     color: #999;
     font-weight: 500
+}
+.read-done{
+    color: #333
 }
 
 .red-charge-tips-content{

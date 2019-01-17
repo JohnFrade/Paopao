@@ -17,7 +17,8 @@
         <div id="app" v-if="init">
             <header>
                 <img src="../../img/red-bg.png" class="red-pocket-bg">
-                <div class="header-content global-flex">
+                <div class="header-content global-flex global-flex-column global-flex-justify-center font-center">
+                    <p class="font-12">红包余额</p>
                     <h1 class="total">4.47</h1>
                     <a href="javascript:;" class="header-btn" @click.stop="hideLayer">
                         说明
@@ -71,7 +72,7 @@
                         </li>
                     </ul>
                     <p class="special-tips">系统将收取2%的手续费</p>
-                    <button class="global-btn red-charge-exp-btn" @click.stop="hideLayer">
+                    <button class="global-btn red-charge-exp-btn" @click.stop="hideLayer" :class="{'read-done':firstShowExp}">
                         知道了
                         <span v-if="!firstShowExp">{{readTime > 0?readTime:''}}s</span>
                     </button>
