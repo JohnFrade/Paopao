@@ -87,7 +87,7 @@
                                     <use xlink:href=""></use>
                                 </svg>
                             </div>
-                            <p>树洞</p>
+                            <p>活动</p>
                         </a>
                     </nav>
                 </header>
@@ -278,60 +278,28 @@
                         </div>
                         <div class="swiper-slide paopao-content-swiper-block">
                             <ul class="paopao-list global-clearfix">
-                                <li class="paopao-item">
+                                <li class="paopao-surround-item global-flex global-border global-border-bottom">
                                     <div class="paopao-item-cover">
                                         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
                                             class="global-img">
                                     </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                    <div class="global-flex-1">
+                                        <h3 class="paopao-surround-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                        <div class="global-flex">
+                                            <div class="global-tag">
+                                                <div class="global-tag-text">
 
+                                                </div>
+                                            </div>
+                                            <div class="global-tag">
+                                                <div class="global-tag-text">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="font-ellipsis font-ellipsis-1">叽叽喳喳呵呵哈哈哈呵呵呵呵呵oooooooo啊啊啊啊</p>
                                     </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="global-sexual-woman">
-                                            <svg class="global-icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i class="global-sexual-text">20</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <i class="global-vip-signs"></i>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="global-sexual-man">
-                                            <svg class="global-icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-man"></use>
-                                            </svg>
-                                            <i class="global-sexual-text">20</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                    </div>
-                                </li>
+                                    
                             </ul>
                             <!-- 正在加载中 -->
                             <img src="../img/loading.svg" class="loading-list-icon">
@@ -339,7 +307,7 @@
                     </div>
                 </div>
                 <!-- 开通会员 -->
-                <a href="javascript:void(0);" class="paopao-vip-btn global-flex global-flex-center">
+                <a href="javascript:void(0);" class="paopao-vip-btn global-flex global-flex-center" :class="{'show-paopao-vip-btn':showVipBtn}">
                     <div class="paopao-vip-btn-signs">
                     </div>
                     <div class="paopao-vip-btn-content">
@@ -349,7 +317,7 @@
                 </a>
 
                 <!-- 侧边栏 -->
-                <a href="javascript:void(0);" id="aside">
+                <a href="javascript:void(0);" id="aside" :class="{'show-backtop':showBackTopBtn}" @click.stop="backTop">
                     <svg aria-hidden="true">
                         <use xlink:href=""></use>
                     </svg>
@@ -396,6 +364,10 @@
     </body>
     <script src="../js/vue.min.js"></script>
     <script src="../js/swiper.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript">
+        var vConsole = new VConsole();
+    </script>
     <script>
         // requestAnimationFrame兼容
         (function () {
@@ -460,6 +432,7 @@
                     isCloseAnnounce:false, //关闭公告
                     hasFixed: false, // fix导航
                     showBackTopBtn: false, // 显示返回顶部
+                    showVipBtn:false       // 显示Vip
                 }
             },
             created: function () {
@@ -470,6 +443,7 @@
                 this.$nextTick(function () {
                     this.initBanner()
                     this.initAnnounce()
+                    this.initBlock()
                     this.getNavOffsetTop()
                     this.globalScroll()
                 })
@@ -500,6 +474,14 @@
                         })
                     }
                 },
+                // 初始化板块
+                initBlock:function() {
+                    this.blockSwiper = new Swiper('.paopao-block-swiper',{
+                        speed: 500,
+                        loop: false,
+                        autoplayDisableOnInteraction: false
+                    })
+                },
                 // 隐藏公告
                 closeAnnounce: function () {
                     this.isCloseAnnounce = !this.isCloseAnnounce;
@@ -510,22 +492,20 @@
                 },
                 // 冻结全部的头部swiper
                 freezeHeaderSwiper: function () {
-                    if(this.bannerList.length > 0){
-                        this.bannerSwiper.startAutoplay()
-                        console.log(this.bannerSwiper.activeIndex)
-                    }
                     if(this.announceList.length > 0 && !this.closeAnnounce){
                         this.announceSwiper.stopAutoplay()
+                    }
+                    if(this.bannerList.length > 0){
+                        this.bannerSwiper.startAutoplay()
                     }
                 },
                 // 恢复轮播
                 recoverHeaderSwiper: function () {
-                    if(this.bannerList.length > 0){
-                        this.bannerSwiper.startAutoplay()
-                        console.log(this.bannerSwiper.activeIndex)
-                    }
                     if(this.announceList.length > 0 && !this.closeAnnounce){
                         this.announceSwiper.startAutoplay()
+                    }
+                    if(this.bannerList.length > 0){
+                        this.bannerSwiper.startAutoplay()
                     }
                 },
                 // 全局滚动
@@ -533,37 +513,46 @@
                     var self = this,
                         startTop = 0, // 起始的scrollTop
                         wrapper = this.$refs.wrapper,
-                        throttleInner = throttle(16.6);
+                        throttleInner = throttle(16.7);
                     wrapper.addEventListener('scroll', function (e) {
                         throttleInner(function () {
                             var scrollTop = e.target.scrollTop;
-                            // 固定导航
-                            if (scrollTop >= self.blockNavOffsetTop) {
-                                if (!self.hasFixed) {
-                                    self.freezeHeaderSwiper()
-                                    self.fixedNav()
-                                }
-                                if ((scrollTop >= self.blockNavOffsetTop + 300) && (
-                                        scrollTop - startTop >= 10) && !self.showBackTopBtn) {
+                            if(Math.abs(scrollTop - startTop) >= 10){
+                                // 固定导航
+                                if (scrollTop >= self.blockNavOffsetTop) {
+                                    if (!self.hasFixed) {
+                                        self.freezeHeaderSwiper()
+                                        self.fixedNav()
+                                    }
+                                    // 回到顶部
+                                    if (self.hasFixed && (scrollTop - 300 >= self.blockNavOffsetTop) && !self.showBackTopBtn) {
                                         self.showBackTop()
+                                    } else {
+                                        if ((scrollTop - startTop <= -28) && self.showBackTopBtn) {
+                                            self.showBackTop()
+                                        }
+                                    }
                                 } else {
-                                    if ((scrollTop - startTop <= -10) && self.showBackTopBtn) {
-                                        self.showBackTop()
+                                    if (self.hasFixed) {
+                                        self.fixedNav()
+                                        self.recoverHeaderSwiper()
                                     }
                                 }
-                            } else {
-                                if (self.hasFixed) {
-                                    self.fixedNav()
-                                    self.recoverHeaderSwiper()
+                                // 显示Vip
+                                if(self.hasFixed && !self.showVipBtn && scrollTop - startTop >= 10){
+                                    self.showVip()
+                                }else{
+                                    if(self.showVipBtn && scrollTop - startTop <= -28){
+                                        self.showVip()
+                                    }
                                 }
-                            }
-                            // 加载更多
-                            if (scrollTop + e.target.clientHeight + 168 >= e.target.scrollHeight) {
+                                // 加载更多
+                                if (scrollTop + e.target.clientHeight + 168 >= e.target.scrollHeight) {
 
+                                }
+                                startTop = scrollTop;
                             }
-                            startTop = scrollTop;
                         })
-
                     })
                 },
                 // 获取导航的高度
@@ -575,9 +564,14 @@
                 fixedNav: function () {
                     this.hasFixed = !this.hasFixed
                 },
+                // vip按钮
+                showVip:function() {
+                    this.showVipBtn = !this.showVipBtn
+                },
                 // 显示返回顶部
                 backTop: function () {
-                    this.$refs.wrapper.offsetTop = 0
+                    this.showBackTop()
+                    this.$refs.wrapper.scrollTop = 0
                 },
                 // 返回顶部
                 showBackTop: function () {

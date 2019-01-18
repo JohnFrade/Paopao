@@ -49,11 +49,13 @@
     color: #fff
 }
 .paopao-announce-swiper .global-tag{
-    padding: 0 1rem
+    padding: 0 1rem;
 }
+
 .paopao-announce-swiper .global-tag-text{
-    color: #fff;
-    border-color: #fff
+    color: #333;
+    background: #FFC96B;
+    border-color: #FFC96B
 }
 .icon-close-wrp{
     padding: 0.208333333333rem
@@ -193,7 +195,7 @@
 }
 /*  */
 .paopao-block-swiper{
-    z-index: -1
+    background: #fff
 }
 .paopao-block-swiper .swiper-slide{
     min-height: calc(100vh - 7.9166666666666666667rem);
@@ -284,7 +286,7 @@
 #aside{
     position: fixed;
     right: 1rem;
-    bottom: 7.125rem;
+    bottom: 0;
     width:3.6666666666667rem;
     height:3.6666666666667rem;
     font-size: 1rem;
@@ -292,7 +294,12 @@
     background: #fff;
     box-shadow:0px 8px 20px 0px rgba(0, 0, 0, 0.1);
     border-radius:50%;
+    transform: translateZ(0);
+    transition: transform .28s cubic-bezier(0.615, 0.010, 0.680, 0.995);
     z-index: 4
+}
+#aside.show-backtop{
+    transform: translateY(-7.125rem)
 }
 /* 开通会员 */
 .paopao-vip-btn{
