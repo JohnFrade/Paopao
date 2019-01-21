@@ -33,8 +33,7 @@
 .icon-announce{
     margin-right:.666666666667rem;
     width: 1.333333333333rem;
-    height: 1.333333333333rem;
-    background: #fff
+    height: 1.333333333333rem
 }
 .paopao-announce-swiper{
     padding-right: 1rem;
@@ -69,8 +68,8 @@
 }
 .icon-close{
     margin: auto;
-    width: 1rem;
-    height: 1rem;
+    width: .5rem;
+    height: .5rem;
     fill:#333
 }
 /* 轮播图 */
@@ -104,9 +103,9 @@
 .page-nav-item:first-of-type .page-nav-icon-wrp{
     background: linear-gradient(150deg,rgb(247, 203, 127),rgb(248, 191, 93))
 }
-.page-nav-item:nth-of-type(2) .page-nav-icon-wrp{
+/* .page-nav-item:nth-of-type(2) .page-nav-icon-wrp{
     background:linear-gradient(150deg,rgba(209,128,255,1),rgba(149,94,255,1))
-}
+} */
 .page-nav-icon-wrp{
     margin:0 auto .5rem;
     width: 4rem;
@@ -119,14 +118,16 @@
 .page-nav-icon{
     margin:auto;
     width: 1.5rem;
-    height: 1.5rem;
-    background: red
+    height: 1.5rem
 }
 /* 板块导航 */
 .block-nav-wrp{
     position: relative;
+    left: 0;
     width: 100%;
     height:3.75rem;
+    background: #fff;
+    z-index: 99
     
 }
 .block-nav{
@@ -134,8 +135,8 @@
     top: 0;
     right: 0;
     left: 0;
-    padding: 0 1rem;
     margin: 0 auto;
+    padding: 0 1rem;
     width: 100%;
     max-width: 640px;
     height: 3.75rem;
@@ -146,13 +147,16 @@
     position: fixed;
     top:-3.75rem;
     transform: translateY(3.75rem);
-    transition:  transform .22s cubic-bezier(0.255, 0.925, 0.865, 0.990);
+    transition:transform .22s cubic-bezier(0.255, 0.925, 0.865, 0.990);
 }
 
 .block-nav-item{
     margin-right: 2.75rem;
+    -webkit-font-smoothing: subpixel-antialiased;
     font-size: 1.3333333rem;
-    color: #666
+    color: #666;
+    transform: translateZ(0);
+    transition:all .28s
 }
 .block-nav-active{
     color: #333;
@@ -182,16 +186,13 @@
     border-radius: 22px;
     transform: scale(.5)
 }
-.recommend-nav-btn .global-tag{
+.recommend-tag{
     position: absolute;
-    top: -42.5%;
-    right: -9%;
-}
-.recommend-nav-btn .global-tag-text{
-    padding: 0 .33333333333rem;
-    background: #FB4D4A;
-    border-color: #FB4D4A;
-    color: #fff
+    top: -35%;
+    right: 0;    
+    width: 2.33333333333rem;
+    height: 1.416666666667rem;
+    
 }
 /*  */
 .paopao-block-swiper{
@@ -239,48 +240,47 @@
     height:2.65rem;
     overflow: hidden
 }
-.paopao-tag-wrapper{
-    position: relative;
-    margin-right: 1rem;
-    width: 6rem;
-    height: 1.1666666667rem;
-    overflow: hidden;
-}
-.paopao-tag:nth-child(1){
-    left:-5rem
-}
-.paopao-tag:nth-child(2){
-    left:-3%
-}
-.paopao-tag:nth-child(3){
-    left:40%;
-}
-.paopao-tag:nth-child(4){
-    top: .5rem;
-    left:-3.2rem
-}
-
-.paopao-item-type .paopao-item-num-tag i{
-    width: 200%;
-    left: -50%;
-}
 .paopao-item-username {
     margin-right: 4px;
     max-width: 65%;
     white-space: nowrap;
 }
-
-.paopao-item-tag::after{
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    top:-50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    transform: scale(.5)
+/* 附近的人 */
+.paopao-surround-list{
+    margin-bottom: 1.66666666666rem
+}
+.paopao-surround-item{
+    padding: 1.3333333333rem 1rem 1rem
+}
+.paopao-surround-item-cover{
+    margin-right: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+.paopao-surround-item::before{
+    left: 7rem;
+}
+.paopao-surround-item-username{
+    margin-bottom: .83333333333333rem;
+    color: #333;
+    font-size:1.166666666667rem;
+    font-weight:700;
+}
+.paopao-vip{
+    color: #945DFF
+}
+.paopao-surround-tag-wrapper{
+    margin-bottom: .83333333333rem
+}
+.paopao-vip-tag .global-tag-text{
+    border-color: #FFC96B;
+    background: #FFC96B
+}
+.paopao-surround-text{
+    font-size: 1rem;
+    color: #999
 }
 /* 更多操作 */
 #aside{
@@ -290,7 +290,8 @@
     width:3.6666666666667rem;
     height:3.6666666666667rem;
     font-size: 1rem;
-    color: #333;
+    color: #666;
+    text-align: center;
     background: #fff;
     box-shadow:0px 8px 20px 0px rgba(0, 0, 0, 0.1);
     border-radius:50%;
@@ -301,10 +302,16 @@
 #aside.show-backtop{
     transform: translateY(-7.125rem)
 }
+.icon-back-top{
+    display: block;
+    margin: .3333333333rem auto .333333333333rem;
+    width: 1.0833333333rem;
+    height: 1.5rem;
+}
 /* 开通会员 */
 .paopao-vip-btn{
     position: fixed;
-    top: 68.78761062%;
+    top: 58.78761062%;
     right:1rem;
     padding: 1px 1rem 1px 0;
     background:linear-gradient(90deg,rgba(255,186,107,1) 0%,rgba(243,130,30,1) 100%);
