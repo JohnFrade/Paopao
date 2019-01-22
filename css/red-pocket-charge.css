@@ -133,13 +133,13 @@
 .red-charge-content{
     box-sizing: border-box;
     position: absolute;
-    top: 9.8%;
+    top: 5.8%;
     right: 0;
     left: 0;
     margin:0 auto;
     width: 80%;
-    height: 73.6916874480%;
-    max-width: 300px;
+    height: 83.6916874480%;
+    max-width: 560px;
     background: #fff;
 }
 .red-charge-title{
@@ -150,10 +150,7 @@
 .red-charge-content-wrapper{
     box-sizing: border-box;
     padding: 0 2.4rem;
-    width: 100%;
-    height: calc(100% - 7.0833333333333rem);
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
+    width: 100%
 }
 .red-charge-exp-list{
     padding-bottom: 2rem
@@ -163,9 +160,6 @@
     font-size:1.16666666667rem;
     color: #666;
     line-height:1.5
-}
-.red-charge-exp-list li:nth-last-of-type(2){
-    margin-bottom: 0
 }
 .red-charge-exp-list li mark{
     margin-bottom: .25rem;
