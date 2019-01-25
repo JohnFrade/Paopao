@@ -77,12 +77,15 @@
                <!-- 板块导航占位符 -->
                 <div class="block-nav-wrp anim" v-show="hasFixed"></div>
                  <!-- 板块导航 --><!-- fix-block-nav -->
-                <nav class="block-nav global-flex global-flex-center global-box anim" :class="{'fix-block-nav':hasFixed}" ref="blockNav">
+                <nav class="block-nav global-flex global-box anim" :class="{'fix-block-nav':hasFixed}" ref="blockNav">
                         <a href="javascript:;" class="block-nav-item" :class="{'block-nav-active':blockNavIndex === 0}" @click.stop="switchBlockNav(0)">
                             推荐
                         </a>
                         <a href="javascript:;" class="block-nav-item" :class="{'block-nav-active':blockNavIndex === 1}" @click.stop="switchBlockNav(1)">
                             附近的人
+                        </a>
+                        <a href="javascript:;" class="block-nav-item">
+                            搜索
                         </a>
                         <button class="global-btn recommend-nav-btn">
                             我要曝光
@@ -543,7 +546,7 @@
                                         self.fixedNav()
                                     }
                                     // 回到顶部
-                                    if (self.hasFixed && (scrollTop - 300 >= self.blockNavOffsetTop) && !self.showBackTopBtn) {
+                                    if (self.hasFixed && (scrollTop - 160 >= self.blockNavOffsetTop) && !self.showBackTopBtn) {
                                         self.showBackTop()
                                     } else {
                                         if ((scrollTop - startTop <= -28) && self.showBackTopBtn) {

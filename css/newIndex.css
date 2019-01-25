@@ -60,6 +60,7 @@
     padding: 0.208333333333rem
 }
 .icon-close-content{
+    position: relative;
     margin-left: auto;
     width: 1.25rem;
     height: 1.25rem;
@@ -67,15 +68,17 @@
     background: #fff
 }
 .icon-close{
+    position: absolute;
     margin: auto;
-    width: .5rem;
-    height: .5rem;
+    width: 1rem;
+    height: 1rem;
+    transform: scale(.5) translate(25%,25%);
     fill:#333
 }
 /* 轮播图 */
 .paopao-banner-swiper{
     padding-top: 1rem;
-    height: 11.6666666667rem;
+    min-height: 9.333333333333rem;
     overflow: hidden
 }
 .paopao-banner-swiper .swiper-slide{
@@ -151,48 +154,51 @@
 }
 
 .block-nav-item{
+    margin-top: auto;
     margin-right: 2.75rem;
+    margin-bottom: .75rem;
     -webkit-font-smoothing: subpixel-antialiased;
     font-size: 1.3333333rem;
     color: #666;
-    transform: translateZ(0);
+    opacity: 1;
+    transform: translate3d(0,0,0);
     transition:all .28s
+}
+.block-nav-item:last-of-type{
+    transform: translateX(-50%)
 }
 .block-nav-active{
     color: #333;
     font-weight: 700;
-    transform: scale(1.5) translateX(12.5%)
+}
+.block-nav-item:first-of-type.block-nav-active{
+    transform: scale(1.5) translate(12.5%,-12.5%)
+}
+.block-nav-item:nth-of-type(2).block-nav-active{
+    transform: scale(1.5) translate(-6.25%,-12.5%)
+}
+.block-nav-item:nth-of-type(2).block-nav-active + .block-nav-item:last-of-type{
+    transform: translateX(-37.5%)
 }
 .recommend-nav-btn{
     position: relative;
+    margin: auto 0 .75rem auto;
     width: 5.333333333rem;
     height: 1.833333333rem;
     line-height: 1.8333333333rem;
     text-align: center;
     font-size: 1rem;
-    margin-left: auto;
+    color: #fff;
     font-weight: 500;
-    color: #945DFF
-}
-.recommend-nav-btn::after{
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    border: 1px solid #945DFF;
-    border-radius: 22px;
-    transform: scale(.5)
+    background: #945DFF;
+    border-radius: 24px
 }
 .recommend-tag{
     position: absolute;
-    top: -35%;
+    top: -55%;
     right: 0;    
     width: 2.33333333333rem;
-    height: 1.416666666667rem;
-    
+    height: 1.416666666667rem
 }
 /*  */
 .paopao-block-swiper{

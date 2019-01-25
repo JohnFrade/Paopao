@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/recommend.css">
+        <title>我要曝光</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <div id="paopao-recommend" class="global-box">
+                <header class="paopao-recommend-tips global-box">上首页可以让更多的人注意到你，相亲/交友成功率大幅度提高噢！
+                </header>
+                <main>
+                    <ul class="paopao-recommend-content">
+                        <li class="paopao-recommend-item global-flex global-flex-center">
+                            <div class="paopao-recommend-tag-name">日推/月推</div>
+                            <button class="global-btn paopao-recommend-btn" :class="{'paopao-recommend-btn-active':index === 0}" @click.stop="switchDays(0)">{{dPrice}}元/天</button>
+                            <button class="global-btn paopao-recommend-btn" :class="{'paopao-recommend-btn-active':index === 1}" @click.stop="switchDays(1)">{{mPrice}}元/月</button>
+                        </li>
+                        <li class="paopao-recommend-item global-flex global-flex-center">
+                            <div class="paopao-recommend-tag-name">开通时长</div>
+                            <input class="paopao-recommend-input" type="number" name="number" pattern="[0-9]*" maxlength="3"
+                                placeholder="填写时长" @input="fillDays" @keydown="listenKeyInput" :value="days"/>
+                            <span class="font-bold">{{index === 0?'天':'月'}}</span>
+                            <p class="font-12 font-red" style="margin-left:1rem" v-show="showTips">{{index === 0?'开通时长最长为999天':'开通时长最长为99月'}}</p>
+                        </li>
+                        <li class="paopao-recommend-item global-flex global-flex-center">
+                            <div class="paopao-recommend-tag-name">支付金额</div>
+                            <div class="font-purple" v-show="days > 0">
+                                <span style="font-size:2.5rem">{{calcTotal}}</span>元
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="paopao-recommend-pay-tips">
+                        温馨提示：<br>支付完成之后，系统会自动按照您购买的时长显示在首页（按照支 付完成时间排序）
+                    </div>
+                    <!-- fill-time -->
+                    <p class="recommend-end-time" :class="{'fill-time':days>0}">{{calcEndDate}} 到期</p>
+                    <button class="global-btn global-btn-round-lg">确认支付</button>
+                    <a href="javascript:;" class="paopao-pay-record">购买记录</a>
+                </main>
+            </div>
+            <aside id="aside">
+                <div>
+                    <svg aria-hidden="true">
+                        <use xlink:href=""></use>
+                    </svg>
+                    更多
+                </div>
+                
+            </aside>
+        </div>
+    </body>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        // 补0
+        function fixNum(num) {
+            return num > 9?num:'0'+num
+        }
+        // 转换时间
+        function transferDate(now,y,m) {
+            now = new Date(now);
+            var year = now.getFullYear(); 
+            if(y){
+                year += y
+            }
+            var month = now.getMonth()+1;
+            if(m){
+                month += m
+            }
+            var date = now.getDate(); 
+            var hour = fixNum(now.getHours()); 
+            var minute = fixNum(now.getMinutes()); 
+            return year+"-"+month+"-"+date+"  "+hour+":"+minute+' '; 
+        }
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+                init:false,
+                index:0,
+                dPrice:10,      // 天价格
+                mPrice:20,      // 月价格
+                days:'',        // 推荐的天数
+                showTips:false  // 显示提示
+            },
+            mounted:function(){
+                this.init = true
+            },
+            computed:{
+                // 计算支付金额
+                calcTotal:function() {
+                    if(this.days > 0){
+                        return this.days*(this.index === 0?this.dPrice:this.mPrice)
+                    }
+                },
+                // 计算结束时间
+                calcEndDate:function() {
+                    if(this.days > 0){
+                        var date = +new Date();
+                        if(this.index === 0){
+                            return transferDate(date + 3600*24*1000*this.days)
+                        }else{
+                            var integer = Math.floor(this.days/12)
+                            var remain = this.days%12;
+                            return transferDate(date,integer,remain)
+                        }
+                        
+                    }
+                }
+            },
+            watch:{
+                index:function(val,oldVal){
+                    if(val === 1 && this.days>99){
+                        this.days = 99
+                        this.showTips = false
+                    }
+                }
+            },
+            methods:{
+                // 切换时长
+                switchDays:function(e) {
+                    if(this.index !== e){
+                        this.index = e
+                    }
+                },
+                // 阻止上下输入
+                listenKeyInput:function(e){
+                    if(e.keyCode === 38 || e.keyCode === 40){
+                        this.days = ''
+                        return
+                    }
+                },
+                // 输入天数
+                fillDays:function(e) {
+                    var val = +e.target.value;
+                    if(val <= (this.index == 0?999:99)){
+                        this.days = val>0?val:''
+                        this.showTips = false
+                    }else{ 
+                        this.showTips = true
+                        return false
+                    }
+                },
+                // 支付
+                pay:function(){
+                    if(!!this.days && !this.showTips){
+                        if(this.index === 0 && this.days <= 999){
+
+                        }else if(this.index === 1 && this.days <= 99){
+
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+</html>
