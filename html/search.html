@@ -1,30 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
-    <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <title>搜索</title>
-</head>
-<body>
-    <nav>
-        <a href="javascript:void(0);">条件搜索</a>
-        <a href="javascript:void(0);">精准搜索</a>
-    </nav>
-    <main>
-        <!-- 条件搜索 -->
-        <div>
 
-        </div>
-        <!-- 精准搜索 -->
-        <div>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/search.css">
+        <title>搜索</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <header>
+                <nav id="nav" class="global-flex" @click.stop="switchNav">
+                    <a href="javascript:void(0);" v-for="(item,index) of navList" class="global-flex-1 global-flex global-flex-center global-flex-justify-center" :class="{'font-bold':index == searchIndex}" :data-index="index">
+                            {{item}}
+                        <svg class="icon-arrow-down" aria-hidden="true" v-if="index === 0" :cLass="{'rotate':searchIndex === 0 && showConditionLayer}">
+                            <use xlink:href="../img/global.svg#icon-down"></use>
+                        </svg>
+                    </a>
+                    <div class="nav-slider" :style="{'left':searchIndex === 1?'68%':'16%'}"></div>
+                </nav>
+                <!-- 精准搜索 -->
+                <div id="strict-search" v-show="searchIndex === 1">
+                    <div class="search-input-wrapper">
+                        <form action="#" class="global-img" :class="{'search-input-form':showSearchBtn}">
+                            <input type="search" class="search-input" placeholder="请输入昵称/ID" v-model.lazy="searchText" @keyup="enterSearch" @focus="handlerFocus" size="20">
+                        </form>
+                        <button class="global-btn search-btn" @click.stop="search" :class="{'show-search-btn':showSearchBtn}">搜索</button>
+                    </div>
+                </div>
+            </header>
+            <main id="main">
+                <!-- 条件搜索 -->
+                <div id="condition-search" :class="{'slide-from-top':searchIndex === 0 && showConditionLayer}" @click.stop="selectedCondition" ref="layer">
+                    <div class="condition-search-content" ref="layerContent">
+                        <section class="condition-search-item" v-for="(conditionItem,conditionIndex) of conditionList">
+                            <h3 class="condition-search-item-name">{{conditionItem.name}}</h3>
+                            <ul class="condition-search-item-list">
+                                <li v-for="(subItem,subIndex) of conditionItem.list" class="condition-search-item-list-subItem" :class="{'selected-active':conditionItem.selectedIndex == subIndex}" :data-index="conditionIndex" :data-subIndex="subIndex">{{subItem}}</li>
+                                </ul>
+                        </section>
+                    </div>
+                    <footer class="global-flex global-absolute" id="footer">
+                        <button class="global-btn" v-show="searchIndex === 0" @click.stop="reset">重置</button>
+                        <button class="global-flex-1 global-btn" @click.stop="search">搜索</button>
+                    </footer>
+                </div>
+                <!-- 搜索结果 -->
+                <div id="search-result">
+                    <ul class="paopao-list global-clearfix">
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                <i class="global-vip-signs"></i>
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-man">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-man"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- 正在加载中 -->
+                    <img src="../img/loading.svg" class="loading-list-icon" v-show="isLoading && !loadAll">
+                    <!-- 找不到 -->
+                    <p class="" v-show="!isLoading && resultList.length === 0 && loadAll">请输入正确的用户名或ID</p>
+                    <!-- 加载全部-->
+                    <p class="" v-show="!isLoading && resultList.length > 0 && loadAll">搜索用户</p>
+                </div>
+            </main>
             
         </div>
-    </main>
-</body>
+    </body>
+    <script src="../js/jweixin-1.0.0.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        var conditionList = [{
+            name: '性别',
+            selectedIndex: 0,
+            list: ['全部', '男士', '女士']
+        }, {
+            name: '年龄',
+            selectedIndex: 0,
+            list: ['不限', '18-22', '23-25', '26-30', '31-35', '36-40', '41-50', '50以上']
+        }, {
+            name: '身高',
+            selectedIndex: 0,
+            list: ['不限', '150cm以下', '150-155cm', '156-160cm', '161-168cm', '169-174cm', '175-196cm',
+                '180-185cm', '185cm以上'
+            ]
+        }, {
+            name: '月收入',
+            selectedIndex: 0,
+            list: ['不限', '3千以下', '3千-5千', '5千-8千', '8千-1万', '1万-2万', '2万-5万', '5万以上']
+        }]
+        // 防节流函数
+        function throttle(interval) {
+            var timer,
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
+                } else {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                    }, interval)
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                init: false,
+                navList: ['条件搜索', '精准搜索'],
+                conditionList: [],
+                showConditionLayer: false,
+                showSearchBtn:false,
+                searchIndex: 0, // 搜索方式
+                searchText:'', // 搜索内容
+                resultList:[], // 搜索结果
+                netWorkStatus:true, // 网络状态
+                pageIndex:1,
+                isLoading:false, // 正在加载
+                loadAll:false,  // 加载完成
+            },
+            watch:{
+                showConditionLayer:function(val,oldVal){
+                    var body = document.querySelector('body');
+                    if(val){
+                        body.classList.add('hide-move')
+                    }else if(oldVal){
+                        body.classList.remove('hide-move')
+                    }
+                }
+            },
+            created: function () {
+                this.conditionList = conditionList;
+                this.clickThrottle = throttle(300)
+            },
+            mounted: function () {
+                this.init = true;
+                var self = this;
+                this.$nextTick(function(){
+                    this.globalScroll();
+                    setTimeout(function() {
+                        self.showConditionLayer = true
+                    },100)
+                })
+            },
+            methods: {
+                // 选择搜索方式
+                switchNav: function (e) {
+                    var index = +e.target.dataset.index;
+                    if(index === 0){
+                        this.showSearchBtn = false;
+                        this.showConditionLayer = !this.showConditionLayer;
+                        if(index !== this.searchIndex){
+                            this.searchIndex = index;
+                        }
+                    }else if(index === 1 && index !== this.searchIndex){
+                        this.searchIndex = index
+                        this.showConditionLayer = false;
+                    }
+                },
+                // 选择条件
+                selectedCondition: function (e) {
+                    if (!!e.target.dataset.index) {
+                        var index = +e.target.dataset.index,
+                            subIndex = +e.target.dataset.subindex;
+                        if (subIndex !== this.conditionList[index].selectedIndex) {
+                            this.$set(this.conditionList[index], 'selectedIndex', subIndex)
+                        }
+                    }
+                },
+                // 重置条件搜索
+                reset: function (e) {
+                    this.conditionList.forEach(function (item, index) {
+                        item.selectedIndex = 0
+                    })
+                },
+                // 搜索
+                search: function (e) {
+                    var self = this;
+                    this.clickThrottle(function(){
+                        if(self.searchIndex === 0 && self.showConditionLayer){
+                            self.showConditionLayer = false
+                        }
+                        this.testNetWorkStatus()
+                    })
+                },
+                // 检测网络状态
+                testNetWorkStatus:function() {
+                    var self = this
+                    wx.getNetworkType({
+                        success: function (res) {
+                            self.resetData()
+                            self.loadPaopaoItem()
+                        },
+                        fail: function(res) {
+                            if(res.errMsg === 'getNetworkType:fail'){
+                                self.netWorkStatus = false
+                            }
+                        }
+                    })
+                },
+                // 重置搜索数据
+                resetData:function() {
+                    this.netWorkStatus = true;
+                    this.resultList = [];
+                    this.pageIndex = 1;
+                    this.isLoading = false;
+                    this.loadAll = false
+                },
+                // 加载列表
+                loadPaopaoItem:function() {
+                    if(!!this.isLoading && !this.loadAll){
+                        this.isLoading = true;
+                    }
+                },
+                // 键盘完成事件
+                enterSearch:function(e) {
+                    if(e.keyCode === 13){
+                        this.loadPaopaoItem()
+                    }
+                },
+                // 
+                handlerFocus:function() {
+                    this.showSearchBtn = true
+                },
+                //全局滚动
+                globalScroll:function() {
+                    if(!this.isLoading && !this.loadAll){
+                        this.loadPaopaoItem()
+                    }
+                }
+            }
+        })
+    </script>
+
 </html>

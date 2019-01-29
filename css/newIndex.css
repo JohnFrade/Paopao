@@ -13,8 +13,9 @@
     height: 100vh;
     padding-bottom: 4.16666666667rem;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
-    -webkit-overflow-scrolling: touch
+    scroll-behavior: smooth
 }
 #header{
     margin-bottom: .8333333333333rem
@@ -25,15 +26,26 @@
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
+    max-width: 640px;
     height: 2.5rem;
-    background: rgba(0, 0, 0, .6);
+    background: rgba(255, 255, 255, .95);
+    transform: translate3d(0,0,0);
+    perspective: 1000px;
+    transition: all .36s cubic-bezier(0.495, 0.005, 0.860, 0.780);
     z-index: 2
+}
+.fix-announce{
+    position: fixed;
+    top: 3.75rem
 }
 .icon-announce{
     margin-right:.666666666667rem;
     width: 1.333333333333rem;
-    height: 1.333333333333rem
+    height: 1.333333333333rem;
+    fill: #009CFF
 }
 .paopao-announce-swiper{
     padding-right: 1rem;
@@ -45,16 +57,16 @@
 }
 .paopao-announce-swiper a{
     font-size: 1rem;
-    color: #fff
+    color: #333
 }
 .paopao-announce-swiper .global-tag{
     padding: 0 1rem;
 }
 
 .paopao-announce-swiper .global-tag-text{
-    color: #333;
-    background: #FFC96B;
-    border-color: #FFC96B
+    color: #fff;
+    background: #945DFF;
+    border-color: #945DFF
 }
 .icon-close-wrp{
     padding: 0.208333333333rem
@@ -69,11 +81,22 @@
 }
 .icon-close{
     position: absolute;
+    top: 25%;
     margin: auto;
-    width: 1rem;
-    height: 1rem;
-    transform: scale(.5) translate(25%,25%);
-    fill:#333
+    width: .833333333333rem;
+    height: .833333333333rem;
+    fill:#999
+}
+.show-announce{
+    animation: showAnnounce .36s .68s cubic-bezier(0.420, 0.040, 0.295, 0.995) both
+}
+@keyframes showAnnounce{
+    0%{
+        transform:translateY(-2.5rem)
+    }
+    to{
+        transform:translateY(unset)
+    }
 }
 /* 轮播图 */
 .paopao-banner-swiper{

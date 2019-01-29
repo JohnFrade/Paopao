@@ -16,13 +16,15 @@
     </head>
 
     <body>
-        <div id="app" v-if="init">
+        <ul id="app" v-if="init">
             <div id="global-wrapper" ref="wrapper">
                 <!-- banner 泡泡数据 公告 -->
                 <header id="header" class="global-bg-fff">
                     <!-- 公告 -->
-                    <div class="paopao-announce global-flex global-box global-flex-center" v-if="announceList.length > 0 && !isCloseAnnounce">
-                        <img src="../img/icon-announce.png" class="icon-announce">
+                    <div class="paopao-announce global-flex global-box global-flex-center" v-if="announceList.length > 0 && !isCloseAnnounce" :class="announceAnim">
+                        <svg class="icon-announce" aria-hidden="true">
+                            <use xlink:href="../img/index.svg#icon-announce"></use>
+                        </svg>
                         <div class="swiper-container paopao-announce-swiper global-flex-1">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" v-for="(item,index) of announceList">
@@ -30,7 +32,7 @@
                                         <div class="global-tag" v-if="item.vote">
                                             投票<i class="global-tag-text">投票</i>
                                         </div>
-                                        <p class="font-ellipsis font-ellipsis-1">{{item.title}}</p>
+                                        <p class="font-ellipsis font-ellipsis-1" :style="{color:announceTextColor}">{{item.title}}</p>
                                     </a>
                                 </div>
                             </div>
@@ -53,6 +55,13 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 数据 -->
+                    <ul class="paopao-data-wrapper global-flex font-333 font-12 font-center" style="padding:1rem 0 0">
+                        <li class="global-flex-1">用户 <span class="font-blue">5.91万</span></li>
+                        <li class="global-flex-1">访问 <span class="font-blue">5.91万</span></li>
+                        <!-- 这个是备用的 -->
+                        <li class="global-flex-1" style="opacity: 0">xxx</li>
+                    </ul>
                     <!-- 路由导航 -->
                     <nav class="global-flex paopao-page-nav">
                         <a href="javascript:void(0);" class="global-flex-1 page-nav-item">
@@ -323,7 +332,8 @@
                 </a>
 
                 <!-- 侧边栏 -->
-                <a href="javascript:void(0);" id="aside" :class="{'show-backtop':showBackTopBtn}" @click.stop="backTop">
+                <!-- @click.stop="backTop" -->
+                <a href="#header" id="aside" :class="{'show-backtop':showBackTopBtn}">
                     <svg aria-hidden="true" class="icon-back-top">
                         <use xlink:href="../img/global.svg#icon-back-top"></use>
                     </svg>
@@ -421,6 +431,8 @@
             data: function () {
                 return {
                     init: false,
+                    announceTextColor:'', // 文字颜色
+                    announceAnim:'',    // 公告出来动画
                     announceList:[{
                         vote:true,
                         title:'哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈据阿姐啊解决阿娇阿娇阿娇阿娇'
@@ -446,13 +458,15 @@
 
             },
             mounted: function () {
-                this.init = true
+                this.init = true,
+                self = this;
                 this.$nextTick(function () {
                     this.initBanner()
                     this.initAnnounce()
                     this.initBlock()
                     this.getNavOffsetTop()
                     this.globalScroll()
+                    this.showAnnounce()
                 })
             },
             watch: {
@@ -466,6 +480,9 @@
                 }
             },
             methods: {
+                showAnnounce:function(){
+                    this.announceAnim = 'show-announce'
+                },
                 // 初始化banner
                 initBanner: function () {
                     if(this.bannerList.length > 0){
@@ -544,6 +561,7 @@
                                     if (!self.hasFixed) {
                                         self.freezeHeaderSwiper()
                                         self.fixedNav()
+                                        self.announceAnim = 'fix-announce'
                                     }
                                     // 回到顶部
                                     if (self.hasFixed && (scrollTop - 160 >= self.blockNavOffsetTop) && !self.showBackTopBtn) {
@@ -555,6 +573,7 @@
                                     }
                                 } else {
                                     if (self.hasFixed) {
+                                        self.announceAnim = ''
                                         self.fixedNav()
                                         self.recoverHeaderSwiper()
                                     }
@@ -594,7 +613,7 @@
                 },
                 // 显示返回顶部
                 backTop: function () {
-                    this.$refs.wrapper.scrollTop = 0
+                    // this.$refs.wrapper.scrollTop = 0
                 },
                 // 检测是否吸顶
                 testFixNav:function(callback) {
