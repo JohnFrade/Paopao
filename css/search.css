@@ -8,14 +8,8 @@ body{
 }
 
 #footer,#nav{
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 640px;
     font-size: 1.3333333333rem;
     text-align: center;
-    z-index: 99
 }
 #footer .global-btn:last-of-type{
     color: #fff;
@@ -23,6 +17,12 @@ body{
 }
 
 #footer{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
     bottom: 0;
     height: 4.08333333333333rem;
     line-height: 4.08333333333333rem
@@ -38,10 +38,22 @@ body{
 #footer .global-btn:last-of-type{
     transition: width .28s linear
 }
-
-#nav{
-    position:fixed;
+.header{
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    transition: transform .36s;
+    z-index: 99;
+}
+.hide-header{
+    transform: translateY(-225%)
+}
+#nav{
+    position: relative;
     height: 3.66666666667rem;
     line-height: 3.66666666667rem;
     background:#fff
@@ -85,7 +97,7 @@ body{
     box-sizing:border-box;
     padding: 4rem 0 4.08333333333rem;
     background:#fff;
-    transition:transform .48s linear;
+    transition:transform .56s cubic-bezier(0.205, 0.365, 0.420, 1);
     z-index:98
 }
 .condition-search-content{
@@ -134,15 +146,9 @@ body{
     background: #FFC96B
 }
 
-#strict-search{
-    box-sizing:border-box;
-    padding:.666666667rem 1rem;
-    height: 4.666666666667rem;
-    background: #fff
-}
 .search-input-wrapper{
     box-sizing: border-box;
-    position: fixed;
+    position: absolute;
     top: 3.666666666667rem;
     right: 0;
     left: 0;
@@ -152,7 +158,20 @@ body{
     max-width: 640px;
     height: 4.666666666667rem;
     background: #fff;
+    overflow: hidden;
     z-index: 97
+}
+.bounce-scale{
+    transform-origin: 50% 50%;
+    animation:bounceScale .22s linear both
+}
+@keyframes bounceScale{
+    0%{
+        transform: scale(.68)
+    }
+    to{
+        transform: unset
+    }
 }
 .search-input-wrapper .global-img{
     box-sizing:border-box;
@@ -201,6 +220,9 @@ body{
 .paopao-list{
     padding: 0 1rem 1rem
 }
+.paopao-list-top{
+    padding-top: 4.666666666667rem
+}
 .paopao-item:nth-of-type(2n+1){
     float: left;
 }
@@ -240,4 +262,10 @@ body{
     margin-right: 4px;
     max-width: 65%;
     white-space: nowrap;
+}
+.search-tips{
+    padding: 2.5rem 0;
+    text-align: center;
+    font-size:1.16666666667rem;
+    color: #999
 }

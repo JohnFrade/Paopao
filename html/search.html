@@ -15,10 +15,11 @@
 
     <body>
         <div id="app" v-if="init">
-            <header>
+            <header class="header" :class="{'hide-header':hasHideHeader}">
                 <nav id="nav" class="global-flex" @click.stop="switchNav">
-                    <a href="javascript:void(0);" v-for="(item,index) of navList" class="global-flex-1 global-flex global-flex-center global-flex-justify-center" :class="{'font-bold':index == searchIndex}" :data-index="index">
-                            {{item}}
+                    <a href="javascript:void(0);" v-for="(item,index) of navList" class="global-flex-1 global-flex global-flex-center global-flex-justify-center"
+                        :class="{'font-bold':index == searchIndex}" :data-index="index">
+                        {{item}}
                         <svg class="icon-arrow-down" aria-hidden="true" v-if="index === 0" :cLass="{'rotate':searchIndex === 0 && showConditionLayer}">
                             <use xlink:href="../img/global.svg#icon-down"></use>
                         </svg>
@@ -26,34 +27,114 @@
                     <div class="nav-slider" :style="{'left':searchIndex === 1?'68%':'16%'}"></div>
                 </nav>
                 <!-- 精准搜索 -->
-                <div id="strict-search" v-show="searchIndex === 1">
-                    <div class="search-input-wrapper">
-                        <form action="#" class="global-img" :class="{'search-input-form':showSearchBtn}">
-                            <input type="search" class="search-input" placeholder="请输入昵称/ID" v-model.lazy="searchText" @keyup="enterSearch" @focus="handlerFocus" size="20">
-                        </form>
-                        <button class="global-btn search-btn" @click.stop="search" :class="{'show-search-btn':showSearchBtn}">搜索</button>
-                    </div>
+                <div class="search-input-wrapper anim" :class="strictSearchAnim" v-show="searchIndex === 1 && strictSearchAnim !== ''">
+                    <form action="#" class="global-img" :class="{'search-input-form':showSearchBtn}">
+                        <input type="search" class="search-input" placeholder="请输入昵称/ID" v-model.lazy="searchText"
+                            @keyup="enterSearch" @focus="handlerFocus" size="20">
+                    </form>
+                    <button class="global-btn search-btn" @click.stop="search" :class="{'show-search-btn':showSearchBtn}">搜索</button>
                 </div>
             </header>
             <main id="main">
                 <!-- 条件搜索 -->
-                <div id="condition-search" :class="{'slide-from-top':searchIndex === 0 && showConditionLayer}" @click.stop="selectedCondition" ref="layer">
+                <div id="condition-search" :class="{'slide-from-top':searchIndex === 0 && showConditionLayer}"
+                    @click.stop="selectedCondition" ref="layer">
                     <div class="condition-search-content" ref="layerContent">
                         <section class="condition-search-item" v-for="(conditionItem,conditionIndex) of conditionList">
                             <h3 class="condition-search-item-name">{{conditionItem.name}}</h3>
                             <ul class="condition-search-item-list">
-                                <li v-for="(subItem,subIndex) of conditionItem.list" class="condition-search-item-list-subItem" :class="{'selected-active':conditionItem.selectedIndex == subIndex}" :data-index="conditionIndex" :data-subIndex="subIndex">{{subItem}}</li>
-                                </ul>
+                                <li v-for="(subItem,subIndex) of conditionItem.list" class="condition-search-item-list-subItem"
+                                    :class="{'selected-active':conditionItem.selectedIndex == subIndex}" :data-index="conditionIndex"
+                                    :data-subIndex="subIndex">{{subItem}}</li>
+                            </ul>
                         </section>
                     </div>
                     <footer class="global-flex global-absolute" id="footer">
-                        <button class="global-btn" v-show="searchIndex === 0" @click.stop="reset">重置</button>
+                        <button class="global-btn" @click.stop="reset">重置</button>
                         <button class="global-flex-1 global-btn" @click.stop="search">搜索</button>
                     </footer>
                 </div>
                 <!-- 搜索结果 -->
                 <div id="search-result">
-                    <ul class="paopao-list global-clearfix">
+                    <ul class="paopao-list global-clearfix" :class="{'paopao-list-top':searchIndex === 1 && strictSearchAnim !== ''}">
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="paopao-item">
+                            <div class="paopao-item-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                    class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                            </div>
+                            <div class="global-flex global-flex-wrap paopao-item-type">
+                                <div class="global-sexual-woman">
+                                    <svg class="global-icon-sexual">
+                                        <use xlink:href="../img/global.svg#icon-female"></use>
+                                    </svg>
+                                    <i class="global-sexual-text">20</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                                <div class="global-tag">
+                                    幽默<i class="global-tag-text">幽默</i>
+                                </div>
+                            </div>
+                        </li>
                         <li class="paopao-item">
                             <div class="paopao-item-cover">
                                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
@@ -219,17 +300,40 @@
                     <!-- 正在加载中 -->
                     <img src="../img/loading.svg" class="loading-list-icon" v-show="isLoading && !loadAll">
                     <!-- 找不到 -->
-                    <p class="" v-show="!isLoading && resultList.length === 0 && loadAll">请输入正确的用户名或ID</p>
+                    <p class="search-tips" v-show="!isLoading && resultList.length === 0 && loadAll">请输入正确的用户名或ID</p>
                     <!-- 加载全部-->
-                    <p class="" v-show="!isLoading && resultList.length > 0 && loadAll">搜索用户</p>
+                    <p class="search-tips" v-show="!isLoading && resultList.length > 0 && loadAll">已查看所有搜索用户的</p>
                 </div>
             </main>
-            
         </div>
     </body>
     <script src="../js/jweixin-1.0.0.js"></script>
     <script src="../js/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript">
+        var vConsole = new VConsole();
+    </script>
     <script>
+        // requestAnimationFrame兼容
+        (function () {
+            if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+                window.requestAnimationFrame = function (callback) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                    var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return timer
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (timer) {
+                    clearTimeout(timer)
+                };
+            }
+        })();
+
         var conditionList = [{
             name: '性别',
             selectedIndex: 0,
@@ -249,6 +353,7 @@
             selectedIndex: 0,
             list: ['不限', '3千以下', '3千-5千', '5千-8千', '8千-1万', '1万-2万', '2万-5万', '5万以上']
         }]
+
         // 防节流函数
         function throttle(interval) {
             var timer,
@@ -272,55 +377,61 @@
             el: '#app',
             data: {
                 init: false,
+                hasHideHeader: false, // 隐藏导航
                 navList: ['条件搜索', '精准搜索'],
                 conditionList: [],
                 showConditionLayer: false,
-                showSearchBtn:false,
+                showSearchBtn: false,
+                strictSearchAnim: '', // 
                 searchIndex: 0, // 搜索方式
-                searchText:'', // 搜索内容
-                resultList:[], // 搜索结果
-                netWorkStatus:true, // 网络状态
-                pageIndex:1,
-                isLoading:false, // 正在加载
-                loadAll:false,  // 加载完成
-            },
-            watch:{
-                showConditionLayer:function(val,oldVal){
-                    var body = document.querySelector('body');
-                    if(val){
-                        body.classList.add('hide-move')
-                    }else if(oldVal){
-                        body.classList.remove('hide-move')
-                    }
-                }
+                searchText: '', // 搜索内容
+                resultList: [], // 搜索结果
+                netWorkStatus: true, // 网络状态
+                pageIndex: 1,
+                isLoading: false, // 正在加载
+                loadAll: false, // 加载完成
             },
             created: function () {
                 this.conditionList = conditionList;
-                this.clickThrottle = throttle(300)
+                this.clickThrottle = throttle(300);
+                this.scrollThrottle = throttle(16.7);
             },
             mounted: function () {
                 this.init = true;
                 var self = this;
-                this.$nextTick(function(){
+                this.$nextTick(function () {
                     this.globalScroll();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         self.showConditionLayer = true
-                    },100)
+                    }, 100)
                 })
             },
             methods: {
                 // 选择搜索方式
                 switchNav: function (e) {
                     var index = +e.target.dataset.index;
-                    if(index === 0){
+                    if (index === 0) {
                         this.showSearchBtn = false;
+                        this.strictSearchAnim = '';
                         this.showConditionLayer = !this.showConditionLayer;
-                        if(index !== this.searchIndex){
+                        if (index !== this.searchIndex) {
                             this.searchIndex = index;
                         }
-                    }else if(index === 1 && index !== this.searchIndex){
-                        this.searchIndex = index
+                    } else if (index === 1 && index !== this.searchIndex) {
                         this.showConditionLayer = false;
+                        this.searchIndex = index;
+                        var count = 0,
+                            self = this;
+                        var timer = requestAnimationFrame(function fn() {
+                            if (count < 26) {
+                                ++count;
+                                requestAnimationFrame(fn)
+                            } else {
+                                self.strictSearchAnim = 'bounce-scale';
+                                count = 0;
+                                cancelAnimationFrame(timer)
+                            }
+                        })
                     }
                 },
                 // 选择条件
@@ -342,30 +453,30 @@
                 // 搜索
                 search: function (e) {
                     var self = this;
-                    this.clickThrottle(function(){
-                        if(self.searchIndex === 0 && self.showConditionLayer){
+                    this.clickThrottle(function () {
+                        if (self.searchIndex === 0 && self.showConditionLayer) {
                             self.showConditionLayer = false
                         }
                         this.testNetWorkStatus()
                     })
                 },
                 // 检测网络状态
-                testNetWorkStatus:function() {
+                testNetWorkStatus: function () {
                     var self = this
                     wx.getNetworkType({
                         success: function (res) {
                             self.resetData()
                             self.loadPaopaoItem()
                         },
-                        fail: function(res) {
-                            if(res.errMsg === 'getNetworkType:fail'){
+                        fail: function (res) {
+                            if (res.errMsg === 'getNetworkType:fail') {
                                 self.netWorkStatus = false
                             }
                         }
                     })
                 },
                 // 重置搜索数据
-                resetData:function() {
+                resetData: function () {
                     this.netWorkStatus = true;
                     this.resultList = [];
                     this.pageIndex = 1;
@@ -373,25 +484,46 @@
                     this.loadAll = false
                 },
                 // 加载列表
-                loadPaopaoItem:function() {
-                    if(!!this.isLoading && !this.loadAll){
+                loadPaopaoItem: function () {
+                    if (!!this.isLoading && !this.loadAll) {
                         this.isLoading = true;
                     }
                 },
                 // 键盘完成事件
-                enterSearch:function(e) {
-                    if(e.keyCode === 13){
+                enterSearch: function (e) {
+                    if (e.keyCode === 13) {
                         this.loadPaopaoItem()
                     }
                 },
                 // 
-                handlerFocus:function() {
+                handlerFocus: function () {
                     this.showSearchBtn = true
                 },
                 //全局滚动
-                globalScroll:function() {
-                    if(!this.isLoading && !this.loadAll){
-                        this.loadPaopaoItem()
+                globalScroll: function (e) {
+                    if (!this.isLoading && !this.loadAll) {
+                        var self = this,
+                            startTop = 0;
+                        window.addEventListener('scroll', function (e) {
+                            self.scrollThrottle(function () {
+                                if(self.searchIndex === 1){
+                                    var scrollTop = e.target.documentElement.scrollTop;
+                                    if (scrollTop >= 100 && scrollTop - startTop >= 10 && !self.hasHideHeader) {
+                                        self.hasHideHeader = true
+                                    } else {
+                                        if (scrollTop - startTop <= -10 && self.hasHideHeader) {
+                                            if(scrollTop <= e.target.documentElement.scrollHeight - document.documentElement.clientHeight) {
+                                                self.hasHideHeader = false
+                                            }
+                                        }
+                                    }
+                                    startTop = scrollTop;
+                                }
+                                if (scrollTop + document.documentElement.clientHeight + 68 >= e.target.documentElement.scrollHeight) {
+                                    self.loadPaopaoItem()
+                                }
+                            })
+                        })
                     }
                 }
             }
