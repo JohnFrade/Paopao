@@ -38,7 +38,7 @@
             <main id="main">
                 <!-- 条件搜索 -->
                 <div id="condition-search" :class="{'slide-from-top':searchIndex === 0 && showConditionLayer}"
-                    @click.stop="selectedCondition" ref="layer">
+                    @click.stop="selectedCondition">
                     <div class="condition-search-content" ref="layerContent">
                         <section class="condition-search-item" v-for="(conditionItem,conditionIndex) of conditionList">
                             <h3 class="condition-search-item-name">{{conditionItem.name}}</h3>
@@ -49,7 +49,7 @@
                             </ul>
                         </section>
                     </div>
-                    <footer class="global-flex global-absolute" id="footer">
+                    <footer class="global-flex global-absolute global-border global-border-top" id="footer">
                         <button class="global-btn" @click.stop="reset">重置</button>
                         <button class="global-flex-1 global-btn" @click.stop="search">搜索</button>
                     </footer>
@@ -391,6 +391,17 @@
                 isLoading: false, // 正在加载
                 loadAll: false, // 加载完成
             },
+            watch:{
+                showConditionLayer:function(val,oldVal) {
+                    if(val){
+                        // 监听滚动
+                        this.listenerLayer()
+                    }else if(oldVal){
+                        // 禁止滚动
+                        this.removeListenerLayer()
+                    }
+                }
+            },
             created: function () {
                 this.conditionList = conditionList;
                 this.clickThrottle = throttle(300);
@@ -433,6 +444,55 @@
                             }
                         })
                     }
+                },
+                // 弹层监听
+                listenerLayer:function() {
+                    var startX = 0,
+                        startY = 0,
+                        startStamp = 0,
+                        self = this,
+                        layerContent = this.$refs.layerContent;
+
+                    layerContent.addEventListener('touchstart', function (e) {
+                        timeStamp = +new Date();
+                        startX = e.changedTouches[0].pageX;
+                        startY = e.changedTouches[0].pageY;
+                    }, false);
+
+                    layerContent.addEventListener('touchmove', function (e) {
+                        e.stopPropagation();
+                        if(+ new Date() - timeStamp >= 10){
+                            var deltaX = e.changedTouches[0].pageX - startX;
+                            var deltaY = e.changedTouches[0].pageY - startY;
+                            // 只能纵向滚
+                            if(Math.abs(deltaY) < Math.abs(deltaX)){
+                                e.preventDefault();
+                                return false;
+                            }
+                            if(this.offsetHeight + this.scrollTop >= this.scrollHeight){
+                                if(deltaY < 0) {
+                                    e.preventDefault();
+                                    return false
+                                }
+                            }
+                            if(this.scrollTop === 0){
+                                if(deltaY > 0) {
+                                    e.preventDefault();
+                                    return false
+                                }
+                            }
+                            timeStamp = +new Date();
+                        }else{
+                            timeStamp = +new Date();
+                            e.preventDefault();
+                            return false
+                        }
+                    },false)
+                },
+                // 移除弹层监听
+                removeListenerLayer:function() {
+                    this.$refs.layerContent.addEventListener('touchmove',function() {
+                    },false)
                 },
                 // 选择条件
                 selectedCondition: function (e) {
@@ -504,10 +564,11 @@
                     if (!this.isLoading && !this.loadAll) {
                         var self = this,
                             startTop = 0;
-                        window.addEventListener('scroll', function (e) {
+                        var body = document.querySelector('body');
+                        window.onscroll = function(e){
                             self.scrollThrottle(function () {
                                 if(self.searchIndex === 1){
-                                    var scrollTop = e.target.documentElement.scrollTop;
+                                    var scrollTop = window.scrollY;
                                     if (scrollTop >= 100 && scrollTop - startTop >= 10 && !self.hasHideHeader) {
                                         self.hasHideHeader = true
                                     } else {
@@ -523,7 +584,7 @@
                                     self.loadPaopaoItem()
                                 }
                             })
-                        })
+                        }
                     }
                 }
             }
