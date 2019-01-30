@@ -393,10 +393,7 @@
             },
             watch:{
                 showConditionLayer:function(val,oldVal) {
-                    if(val){
-                        // 监听滚动
-                        this.listenerLayer()
-                    }else if(oldVal){
+                    if(oldVal){
                         // 禁止滚动
                         this.removeListenerLayer()
                     }
@@ -413,7 +410,8 @@
                 this.$nextTick(function () {
                     this.globalScroll();
                     setTimeout(function () {
-                        self.showConditionLayer = true
+                        self.showConditionLayer = true;
+                        self.listenerLayer()
                     }, 100)
                 })
             },
@@ -449,19 +447,16 @@
                 listenerLayer:function() {
                     var startX = 0,
                         startY = 0,
-                        startStamp = 0,
                         self = this,
                         layerContent = this.$refs.layerContent;
 
                     layerContent.addEventListener('touchstart', function (e) {
-                        timeStamp = +new Date();
                         startX = e.changedTouches[0].pageX;
                         startY = e.changedTouches[0].pageY;
                     }, false);
 
                     layerContent.addEventListener('touchmove', function (e) {
                         e.stopPropagation();
-                        if(+ new Date() - timeStamp >= 10){
                             var deltaX = e.changedTouches[0].pageX - startX;
                             var deltaY = e.changedTouches[0].pageY - startY;
                             // 只能纵向滚
@@ -481,16 +476,12 @@
                                     return false
                                 }
                             }
-                            timeStamp = +new Date();
-                        }else{
-                            timeStamp = +new Date();
-                            e.preventDefault();
-                            return false
-                        }
                     },false)
                 },
                 // 移除弹层监听
                 removeListenerLayer:function() {
+                    this.$refs.layerContent.addEventListener('touchstart',function() {
+                    },false)
                     this.$refs.layerContent.addEventListener('touchmove',function() {
                     },false)
                 },
