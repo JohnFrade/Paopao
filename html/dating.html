@@ -9,643 +9,448 @@
         <meta content="email=no" name="format-detection">
         <meta name="x5-page-mode" content="app">
         <link rel="stylesheet" href="../css/swiper.min.css">
-        <link rel="stylesheet" href="../css/jquery.range.css">
         <link rel="stylesheet" href="../css/common.css">
-        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/newIndex.css">
         <link rel="stylesheet" href="../css/dating.css">
         <link rel="stylesheet" href="../css/footer.css">
         <title>Paopao相亲</title>
     </head>
 
     <body>
-        <div id="global-wrapper">
-            <!-- 板块导航 -->
-            <header class="paopao-nav-wrapper global-flex global-flex-end global-box">
-                <nav class="paopao-nav global-flex-1 global-flex global-flex-center">
-                    <li class="paopao-nav-item paopao-nav-active">
-                        <div class="paopao-nav-text">最新</div>
+        <div id="app" v-if="init">
+            <div id="global-wrapper">
+                <!-- 板块导航 -->
+                <nav class="block-nav global-flex global-box anim">
+                    <a href="javascript:;" class="block-nav-item" :class="{'block-nav-active':blockNavIndex === 0}"
+                        @click.stop="switchBlockNav(0)">
+                        推荐
+                    </a>
+                    <a href="javascript:;" class="block-nav-item" :class="{'block-nav-active':blockNavIndex === 1}"
+                        @click.stop="switchBlockNav(1)">
+                        附近的人
+                    </a>
+                    <a href="./search.html" class="block-nav-item">
+                        搜索
+                    </a>
+                    <button class="global-btn recommend-nav-btn">
+                        我要曝光
+                        <img src="../img/icon-hot.png" class="recommend-tag">
+                    </button>
+                </nav>
+                <!-- 板块内容 -->
+                <main id="main">
+                    <!-- 板块轮播 -->
+                    <div class="swiper-container paopao-block-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide paopao-block">
+                                <ul class="paopao-list global-clearfix">
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                VIP <i class="global-tag-text global-bg-orange">VIP</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <!-- 男 global-sexual-man -->
+                                            <div class="global-bg-blue global-sexual-woman">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <div class="global-sexual-man">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-man"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- 正在加载中 -->
+                                <img src="../img/loading.svg" class="loading-list-icon" v-show="isLoadingArr[blockNavIndex] && !loadAll[blockNavIndex]">
+                                <!-- 加载全部 -->
+                                <p class="loading-all">已阅尽所有好看的灵魂~</p>
+                            </div>
+                            <div class="swiper-slide paopao-block">
+                                <ul class="paopao-list global-clearfix">
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                VIP <i class="global-tag-text global-bg-orange">VIP</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <!-- 男 global-sexual-man -->
+                                            <div class="global-bg-blue global-sexual-woman">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <div class="global-sexual-man">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-man"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                VIP <i class="global-tag-text global-bg-orange">VIP</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <!-- 男 global-sexual-man -->
+                                            <div class="global-bg-blue global-sexual-woman">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <div class="global-sexual-man">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-man"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                VIP <i class="global-tag-text global-bg-orange">VIP</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <!-- 男 global-sexual-man -->
+                                            <div class="global-bg-blue global-sexual-woman">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="paopao-item">
+                                        <div class="paopao-item-cover">
+                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
+                                                class="global-img">
+                                        </div>
+                                        <div class="global-flex global-flex-center paopao-item-name-wrapper">
+                                            <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
+                                            <div class="global-tag">
+                                                推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
+                                            </div>
+                                        </div>
+                                        <div class="global-flex global-flex-wrap paopao-item-type">
+                                            <div class="global-sexual-man">
+                                                <svg class="global-icon-sexual">
+                                                    <use xlink:href="../img/global.svg#icon-man"></use>
+                                                </svg>
+                                                <i class="global-sexual-text">20</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                182cm<i class="global-tag-text">182cm</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                幽默<i class="global-tag-text">幽默</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                            <div class="global-tag">
+                                                月薪12000<i class="global-tag-text">月薪12000</i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- 正在加载中 -->
+                                <img src="../img/loading.svg" class="loading-list-icon" v-show="isLoadingArr[blockNavIndex] && !loadAll[blockNavIndex]">
+                                <!-- 加载全部 -->
+                                <p class="loading-all">已阅尽所有好看的灵魂~</p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer id="footer">
+                <nav class="global-flex footer-item-wrapper">
+                    <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                        <a href="./newIndex.html">
+                            <svg class="icon-footer" aria-hidden="true">
+                                <use xlink:href="../img/global.svg#icon-index"></use>
+                            </svg>
+                            <p>首页</p>
+                        </a>
                     </li>
-                    <li class="global-relative global-flex global-flex-center paopao-nav-item">
-                        <div class="paopao-nav-text">高颜值</div>
+                    <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item footer-active">
+                        <a href="javascript:void(0);">
+                            <svg class="icon-footer" aria-hidden="true">
+                                <use xlink:href="../img/global.svg#icon-date"></use>
+                            </svg>
+                            <p>相亲</p>
+                        </a>
+                    </li>
+                    <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                        <a href="">
+                            <svg class="icon-footer" aria-hidden="true">
+                                <use xlink:href="../img/global.svg#icon-message"></use>
+                            </svg>
+                            <p>信息</p>
+                        </a>
+                    </li>
+                    <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
+                        <a href="./my.html">
+                            <svg class="icon-footer" aria-hidden="true">
+                                <use xlink:href="../img/global.svg#icon-my"></use>
+                            </svg>
+                            <p>我的</p>
+                        </a>
                     </li>
                 </nav>
-                <button class="global-button global-align-right global-flex global-flex-center paopao-selected-nav-btn">
-                    <svg class="icon-selected" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-selected"></use>
-                    </svg>
-                    <div class="paopao-nav-text">筛选</div>
-                </button>
-            </header>
-            <!-- 板块内容 -->
-            <main id="main" class="global-bg-fff global-relative">
-                <!-- 筛选层 -->
-                <div class="paopao-selected-wrapper anim">
-                    <div class="paopao-selected-content global-box">
-                        <div class="selected-item">
-                            <div class="selected-item-top">
-                                <h6 class="selected-item-tagname">性别</h6>
-                            </div>
-                            <div class="global-flex">
-                                <button class="global-btn global-flex-1 selected-sexual-btn selected-sexual-active">全部</button>
-                                <button class="global-btn global-flex-1 selected-sexual-btn">男士</button>
-                                <button class="global-btn global-flex-1 selected-sexual-btn">女士</button>
-                            </div>
-                        </div>
-                        <div class="selected-item">
-                            <div class="global-flex selected-item-top">
-                                <h6 class="selected-item-tagname">身高</h6>
-                                <div class="font-blue">不限</div>
-                            </div>
-                            <div class="slider-wrapper">
-                                <input class="range-slider range-height-slider" type="hidden" value="135,135">
-                            </div>
-                        </div>
-                        <div class="selected-item">
-                            <div class="global-flex selected-item-top">
-                                <h6 class="selected-item-tagname">年龄</h6>
-                                <div class="font-blue">不限</div>
-                            </div>
-                            <div class="slider-wrapper">
-                                <input class="range-slider range-age-slider" type="hidden" value="0,65">
-                            </div>
-                        </div>
-                        <div class="selected-item">
-                            <div class="global-flex selected-item-top">
-                                <h6 class="selected-item-tagname">月薪</h6>
-                                <div class="font-blue">不限</div>
-                            </div>
-                            <div class="slider-wrapper">
-                                <input class="range-slider range-salary-slider" type="hidden" value="3000,20000">
-                            </div>
-                        </div>
-                        <div class="global-flex">
-                            <button class="global-btn selected-btn selected-btn-reset">重置</button>
-                            <button class="global-btn selected-btn selected-btn-sure global-flex-1">确定</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- 板块轮播 -->
-                <div class="swiper-container paopao-block-swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide paopao-block">
-                            <ul class="paopao-list global-clearfix">
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="global-tag">
-                                            VIP <i class="global-tag-text global-bg-orange">VIP</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <!-- 男 global-sexual-man -->
-                                        <div class="global-bg-blue global-sexual-woman">
-                                            <svg class="global-icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i class="global-sexual-text">20</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            182cm<i class="global-tag-text">182cm</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="global-tag">
-                                            推荐 <i class="global-tag-text global-bg-light-pink">推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="global-sexual-man">
-                                            <svg class="global-icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-man"></use>
-                                            </svg>
-                                            <i class="global-sexual-text">20</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            182cm<i class="global-tag-text">182cm</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p class="loading-all">已阅尽所有好看的灵魂~</p>
-                        </div>
-                        <div class="swiper-slide paopao-block">
-                            <ul class="paopao-list global-clearfix">
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544011513362&di=7256e9026beb19908efdcc32b84c681b&imgtype=0&src=http%3A%2F%2Fyouxi899.com%2Fwp-content%2Fuploads%2F2018%2F05%2F%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588-2017-11-16-16.08.44-1024x656.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            182cm<i class="global-tag-text">182cm</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://img.idol001.com/origin/2017/10/14/2ac97ad16ec48527a3986f880c05a3711507968881.jpg"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            182cm<i class="global-tag-text">182cm</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            月薪12000<i class="global-tag-text">月薪12000</i>
-                                        </div>
-                                        <div class="global-tag">
-                                            幽默<i class="global-tag-text">幽默</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://m1.sinaimg.cn/maxwidth.640/m1.sinaimg.cn/1b6fdb0aad21e062e2499bdde5b867c6_431_554.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://m1.sinaimg.cn/maxwidth.640/m1.sinaimg.cn/1b6fdb0aad21e062e2499bdde5b867c6_431_554.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544011513362&di=7256e9026beb19908efdcc32b84c681b&imgtype=0&src=http%3A%2F%2Fyouxi899.com%2Fwp-content%2Fuploads%2F2018%2F05%2F%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588-2017-11-16-16.08.44-1024x656.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://img.idol001.com/origin/2017/10/14/2ac97ad16ec48527a3986f880c05a3711507968881.jpg"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://m1.sinaimg.cn/maxwidth.640/m1.sinaimg.cn/1b6fdb0aad21e062e2499bdde5b867c6_431_554.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="paopao-item">
-                                    <div class="paopao-item-cover">
-                                        <img src="http://m1.sinaimg.cn/maxwidth.640/m1.sinaimg.cn/1b6fdb0aad21e062e2499bdde5b867c6_431_554.png"
-                                            class="global-img">
-                                    </div>
-                                    <div class="global-flex global-flex-center paopao-item-name-wrapper">
-                                        <h3 class="paopao-item-username font-ellipsis font-ellipsis-1">呵呵呵呵呵呵呵</h3>
-                                        <div class="paopao-tag global-bg-light-pink">
-                                            <i>推荐</i>
-                                        </div>
-                                    </div>
-                                    <div class="global-flex global-flex-wrap paopao-item-type">
-                                        <div class="paopao-tag global-bg-pink icon-sexual-wrapper">
-                                            <svg class="icon-sexual">
-                                                <use xlink:href="../img/global.svg#icon-female"></use>
-                                            </svg>
-                                            <i>26</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>170cm</i>
-                                        </div>
-                                        <div class="paopao-item-tag paopao-item-num-tag">
-                                            <i>月薪30k</i>
-                                        </div>
-                                        <div class="paopao-item-tag">
-                                            <i>技术好</i>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- 正在加载中 -->
-                            <img src="../img/loading.svg" class="loading-list-icon">
-                        </div>
-                    </div>
-                </div>
+            </footer>
         </div>
-        </main>
-        </div>
-        <footer id="footer">
-            <nav class="global-flex footer-item-wrapper">
-                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-index"></use>
-                    </svg>
-                    <p>首页</p>
-                </li>
-                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item footer-active">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-date"></use>
-                    </svg>
-                    <p>相亲</p>
-                </li>
-                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-rank"></use>
-                    </svg>
-                    <p>排行榜</p>
-                </li>
-                <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
-                    <svg class="icon-footer" aria-hidden="true">
-                        <use xlink:href="../img/global.svg#icon-my"></use>
-                    </svg>
-                    <p>我的</p>
-                </li>
-            </nav>
-        </footer>
     </body>
-    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/vue.min.js"></script>
     <script src="../js/swiper.js"></script>
-    <script src="../js/jquery.range.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript">
+        var vConsole = new VConsole();
+    </script>
     <script>
-        $(function () {
-            // 全局变量
-            var wrapper = document.querySelector('#global-wrapper');
-            const winW = ((document.documentElement.clientWidth > 640?640:document.documentElement.clientWidth)* .72)
-
-            function showSelected() {
-                $('.paopao-selected-nav-btn').on('click', function () {
-                    if ($('.paopao-selected-content').hasClass('sliderFromTop')) {
-                        hideSelected()
-                    } else {
-                        $('.paopao-selected-wrapper').fadeIn(300)
-                        $('.paopao-selected-content').removeClass('sliderOutTop').addClass(
-                            'sliderFromTop')
-                    }
-                })
-            }
-            showSelected()
-
-            //隐藏筛选弹层
-            function hideSelected() {
-                $('.paopao-selected-content').removeClass('sliderFromTop').addClass('sliderOutTop')
-                setTimeout(() => {
-                    $('.paopao-selected-wrapper').fadeOut()
-                }, 420)
-            }
-
-            let navObj = {
-                before: 0, // 前一个索引
-                index: 0, // 当前的索引
-                navOffsetTop: 0, // 导航距离顶部的距离
-                navArr: [], // 导航Arr
-                blockArr: [], // 板块
-                isLoadingArr: [], // 正在加载
-                loadAllArr: [], // 加载完成
-                transformArr: function (arr) {
-                    return Array.prototype.slice.call(arr)
-                },
-                init: function () {
-                    var doc = document;
-                    this.navArr = this.transformArr(doc.querySelectorAll('.paopao-nav-item'))
-                    for (var i = 0, len = this.navArr.length; i < len; i++) {
-                        this.isLoadingArr.push(false)
-                        this.loadAllArr.push(false)
-                    }
-                    this.blockArr = this.transformArr(doc.querySelectorAll('.paopao-block'))
-                    this.navOffsetTop = doc.querySelector('.paopao-nav-wrapper').offsetTop;
-                }
-            }
-            navObj.init()
-
-            function switchPaoPaoNav(moveSwitch, fn) {
-                var cla = 'paopao-nav-active';
-                if (!moveSwitch) {
-                    navObj.navArr.forEach(function (item, index) {
-                        item.onclick = function () {
-                            if (index == navObj.index) return
-                            navObj.before = navObj.index
-                            item.classList.add(cla)
-                            navObj.navArr[navObj.before].classList.remove(cla)
-                            navObj.index = index
-                            fn && fn(index)
-                        }
-                    })
+        // 防节流
+        function throttle(interval) {
+            var timer,
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
                 } else {
-                    fn && fn(cla)
+                    timer = setTimeout(function () {
+                        fn && fn()
+                    }, interval)
                 }
             }
-            switchPaoPaoNav(false, function (index) {
-                hideSelected()
-                paopaoBlockSwiper.slideTo(index, 700, false)
-                // loadPaopaoItem(function(){
-                    
-                // })
-            })
+        }
 
-            // 板块切换
-            var paopaoBlockSwiper = new Swiper('.paopao-block-swiper', {
-                autoplay: false,
-                speed: 720,
-                touchAngle: 30,
-                // shortSwipes : false,
-                resistanceRatio: 0.9,
-                touchMoveStopPropagation: false,
-                passiveListeners: false,
-                onSlideChangeStart: function (swiper) {
-                    switchPaoPaoNav(true, function (cla) {
-                        navObj.navArr[swiper.activeIndex].classList.add(cla)
-                        navObj.navArr[swiper.previousIndex].classList.remove(cla)
-                        navObj.index = swiper.activeIndex
-                        navObj.before = swiper.previousIndex
-                        // loadPaopaoItem(function(){
-                        //     console.log('2200')
-                        // })
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false,
+                    blockNavIndex: 0,
+                    isLoadingArr: [false, false],
+                    loadAll: [false, false]
+                }
+            },
+            mounted: function () {
+                this.init = true;
+                this.$nextTick(function () {
+                    this.initSwiper();
+                    this.globalScroll()
+                })
+            },
+            methods: {
+                // 初始化swiper
+                initSwiper: function () {
+                    var self = this;
+                    this.blockSwiper = new Swiper('.paopao-block-swiper', {
+                        autoplayDisableOnInteraction: false,
+                        loop: false,
+                        autoplay: false,
+                        speed: 500,
+                        onSlideChangeStart: function (swiper) {
+                            self.blockNavIndex = swiper.activeIndex
+                        }
                     })
-                }
-            })
+                    this.paopaoBlock = document.querySelectorAll('.paopao-block')
+                },
+                // 全局滚动
+                globalScroll: function () {
+                    var block = this.paopaoBlock[this.blockNavIndex],
+                        startY = 0,
+                        self = this,
+                        throttleInner = throttle(16.7);
 
-            // 加载paopao列表页
-            function loadPaopaoItem(fn) {
-                var block = navObj.blockArr[navObj.index];
-                var startY = 0;
-                block.addEventListener('touchstart', function (e) {
-                    startY = e.changedTouches[0].pageY
-                })
-                block.addEventListener('touchmove', function (e) {
-                    var deltaY = e.changedTouches[0].pageY - startY;
-                    if (deltaY > 0 && block.scrollTop === 0) {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        return false
+
+                    block.addEventListener('scroll', function (e) {
+                        throttleInner(function () {
+                            if (!self.isLoadingArr[self.blockNavIndex] && !self.loadAll[
+                                    self.blockNavIndex]) {
+                                if (e.target.scrollTop + e.target.clientHeight + 128 >= e.target
+                                    .scrollHeight) {
+                                    self.loadPaoPaoItem()
+                                }
+                            }
+                        })
+                    })
+                },
+                loadPaoPaoItem: function () {
+                    console.log('加载数据')
+                },
+                // 板块切换
+                switchBlockNav: function (e) {
+                    if (e !== this.blockNavIndex) {
+                        this.blockNavIndex = e;
+                        this.blockSwiper.slideTo(this.blockNavIndex, 500, false)
+                        this.globalScroll()
                     }
-                })
-                block.addEventListener('scroll', function (e) {
-                    if (!navObj.isLoadingArr[navObj.index] && !navObj.isLoadingArr[navObj.index]) {
-                        console.log(e.target.scrollTop + e.target.clientHeight + 68)
-                        // console.log(e.target.scrollHeight)
-                        if (e.target.scrollTop + e.target.clientHeight + 128 >= e.target.scrollHeight) {
-                            fn && fn()
-                        }
-                    }
-                })
+                }
             }
-            loadPaopaoItem(function () {
-                console.log('加载数据啦')
-            })
-            // 筛选弹层            
-            var heightRange = $('.range-height-slider').jRange({
-                from: 135,
-                to: 200,
-                step: 1,
-                format: '%s',
-                width: winW,
-                showLabels: false,
-                isRange: true,
-                onstatechange: function (val) {
-
-                }
-            });
-            var ageRange = $('.range-age-slider').jRange({
-                from: 18,
-                to: 65,
-                step: 1,
-                format: '%s',
-                width: winW,
-                showLabels: false,
-                isRange: true,
-                onstatechange: function (val) {
-                    // input上面两个value值相等的时候会叠在一起 文案变成默认
-                    console.log(val)
-                }
-            });
-            var salaryRange = $('.range-salary-slider').jRange({
-                from: 3000,
-                to: 20000,
-                step: 100,
-                format: '%s',
-                width: winW,
-                showLabels: false,
-                isRange: true,
-                onstatechange: function (val) {
-
-                }
-            });
-
-            $('.selected-sexual-btn').on('click',function(e){
-                e.stopPropagation()
-                // e.preventDefault()
-                alert(110)
-            })
-            // 点击遮罩层关闭筛选层
-            $('.paopao-selected-wrapper').on('click', function () {
-                hideSelected()
-            })
-
-            //阻止遮罩层可以上下滚动
-            function preventSelectedLayerMove() {
-                var startY = 0;
-                var select = document.querySelector('.paopao-selected-content')
-                select.addEventListener('touchstart', function (e) {
-                    startY = e.changedTouches[0].clientY
-                }, false);
-                select.addEventListener('touchmove', function (e) {
-                    var deltaY = e.changedTouches[0].clientY - startY;
-                    //计算位置有缓慢的延时
-                    if (Math.abs(deltaY) > 10) {
-                        e.preventDefault()
-                        return false
-                    }
-                }, false);
-            }
-            preventSelectedLayerMove()
-
-
-            // 底部链接跳转
-            function footerLink() {
-                var footerList = Array.prototype.slice.call(document.querySelectorAll('.footer-item'))
-                url = ''
-                footerList.forEach(function (item, index) {
-                    item.onclick = function () {
-                        if (index === 0) {
-                            url = 'http://192.168.10.227:3000/html/index.html'
-                        } else if (index === 1) {
-                            url = 'http://192.168.10.227:3000/html/dating.html'
-                        } else if (index === 2) {
-
-                        } else if (index === 3) {
-                            url = 'http://192.168.10.227:3000/html/my.html'
-                        }
-                        window.open(url)
-                    }
-                })
-            }
-            footerLink()
         })
     </script>
 

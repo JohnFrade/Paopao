@@ -12,8 +12,8 @@
     max-width: 640px;
     height: 100vh;
     padding-bottom: 4.16666666667rem;
-    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth
 }
@@ -34,10 +34,11 @@
     background: rgba(255, 255, 255, .95);
     transform: translate3d(0,0,0);
     perspective: 1000px;
-    transition: all .36s cubic-bezier(0.495, 0.005, 0.860, 0.780);
+    transition: all .22s cubic-bezier(0.495, 0.005, 0.860, 0.780);
     z-index: 2
 }
 .fix-announce{
+    will-change: top;
     position: fixed;
     top: 3.75rem
 }
@@ -88,7 +89,8 @@
     fill:#999
 }
 .show-announce{
-    animation: showAnnounce .36s .68s cubic-bezier(0.420, 0.040, 0.295, 0.995) both
+    will-change: transform;
+    animation: showAnnounce .28s .12s cubic-bezier(0.420, 0.040, 0.295, 0.995) both
 }
 @keyframes showAnnounce{
     0%{
@@ -129,9 +131,6 @@
 .page-nav-item:first-of-type .page-nav-icon-wrp{
     background: linear-gradient(150deg,rgb(247, 203, 127),rgb(248, 191, 93))
 }
-/* .page-nav-item:nth-of-type(2) .page-nav-icon-wrp{
-    background:linear-gradient(150deg,rgba(209,128,255,1),rgba(149,94,255,1))
-} */
 .page-nav-icon-wrp{
     margin:0 auto .5rem;
     width: 4rem;
@@ -172,8 +171,9 @@
 .fix-block-nav{
     position: fixed;
     top:-3.75rem;
+    will-change: transform;
     transform: translateY(3.75rem);
-    transition:transform .22s cubic-bezier(0.255, 0.925, 0.865, 0.990);
+    transition:transform .28s cubic-bezier(0.255, 0.925, 0.865, 0.990);
 }
 
 .block-nav-item{
@@ -189,6 +189,9 @@
 }
 .block-nav-item:last-of-type{
     transform: translateX(-50%)
+}
+.block-nav:active .block-nav-active{
+    will-change: transform
 }
 .block-nav-active{
     color: #333;
@@ -329,6 +332,7 @@
     z-index: 4
 }
 #aside.show-backtop{
+    will-change: transform;
     transform: translateY(-7.125rem)
 }
 .icon-back-top{
@@ -346,12 +350,14 @@
     background:linear-gradient(90deg,rgba(255,186,107,1) 0%,rgba(243,130,30,1) 100%);
     box-shadow:0px 4px 10px rgba(255,201,107,0.6);
     border-radius:55px;
-    transition: transform .56s cubic-bezier(0.300, 0.770, 0.465, 1);
     transform: translateX(77%);
+    transition: transform .56s cubic-bezier(0.300, 0.770, 0.465, 1);
     overflow: hidden;
     z-index: 5;
 }
+
 .show-paopao-vip-btn{
+    will-change: transform;
     transform: unset
 }
 
