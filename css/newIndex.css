@@ -11,6 +11,7 @@
     width: 100%;
     max-width: 640px;
     height: 100vh;
+    will-change: scroll-position;
     padding-bottom: 4.16666666667rem;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;

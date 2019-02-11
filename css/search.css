@@ -110,8 +110,7 @@ body{
     height:100%;
     overflow-x:hidden;
     -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
 }
 .slide-from-top{
     transform:translateY(100%)

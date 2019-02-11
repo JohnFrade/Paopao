@@ -38,6 +38,7 @@
     background-size: 100%;
 }
 .hide-block-nav{
+    will-change: transform;
     transform: translateY(-3.6666666666667rem)
 }
 body,#app{
@@ -46,7 +47,7 @@ body,#app{
     overflow: hidden;
     background: #f2f2f2
 }
-.header{
+#header{
     position: fixed;
     top: 0;
     right: 0;
@@ -86,6 +87,9 @@ body,#app{
 }
 .block-item:nth-of-type(3){
     transform: translateX(52.5%)
+}
+.block-nav:active .block-active{
+    will-change: transform
 }
 .block-item:first-of-type.block-active{
     transform: scale(1.5) translate(25%,12.5%);
@@ -131,8 +135,8 @@ body,#app{
     font-size: 0;
     background: #fff;
     overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch
 }
 .block-sub-item{
     display: inline-block;
@@ -142,6 +146,7 @@ body,#app{
     font-size: 1.1666666666667rem;
 }
 .block-sub-active{
+    will-change: scroll-position;
     color: #333;
     font-weight:700
 }
@@ -193,8 +198,9 @@ body,#app{
     height: 100vh;
     padding-bottom: 4.0833333333rem;
     overflow-x: hidden;
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+    overflow-y: scroll;
 }
 .global-wrapper .has-sub-nav{
     padding-top: 4.166666666667rem
@@ -365,6 +371,7 @@ body,#app{
 }
 .icon-liked{
     fill:#FFC96B;
+    will-change: tranform;
     animation: likeAnim .48s cubic-bezier(0.445, 0.165, 0.825, 0.770) both
 }
 @keyframes likeAnim{

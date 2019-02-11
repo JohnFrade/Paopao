@@ -22,7 +22,7 @@
 
     <body>
         <div id="app" v-if="init">
-            <header class="header" :class="hideBlockNav">
+            <header id="header" :class="hideBlockNav">
                 <!-- 板块导航 -->
                 <nav class="global-flex global-box block-nav">
                     <ul class="global-flex-1 global-flex global-flex-end anim">
@@ -166,8 +166,8 @@
             </div>
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
-                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active"
-                        @click.stop="backTop">
+                    <a href="javascript:void(0);" class="global-flex-1 footer-item global-flex global-flex-justify-center global-flex-column footer-active" @click.stop="backTop">
+                        <!-- 交友圈图片要改 -->
                         <svg class="icon-footer" aria-hidden="true">
                             <use xlink:href="../../img/global.svg#icon-index"></use>
                         </svg>
@@ -209,7 +209,7 @@
             <div class="tips" v-show="showTips">请求超时</div>
         </div>
     </body>
-    <script src="../../js/jquery-2.1.4.js"></script>
+    <!-- <script src="../../js/jquery-2.1.4.js"></script> -->
     <script src="../../js/swiper.js"></script>
     <script src="../../js/jweixin-1.0.0.js"></script>
     <script src="../../js/vue.min.js"></script>
@@ -294,6 +294,31 @@
                 }
             }
         }
+
+        // 自定义平滑滚动
+        function selfScrollTo (el,position) {
+            var scrollTop = el.scrollTop,
+                direction = position - scrollTop > 0 ? 1 : -1,
+                distance = Math.abs(position - scrollTop),
+                split = distance / 50,
+                timeout = 1670,
+                _timeout;
+
+                if (position !== scrollTop) {
+                    split *= direction;
+                    _timeout = setInterval(function () {
+                        scrollTop += split;
+                        distance -= Math.abs(split);
+                        if (0 >= distance) {
+                            window.scrollTo(0, position);
+                            clearInterval(_timeout);
+                            _timeout = null;
+                        } else {
+                            window.scrollTo(0, scrollTop);
+                        }
+                    }, timeout / 100);
+                }
+        };
 
         var app = new Vue({
             el: '#app',
@@ -498,7 +523,7 @@
                                 if (self.hideBlockNav !== 'hide-block-nav') {
                                     self.hideBlockNav = 'hide-block-nav'
                                 }
-                                if (e.target.scrollTop + e.target.clientHeight + 68>= e.target.scrollHeight){
+                                if (e.target.scrollTop + e.target.clientHeight + 88>= e.target.scrollHeight){
                                     self.loadCircleItem()
                                 }
                                 self.loadImg(e.target.scrollTop)
@@ -513,42 +538,43 @@
                 },
                 // 返回顶部
                 backTop: function () {
-                    var self = this;
-                    var wrapper = this.$refs.wrapper[self.blockIndex];
-                    function getScrollAnimNum(scrollTop) {
-                        switch (true) {
-                            case scrollTop >= 12000:
-                                return 12000
-                            break
-                            case scrollTop >= 8000 && scrollTop < 12000:
-                                return 1000
-                                break;
-                            case scrollTop >= 5000 && scrollTop < 8000:
-                                return 800
-                                break;
-                            case scrollTop >= 2000 && scrollTop < 5000:
-                                return 450
-                                break;
-                            default:
-                                return 150
-                        }
-                    }
+                    selfScrollTo(this.$refs.wrapper[this.blockIndex],0)
+                    // var self = this;
+                    // var wrapper = this.$refs.wrapper[self.blockIndex];
+                    // function getScrollAnimNum(scrollTop) {
+                    //     switch (true) {
+                    //         case scrollTop >= 12000:
+                    //             return 12000
+                    //         break
+                    //         case scrollTop >= 8000 && scrollTop < 12000:
+                    //             return 1000
+                    //             break;
+                    //         case scrollTop >= 5000 && scrollTop < 8000:
+                    //             return 800
+                    //             break;
+                    //         case scrollTop >= 2000 && scrollTop < 5000:
+                    //             return 450
+                    //             break;
+                    //         default:
+                    //             return 150
+                    //     }
+                    // }
                     
-                    if(wrapper.scrollTop > 0){
-                        wrapper.scrollTop = wrapper.scrollTop >= 15000 ? 15000 : wrapper.scrollTop;
-                        var timer = requestAnimationFrame(function fn() {
-                            if (wrapper.scrollTop > 0) {
-                                wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
-                                requestAnimationFrame(fn)
-                            } else {
-                                cancelAnimationFrame(timer)
-                                wrapper.scrollTop = 0
-                                if(self.blockIndex >= 1){
-                                    self.showBlockNav()
-                                }
-                            }
-                        })
-                    }
+                    // if(wrapper.scrollTop > 0){
+                    //     wrapper.scrollTop = wrapper.scrollTop >= 15000 ? 15000 : wrapper.scrollTop;
+                    //     var timer = requestAnimationFrame(function fn() {
+                    //         if (wrapper.scrollTop > 0) {
+                    //             wrapper.scrollTop -= getScrollAnimNum(wrapper.scrollTop);
+                    //             requestAnimationFrame(fn)
+                    //         } else {
+                    //             cancelAnimationFrame(timer)
+                    //             wrapper.scrollTop = 0
+                    //             if(self.blockIndex >= 1){
+                    //                 self.showBlockNav()
+                    //             }
+                    //         }
+                    //     })
+                    // }
                 },
                 // 初始化数据
                 initData: function (fn) {
@@ -750,6 +776,7 @@
                     })
                     Array.prototype.push.apply(this.lazyLoad[this.blockIndex],imgLoadArr);
                     this.lazyLoadDomNum[this.blockIndex] = getArrMid(imgOffsetTopArr);
+                    console.log(this.lazyLoadDomNum)
                 },
                 // 加载图片
                 loadImg: function (scrollTop) {
@@ -811,7 +838,7 @@
                 like: function (index) {
                     console.log(index)
                     this.testLike = true;
-                    /*
+                    /* 
                         var circleItem = this.circleList[this.blockIndex][index]; 
                         axios.post().then(function(response){
                             this.$set(circleItem,'like',!circleItem)
