@@ -514,15 +514,29 @@
                         <p>7项专属特权</p>
                     </div>
                 </a>
-
                 <!-- 侧边栏 -->
-                <!-- @click.stop="backTop" -->
-                <a href="#header" id="aside" :class="{'show-backtop':showBackTopBtn}">
-                    <svg aria-hidden="true" class="icon-back-top">
-                        <use xlink:href="../img/global.svg#icon-back-top"></use>
-                    </svg>
-                    顶部
-                </a>
+                <aside id="aside">
+                    <!-- 普通用户 -->
+                    <a class="aside-item" v-if="1">
+                        <svg aria-hidden="true">
+                            <use xlink:href="../img/global.svg#icon-service"></use>
+                        </svg>
+                        客服
+                    </a>
+                    <!-- 管理员 -->
+                    <a class="aside-item" v-else>
+                        <svg aria-hidden="true">
+                            <use xlink:href="../img/global.svg#icon-manage"></use>
+                        </svg>
+                        管理
+                    </a>
+                    <a href="#header" class="aside-item back-top" :class="{'show-backtop':showBackTopBtn}">
+                        <svg aria-hidden="true">
+                            <use xlink:href="../img/global.svg#icon-back-top"></use>
+                        </svg>
+                        顶部
+                    </a>
+                </aside>
             </div>
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
@@ -751,7 +765,7 @@
                                     // 回到顶部
                                     if (self.hasFixed && (scrollTop - 160 >= self.blockNavOffsetTop) &&
                                         !self.showBackTopBtn) {
-                                        self.showBackTop()
+                                            self.showBackTop()
                                     } else {
                                         if ((scrollTop - startTop <= -28) && self.showBackTopBtn) {
                                             self.showBackTop()
@@ -838,6 +852,5 @@
                     }
                 }
             }
-
         })
     </script>

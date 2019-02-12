@@ -209,7 +209,6 @@
             <div class="tips" v-show="showTips">请求超时</div>
         </div>
     </body>
-    <!-- <script src="../../js/jquery-2.1.4.js"></script> -->
     <script src="../../js/swiper.js"></script>
     <script src="../../js/jweixin-1.0.0.js"></script>
     <script src="../../js/vue.min.js"></script>
@@ -302,17 +301,17 @@
                 distance = Math.abs(position - scrollTop),
                 split = distance / 50,
                 timeout = 1670,
-                _timeout;
+                timer = null;
 
                 if (position !== scrollTop) {
                     split *= direction;
-                    _timeout = setInterval(function () {
+                    timer = setInterval(function () {
                         scrollTop += split;
                         distance -= Math.abs(split);
                         if (0 >= distance) {
                             window.scrollTo(0, position);
-                            clearInterval(_timeout);
-                            _timeout = null;
+                            clearInterval(timer);
+                            timer = null;
                         } else {
                             window.scrollTo(0, scrollTop);
                         }

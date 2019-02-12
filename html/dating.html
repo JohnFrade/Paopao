@@ -43,7 +43,7 @@
                     <div class="swiper-container paopao-block-swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide paopao-block">
-                                <ul class="paopao-list global-clearfix">
+                                <ul class="paopao-list global-clearfix" ref="list0">
                                     <li class="paopao-item">
                                         <div class="paopao-item-cover">
                                             <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
@@ -116,7 +116,7 @@
                                 <p class="loading-all">已阅尽所有好看的灵魂~</p>
                             </div>
                             <div class="swiper-slide paopao-block">
-                                    <ul class="paopao-surround-list global-clearfix">
+                                    <ul class="paopao-surround-list global-clearfix" ref="list1">
                                             <li class="paopao-surround-item global-flex global-border global-border-bottom">
                                                 <div class="paopao-surround-item-cover">
                                                     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
@@ -294,6 +294,30 @@
                         </div>
                     </div>
                 </main>
+                <!-- 侧边栏 -->
+            <aside id="aside">
+                <!-- 普通用户 -->
+                <a class="aside-item" v-if="1">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-service"></use>
+                    </svg>
+                    客服
+                </a>
+                <!-- 管理员 -->
+                <a class="aside-item" v-else>
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-manage"></use>
+                    </svg>
+                    管理
+                </a>
+                <!-- 返回顶部 -->
+                <a href="javascript:void(0);" class="aside-item back-top" :class="{'show-backtop':showBackTopArr[blockNavIndex]}" @click.stop="backTop">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-back-top"></use>
+                    </svg>
+                    顶部
+                </a>
+            </aside>
             </div>
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
@@ -335,10 +359,10 @@
     </body>
     <script src="../js/vue.min.js"></script>
     <script src="../js/swiper.js"></script>
-    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
     <script type="text/javascript">
         var vConsole = new VConsole();
-    </script>
+    </script> -->
     <script>
         // 防节流
         function throttle(interval) {
@@ -366,6 +390,7 @@
                 return {
                     init: false,
                     blockNavIndex: 0,
+                    showBackTopArr:[false,false],
                     isLoadingArr: [false, false],
                     loadAll: [false, false]
                 }
@@ -395,23 +420,35 @@
                 // 全局滚动
                 globalScroll: function () {
                     var block = this.paopaoBlock[this.blockNavIndex],
-                        startY = 0,
+                        startTop = 0,
                         self = this,
                         throttleInner = throttle(16.7);
 
 
                     block.addEventListener('scroll', function (e) {
                         throttleInner(function () {
+                            var scrollTop = e.target.scrollTop;
+                            // 回到顶部
+                            if (scrollTop - 160 >= 0 && !self.showBackTopArr[self.blockNavIndex]) {
+                                self.showBackTop()
+                            } else {
+                                if ((scrollTop - startTop <= -28) && self.showBackTopArr[self.blockNavIndex]) {
+                                    self.showBackTop()
+                                }
+                            }
+                            // 加载数据
                             if (!self.isLoadingArr[self.blockNavIndex] && !self.loadAll[
                                     self.blockNavIndex]) {
-                                if (e.target.scrollTop + e.target.clientHeight + 128 >= e.target
+                                if (scrollTop + e.target.clientHeight + 128 >= e.target
                                     .scrollHeight) {
                                     self.loadPaoPaoItem()
                                 }
                             }
+                            startTop = scrollTop;
                         })
                     })
                 },
+                // 加载数据
                 loadPaoPaoItem: function () {
                     console.log('加载数据')
                 },
@@ -422,6 +459,14 @@
                         this.blockSwiper.slideTo(this.blockNavIndex, 500, false)
                         this.globalScroll()
                     }
+                },
+                // 显示返回顶部
+                showBackTop:function() {
+                    this.$set(this.showBackTopArr,this.blockNavIndex,!this.showBackTopArr[this.blockNavIndex])
+                },
+                // 返回顶部
+                backTop:function() {
+                    this.$refs['list'+this.blockNavIndex].scrollIntoView()
                 }
             }
         })
