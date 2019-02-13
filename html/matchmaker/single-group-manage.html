@@ -275,11 +275,15 @@
                     var startTop = 0,
                         self = this;
                     window.onscroll = function() {
-                        if(window.scrollY> 160 && !self.showBackTopBtn){
-                            self.showBackTopBtn = true
+                        if(window.scrollY - startTop >= 10){
+                            self.showBackTopBtn = false
                         }else{
-                            if(window.scrollY - startTop <= 20 && self.showBackTopBtn){
+                            if(window.scrollY === 0){
                                 self.showBackTopBtn = false
+                                return 
+                            }
+                            if(window.scrollY - startTop <= -10){
+                                self.showBackTopBtn = true
                             }
                         }
                         startTop = window.scrollY

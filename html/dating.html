@@ -429,11 +429,11 @@
                         throttleInner(function () {
                             var scrollTop = e.target.scrollTop;
                             // 回到顶部
-                            if (scrollTop - 160 >= 0 && !self.showBackTopArr[self.blockNavIndex]) {
-                                self.showBackTop()
+                            if (scrollTop - startTop >= 10) {
+                                self.$set(self.showBackTopArr,self.blockNavIndex,false)
                             } else {
-                                if ((scrollTop - startTop <= -28) && self.showBackTopArr[self.blockNavIndex]) {
-                                    self.showBackTop()
+                                if (scrollTop - startTop <= -28) {
+                                    self.$set(self.showBackTopArr,self.blockNavIndex,true)
                                 }
                             }
                             // 加载数据
