@@ -1,136 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
-    <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/single-group-manage.css">
-    <title>单身管理</title>
-</head>
-<body>
-    <header>
-        <nav class="global-flex global-flex-end global-border global-border-bottom block-nav global-box">
-            <li class="block-nav-item block-nav-active">
-                单身团(28)
-            </li>
-            <li class="block-nav-item">
-                后备团(5)
-            </li>
-        </nav>
-        <nav class="block-sub-nav global-flex">
-            <li class="block-sub-nav-item">
-                全部
-            </li>
-            <li class="block-sub-nav-item global-align-right block-sub-nav-active">
-                女士10
-            </li>
-            <li class="block-sub-nav-item">
-                男士18
-            </li>
-        </nav>
-    </header>
-    <main>
-        <ul class="group-list">
-            <li class="group-item global-box">
-                <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
-                    <div class="group-cover">
-                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg" alt="" class="global-img">
-                    </div>
-                    <div class="group-content global-flex-1">
-                        <div class="global-flex">
-                            <h3 class="group-item-username">小白兔那么可爱</h3>
-                            <div class="icon-sexual-wrapper" style="display:none">
-                                <svg></svg>
-                                <div></div>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/single-group-manage.css">
+        <title>单身管理</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <header>
+                <nav class="global-flex global-flex-end global-border global-border-bottom block-nav global-box">
+                    <li class="block-nav-item block-nav-active">
+                        单身团(28)
+                    </li>
+                    <li class="block-nav-item">
+                        后备团(5)
+                    </li>
+                </nav>
+                <nav class="block-sub-nav global-flex">
+                    <li class="block-sub-nav-item">
+                        全部
+                    </li>
+                    <li class="block-sub-nav-item global-align-right block-sub-nav-active">
+                        女士10
+                    </li>
+                    <li class="block-sub-nav-item">
+                        男士18
+                    </li>
+                </nav>
+            </header>
+            <main>
+                <ul class="group-list">
+                    <li class="group-item global-box">
+                        <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
+                            <div class="group-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg"
+                                    alt="" class="global-img">
                             </div>
-                        </div>
-                        <ul class="group-item-tag-list global-flex">
-                            <li class="group-item-tag">
-                                169<i class="tag-text">169</i>
-                            </li>
-                            <li class="group-item-tag">
-                                月薪8000<i class="tag-text">月薪8000</i>
-                            </li>
-                            <li class="group-item-tag">
-                                双鱼座<i class="tag-text">双鱼座</i>
-                            </li>
-                            <li class="group-item-tag">
-                                已购房<i class="tag-text">已购房</i>
-                            </li>
-                        </ul>
-                    </div>
-                    <svg class="icon-arrow-right" aria-hidden="true">
-                        <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
-                    </svg>
-                </a>
-                <div class="global-flex group-item-bottom">
-                    <button class="global-btn">删除</button>
-                    <button class="global-btn global-align-right">编辑</button>
-                    <button class="global-btn">下架</button>
-                </div>
-            </li>
-            <li class="group-item global-box">
-                    <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
-                        <div class="group-cover">
-                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg" alt="" class="global-img">
-                        </div>
-                        <div class="group-content global-flex-1">
-                            <div class="global-flex">
-                                <h3 class="group-item-username">小白兔那么可爱</h3>
-                                <div class="icon-sexual-wrapper" style="display:none">
-                                    <svg></svg>
-                                    <div></div>
+                            <div class="group-content global-flex-1">
+                                <div class="global-flex">
+                                    <h3 class="group-item-username">小白兔那么可爱</h3>
+                                    <div class="icon-sexual-wrapper" style="display:none">
+                                        <svg></svg>
+                                        <div></div>
+                                    </div>
                                 </div>
+                                <ul class="group-item-tag-list global-flex">
+                                    <li class="group-item-tag">
+                                        169<i class="tag-text">169</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        月薪8000<i class="tag-text">月薪8000</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        双鱼座<i class="tag-text">双鱼座</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        已购房<i class="tag-text">已购房</i>
+                                    </li>
+                                </ul>
                             </div>
-                            <!-- 这里一定要写两份不然无法居中 -->
-                            <ul class="group-item-tag-list global-flex">
-                                <li class="group-item-tag">
-                                    169<i class="tag-text">169</i>
-                                </li>
-                                <li class="group-item-tag">
-                                    月薪8000<i class="tag-text">月薪8000</i>
-                                </li>
-                                <li class="group-item-tag">
-                                    双鱼座<i class="tag-text">双鱼座</i>
-                                </li>
-                                <li class="group-item-tag">
-                                    已购房<i class="tag-text">已购房</i>
-                                </li>
-                            </ul>
+                            <svg class="icon-arrow-right" aria-hidden="true">
+                                <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                        <div class="global-flex group-item-bottom">
+                            <button class="global-btn">删除</button>
+                            <button class="global-btn global-align-right">编辑</button>
+                            <button class="global-btn">下架</button>
                         </div>
-                        <svg class="icon-arrow-right" aria-hidden="true">
-                            <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
-                        </svg>
-                    </a>
-                    <div class="global-flex group-item-bottom">
-                        <button class="global-btn">删除</button>
-                        <button class="global-btn global-align-right">编辑</button>
-                        <button class="global-btn">下架</button>
-                    </div>
-                </li>
-        </ul>
-    </main>
-    <footer id="footer" class="global-box">
-        <button class="global-btn footer-btn">新增成员</button>
-    </footer>
-    <!-- 侧边栏 -->
-    <aside id="aside">
-        <a class="aside-item">
-            <svg aria-hidden="true">
-                <use xlink:href="../../img/global.svg#icon-date"></use>
-            </svg>
-            相亲
-        </a>
-        <a class="aside-item">
-            <svg aria-hidden="true">
-                <use xlink:href="../../img/global.svg#icon-back-top"></use>
-            </svg>
-            顶部
-        </a>
-    </aside>
-</body>
+                    </li>
+                    <li class="group-item global-box">
+                        <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
+                            <div class="group-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg"
+                                    alt="" class="global-img">
+                            </div>
+                            <div class="group-content global-flex-1">
+                                <div class="global-flex">
+                                    <h3 class="group-item-username">小白兔那么可爱</h3>
+                                    <div class="icon-sexual-wrapper" style="display:none">
+                                        <svg></svg>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="group-item-tag-list global-flex">
+                                    <li class="group-item-tag">
+                                        169<i class="tag-text">169</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        月薪8000<i class="tag-text">月薪8000</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        双鱼座<i class="tag-text">双鱼座</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        已购房<i class="tag-text">已购房</i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <svg class="icon-arrow-right" aria-hidden="true">
+                                <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                        <div class="global-flex group-item-bottom">
+                            <button class="global-btn">删除</button>
+                            <button class="global-btn global-align-right">编辑</button>
+                            <button class="global-btn">下架</button>
+                        </div>
+                    </li>
+                    <li class="group-item global-box">
+                        <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
+                            <div class="group-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg"
+                                    alt="" class="global-img">
+                            </div>
+                            <div class="group-content global-flex-1">
+                                <div class="global-flex">
+                                    <h3 class="group-item-username">小白兔那么可爱</h3>
+                                    <div class="icon-sexual-wrapper" style="display:none">
+                                        <svg></svg>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="group-item-tag-list global-flex">
+                                    <li class="group-item-tag">
+                                        169<i class="tag-text">169</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        月薪8000<i class="tag-text">月薪8000</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        双鱼座<i class="tag-text">双鱼座</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        已购房<i class="tag-text">已购房</i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <svg class="icon-arrow-right" aria-hidden="true">
+                                <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                        <div class="global-flex group-item-bottom">
+                            <button class="global-btn">删除</button>
+                            <button class="global-btn global-align-right">编辑</button>
+                            <button class="global-btn">下架</button>
+                        </div>
+                    </li>
+                    <li class="group-item global-box">
+                        <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
+                            <div class="group-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg"
+                                    alt="" class="global-img">
+                            </div>
+                            <div class="group-content global-flex-1">
+                                <div class="global-flex">
+                                    <h3 class="group-item-username">小白兔那么可爱</h3>
+                                    <div class="icon-sexual-wrapper" style="display:none">
+                                        <svg></svg>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="group-item-tag-list global-flex">
+                                    <li class="group-item-tag">
+                                        169<i class="tag-text">169</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        月薪8000<i class="tag-text">月薪8000</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        双鱼座<i class="tag-text">双鱼座</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        已购房<i class="tag-text">已购房</i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <svg class="icon-arrow-right" aria-hidden="true">
+                                <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                        <div class="global-flex group-item-bottom">
+                            <button class="global-btn">删除</button>
+                            <button class="global-btn global-align-right">编辑</button>
+                            <button class="global-btn">下架</button>
+                        </div>
+                    </li>
+                    <li class="group-item global-box">
+                        <a href="javascript:void(0);" class="group-item-top global-flex global-flex-center">
+                            <div class="group-cover">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545128421530&di=415fdaa6b7cdacd867eaca8da81c5c5e&imgtype=0&src=http%3A%2F%2Fimg1.lukou.com%2Fstatic%2Fp%2Fcommodity%2Fmedium%2F0027%2F22%2F64%2F03%2F27226403.jpg"
+                                    alt="" class="global-img">
+                            </div>
+                            <div class="group-content global-flex-1">
+                                <div class="global-flex">
+                                    <h3 class="group-item-username">小白兔那么可爱</h3>
+                                    <div class="icon-sexual-wrapper" style="display:none">
+                                        <svg></svg>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <!-- 这里一定要写两份不然无法居中 -->
+                                <ul class="group-item-tag-list global-flex">
+                                    <li class="group-item-tag">
+                                        169<i class="tag-text">169</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        月薪8000<i class="tag-text">月薪8000</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        双鱼座<i class="tag-text">双鱼座</i>
+                                    </li>
+                                    <li class="group-item-tag">
+                                        已购房<i class="tag-text">已购房</i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <svg class="icon-arrow-right" aria-hidden="true">
+                                <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                        <div class="global-flex group-item-bottom">
+                            <button class="global-btn">删除</button>
+                            <button class="global-btn global-align-right">编辑</button>
+                            <button class="global-btn">下架</button>
+                        </div>
+                    </li>
+                </ul>
+            </main>
+            <footer id="footer" class="global-box">
+                <button class="global-btn footer-btn">新增成员</button>
+            </footer>
+            <!-- 侧边栏 -->
+            <aside id="aside">
+                <a class="aside-item">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../../img/global.svg#icon-date"></use>
+                    </svg>
+                    相亲
+                </a>
+                <a href="#" class="aside-item back-top" :class="{'show-backtop':showBackTopBtn}">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../../img/global.svg#icon-back-top"></use>
+                    </svg>
+                    顶部
+                </a>
+            </aside>
+        </div>
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false,
+                    showBackTopBtn:false,
+                }
+            },
+            mounted: function () {
+                this.init = true;
+                this.globalScroll()
+            },
+            methods: {
+                globalScroll:function() {
+                    var startTop = 0,
+                        self = this;
+                    window.onscroll = function() {
+                        if(window.scrollY> 160 && !self.showBackTopBtn){
+                            self.showBackTopBtn = true
+                        }else{
+                            if(window.scrollY - startTop <= 20 && self.showBackTopBtn){
+                                self.showBackTopBtn = false
+                            }
+                        }
+                        startTop = window.scrollY
+                    }
+                }
+            }
+        })
+    </script>
+
 </html>
