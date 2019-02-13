@@ -763,12 +763,11 @@
                                         self.announceAnim = 'fix-announce'
                                     }
                                     // 回到顶部
-                                    if (self.hasFixed && (scrollTop - 160 >= self.blockNavOffsetTop) &&
-                                        !self.showBackTopBtn) {
-                                            self.showBackTop()
+                                    if (scrollTop - startTop > 10) {
+                                            self.showBackTopBtn = false;
                                     } else {
-                                        if ((scrollTop - startTop <= -28) && self.showBackTopBtn) {
-                                            self.showBackTop()
+                                        if (scrollTop - startTop <= -10 && !self.showBackTopBtn) {
+                                            self.showBackTopBtn = true;
                                         }
                                     }
                                 } else {
@@ -808,10 +807,6 @@
                 // vip按钮
                 showVip: function () {
                     this.showVipBtn = !this.showVipBtn
-                },
-                // 返回顶部
-                showBackTop: function () {
-                    this.showBackTopBtn = !this.showBackTopBtn
                 },
                 // 显示返回顶部
                 backTop: function () {

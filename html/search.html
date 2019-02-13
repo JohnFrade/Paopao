@@ -11,10 +11,18 @@
         <link rel="stylesheet" href="../css/common.css">
         <link rel="stylesheet" href="../css/search.css">
         <title>搜索</title>
+        <style>
+            #aside .back-top{
+                bottom: -11rem;
+            }
+            #aside .show-backtop{
+                transform: translateY(-7.125rem)
+            }
+        </style>
     </head>
 
     <body>
-        <div id="app" v-if="init">
+        <div id="app" v-if="init" style="">
             <header class="header" :class="{'hide-header':hasHideHeader}">
                 <nav id="nav" class="global-flex" @click.stop="switchNav">
                     <a href="javascript:void(0);" v-for="(item,index) of navList" class="global-flex-1 global-flex global-flex-center global-flex-justify-center"
@@ -305,6 +313,22 @@
                     <p class="search-tips" v-show="!isLoading && resultList.length > 0 && loadAll">已查看所有搜索用户的</p>
                 </div>
             </main>
+            <!-- 侧边栏 -->
+            <aside id="aside">
+                <!-- 普通用户 -->
+                <a class="aside-item">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-index"></use>
+                    </svg>
+                    首页
+                </a>
+                <a href="#" class="aside-item back-top" :class="{'show-backtop':showBackTopBtn}">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-back-top"></use>
+                    </svg>
+                    顶部
+                </a>
+            </aside>
         </div>
     </body>
     <script src="../js/jweixin-1.0.0.js"></script>
@@ -387,9 +411,10 @@
                 searchText: '', // 搜索内容
                 resultList: [], // 搜索结果
                 netWorkStatus: true, // 网络状态
-                pageIndex: 1,
+                pageIndex: 1, // 页码索引
                 isLoading: false, // 正在加载
                 loadAll: false, // 加载完成
+                showBackTopBtn:false // 返回顶部按钮
             },
             watch:{
                 showConditionLayer:function(val,oldVal) {
@@ -558,10 +583,11 @@
                         var body = document.querySelector('body');
                         window.onscroll = function(e){
                             self.scrollThrottle(function () {
+                                var scrollTop = window.scrollY;
+                                // 隐藏导航
                                 if(self.searchIndex === 1){
-                                    var scrollTop = window.scrollY;
                                     if (scrollTop >= 100 && scrollTop - startTop >= 10 && !self.hasHideHeader) {
-                                        self.hasHideHeader = true
+                                        self.hasHideHeader = true;
                                     } else {
                                         if (scrollTop - startTop <= -10 && self.hasHideHeader) {
                                             if(scrollTop <= e.target.documentElement.scrollHeight - document.documentElement.clientHeight) {
@@ -569,11 +595,21 @@
                                             }
                                         }
                                     }
-                                    startTop = scrollTop;
                                 }
+                                // 返回顶部
+                                if(scrollTop >= 160 && scrollTop - startTop >= 10 && self.showBackTopBtn){
+                                    self.showBackTopBtn = false
+                                }else{
+                                    if(scrollTop - startTop <= -10){
+                                        self.showBackTopBtn = true
+                                    }
+                                }
+
+                                // 加载数据
                                 if (scrollTop + document.documentElement.clientHeight + 68 >= e.target.documentElement.scrollHeight) {
                                     self.loadPaopaoItem()
                                 }
+                                startTop = scrollTop;
                             })
                         }
                     }

@@ -1,5 +1,6 @@
 body{
-    background: #fff
+    background: #fff;
+    scroll-behavior: smooth
 }
 .hide-move{
     width: 100%;
