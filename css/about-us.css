@@ -1,0 +1,35 @@
+#app{
+    padding:0 1rem;
+    margin-top: .66666666667rem;
+    height: calc(100vh - .6666666667rem);
+    background: #fff;
+}
+.introduce{
+    padding:1.33333333rem 0 5rem;
+    font-size: 1.16666667rem;
+    color: #333;
+    line-height: 1.75rem
+}
+.code-wrapper{
+    margin-bottom: 2.333333333rem;
+    line-height: 1.5rem;
+    font-size: 1.1666666667rem;
+    color: #999
+}
+.code{
+    width: 11.6666666667rem;
+    height: 11.66666666667rem;
+    margin-bottom: 2rem
+}
+.global-btn{
+    display: block;
+    margin: 0 auto;
+    width: 10rem;
+    height: 3.333333333rem;
+    line-height: 3.3333333333333rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1666666667rem;
+    background: #945DFF;
+    border-radius: 50px;
+}

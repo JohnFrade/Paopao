@@ -1,0 +1,126 @@
+#app{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 4.08333333333rem;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+}
+/*头部信息 */
+.my-info{
+    padding: 1rem 1.25rem 1.33333333333rem 1rem;
+    color: #fff
+}
+.my-avatar{
+    width:7.5rem;
+    height:7.5rem;
+    margin-right: 1rem;
+    border-radius: 50%
+}
+
+.my-username{
+    margin-bottom: .5rem;
+    max-width: 12.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    /* color: #945dff */
+    color: #fff
+}
+.my-username-wrapper .global-vip-signs{
+    position: relative;
+    top: 2px;
+}
+
+figcaption a{
+    padding-bottom: .333333333333rem;
+    color: #fff
+}
+.icon-edit{
+    margin-right: 4px;
+    width: 1.166666666667rem;
+    height: 1.1666666666667rem;
+    /* fill: #999 */
+    fill: #fff
+}
+
+.my-album-btn{
+    height: 2.333333333335rem;
+    width: 4.8rem;
+    font-size: 1.1666666667rem;
+    font-weight: 400;
+    color: #333;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 24px 0 0 24px
+}
+.new-visit-tips{
+    position: absolute;
+    top: -.5rem
+}
+.my-nav-list{
+    padding:.6666666667rem 0 1.5rem;
+    text-align: center;
+}
+.my-nav-item-data{
+    display: block;
+    margin-right: .3333333333rem;
+    font-size: 1.666666666667rem;
+    font-weight: 700;
+    color:#fff;
+    cursor: pointer
+}
+.my-nav-list .font-999{
+    font-size: 1rem
+}
+/* 我的 */
+.my-item{
+    position: relative;
+    padding: 1.333333333333rem 1.25rem 1.333333333333rem 1rem;
+    font-size: 1.16666666667rem;
+    font-weight: 700;
+    color: #333;
+    background: #fff
+}
+.my-item-wrapper:nth-last-of-type(3){
+    margin-top: .833333333333rem
+}
+.icon-my-item{
+    margin-right: .666666666667rem;
+    width: 1.333333333333rem;
+    height:1.333333333333rem;
+    fill:#666
+}
+.my-item .gap-right{
+    padding-right: 1.1666666667rem;
+    font-weight: 500
+}
+.icon-arrow-right{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.25rem;
+    margin: auto 0;
+    width: 1rem;
+    height: 1.0833333333rem;
+}
+
+.my-text-center{
+    position: relative;
+    top:1px
+}
+
+.my-invited{
+    position: fixed;
+    top:58%;
+    right:-2.7191666666rem;
+    width: 3.666666666666rem;
+    height: 4.7916666666rem;
+    transition: transform .48s
+}
+.show-invited{
+    transform: rotate(-30deg) translate(-50%)
+}
