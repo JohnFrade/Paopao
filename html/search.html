@@ -600,6 +600,10 @@
                                 if(scrollTop >= 160 && scrollTop - startTop >= 10 && self.showBackTopBtn){
                                     self.showBackTopBtn = false
                                 }else{
+                                    if(scrollTop === 0){
+                                        self.showBackTopBtn = false
+                                        return 
+                                    }
                                     if(scrollTop - startTop <= -10){
                                         self.showBackTopBtn = true
                                     }

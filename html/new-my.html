@@ -17,34 +17,39 @@
     <body>
         <div id="app" v-if="init">
             <header id="header" class="global-relative">
-                <div class="my-info global-flex global-flex-center">
-                    <figure class="global-flex">
+                <div class="my-info">
+                    <figure class="global-flex global-flex-center">
                         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543333345155&di=1ed82f3b374af9b7eb988123bea26d8b&imgtype=0&src=http%3A%2F%2Fuploads.5068.com%2Fallimg%2F1801%2F151P42a2-4.jpg"
-                            class="my-avatar mask-click">
-                        <figcaption style="width:15rem" class="global-flex">
+                            class="my-avatar">
+                        <figcaption style="width:15rem">
+                            <!-- my-vip-username -->
                             <div class="my-username-wrapper global-flex global-flex-center">
-                                <div class="my-username font-ellipsis font-ellipsis-1">xxxxxx</div>
-                                <div class="global-vip-signs"></div>
+                                <a href="javascript:;" class="my-username font-ellipsis font-ellipsis-1">xxxxxx</a>
                             </div>
-                            <div class="font-12">UID:451550</div>
+                            <div class="font-14">UID:451550</div>
                         </figcaption>
                     </figure>
-                    <button class="global-btn my-album-btn mask-click">相册</button>
+                    <button class="global-btn my-album-btn mask-click">
+                        <svg aria-hidden="true" class="icon-ablum">
+                            <use xlink:href=""></use>
+                        </svg>
+                        相册
+                    </button>
                 </div>
-                <nav class="global-flex my-nav-list global-flex-between">
-                    <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center" href="www.baidu.com">
+                <nav class="global-flex global-flex-between my-nav-list">
+                    <a class="my-nav-item" href="www.baidu.com">
                         <p class="my-nav-item-data">24</p>
                         <p class="font-999">好友</p>
                     </a>
-                    <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                    <a class="my-nav-item">
                         <p class="my-nav-item-data">24</p>
                         <p class="font-999">关注</p>
                     </a>
-                    <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                    <a class="my-nav-item">
                         <p class="my-nav-item-data">24</p>
                         <p class="font-999">暗恋你</p>
                     </a>
-                    <a class="global-flex-1 my-nav-item global-flex global-flex-end global-flex-justify-center">
+                    <a class="my-nav-item">
                         <p class="my-nav-item-data">
                             24
                         </p>
@@ -53,25 +58,27 @@
                         </p>
                     </a>
                 </nav>
-                <nav class="global-flex">
-                    <a href="global-flex-1 global-flex global-flex-end global-flex-justify-center">
+                <nav class="global-flex global-flex-center global-flex-around my-tools">
+                    <a href="javascript:void(0);" class="my-tools-item">
                         <svg aria-hidden="true">
                             <use xlink:href=""></use>
                         </svg>
                         <p>续费会员</p>
                     </a>
-                    <a href="global-flex-1 global-flex global-flex-end global-flex-justify-center">
+                    <a href="javascript:void(0);" class="my-tools-item">
                         <svg aria-hidden="true">
                             <use xlink:href=""></use>
                         </svg>
                         <p>我要曝光</p>
                     </a>
-                    <a href="global-flex-1 global-flex global-flex-end global-flex-justify-center">                            <svg aria-hidden="true">
+                    <a href="javascript:void(0);" class="my-tools-item">
+                        <svg aria-hidden="true">
                             <use xlink:href=""></use>
                         </svg>
                         <p>自助广告</p>
                     </a>
-                    <a href="global-flex-1 global-flex global-flex-end global-flex-justify-center">                            <svg aria-hidden="true">
+                    <a href="javascript:void(0);" class="my-tools-item">
+                        <svg aria-hidden="true">
                             <use xlink:href=""></use>
                         </svg>
                         <p>红娘入驻</p>
@@ -79,6 +86,7 @@
                 </nav>
             </header>
             <main>
+                <div class="empty-bar"></div>
                 <ul class="my-list">
                     <li class="my-item-wrapper">
                         <a href="./personal-home-page.html" class="my-item global-flex">
@@ -108,7 +116,7 @@
                                 <use xlink:href="../img/my.svg#icon-chat"></use>
                             </svg>
                             日签卡
-                            <span class="global-align-right font-bold font-red gap-right">•</span>
+                            <div class="global-align-right font-red gap-right">邀请新用户获取红包</div>
                             <svg class="icon-arrow-right" aria-hidden="true">
                                 <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                             </svg>
@@ -120,7 +128,7 @@
                                 <use xlink:href="../img/my.svg#icon-apply-cash"></use>
                             </svg>
                             <div class="my-text-center">我的收支</div>
-                            <div class="global-align-right font-red gap-right">9.55元</div>
+                            <div class="global-align-right font-red gap-right">￥9.55元</div>
                             <svg class="icon-arrow-right" aria-hidden="true">
                                 <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                             </svg>
@@ -132,6 +140,7 @@
                                 <use xlink:href="../img/my.svg#icon-my-order"></use>
                             </svg>
                             <span class="my-text-center">隐私设置</span>
+                            <div class="global-align-right gap-right font-999">可设置信息是否显示</div>
                             <svg class="icon-arrow-right" aria-hidden="true">
                                 <use xlink:href="../img/global.svg#icon-arrow-right"></use>
                             </svg>
@@ -164,7 +173,7 @@
             <footer id="footer">
                 <nav class="global-flex footer-item-wrapper">
                     <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item">
-                        <a href="javascript:void(0);">
+                        <a href="./newIndex.html">
                             <svg class="icon-footer" aria-hidden="true">
                                 <use xlink:href="../img/global.svg#icon-index"></use>
                             </svg>
@@ -188,7 +197,7 @@
                         </a>
                     </li>
                     <li class="global-flex-1 global-flex global-flex-justify-center global-flex-column footer-item footer-active">
-                        <a href="./my.html">
+                        <a href="./new-my.html">
                             <svg class="icon-footer" aria-hidden="true">
                                 <use xlink:href="../img/global.svg#icon-my"></use>
                             </svg>
@@ -206,16 +215,16 @@
     <script>
         var app = new Vue({
             el: '#app',
-            data:function() {
-                return{
-                    init:false
+            data: function () {
+                return {
+                    init: false
                 }
             },
-            mounted:function() {
+            mounted: function () {
                 this.init = true
             },
-            methods:{
-                showRedPacket:function() {
+            methods: {
+                showRedPacket: function () {
 
                 }
             }
