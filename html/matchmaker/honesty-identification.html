@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>诚信认证</title>
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/honesty-identification.css">
+    </head>
+
+    <body>
+        <div id="app">
+            <header id="header">
+                <img src="../../img/matchmaker/identification-bg.png"  class="header-bg">
+                <figure class="global-flex global-flex-center header-card">
+                    <img src="../../img/matchmaker/level-signs.png" class="icon-signs">
+                    <figcaption class="font-fff">
+                        <div class="font-12" style="margin-bottom:.916666667rem">
+                            <span class="font-bold font-14">诚信等级</span>
+                            <span>每成功认证一项，加一星</span>
+                        </div>
+                        <ul class="start-list global-flex">
+                            <li class="star-item" v-for="(item,index) of starList">
+                                <img src="../../img/matchmaker/star.png" class="global-img" v-if="item === true">
+                                <img src="../../img/matchmaker/star-none.png" class="global-img" v-else>
+                            </li>
+                        </ul>
+                    </figcaption>
+                </figure>
+            </header>
+            <main id="main">
+                <h1 class="title">-认证项目越多诚信越高-</h1>
+                <section class="item-wrp">
+                    <h2 class="item-title">联系方式认证</h2>
+                    <ul class="item-list">
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span class="item-name">手机认证</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true">
+                                    <use></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span class="item-name">微信认证</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true">
+                                    <use></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="item-wrp">
+                    <h2 class="item-title">身份认证</h2>
+                    <ul class="item-list">
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span>实名认证</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true">
+                                    <use></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span>学历</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true"></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <section class="item-wrp">
+                    <h2 class="item-title">资产认证</h2>
+                    <ul class="item-list">
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span>房产认证</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true"></svg>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="javascript:void(0);" class="global-flex global-flex-center font-bold item-content">
+                                <img src="" alt="">
+                                <span>车辆认证</span>
+                                <span class="global-align-right"></span>
+                                <svg aria-hidden="true"></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+            <footer id="footer">
+                <p>关于隐私安全</p>
+                <p>您上传的证件图片等资料，仅供审核使用且TA人无法查看。除此之
+                    外，我们还会进行安全水印处理，尽情放心。</p>
+            </footer>
+        </div>
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+
+        var app = new Vue({
+            el: "#app",
+            data: function () {
+                return {
+                    init:false,
+                    starList:[]
+                }
+            },
+            created() {
+                this.initStar()
+                console.log(this.starList)
+            },
+            mounted:function() {
+                this.init = true
+                this.calcStar()
+            },
+            methods: {
+                // 初始化星星
+                initStar:function() {
+                    for(var i = 1;i < 7;i++){
+                        this.starList.push(i)
+                    }
+                },
+                // 计算星星
+                calcStar:function() {
+
+                }
+            }
+        })
+    </script>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/swiper.min.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/personal-home-page.css">
+        <title>Paopao的主页</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <header>
+
+            </header>
+            <main>
+                <section class="global-flex personal-info global-flex-center">
+                    <div class="global-flex-1">
+                        <h2 class="personal-name font-ellipsis font-ellipsis-1">哈哈哈哈哈哈哈哈哈</h2>
+                        <div class="global-flex global-flex-center">
+                            <div class="icon-sexual-wrapper global-bg-pink">
+                                <svg class="icon-sexual">
+                                    <use xlink:href="../img/global.svg#icon-female"></use>
+                                </svg>
+                                <i class="tag-text">19</i>
+                            </div>
+                            <div class="personal-professional icon-sexual-wrapper">
+                                <i class="icon-tag">哈哈哈</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personal-btn-wrapper" style="margin-right:1.333333333rem">
+                        <!-- personal-secret-love -->
+                        <button class="personal-btn personal-love-btn">
+                            <svg class="personal-btn-icon" aria-hidden="true">
+                                <use xlink:href="../img/personal-home-page.svg#icon-love"></use>
+                            </svg>
+                        </button>
+                        <p>暗恋TA</p>
+                    </div>
+                    <div class="personal-btn-wrapper">
+                        <!-- personal-adding 正在申请-->
+                        <button class="global-flex personal-btn personal-add-btn personal-adding">
+                            <svg class="personal-btn-icon" aria-hidden="true">
+                                <use xlink:href="../img/personal-home-page.svg#icon-add"></use>
+                            </svg>
+                        </button>
+                        <p>加好友</p>
+                    </div>
+                </section>
+                <div class="gap-bar"></div>
+                <section class="my-active-news-wrapper global-flex global-flex-center global-border global-border-bottom">
+                    <div class="font-bold font-14 my-active-news-block-name">
+                        个人动态
+                    </div>
+                    <!-- 最多显示三张 -->
+                    <ul class="my-active-news-list global-flex">
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                        <li class="my-active-news-item">
+                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544194605306&di=62373223d9bb04c0d2495aa085cdec1a&imgtype=0&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2F473b7b29c33300127d2897fdc391f736.jpeg%40wm_2%2Ct_55m%2B5a625Y%2B3L%2BaDs%2BS9oOS6hg%3D%3D%2Cfc_ffffff%2Cff_U2ltSGVp%2Csz_27%2Cx_17%2Cy_17"
+                                class="global-img">
+                        </li>
+                    </ul>
+                    <div class="my-active-news-item" style="display:none">
+                        <img src="" class="global-img">
+                    </div>
+                    <div class="global-align-right font-12 font-999" style="padding-right:1rem">63动态</div>
+                    <svg class="icon-arrow-right" aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+                </section>
+                <section class="my-info-block global-box global-border global-border-bottom">
+                    <h2 class="block-title">我的信息</h2>
+                    <div class="my-info-contact global-flex global-flex-center">
+                        <div class="my-info-tag-name">联系方式</div>
+                        <p style="display:none">188 1234 1542</p>
+                        <button class="global-flex global-flex-center global-flex-justify-center persoan-no-vip-btn">
+                            请开通VIP查看
+                        </button>
+                    </div>
+                    <ul class="global-flex global-flex-wrap">
+                        <li class="my-info-item">
+                            <i class="tag-text">165cm</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">12000~15000</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">广东广州</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">幽默</i>
+                        </li>
+                        <li class="my-info-item">
+                            <i class="tag-text">老司机</i>
+                        </li>
+                    </ul>
+                </section>
+                <section class="my-slogan global-box global-border global-border-bottom">
+                    <h2 class="block-title">内心独白</h2>
+                    <p class="my-slogan-text">希望有一段让彼此成为更好的人的感情。如果有想法，请 主动，因为我也不会主动的</p>
+                </section>
+                <section class="my-accept global-box">
+                    <h2 class="block-title">收到的礼物（55）</h2>
+                    <ul class="my-accept-list">
+                        <li class="my-accept-item global-flex">
+                            <img src="../img/gift-heart.png" class="global-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="../img/gift-cake.png" class="global-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="../img/gift-present.png" class="global-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                        <li class="my-accept-item global-flex">
+                            <img src="../img/gift-birthday-cake.png" class="global-img">
+                            <div class="my-accept-count">
+                                25
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+            <footer id="footer" class="global-flex global-flex-center global-flex-between global-box">
+                <a href="javascript:;" class="footer-item footer-item-sayHi global-flex anim">
+                    <svg class="icon-sayHi" aria-hidden="true">
+                        <use xlink:href="../img/personal-home-page.svg#icon-sayHi"></use>
+                    </svg>
+                </a>
+                <a href="javascript:;" class="footer-item footer-item-gift global-flex">
+                    <svg class="icon-gift" aria-hidden="true">
+                        <use xlink:href="../img/personal-home-page.svg#icon-gift"></use>
+                    </svg>
+                </a>
+                <a href="javascript:;" class="footer-item footer-item-chat global-flex">
+                    <svg class="icon-chat" aria-hidden="true">
+                        <use xlink:href="../img/personal-home-page.svg#icon-chat"></use>
+                    </svg>
+                </a>
+            </footer>
+            <!-- 侧边栏 -->
+            <aside id="aside" style="bottom:9.125rem;z-index:999">
+                <a class="aside-item">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-index"></use>
+                    </svg>
+                    首页
+                </a>
+                <a class="aside-item">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../img/global.svg#icon-report"></use>
+                    </svg>
+                    举报
+                </a>
+            </aside>
+            <!-- 礼物 -->
+            <div class="personal-gift-wrapper anim">
+                <div class="personal-gift-mask"></div>
+                <div class="personal-gift-content global-box">
+                    <div class="global-flex global-flex-center global-flex-between personal-gift-title">
+                        <span>送她礼物</span>
+                        <div class="icon-close-wrapper global-box">
+                            <svg class="icon-close" aria-hidden="true">
+                                <use xlink:href="../img/global.svg#icon-close"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="gift-list global-flex global-flex-wrap  ">
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-rose.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">玫瑰花</h6>
+                            <p class="gift-item-price">￥1.0</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-cake.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">蛋糕</h6>
+                            <p class="gift-item-price">￥3.0</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-ring.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">戒指</h6>
+                            <p class="gift-item-price">￥9.99</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-birthday-cake.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">生日蛋糕</h6>
+                            <p class="gift-item-price">￥5.20</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-present.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">小礼物</h6>
+                            <p class="gift-item-price">￥1.0</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-eternal.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">天长地久</h6>
+                            <p class="gift-item-price">￥5.20</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-dog.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">宠物狗</h6>
+                            <p class="gift-item-price">￥6.66</p>
+                        </a>
+                        <a href="javascript:void(0);" class="gift-item">
+                            <div class="gift-img-wrapper">
+                                <img src="../img/gift-heart.png" class="global-img">
+                            </div>
+                            <h6 class="gift-item-title">爱心</h6>
+                            <p class="gift-item-price">13.14</p>
+                        </a>
+                    </div>
+                    <a href="javascript:void(0);" class="font-blue open-gift-vip">
+                        开通会员，礼物一律8折
+                        <svg class="icon-arrow-right" aria-hidden="true">
+                            <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false
+                }
+            },
+            mounted: function () {
+                this.init = true
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+</html>

@@ -318,9 +318,9 @@ body,#app{
     max-height: 14.1666666666rem
 }
 .ablum-more{
+    vertical-align: middle;
     width: calc(33.3333333333% - .555555555555rem);
     max-height: calc((100vw - 2rem)/3 - .5555555555rem);
-    overflow: hidden;
 }
 .ablum-item img{
     vertical-align: top;

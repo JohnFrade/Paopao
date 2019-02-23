@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/adindex.css">
+</head>
+<body>
+    <div id="app" v-if="init">
+        <nav id="nav" @click.stop="switchNav">
+            <a href="javascript:void(0);" class="nav-item" :class="{'nav-active':index === navIndex}" v-for="(item,index) of navList" :key="index" :data-index="index">{{item}}</a>
+        </nav>
+        <main id="main">
+            <div>
+                <ul v-for="">
+                    <li>
+                        <div>
+                            <img src="" class="global-img">
+                            <div class="global-flex">
+                                <div>浏览量：5952</div>
+                                <div>浏览量：5952</div>
+                                <div>投放时长</div>
+                            </div>
+                        </div>
+                        <div class="global-flex">
+                            <p></p>
+                            <button>下架</button>
+                            <button>续费</button>
+                            <button>重投</button>
+                        </div>
+                    </li>
+                </ul>
+                <div></div>
+            </div>
+        </main>
+        <!-- 续费 -->
+        <div class="layer-wrp" v-show="showLayer">
+            <div class="layer-mask"></div>
+            <div class="layer-content">
+                <section class="global-flex global-flex-end layer-header">
+                    <div class="layer-img">
+                        <img src="http://img3.imgtn.bdimg.com/it/u=3140871905,3736058072&fm=11&gp=0.jpg" class="global-img">
+                    </div>
+                    <span>点击可看大图</span>
+                </section>
+                <section>
+                    <h2 class="layer-item-name">续费时长</h2>
+                    <ul class="layer-item-list" @click.stop="chooseRenewTime">
+                        <li class="layer-item-item" v-for="(item,index) of renewList" :key="index" :class="{'layer-item-active':layerItemIndex === index}" :data-index="index">
+                            {{item.price+'元/'+ item.time}}
+                        </li>
+                    </ul>
+                </section>
+                <section class="global-flex global-flex-between global-flex-center">
+                    <h2 class="layer-item-name">购买天/月数</h2>
+                    <div class="global-flex">
+                        <button class="global-btn" @click.stop="minus">-</button>
+                        <form action="#">
+                            <input type="number" v-model.number="renewDays">
+                        </form>
+                        <button class="global-btn" @click.stop="add">+</button>
+                    </div>
+                </section>
+                <footer class="layer-footer global-flex global-flex-between">
+                    <div>
+                        <span></span>
+                        <span>购买时长</span>
+                    </div>
+                    <button class="global-btn layer-footer-btn">付费</button>
+                </footer>
+            </div>
+        </div>
+        <!-- 对话框 -->
+        <div class="dialog-wrp" @click.stop="hideDialog" v-show="showDialog">
+            <div class="dialog-mask" data-type="cancel"></div>
+            <div class="dialog-content">
+                <h3 class="dialog-title">提醒</h3>
+                <div class="dialog-content-top">
+                    <p>提前下架之后，费用将不予退还</p>
+                    <p>您确定要下架广告吗？</p>
+                </div>
+                <div class="global-flex dialog-footer global-border global-border-top">
+                    <button class="global-flex-1 dialog-btn" data-type="sure">确定</button>
+                    <button class="global-flex-1 dialog-btn" data-type="cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return {
+                init:false,
+                navIndex:0,
+                navList:['展示中','投放历史'],      // 导航 
+                layerItemIndex:0,  // 
+                renewDays:1,       // 购买时长
+                renewList:[{      // 续费套餐价格 
+                    price:20,
+                    time:'天'
+                },{
+                    price:200,
+                    time:'月'
+                }],
+                showLayer:true,  //显示弹层
+                showDialog:false     
+            }
+        },
+        mounted() {
+            this.init = true
+        },
+        computed:{
+            totalPay:function() {
+
+            }
+        },
+        methods: {
+            // 切换导航
+            switchNav:function(e) {
+                var index = +e.target.dataset.index;
+                if(index !== this.navIndex){
+                    this.navIndex = index;
+                    if(1){
+                        `   
+                    }
+                }
+            },
+            // 显示弹层
+            openLayer:function() {
+
+            },
+            // 选择续费项目
+            chooseRenewTime:function(e){
+                var index = +e.target.dataset.index;
+                if(index !== this.layerItemIndex){
+                    this.layerItemIndex = index
+                }
+            },
+            // 减
+            minus:function() {
+                if(this.renewDays > 1){
+                    --this.renewDays
+                }
+            },
+            // 加
+            add:function() {
+                ++this.renewDays
+            },
+            // 隐藏对话
+            hideDialog:function(e){
+                var type = e.target.dataset.type;
+                if(type === cancel){
+                    this.showDialog = false
+                }else if (type === sure){
+
+                }
+            }
+        }
+    })
+</script>
+</html>
