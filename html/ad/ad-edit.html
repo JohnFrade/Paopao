@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/adedit.css">
+</head>
+<body>
+    <div id="app" v-if="init">
+        <header class="global-flex global-flex-center global-flex-between">
+            <h2 class="font-16">
+                广告图
+                <span class="font-red">*</span>
+            </h2>
+            <a href="javascript:;" class="ad-record">
+                投放记录
+            </a>
+        </header>
+        <main>
+            <section class="ad-edit-section">
+                <div class="ad-edit-cover">
+                    <img src="" alt="">
+                    <a href="javascript:;" class="add-cover"></a>
+                </div>
+                <p class="size-tips">广告图最佳尺寸:702*232</p>
+            </section>
+            <section class="global-flex global-flex-center ad-edit-section">
+                <span>广告跳转链接</span>
+                <input type="text" v-model="link" placeholder="请输入http://开头的链接地址（非必填）" class="ad-edit-link global-flex-1">
+            </section>
+            <section class="ad-edit-section global-border global-border-bottom">
+                <h2 class="tag-name">续费时长</h2>
+                <ul class="ad-edit-list" @click.stop="chooseRenewTime">
+                    <li class="ad-edit-item" v-for="(item,index) of renewList" :key="index" :class="{'layer-item-active':layerItemIndex === index}" :data-index="index">
+                        {{item.price+'元/'+ item.time}}
+                        <div class="global-tag">荐
+                            <div class="global-tag-text">荐</div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="global-flex global-flex-between global-flex-center ad-edit-section">
+                <h2 class="tag-name" style="margin-bottom:0">购买天/月数</h2>
+                <div class="global-flex">
+                    <button class="global-btn edit-btn" @click.stop="minus">-</button>
+                    <form action="#">
+                        <input type="number" v-model.number="renewDays" class="ad-edit-time" pattern="[0-9]*">
+                    </form>
+                    <button class="global-btn edit-btn" @click.stop="add">+</button>
+                </div>
+            </section>
+        </main>
+        <footer class="footer global-flex global-flex-between global-flex-center">
+            <div class="footer-text">
+                <span class="total-price">{{totalPay}}</span>
+                <span>购买时长：</span>
+                {{renewDays + (layerItemIndex === 0?'天':'个月')}}
+            </div>
+            <button class="global-btn footer-btn">付费</button>
+        </footer>
+        <div class="announce" v-show="showAnnounce">
+            <div class="announce-mask" @click.stop="closeAnnounce"></div>
+            <div class="announce-content">
+                <h2 class="announce-title">重要</h2>
+                <p class="announce-txt">1. 请勿违反国家法律，国家网络安全内容，如：色情，暴力，木马…等内容。</p>
+                <p class="announce-txt">2. 请勿发布虚假广告内容，遵守《广告法》，如：xxx全球销量排名第一，等违反《广告法》如经发现。广告将被关闭！费用不予以退款！</p>
+                <button @click.stop="closeAnnounce" class="announce-btn" :class="{'read-done':readDone}">{{readDone?'确定':readTime+'s'}}</button>
+            </div>
+        </div>
+        <aside id="aside">
+            <a class="aside-item">
+                <svg aria-hidden="true">
+                    <use xlink:href="../../img/global.svg#icon-index"></use>
+                </svg>
+                首页
+            </a>
+        </aside>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function(){
+            return{
+                init:false,
+                layerItemIndex:0,
+                link:'',          // 广告链接
+                renewDays:1,       // 购买时长
+                renewList:[{      // 续费套餐价格 
+                    price:20,
+                    time:'天'
+                },{
+                    price:200,
+                    time:'月'
+                }],
+                showAnnounce:false,
+                readDone:false,
+                readTime:3
+            }
+        },
+        mounted:function() {
+            this.init = true,
+            this.showAnnounce = true;
+            this.readAnnounce()
+        },
+        computed:{
+            // 总价
+            totalPay:function() {
+                return (this.renewList[this.layerItemIndex].price * this.renewDays).toFixed(2)
+            }
+        },
+        watch:{
+            // 续费时间
+            renewDays:function(val) {
+                if(val <= 1){
+                    this.renewDays = 1
+                }
+            }
+        },
+        methods: {
+            // 选择续费项目
+            chooseRenewTime:function(e){
+                var index = +e.target.dataset.index;
+                if(index !== this.layerItemIndex){
+                    this.layerItemIndex = index
+                }
+            },
+            // 减
+            minus:function() {
+                if(this.renewDays > 1){
+                    --this.renewDays
+                }
+            },
+            // 加
+            add:function() {
+                ++this.renewDays
+            },
+            readAnnounce:function() {
+                var self = this;
+                var timer = setTimeout(function() {
+                    --self.readTime;
+                    if(self.readTime <= 0){
+                        clearTimeout(timer);
+                        self.readDone = true;
+                        return 
+                    }
+                    self.readAnnounce()
+                },1000)
+            },
+            // 关闭公告
+            closeAnnounce:function(){
+                if(this.readDone){
+                    this.showAnnounce = false
+                }
+            }
+        },
+    })
+</script>
+</html>

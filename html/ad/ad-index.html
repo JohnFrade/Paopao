@@ -12,35 +12,54 @@
 </head>
 <body>
     <div id="app" v-if="init">
-        <nav id="nav" @click.stop="switchNav">
+        <!-- 导航 -->
+        <nav id="nav" @click.stop="switchNav" class="global-flex global-flex-end">
             <a href="javascript:void(0);" class="nav-item" :class="{'nav-active':index === navIndex}" v-for="(item,index) of navList" :key="index" :data-index="index">{{item}}</a>
         </nav>
+        <!--  -->
         <main id="main">
-            <div>
-                <ul v-for="">
-                    <li>
-                        <div>
-                            <img src="" class="global-img">
-                            <div class="global-flex">
-                                <div>浏览量：5952</div>
-                                <div>浏览量：5952</div>
-                                <div>投放时长</div>
+            <div v-for="(adList,adIndex) of adBlock" :key="adIndex" v-show="adIndex === navIndex" ref="wrap">
+                <!-- 暂无投放历史 -->
+                <section v-if="adIndex === 1 && adBlock[adIndex].length === 0" class="ad-empty-block">
+                    <figure>
+                        <img src="../../img/ad-empty.png" class="ad-empty-img">
+                        <figcaption>
+                            暂无广告记录
+                        </figcaption>
+                    </figure>
+                    <a href="javascript:;" class="ad-empty-btn">投放广告</a>
+                </section>
+                <!-- 列表页面 -->
+                <ul class="ad-list" v-if="adList.length > 0" :data-test="adList.length">
+                    <li class="ad-item-wrp" v-for="(adItem,adItemIndex) of adList" :key="adItemIndex">
+                        <div class="ad-item-top">
+                            <div class="ad-item-cover">
+                                <img src="http://p9.pstatp.com/large/149b000474f2ffe61bfc" class="global-img">
+                            </div>
+                            <div class="global-flex global-flex-center ad-item-data">
+                                <div class="ad-item-data-item">浏览量：5952</div>
+                                <div class="ad-item-data-item">浏览量：5952</div>
+                                <div class="ad-item-data-item global-align-right">投放时长：7天</div>
                             </div>
                         </div>
-                        <div class="global-flex">
-                            <p></p>
-                            <button>下架</button>
-                            <button>续费</button>
-                            <button>重投</button>
+                        <div class="global-flex global-flex-center ad-item-bottom">
+                            <!-- 对应的状态请看设计稿 -->
+                            <p class="ad-time ad-time-red">2019-02-05 22:55 到期</p>
+                            <!-- <p class="ad-time">2019-02-05 22:55 已到期</p>
+                            <p class="ad-time">2019-02-05 22:55 自主下架</p> -->
+                            <button class="ad-item-bottom-btn global-align-right ad-unshelve" @click.stop="openDialog(adItemIndex)">下架</button>
+                            <button class="ad-item-bottom-btn ad-recharge" @click.stop="openLayer(adItemIndex)">续费</button>
+                            <!-- <button class="ad-item-bottom-btn global-align-right ad-reshelf">重投</button> -->
                         </div>
                     </li>
                 </ul>
-                <div></div>
+                <!-- v-show="loadAll[navIndex]" -->
+                <div class="load-all">我是底线</div>
             </div>
         </main>
         <!-- 续费 -->
-        <div class="layer-wrp" v-show="showLayer">
-            <div class="layer-mask"></div>
+        <div class="layer-wrp" v-show="showLayer" ref="layer">
+            <div class="layer-mask" @click.stop="showLayer = !showLayer"></div>
             <div class="layer-content">
                 <section class="global-flex global-flex-end layer-header">
                     <div class="layer-img">
@@ -56,20 +75,21 @@
                         </li>
                     </ul>
                 </section>
-                <section class="global-flex global-flex-between global-flex-center">
-                    <h2 class="layer-item-name">购买天/月数</h2>
+                <section class="global-flex global-flex-between global-flex-center" style="margin-bottom:2.33333333333rem">
+                    <h2 class="layer-item-name" style="margin-bottom:0">购买天/月数</h2>
                     <div class="global-flex">
-                        <button class="global-btn" @click.stop="minus">-</button>
+                        <button class="global-btn layer-item-btn" @click.stop="minus">-</button>
                         <form action="#">
-                            <input type="number" v-model.number="renewDays">
+                            <input type="number" v-model.number="renewDays" class="lay-input" pattern="[0-9]*" @blur="fixInputPosition">
                         </form>
-                        <button class="global-btn" @click.stop="add">+</button>
+                        <button class="global-btn layer-item-btn" @click.stop="add">+</button>
                     </div>
                 </section>
-                <footer class="layer-footer global-flex global-flex-between">
-                    <div>
-                        <span></span>
-                        <span>购买时长</span>
+                <footer class="layer-footer global-flex global-flex-between global-flex-center">
+                    <div class="layer-footer-text">
+                        <span class="total-price">{{totalPay}}</span>
+                        <span>购买时长：</span>
+                        {{renewDays + (layerItemIndex === 0?'天':'个月')}}
                     </div>
                     <button class="global-btn layer-footer-btn">付费</button>
                 </footer>
@@ -101,6 +121,10 @@
                 init:false,
                 navIndex:0,
                 navList:['展示中','投放历史'],      // 导航 
+                adBlock:[[1,2,3,4,5,6,7,8],[1]],  // 板块
+                loadAll:[false,false],  // 加载完成
+                isLoading:[false,false], // 正在加载中
+                scrollTopArr:[0,0],
                 layerItemIndex:0,  // 
                 renewDays:1,       // 购买时长
                 renewList:[{      // 续费套餐价格 
@@ -110,32 +134,74 @@
                     price:200,
                     time:'月'
                 }],
-                showLayer:true,  //显示弹层
+                showLayer:false,  //显示弹层
                 showDialog:false     
             }
         },
         mounted() {
-            this.init = true
+            this.init = true;
+            this.globalScroll()
         },
         computed:{
+            // 总价
             totalPay:function() {
-
+                return (this.renewList[this.layerItemIndex].price * this.renewDays).toFixed(2)
+            }
+        },
+        watch:{
+            // 续费时间
+            renewDays:function(val) {
+                if(val <= 1){
+                    this.renewDays = 1
+                }
             }
         },
         methods: {
+            // 全局滚动
+            globalScroll:function() {
+                var self = this;
+                window.onscroll = function(e) {
+                    self.$set(self.scrollTopArr,self.navIndex,window.scrollY)
+                    if(!self.loadAll[self.navIndex] && !self.isLoading[self.navIndex]){
+                        if(window.scrollY + document.documentElement.clientHeight + 128 >= document.documentElement.scrollHeight){
+                            self.loadData();
+                        }
+                    }
+                }
+            },
+            // 加载数据
+            loadData:function() {
+                if(!this.isLoading[this.navIndex]){
+                    this.$set(this.isLoading,this.navIndex,true);
+
+                }
+            },
+            // 修正input的位置
+            fixInputPosition:function() {
+                this.$refs.layer.scrollIntoViewIfNeeded()
+            },
             // 切换导航
             switchNav:function(e) {
-                var index = +e.target.dataset.index;
-                if(index !== this.navIndex){
-                    this.navIndex = index;
-                    if(1){
-                        `   
+                var index = e.target.dataset.index,
+                    self = this;
+                if(!!index && +index !== this.navIndex){
+                    this.navIndex = +index;
+                    self.globalScroll();
+                    this.$nextTick(function() {
+                        window.scrollTo(500,self.scrollTopArr[self.navIndex]);
+                    })
+                    if(!this.loadAll[this.navIndex] && this.adBlock[this.navIndex].length === 0){
+                        this.loadData()
                     }
                 }
             },
             // 显示弹层
-            openLayer:function() {
-
+            openLayer:function(e) {
+                this.showLayer = true
+            },
+            // 显示对话
+            openDialog:function(e){
+                this.showDialog = true
             },
             // 选择续费项目
             chooseRenewTime:function(e){
@@ -157,10 +223,10 @@
             // 隐藏对话
             hideDialog:function(e){
                 var type = e.target.dataset.type;
-                if(type === cancel){
+                if(type === 'cancel'){
                     this.showDialog = false
-                }else if (type === sure){
-
+                }else if (type === 'sure'){
+                    this.showDialog = false
                 }
             }
         }

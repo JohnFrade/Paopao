@@ -1,16 +1,152 @@
-#nav{
+body{
+    width: 100%;
+    height: 100%;
     background: #fff
 }
-/* .nav-item{
-    margin-right: ;
-    font-size: ;
-    color: 
+#nav{
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 640px;
+    height: 3.666666666667rem;
+    background: #fff;
+    box-shadow:0px 10px 30px 0px rgba(0, 0, 0, 0.05);
+    z-index: 99
+}
+.nav-item{
+    padding-bottom: .833333333333rem;
+    margin-right: 2.5833333333rem;
+    font-size: 1.3333333333rem;
+    color: #666;
+    transition: all .36s
 }
 .nav-active{
     color: #333;
-    font-size: ;
+    font-size: 2rem;
     font-weight: 700
-} */
+}
+#main{
+    padding-top: 3.666666666667rem
+}
+.ad-list{
+    padding:1rem 1rem 0
+}
+.ad-item-wrp{
+    margin-bottom: 1rem
+}
+.ad-item-top{
+    position: relative;
+    width: 100%;
+    height: 9.666666666667rem;
+    border-radius: .66666666666667rem;
+    overflow: hidden;
+}
+.ad-item-cover{
+    width: 100%;
+    height: 100%
+}
+.ad-item-data{
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 1rem;
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(0, 0, 0, .42)
+}
+.ad-item-data-item:nth-of-type(2){
+    margin-left: 2.5833333333rem
+}
+.ad-item-bottom{
+    padding: 1rem 0
+}
+.ad-time{
+    font-size:1.1666666666667rem;
+    color: #999;
+    line-height: 1.28571428
+}
+.ad-time-red{
+    color: #FB4D4A
+}
+.ad-item-bottom-btn{
+    box-sizing: border-box;
+    width: 6rem;
+    height:2rem;
+    line-height:2rem;
+    text-align: center;
+    color: #fff;
+    border-radius: 30px;
+    overflow: hidden
+}
+.ad-unshelve{
+    color:#666;
+    border: 1px solid #f2f2f2
+}
+.ad-recharge{
+    margin-left: 1rem;
+    background: #945DFF
+}
+.ad-reshelf{
+    background: #FB4D4A
+}
+
+/* 广告空 */
+.ad-empty-block{
+    padding-top: 6.666666666667rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #999
+}
+.ad-empty-img{
+    width: 12rem;
+    height: 12rem;
+    margin-bottom: 1rem
+}
+.ad-empty-btn{
+    display: block;
+    margin: 3.3333333333rem auto 0;
+    text-align: center;
+    width: 12rem;
+    height: 3.33333333333rem;
+    color: #fff;
+    line-height: 3.33333333333rem;
+    border-radius: 48px;
+    background: #945DFF
+}
+
+.load-all{
+    position: relative;
+    padding-bottom: 3rem;
+    margin-top: 4.375rem;
+    text-align: center;
+    font-size: .83333333334rem;
+    color: #999
+}
+.load-all::before,.load-all::after{
+    content: '';
+    position: absolute;
+    top: .5rem;
+    width: 2.83333333333rem;
+    height: 2px;
+}
+.load-all::before{
+    left: 30%;
+    background: linear-gradient(to right,#fff 30%,#c5c5c5 70%)
+}
+.load-all::after{
+    right: 30%;
+    background: linear-gradient(to left,#fff 30%,#c5c5c5 70%)
+}
+
 .layer-wrp,.dialog-wrp{
     position: fixed;
     top: 0;
@@ -80,10 +216,56 @@
     background: #ffc96b;
     border-color: #ffc96b
 }
+
+.layer-item-btn{
+    width: 1.666666667rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem
+}
+.lay-input{
+    margin: 0 .416666667rem;
+    width: 3.3333333rem;
+    height: 2rem;
+    font-size: 1.166666666667rem;
+    text-align: center;
+    line-height: 2rem;
+    background: #f2f2f2;
+    border-radius: 30px
+}
+.layer-item-btn:first-of-type{
+    color: #999
+}
+.layer-item-btn:last-of-type{
+    color: #333
+}
+.layer-footer{
+    height: 4.083333333333rem;
+    box-shadow:0px -10px 30px 0px rgba(0, 0, 0, 0.05)
+}
+.total-price{
+    color: #FF3939;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right:.8333333334rem
+}
+.total-price::before{
+    content: '￥';
+    font-size: 1.2rem
+}
+.layer-footer-text{
+    font-size: 1.1666666667rem;
+    color: #999
+}
+
 .layer-footer-btn{
     width: 12rem;
     height: 3.333333333rem;
     color: #fff;
+    text-align: center;
+    background: #945DFF;
     border-radius: 48px;
 }
 .dialog-content{
