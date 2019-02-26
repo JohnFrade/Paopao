@@ -66,6 +66,19 @@ body{
 .ad-item-data-item:nth-of-type(2){
     margin-left: 2.5833333333rem
 }
+.ad-status{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: .6666666666667rem 0;
+    background:linear-gradient(90deg,rgba(251,141,74,1),rgba(255,45,41,1));
+}
+.ad-status .global-tag-text::before{
+    border: unset
+}
+.ad-status .global-tag-text{
+    color: #fff;
+}
 .ad-item-bottom{
     padding: 1rem 0
 }
@@ -197,6 +210,7 @@ body{
     font-size: 0
 }
 .layer-item-item{
+    position: relative;
     display: inline-block;
     margin-right: 1rem;
     margin-bottom: 1.33333333333rem;
@@ -215,6 +229,17 @@ body{
     color: #333;
     background: #ffc96b;
     border-color: #ffc96b
+}
+.layer-tag{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FB4D4A;
+    border-radius: .666666666667rem 0
+}
+.layer-tag .global-tag-text{
+    color: #fff;
+    border: unset
 }
 
 .layer-item-btn{

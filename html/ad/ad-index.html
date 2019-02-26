@@ -20,7 +20,7 @@
         <main id="main">
             <div v-for="(adList,adIndex) of adBlock" :key="adIndex" v-show="adIndex === navIndex" ref="wrap">
                 <!-- 暂无投放历史 -->
-                <section v-if="adIndex === 1 && adBlock[adIndex].length === 0" class="ad-empty-block">
+                <section  class="ad-empty-block" v-if="adIndex === 1 && adBlock[adIndex].length === 0">
                     <figure>
                         <img src="../../img/ad-empty.png" class="ad-empty-img">
                         <figcaption>
@@ -40,6 +40,10 @@
                                 <div class="ad-item-data-item">浏览量：5952</div>
                                 <div class="ad-item-data-item">浏览量：5952</div>
                                 <div class="ad-item-data-item global-align-right">投放时长：7天</div>
+                            </div>
+                            <div class="global-tag ad-status">
+                                已下架
+                                <div class="global-tag-text">已下架</div>
                             </div>
                         </div>
                         <div class="global-flex global-flex-center ad-item-bottom">
@@ -72,6 +76,12 @@
                     <ul class="layer-item-list" @click.stop="chooseRenewTime">
                         <li class="layer-item-item" v-for="(item,index) of renewList" :key="index" :class="{'layer-item-active':layerItemIndex === index}" :data-index="index">
                             {{item.price+'元/'+ item.time}}
+                            <div class="layer-tag global-tag">
+                                荐
+                                <div class="global-tag-text">
+                                    荐
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </section>
