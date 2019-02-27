@@ -443,10 +443,10 @@ ul, li {
 /* 开通会员 */
 .global-vip-signs{
     margin-left: .5rem;
-    width: 2rem;
+    width: 1.33333333333rem;
     height: 1.16666666666rem;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAcCAMAAAAQssz4AAAATlBMVEUAAAD/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/yWv/////3KX/zXj/9eb/47n/0YT//Pf/8d7/7tX/58P/6sz/2Jv/1JD/+O//4K/eUGcMAAAACnRSTlMAyOk+89yKYiVIkjzwxgAAASBJREFUOMudlNuWgyAMRcULViKCd/3/Hx0EkgozQ7HnoQ1ruSE5IRSkirNS/KmS8aqI1TYiqaYNPn8x8VHsdcumFBkqKa9OZKrz+dS5QO2yYiJbzPqDq37DSPfSrmTvpIm4vCI/jxGjGXYJg9kCvCaJ7hqHiF7gdIEcB+EBZU9YzcKrKjgBO8wuUKAQ6P1eGAh+L3kapfsHHQE9LFS26xntbKTNSf8CZSHekuPkuDMGZiAHi3vXZrgMHIxbQdHnDBP1zqaEOkFdta9vwGlcJV2osM/HcDmyRSfooNf8DqywWyioIRDHxmErlg1UCqjc1SANxwo6ATR0+agVxtoE0MbXWwOoBMB+D5CUGOBPMEDPR9QTddaAdk+fme8essdP5Q9onDEL9NGgdwAAAABJRU5ErkJggg==) 0% 0%;
-    background-size: cover
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA4CAMAAAB6xg5AAAAAflBMVEUAAAD/rmz/rmz/r2z/rmz/r2z/rmz/r2v/rmv/rmv/r2z/rm3/r2v/r2j/r2z/sGv/r2z/rWz/rmz/rWz/rWz/rWz/rmz/r2z/sGv/yWv/rmz/////xmv/tWz/umz//ff/wWv/47P/2Zj/3qT/1Y3/vmv/y27/+vD/0YH/57455/EQAAAAGXRSTlMA9+wc44vSLb5zWUESDKUjtNvJmYBNqmg3aISE5AAAAd1JREFUSMeNl+t2gkAQgxdEREDxfgEBW2/t+79gXe0hMsMSvp9CojNkw9G0iPMBxMbJyB9i4I+MiygfROTST/OBTLv1E+95rTwSyudN3sR0EVrzEzM42bvCLv3YXjkfKWd731jrE/t5dRxAZe9MpD4NxABkiCAVBnMxAB1iLiIoB+BDxCqCJQYgnEoZyEgvgK8hEhG8cR24IZAkgiSQJII0kCyCPJAsgjyQLII8kCyCPJDjXGbo3iO638UMa3sK2g/xt3hcXfpLXV9aP2DVxLDZ4k9RFPXVobfXmhU0cZ6FLwcYwEHri8fHcfCS/6MUfEb5Cw5Sb/lGEpHlzMejgINDj7OwMw0HD2EQDlKPBYYzA7b9DtBjgV5mPtnnTgetfy1ga9psECg4KD0StDGStdMBeixwYTQLxAEOLT0WsEyNZrbqctB698sxXSJQcIAeCYpNN1nQ4dDWV443I+r1HUk4tPVn0eeK5B0oOECPFhqZHuJcOCi9dzC9TIVD/XjpscC9IYiO0x1G0B0nO4yDjgPoMA46DqDDCLLjQIUOI+iO0x3GQcfpDuPojkOHcXTHocMI7o5Dh3F0x6HDCM6Oe3cYXaC749BhFN1x/H8Sj2Rfh3EmPlkgJdt5fu/3/wEP+93VCuqDxQAAAABJRU5ErkJggg==) 0% 0%;
+    background-size: 100%
 }
 
 /* 更多操作 */

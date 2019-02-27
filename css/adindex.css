@@ -73,7 +73,7 @@ body{
     border-radius: .6666666666667rem 0;
     background:linear-gradient(90deg,rgba(251,141,74,1),rgba(255,45,41,1));
 }
-.ad-status .global-tag-text::before{
+.ad-status .global-tag-text{
     border: unset
 }
 .ad-status .global-tag-text{

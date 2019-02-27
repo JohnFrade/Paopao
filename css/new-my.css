@@ -13,7 +13,7 @@
 #header{
     width:100%;
     height: 15.916666667rem;
-    background: no-repeat;
+    background:url(../img/my-bg.png) no-repeat 0 0;
     background-size: 100%
 }
 .my-info{
@@ -51,7 +51,6 @@
     font-weight: 400;
     color: #fff;
     background: rgba(0, 0, 0, .62);
-    border: 1px solid #fff;
     border-radius: 24px 0 0 24px
 }
 .icon-ablum{
@@ -64,15 +63,15 @@
     padding: 0 1rem;
     text-align: center;
 }
+.my-nav-item{
+    color: #fff
+}
 .my-nav-item-data{
     display: block;
+    margin-bottom:2px; 
     font-size: 1.666666666667rem;
     font-weight: 700;
-    color:#fff;
     cursor: pointer
-}
-.my-nav-list .font-999{
-    font-size: 1rem
 }
 .my-tools{
     position: absolute;
@@ -88,31 +87,45 @@
     z-index: 2;
 }
 .my-tools-item{
+    position: relative;
     display: block;
     color: #333;
     font-size: 1rem;
 }
-.my-tools-item svg{
-    margin: 0 auto .66666666667rem;
-    width: 1.33333333333rem;
-    height: 1.33333333333rem;
+.my-tools-item-tips{
+    position: absolute;
+    top: -37.5%;
+    left: 25%;
+    width: 3.6666666666666rem;
+    height:2.83333333333rem;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAABECAMAAAAWak9jAAAAUVBMVEUAAAD7TUr7TUr7Tkv8TUr7TEn8TUr5TUn/UUb/VVX7TEr7TUr////9r678ioj+2dn8bmz7Xlz+4+P9o6L+7ez8fHv9xcT/9vb+z878l5X9urnKn2JCAAAAC3RSTlMA7Narlo9WKxYHvBpfyZQAAAQWSURBVGje7ZrrlpsgEIBtu+l2F4aLiIrv/6AduU04rImuabOc9vsTkgh8zhlHMOlWXi/f2Zfn++W1C7y9sEZ4efO+76wZ3lfjZuLrY4z5y5ritbuwprh0DdSHa753rDFOCEsp6c0CTrMjKAATm9QSAIIRDxbmnOe24HzaKUw90vlSCzgHhlhxhbohzEviwITcEpZ+pgLgNbBTWBadHipMcr3MLH9ReIDEkIUH6ek3hQ0vkf5D6SlOxfjxYI8wBMZ7wqQkszAUMdGmh0K48qVBwvkyohYGXvXOcyPivLCa/PVFwlAqzqEDjWIYou0ThGmKmYSVxNeZKoShehH69P51mNTHwgKAElHih2AeK4xgMosorGHCl4XZVD4dvnW+RYciEPvuyuFDwr1I9BvCIWxRWKHv5PxEOZ3HorRJqnt/QrikFs5pamJKWD5q9Jy8p14KX386ipr2acIKsy7lcMhX22PU3UC+FFZy6TeFKYfrsnY+JRAcxnjhjO75ypRHJ0dEC1iDDxvCBAkTpy86xGIkC2EFA0dkSAAqz8YByDz9pJ4jjCyOkbCFEN6hWGn1vECOOOC8P4dFAM4KE1HYyol75lVX0eJq4YFeAggVrztx9qI7L6wnbwWKZgyIGUWFLnJ61s8XZjDNwbYUJgTE77V7VlkjYWJbGNZMCNytEn9eWImCkfNRIPqvCQ9wxU1h64WBf4g4JEw3jjM5jNwSNvyM8P0cloH+UcIQc0ZAgtaHiIqHlMBd4RM3DqNvCOuZI3cuuhPC/LCwknzZEI5LnclkYTHrzwtDtYAH8jiQwwPndksYJvS1uayh+fz5ssZrmDgsTHubWlj5jbD1U+VbzPhQYYPHHBOmvWQtbOMejoT1wLn5rLCoWVev7rCw8pvJ2EMLRKJoCCht8wPWbyf2CVspDQkH1BJXIirnoz4gTOvbJfe4vmCt/ejJz6DvCxOl8OjPV/UxCy3HxhFhBT0PqNAjFcZeV7dmSiB3V1iAq4Sp6SdZoj/sE9bYM9vOC+dj6iEAoekqYT24WynhBIz91rM17StSWjCHBavaJzzyxADKp5KqehxcrSkB8s7DQHpU5HxmQXFHvSVsk+1iU4E1B4VnOtrAKAd+hVyM33jocK9MtXChjPVJodJSRCg87PZaYh1fgqVtmWN7hVVaqnBDkyeGGVwe1VC849vJUmlCe3SINgG3LQxL9dx/d4SznL7e00lSJalIr+mhTAIGsZYMGoDCT8IVh4UpoHLUOcGcYB8iPSPo6GgYofHDEeLM6bCCf+lXpF38F25N+Ftrws39dHtpTfi1MeGXri3h97e2hF/eunaEv6W/gVVf/Oy+Nqzkx6/ui9NWeJG2wou0FV6krfAibYUXaSu8SFvhRdoKL9JWeJG2wtt1vwFNi8VW0LjJzQAAAABJRU5ErkJggg==) no-repeat;
+    background-size: 100%
+    
 }
-/* .my-tools-item:first-of-type svg{
-    width: ;
-    height: ;
+.my-tools-item svg{
+    display:block;
+    margin: 0 auto
+}
+.my-tools-item:first-of-type svg{
+    margin-bottom: .666666667rem;
+    width: 1.8333333333333rem;
+    height: 1.8333333333333rem
 }
 .my-tools-item:nth-of-type(2) svg{
-    width: ;
-    height: ;
+    margin-bottom: .666666667rem;
+    width: 1.8333333333333rem;
+    height: 1.8333333333333rem
 }
 .my-tools-item:nth-of-type(3) svg{
-    width: ;
-    height: ;
+    margin-bottom: .75rem;
+    width: 1.75rem;
+    height: 1.75rem
 }
 .my-tools-item:last-of-type svg{
-    width: ;
-    height: ;
-} */
+    margin-bottom: .666666667rem;
+    width: 1.5rem;
+    height: 1.5rem
+}
 /* 我的 */
 .empty-bar{
     width: 100%;
@@ -130,7 +143,7 @@
     color: #333;
     background: #fff
 }
-.my-item-wrapper:nth-last-of-type(3){
+.my-item-wrapper:nth-last-of-type(4){
     margin-top: .833333333333rem
 }
 .icon-my-item{
@@ -155,15 +168,4 @@
 .my-text-center{
     position: relative;
     top:1px
-}
-.my-invited{
-    position: fixed;
-    top:58%;
-    right:-2.7191666666rem;
-    width: 3.666666666666rem;
-    height: 4.7916666666rem;
-    transition: transform .48s
-}
-.show-invited{
-    transform: rotate(-30deg) translate(-50%)
 }
