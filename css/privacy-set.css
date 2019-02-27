@@ -1,0 +1,99 @@
+.weui-cell__ft {
+    font-size: 0;
+    text-align: right;
+    color: #808080;
+}
+.weui-switch:checked, .weui-switch-cp__input:checked ~ .weui-switch-cp__box {
+    border-color: #6CCD42;
+    background-color: #6CCD42;
+}
+.weui-switch:checked:after, .weui-switch-cp__input:checked ~ .weui-switch-cp__box:after {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+}
+.weui-switch:after, .weui-switch-cp__box:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+    transition: -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+    transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+    transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35), -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+}
+.weui-switch-cp__box {
+    display: block;
+}
+.weui-switch, .weui-switch-cp__box {
+    position: relative;
+    width: 52px;
+    height: 32px;
+    border: 1px solid #DFDFDF;
+    outline: 0;
+    border-radius: 16px;
+    box-sizing: border-box;
+    background-color: #DFDFDF;
+    -webkit-transition: background-color 0.1s, border 0.1s;
+    transition: background-color 0.1s, border 0.1s;
+}
+
+
+main{
+    margin:.83333333333rem 0 5rem
+}
+section{
+    padding: 1.33333333333rem 1rem;
+    background: #fff
+}
+.tag-name{
+    margin-bottom: .83333333333rem;
+    font-size: 1.16666666666rem;
+    color: #333
+}
+section:nth-of-type(1) .tag-name,section:nth-of-type(2) .tag-name{
+    margin-bottom: 0
+}
+section:nth-of-type(1) .global-flex-1,section:nth-of-type(2) .global-flex-1{
+    margin-right: .3333333333333rem;
+    text-align: right;
+    font-size: 1.16666666667rem;
+    color: #333
+}
+section:nth-of-type(1) .global-flex-1::-webkit-input-placeholder,section:nth-of-type(2) .global-flex-1::-webkit-input-placeholder{
+    color: #999
+}
+
+.icon-arrow-right{
+    width: 1rem;
+    height: 1.16666666667rem;
+}
+
+p{
+    font-size: 1rem;
+    color: #999
+}
+
+.footer-btn{
+    display: block;
+    margin: 0 auto;
+    width: 85.3333333336%;
+    text-align: center;
+    font-size: 1.33333333333rem;
+    height: 3.666666666667rem;
+    line-height: 3.6666666666667rem;
+    border-radius: 56px;
+}
+.footer-btn-back{
+    margin-bottom: 1rem;
+    color: #333;
+    background: #ffff
+}
+.footer-btn-delete{
+    color: #fff;
+    background: #FB4D4A
+}

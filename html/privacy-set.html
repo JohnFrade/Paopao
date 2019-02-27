@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/privacy-set.css">
+        <title>隐私设置</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <main>
+                <section class="global-flex global-flex-center">
+                    <h2 class="tag-name">手机认证</h2>
+                    <input type="number" name="number" pattern="[0-9]*" placeholder="请输入手机号码" class="global-align-right global-flex-1"
+                        v-model="phone">
+                    <svg aria-hidden="true" class="icon-arrow-right">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+                </section>
+                <section class="global-flex global-flex-center">
+                    <h2 class="tag-name">微信号</h2>
+                    <input type="text" placeholder="未填写" class="global-align-right global-flex-1" v-model.trim="wechat">
+                    <svg aria-hidden="true" class="icon-arrow-right">
+                        <use xlink:href="../img/global.svg#icon-arrow-right"></use>
+                    </svg>
+                </section>
+                <section class="global-flex global-flex-center global-flex-between">
+                    <div>
+                        <h2 class="tag-name">联系方式是否公开</h2>
+                        <p>用户付费获取联系方式，您将获得现金分成</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <label for="switchCP-1" class="weui-switch-cp">
+                            <input id="switchCP-1" class="weui-switch-cp__input" type="checkbox" checked="checked">
+                            <div class="weui-switch-cp__box"></div>
+                        </label>
+                    </div>
+                </section>
+                <section class="global-flex global-flex-center global-flex-between">
+                    <div>
+                        <h2 class="tag-name">首页信息展示</h2>
+                        <p>关闭后，将不在首页显示您的资料</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <label for="switchCP-2" class="weui-switch-cp">
+                            <input id="switchCP-2" class="weui-switch-cp__input" type="checkbox" checked="checked">
+                            <div class="weui-switch-cp__box"></div>
+                        </label>
+                    </div>
+                </section>
+                <section class="global-flex global-flex-center global-flex-between">
+                    <div>
+                        <h2 class="tag-name">相亲信息展示</h2>
+                        <p>关闭后，将不在相亲页显示您的资料</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <label for="switchCP-3" class="weui-switch-cp">
+                            <input id="switchCP-3" class="weui-switch-cp__input" type="checkbox" checked="checked">
+                            <div class="weui-switch-cp__box"></div>
+                        </label>
+                    </div>
+                </section>
+            </main>
+            <a href="javascript:void(0);" class="footer-btn footer-btn-back">返回个人中心</a>
+            <a href="javascript:void(0);" class="footer-btn footer-btn-delete">删除资料</a>
+        </div>
+    </body>
+    <script src="../js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false,
+                    phone: '',
+                    wechat: ''
+                }
+            },
+            mounted: function () {
+                this.init = true
+            },
+            watch: {
+                phone: function (val) {
+                    if (val.length >= 11) {
+
+                    }
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+</html>

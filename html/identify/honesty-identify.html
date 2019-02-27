@@ -107,9 +107,30 @@
                 <p>您上传的证件图片等资料，仅供审核使用且TA人无法查看。除此之
                     外，我们还会进行安全水印处理，尽情放心。</p>
             </footer>
+            <div class="layer">
+                <div class="layer-mask"></div>
+                <div class="layer-content">
+                    <h2 class="layer-title">认证服务条款</h2>
+                    <div class="layer-txt-wrp">
+                        <p>尊敬的用户：</p>
+                        <p>您上传的证件图片等资料，仅供审核使用且TA人无法查看。</p>
+                        <p>除此之外，我们还会进行安全水印处理，尽情放心。</p>
+                    </div>
+                    <div class="layer-comfirm">
+                        <form action="">
+                            <input type="checkbox">
+                        </form>
+                        已阅读并同意认证服务条款
+                    </div>
+                    <p class="layer-tips">
+                        (平台仅作信息展示，不负责也不能保证信息的真实性。因此，如果当事人因信息认证原因，产生相关刑事事件，本平台将不负责相关责任）
+                    </p>
+                    <button class="layer-btn" :class="">确定</button>
+                </div>
+            </div>
         </div>
     </body>
-    <script src="../../js/vue.min.js"></script>
+    <script src="../../js/vue.min.js" @click.stop="closeLayer"></script>
     <script>
 
         var app = new Vue({
@@ -117,7 +138,11 @@
             data: function () {
                 return {
                     init:false,
-                    starList:[]
+                    starList:[],
+                    layer:{
+                        showLayer:true,
+                        readDone:false
+                    }
                 }
             },
             created() {
