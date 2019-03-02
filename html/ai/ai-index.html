@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <title>脱单神预测</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/ai-index.css">
+</head>
+<body>
+    <div id="app" v-if="init">
+        <h1>你能脱单吗？</h1>
+        <h2>人工智能检测 • 解锁2019的桃花运</h2>
+        <div>
+            
+            <button>测一测</button>
+        </div>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function(){
+            return{
+                init:false
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/link-share.css">
+    <title>预测结果</title>
+</head>
+<body>
+    <div id="app" v-if="init">
+        <h1 class="">脱单神预测</h1>
+        <div class="poster-wrp">
+            <canvas id="poster"></canvas>
+            <img src="">
+        </div>
+        <h2 class="">长按保存图片，分享赚钱</h2>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    // 预加载图片
+    function preLoadImg(){
+
+    }
+
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return{
+                init:false
+            }
+        },
+        mounted:function() {
+            this.init = true
+            this.drawPoster()
+        },
+        methods:{
+            //  绘制海报
+            drawPoster:function() {
+
+            }
+        }
+    })
+</script>
+</html>
