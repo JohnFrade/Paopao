@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/wechat-identify.css">
+        <title>微信认证</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1 class="title">微信认证</h1>
+            <section class="phone-verify-wrp global-flex global-flex-center">
+                <h2 class="tag-name">微信号码</h2>
+                <div class="phone-verify-text">
+                    <i class="icon-checkbox icon-selected"></i>
+                    未认证
+                </div>
+            </section>
+            <section class="phone-wrp">
+                <input type="text" placeholder="请输入您的微信号码" class="phone-input">
+            </section> 
+            <section class="tips">
+                <p>微赞相亲平台名作为一个真实、严肃的相亲交友平台。我们要求用户必须完成手机认证（微信号非必填）尽可能的保证会员的真实性。高星认证，将给与他人信任的感觉，更受欢迎。
+                </p>
+                <p>温馨提示：</br>中国地区以外的地区，手机号将不是必填。微信号为必填项</p>
+            </section>
+            <footer id="footer">
+                验证
+            </footer>
+            <div class="layer-wrp" v-show="layer.show">
+                    <div class="mask"></div>
+                    <div class="layer-content">
+                        <div class="layer-tips">
+                            <img src="../../img/layer-tips.png" class="global-img">
+                        </div>
+                        <div class="font-center font-14 font-333 layer-content-text" v-html="layer.text">
+                        </div>
+                        <div class="global-flex global-border global-border-top layer-btn-wrp" :class="{'layer-btn-both':layer.btnBoth}">
+                            <button class="global-flex-1 global-btn layer-btn font-999" v-if="layer.btnBoth">取消</button>
+                            <button class="global-flex-1 global-btn layer-btn font-blue">确定</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:function() {
+                return {
+                    init:false,
+                    layer:{
+                        show:true,
+                        btnBoth:true,
+                        text:'微信每个月只可认证1次<br>继续进行认证申请？' 
+                    }
+                }
+            },
+            mounted:function() {
+                this.init = true
+            },
+            methods: {
+            
+            }
+        })
+</script>
+
+</html>

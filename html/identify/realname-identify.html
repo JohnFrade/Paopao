@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/realname-identify.css">
+    <title>实名认证</title>
+</head>
+<body>
+    <div id="app">
+        <h1 class="title">请按照正反面示例上传</h1>
+        <section class="global-flex global-flex-between">
+            <div class="id-item">
+                <div class="id-item-cover">
+                    <img src="../../img/id-up.png" class="global-img">
+                    <a href="javascript:;" class="id-btn">
+                        <img src="../../img/id-add-btn.png" class="global-img">
+                        <input type="file">
+                    </a>
+                </div>
+                <p>证件正面</p>
+            </div>
+            <div class="id-item">
+                <div class="id-item-cover">
+                    <img src="../../img/id-opp.png" class="global-img">
+                    <a href="javascript:;" class="id-btn">
+                        <img src="../../img/id-add-btn.png" class="global-img">
+                        <input type="file">
+                    </a>
+                </div>
+                <p>证件反面</p>
+            </div>
+        </section>
+        <section class="input-wrp">
+            <h2 class="tag-name">真实姓名</h2>
+            <input type="text" class="input" placeholder="请填写您的姓名">
+        </section>
+        <section class="input-wrp">
+            <h2 class="tag-name">身份证号码</h2>
+            <input type="text" class="input" placeholder="请填写您的身份证号码">
+        </section>
+        <section class="slogan">
+            实名认证的好处？
+            ***平台名作为一个真实、严肃的相亲交友平台。身份证认证可以让人更放心的与您交往。高星认证，将给与他人信任的感觉，更受欢迎。
+        </section>
+        <!-- 审核中 global-bg-orange-->
+        <!-- 已认证 global-bg-blue-->
+        <footer id="footer">
+            提交
+        </footer>
+        <div class="layer-wrp" v-show="layer.show">
+            <div class="mask"></div>
+            <div class="layer-content">
+                <div class="layer-tips">
+                    <img src="../../img/layer-tips.png" class="global-img">
+                </div>
+                <div class="font-center font-14 font-333 layer-content-text" v-html="layer.text">
+                </div>
+                <div class="global-flex global-border global-border-top layer-btn-wrp" :class="{'layer-btn-both':layer.btnBoth}">
+                    <button class="global-flex-1 global-btn layer-btn font-999" v-if="layer.btnBoth">取消</button>
+                    <button class="global-flex-1 global-btn layer-btn font-blue">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return{
+                layer:{
+                    show:true,
+                    btnBoth:false,  // 认证了只有一个确定按钮
+                    // text:'实名认证通过后<br>不可修改，继续行认证申请？' // 未认证
+                    text:'你已通过实名认证<br>不可再次认证' // 已认证
+                }
+            }
+        },
+        methods:{
+            
+        }
+    })
+</script>
+</html>

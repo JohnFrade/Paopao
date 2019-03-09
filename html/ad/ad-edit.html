@@ -49,13 +49,13 @@
                 <div class="global-flex">
                     <button class="global-btn edit-btn" @click.stop="minus">-</button>
                     <form action="#">
-                        <input type="number" v-model.number="renewDays" class="ad-edit-time" pattern="[0-9]*">
+                        <input type="number" v-model.number="renewDays" class="ad-edit-time" pattern="[0-9]*" @focus="testFoucs" @blur="testBlur">
                     </form>
                     <button class="global-btn edit-btn" @click.stop="add">+</button>
                 </div>
             </section>
         </main>
-        <footer class="footer global-flex global-flex-between global-flex-center">
+        <footer class="footer global-flex global-flex-between global-flex-center" ref="footer">
             <div class="footer-text">
                 <span class="total-price">{{totalPay}}</span>
                 <span>购买时长：</span>

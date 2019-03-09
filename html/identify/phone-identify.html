@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <title>手机认证</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/phone-identify.css">
+</head>
+<body>
+    <div id="app" v-if="init">
+        <h1 class="title">手机认证</h1>
+        <section class="phone-verify-wrp global-flex global-flex-center">
+            <h2 class="tag-name">手机号码</h2>
+            <div class="phone-verify-text">
+                <i class="icon-checkbox icon-selected"></i>
+                未认证
+            </div>
+        </section>
+        <section class="phone-wrp">
+            <input type="number" pattern="[0-9]*" placeholder="请输入手机号码" class="phone-input">
+        </section>
+        <section class="verify-code-wrp">
+            <h2 class="tag-name">验证码</h2>
+            <div class="global-flex global-flex-center global-flex-between">
+                <input type="number" placeholder="获取验证码" name="number" pattern="[0-9]*" class="verify-code-input">
+                <button class="global-btn global-border-all verify-code-btn">获取验证码</button>
+            </div>
+        </section>
+        <section class="tips">
+            <p>微赞相亲平台名作为一个真实、严肃的相亲交友平台。我们要求用户必须完成手机认证（微信号非必填）尽可能的保证会员的真实性。高星认证，将给与他人信任的感觉，更受欢迎。
+            </p>
+            <p>温馨提示：</br>中国地区以外的地区，手机号将不是必填。微信号为必填项</p>
+        </section>
+        <footer id="footer">
+            验证
+        </footer>
+
+        <div class="layer-wrp">
+            <div class="mask"></div>
+            <div class="layer-content">
+                <h2 class="layer-tips-title">关于隐私安全</h2>
+                <div class="layer-tips-text">您验证的手机号码将会展示给已开通VIP会员的会员，展示与否将取决于您个人。如不需要展示，可在【个人中心】 - 【隐私设置】关闭联系信息展示。</div>
+                <button class="global-btn layer-tips-btn">确定</button>
+            </div>
+        </div>
+
+        <div class="layer-wrp" v-show="layer.show">
+            <div class="mask"></div>
+            <div class="layer-content">
+                <div class="layer-tips">
+                    <img src="../../img/layer-tips.png" class="global-img">
+                </div>
+                <div class="font-center font-14 font-333 layer-content-text" v-html="layer.text">
+                </div>
+                <div class="global-flex global-border global-border-top layer-btn-wrp" :class="{'layer-btn-both':layer.btnBoth}">
+                    <button class="global-flex-1 global-btn layer-btn font-999" v-if="layer.btnBoth">取消</button>
+                    <button class="global-flex-1 global-btn layer-btn font-blue">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return {
+                init:false,
+                layer:{
+                    show:true,
+                    btnBoth:true,
+                    text:'手机每个月只可认证1次<br>继续进行认证申请？' 
+                }
+            }
+        },
+        mounted:function() {
+            this.init = true
+        },
+        methods: {
+            
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,63 @@
+body{
+    padding: 0 1.375rem;
+    background: #fff
+}
+.title{
+    padding: 1.666666666666rem 0 1rem;
+    font-size: 1.5rem;
+    color: #333
+}
+.tips{
+    margin-bottom: 2rem;
+    color: #FB4D4A;
+    font-size: 1.16666666667rem
+}
+.car-picture{
+    position: relative;
+    margin: 0 auto 2.25rem;
+    width: calc(100% - 2.3333333333333rem);
+    height: 13.33333333333rem
+}
+.id-btn{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+input[type="file"]{
+    position: relative;
+    top: -100%;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%
+}
+.slogan{
+    margin-bottom:1.6666666667rem; 
+    font-size: 1.1666666667rem;
+    color: #999;
+    line-height: 1.5
+}
+#footer{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    height: 4.08333333333333rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    line-height: 4.08333333333333rem;
+    background:linear-gradient(90deg,rgba(97,171,255,1),rgba(207,42,255,1))
+}

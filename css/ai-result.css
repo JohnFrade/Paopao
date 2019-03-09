@@ -1,0 +1,196 @@
+header{
+    padding: 2rem 0 5rem;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    background: blue
+}
+.score-wrp{
+    margin-bottom: 1rem
+}
+.score-num{
+    margin-right: .5rem;
+    font-size: 5rem
+}
+.score{
+    font-size: 1.833333333rem
+}
+.star-name{
+    font-size: 1.5rem;
+    vertical-align: middle
+}
+.star-list-wrp{
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 0;
+    width: 7.66666666667rem;
+    height: 1.416666666667rem;
+}
+.star-list{
+    width: 100%;
+    height: 100%;
+    background: red
+}
+#main{
+    position: relative;
+    padding: 0 1rem 5rem;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 93.6%;
+    background: #fff;
+    border-radius: .6666666667rem .6666666666667rem 0 0
+}
+.avatar{
+    box-sizing: border-box;
+    position: absolute;
+    top: -3.95833333333rem;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 7.916666666667rem;
+    height: 7.916666666667rem;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    overflow: hidden
+}
+.feature-list{
+    position: relative;
+    padding:1.5rem 0;
+    width: 100%;
+    height: 7.33333333333rem
+}
+.feature-item{
+    position: absolute;
+    width: 6.16666666667rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1.1666666666667rem;
+    color:#805B06;
+    text-align: center;
+    background: #FFF5E0;
+    border-radius:36px
+}
+.feature-item:nth-of-type(1){
+    top: 1.5rem;
+    left: 0;
+}
+.feature-item:nth-of-type(2){
+    top: 1.5rem;
+    right: 0;
+}
+.feature-item:nth-of-type(3){
+    top: 5rem;
+    left: 1.5rem;
+}
+.feature-item:nth-of-type(4){
+    top: 5rem;
+    right: 1.5rem;
+}
+.feature-item:nth-of-type(5){
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto
+}
+.feature-item::before{
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    border: 1px solid #D5BB7F;
+    border-radius: 100px
+}
+.result-list{
+    padding-bottom: 1.5rem
+}
+.result-item{
+    position: relative;
+    border-radius: .66666666667rem;
+    overflow: hidden;
+}
+.result-item:not(:last-of-type){
+    margin-bottom: 1.5rem
+}
+.result-item-name-text{
+    margin:auto;
+    width: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 1.5
+}
+.result-item::after{
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    transform: scale(.5);
+    border: 1px solid #ccc;
+    border-radius: 1.33333333333333rem
+}
+.result-item-name{
+    width: 4rem;
+    min-height: 6.66666666667rem;
+    font-weight: 700;
+    text-align: center;
+    writing-mode:lr-tb
+}
+.result-fortune{
+    color:#805B06;
+    background: #FFB60D;
+}
+.result-love{
+    color:#800000;
+    background:rgba(255,0,0,.5);
+}
+.result-lucky{
+    color:#1E9BE1;
+    background:rgba(30,155,225,.5);
+}
+.result-item-content{
+    box-sizing: border-box;
+    padding: 1rem 1.5rem;
+    line-height: 1.5;
+    color: #666;
+    font-size: 1.166666666667rem;
+    background:rgba(246,249,252,1);
+}
+#footer{
+    box-sizing: border-box;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding:0 2.20833333333rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    height: 5rem;
+    background: #fff;
+}
+.footer-btn{
+    width: 37.3333333333%;
+    height: 3.66666666666667rem;
+    color: #fff;
+    font-size: 1.3333333333333rem;
+    border-radius: 56px
+}
+.footer-btn:first-of-type{
+    background:rgba(255,182,13,1);
+    box-shadow:0px 5px 68px 0px rgba(255,182,13,0.36);
+}
+.footer-btn:last-of-type{
+    background:linear-gradient(0deg,rgba(249,96,42,1),rgba(240,6,160,1));
+    box-shadow:0px 2px .5rem 0px rgba(158,64,255,0.54), 0px -2px 4px 0px rgba(183,6,6,0.65), 0px -2px .5rem 0px rgba(255,88,218,0.65); 
+}
+.footer-icon{
+    width: 1.4166666666666rem;
+    height:1.4166666666666rem;
+    margin-right: .5rem
+}

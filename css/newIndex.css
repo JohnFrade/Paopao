@@ -187,7 +187,7 @@
     transition:all .28s
 }
 .block-nav-item:not(:last-of-type){
-    margin-right: 2.25rem
+    margin-right: 2rem
 }
 .block-nav-active{
     color: #333;

@@ -124,8 +124,8 @@
             var outline = Math.round(winW * 0.06557377049180328);
             return {
                 outline:outline,
-                w: (winW + outline) * 4,
-                h: (winH + outline) * 4
+                w: (winW + outline) * 2,
+                h: (winH + outline) * 2
             }
         }
         // 修正月份
@@ -457,10 +457,8 @@
                         (405 /
                             434) * parent.h);
                     
-
                     // canvas 转base64
                     var src = canvas.toDataURL('image/jpeg', 1);
-
                     this.$set(this.imgArr,currentIndex,src)
                     this.$set(this.loadStatus,currentIndex,true);
                 },

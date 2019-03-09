@@ -8,25 +8,70 @@
     <meta content="email=no" name="format-detection">
     <meta name="x5-page-mode" content="app">
     <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/link-share.css">
-    <title>预测结果</title>
+    <link rel="stylesheet" href="../../css/ai-share.css">
+    <title>脱单分享</title>
 </head>
 <body>
     <div id="app" v-if="init">
-        <h1 class="">脱单神预测</h1>
         <div class="poster-wrp">
             <canvas id="poster"></canvas>
-            <img src="">
+            <img src="" class="poster-img">
         </div>
-        <h2 class="">长按保存图片，分享赚钱</h2>
+        <h1 class="poster-tips">长按保存图片，分享赚钱</h1>
     </div>
 </body>
 <script src="../../js/vue.min.js"></script>
 <script>
-    // 预加载图片
-    function preLoadImg(){
-
+    // 加载图片
+    function preLoadImg(img) {
+        if(!img) return;
+        var newImg = new Image();
+        var loadDone = function () {}
+        newImg.src = img;
+        newImg.onload = function () {
+            loadDone(newImg)
+        }
+        return {
+            done: function (f) {
+                loadDone = f || loadDone
+            }
+        }
     }
+
+    // 获取canvas的尺寸
+    function getCanvasSize() {
+        var u = navigator.userAgent;
+        var winW = document.documentElement.clientWidth;
+        var winH = document.documentElement.clientHeight;        
+        if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+            winH = winH*1.08;
+        }
+        winW = Math.round(((winW >= 640 ? 640 : winW) * 0.8));
+        winH = Math.round(winH * 0.7860199004975);
+        var outline = Math.round(winW * 0.0166666666667)
+        return {
+            outline:outline*2,
+            w: winW * 2,
+            h: winH * 2
+        }
+    }
+
+    // 获取缩放比例
+    function getBasePixal() {
+        var winW = document.documentElement.clientWidth;
+        winW = winW >= 640 ? 640 : winW;
+        if (winW >= 320 && winW < 360) {
+            return 10
+        } else if (winW >= 360 && winW < 414) {
+            return 12
+        } else if (winW >= 414 && winW < 480) {
+            return 14
+        } else if (winW >= 480) {
+            return 16
+        }
+    }
+
+    //
 
     var app = new Vue({
         el:'#app',
@@ -36,13 +81,71 @@
             }
         },
         mounted:function() {
-            this.init = true
-            this.drawPoster()
+            this.init = true;
+            this.$nextTick(function() {
+                this.drawPoster()
+            })
         },
         methods:{
             //  绘制海报
-            drawPoster:function() {
+            drawPoster:function(content) {
+                var canvas = document.getElementById("poster");
+                var ctx = canvas.getContext("2d");
+                var parent = getCanvasSize();
+                console.log(parent)
+                canvas.setAttribute("width", parent.w);
+                canvas.setAttribute("height", parent.h);
+                canvas.style.width = (parent.w / 2) + 'px';
+                canvas.style.height = (parent.h / 2) + 'px';
 
+                // 字体的缩放系数
+                var fontSize = getBasePixal();
+
+                // 清空画布
+                ctx.clearRect(0, 0, parent.w, parent.h)
+
+                // 开始绘制
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, parent.w, parent.h);
+
+                // 绘制banner
+                preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551695617646&di=81f9ddfc9cd3b5106d7253ebb9f0d0b0&imgtype=0&src=http%3A%2F%2Ff2.dn.anqu.com%2Fdown%2FZmEwZA%3D%3D%2Fallimg%2F1208%2F48-120P5154015.jpg').done(function(img) {
+                    ctx.drawImage(img, parent.outline, parent.outline, parent.w-parent.outline*2, parent.w-parent.outline*0.80357142857);
+                })
+
+                // 绘制头像
+                function drawAvatar(ctx,img,x,y,r){
+                    // ctx.save();
+                    var d = 2 * r;
+                    var cx = x + r;
+                    var cy = y + r;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                    ctx.clip();
+                    ctx.drawImage(img, x, y, d, d);
+                    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                }
+
+                // 绘制头像
+                preLoadImg('http://img.duoziwang.com/2017/10/1722593612686.jpg').done(function(img) {
+                    drawAvatar(ctx,img,20*fontSize,5.833333333*fontSize,5*fontSize)
+                })
+
+                // 绘制用户名
+                var test = '哈哈哈哈哈哈';
+                ctx.font = fontSize * 2 + 'px PingFang SC';
+                ctx.fillStyle = '#fff';
+                ctx.fillText(test, (parent.w - ctx.measureText(test).width) / 2,0.2229166666667 * parent.h);
+
+                // 分数
+
+                // 星星
+
+                // 标题
+
+                // 副标题
+
+                // 二维码
             }
         }
     })
