@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/swiper.min.css">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/activity-common.css">
+        <link rel="stylesheet" href="../../css/activity-index.css">
+        <title>活动</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <header id="header">
+                <div class="swiper-container banner-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="javascript:void(0);" class="banner-wrp">
+                                <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=8279363,686873154&fm=26&gp=0.jpg"
+                                    alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-container global-flex global-flex-center announce-swiper">
+                    <svg class="icon-announce">
+                        <use xlink:href="../../img/index.svg#icon-announce"></use>
+                    </svg>
+                    <div class="swiper-wrapper global-flex-1">
+                        <div class="swiper-slide global-flex global-flex-center">
+                            <div class="global-tag">
+                                投票<i class="global-tag-text">投票</i>
+                            </div>
+                            <p class="font-ellipsis font-ellipsis-1">
+                                富商大贾的房间空间看过浪费电脑开始管理费等功能的风格哦infgio
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="main">
+                <nav class="activity-list global-flex global-flex-between">
+                    <a href="javascript:void(0);" class="activity-item">
+                        <img src="../../img/activity-1.png" alt="" class="global-img">
+                        <h2>线上线下活动</h2>
+                    </a>
+                    <a href="javascript:void(0);" class="activity-item">
+                        <img src="../../img/activity-2.png" alt="" class="global-img">
+                    </a>
+                    <a href="javascript:void(0);" class="activity-item">
+                        <img src="../../img/activity-3.png" alt="" class="global-img">
+                    </a>
+                </nav>
+                <div class="empty-bar-position" ref="nav" :class="{'sticky-fixed':isIOS}">
+                    <nav class="activity-nav-wrp" :class="{'fixed-nav':!isIOS && fixedNav}">
+                        <ul class="activity-nav-list" @click="switchNav">
+                            <li class="activity-nav-item" :class="{'activity-nav-index':navIndex === 0}">
+                                <a href="javascript:void(0);" :data-index="0">活动</a>
+                            </li>
+                            <li class="activity-nav-item" :class="{'activity-nav-index':navIndex === 1}" :data-index="1"
+                                style="display:none">
+                                <a href="javascript:void(0);" :data-index="1">投票</a>
+                            </li>
+                        </ul>
+                        <div class="nav-slider" :style="{transform:'translateX('+4.6*navIndex+'rem)'}"></div>
+                    </nav>
+                </div>
+                <div class="activity-block-wrp">
+                    <!-- 活动 -->
+                    <div  v-show="navIndex === 0">
+                        <ul class="activity-block">
+                            <li class="activity-block-item global-border global-border-bottom" v-for="(activityItem,activityIndex) of activityList"
+                                :key="activityIndex">
+                                <a href="./activity-detail.html" class="activity-block-item-wrp">
+                                    <div class="activity-item-top">
+                                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552920962893&di=9b986485d02c96a88d497310e9ed8b30&imgtype=0&src=http%3A%2F%2Fpic22.nipic.com%2F20120725%2F3196253_090606755323_2.jpg"
+                                            alt="" class="global-img">
+                                        <div class="global-flex global-flex-between activity-time">
+                                            <p>开始：2018-12-15 12:30</p>
+                                            <p>开始：2018-12-15 12:30</p>
+                                        </div>
+                                    </div>
+                                    <h2 class="activity-block-item-title font-ellipsis font-ellipsis-2">
+                                        <!-- 线下 activity-type-offline-->
+                                        <i class="activity-type-online"></i> 撒旦发是否挂号费德国和iodfgkldsfgdfih 梵蒂冈哦附近的梵蒂冈反对
+                                    </h2>
+                                    <ul class="activity-block-item-condition">
+                                        <!-- 最多显示4个 -->
+                                        <li class="condition-item">女性半价</li>
+                                        <li class="condition-item">签到付费</li>
+                                        <li class="condition-item">签到付费</li>
+                                        <li class="condition-item">签到付费</li>
+                                        <span class="condition-more">...</span>
+                                    </ul>
+                                    <div class="global-flex global-flex-center global-flex-between activity-block-item-bottom">
+                                        <p class="activity-attend-num">40/60人参与</p>
+                                        <button class="activity-btn-defalut">立即参与</button>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- v-show="loadingArr[navIndex]" -->
+                        <img src="../../img/loading.svg" class="loading-icon">
+                        <p class="load-all" v-show="loadAllArr[navIndex]">已查看所有活动</p>
+                    </div>
+                    <!-- 投票 -->
+                    <div v-show="navIndex === 1">
+                        <ul class="activity-block">
+                        </ul>
+                        <img src="../../img/loading.svg" class="loading-icon">
+                        <p class="load-all">已查看所有投票</p>
+                    </div>
+                </div>
+            </main>
+            <footer id="footer">
+                <a href="javascript:void(0);" class="footer-btn" :class="{'rotate-publish':layer.show}" @click.stop="tapPublishLayer"></a>
+            </footer>
+            <!-- 侧边 -->
+            <aside id="aside">
+                <a class="aside-item">
+                    <svg aria-hidden="true">
+                        <use xlink:href="../../img/global.svg#icon-index"></use>
+                    </svg>
+                    首页
+                </a>
+            </aside>
+            <!-- 弹层 -->
+            <div class="publish-layer" v-show="layer.show" ref="layer">
+                <div class="mask" :class="{'fadeIn':layer.show}"></div>
+                <div class="publish-layer-content" :class="{'sliderFromDown':layer.show}">
+                    <ul class="publish-layer-list global-flex global-flex-between">
+                        <li class="publish-layer-item" :class="{'showLayerItem':layer.show}" :style="{'animation-duration':.28+'s'}">
+                            <a href="" class="publish-layer-wrp">
+                                <img src="../../img/activity-offline.png" alt="" class="publish-layer-icon">
+                                <p>线下活动</p>
+                            </a>
+                        </li>
+                        <li class="publish-layer-item" :class="{'showLayerItem':layer.show}" :style="{'animation-duration':.4+'s'}">
+                            <a href="" class="publish-layer-wrp">
+                                <img src="../../img/activity-online.png" alt="" class="publish-layer-icon">
+                                <p>线上活动</p>
+                            </a>
+                        </li>
+                        <li class="publish-layer-item" :class="{'showLayerItem':layer.show}" :style="{'animation-duration':.52+'s'}">
+                            <a href="" class="publish-layer-wrp">
+                                <img src="../../img/activity-model.png" alt="" class="publish-layer-icon">
+                                <p>活动模板</p>
+                            </a>
+                        </li>
+                        <li class="publish-layer-item" :class="{'showLayerItem':layer.show}" :style="{'animation-duration':.64+'s'}">
+                            <a href="" class="publish-layer-wrp">
+                                <img src="../../img/activity-vote.png" alt="" class="publish-layer-icon">
+                                <p>投票</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../../js/swiper.js"></script>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        function throttle(interval) {
+            var timer,
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
+                } else {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                    }, interval)
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: true,
+                    navIndex: 0, // 导航索引
+                    isIOS: false, // 是否为IOS
+                    navTop: 0, // 导航距离顶部的高度
+                    fixedNav: false, // 悬浮导航
+                    loadingArr:[false,false],
+                    loadAllArr:[false,false],
+                    activityList: [1, 2, 3],
+                    layer: {
+                        show: false
+                    }
+                }
+            },
+            watch: {
+                'layer.show': function (val, oldVal) {
+                    if (val) {
+                        this.$refs.layer.addEventListener('touchmove', function (e) {
+                            e.preventDefault()
+                            e.stopPropagation();
+                        }, false)
+                    } else if (oldVal) {
+                        this.$refs.layer.removeEventListener('touchmove', function (e) {}, false)
+                    }
+                }
+            },
+            beforeMount() {
+                this.testDevice();
+            },
+            mounted: function () {
+                this.init = true;
+                this.testNavTop()
+                this.globalScroll()
+            },
+            methods: {
+                // 初始化banner
+                initBanner: function () {
+
+                },
+                // 初始化公告
+                initAnnounce: function () {
+
+                },
+                // 全局滚动事件
+                globalScroll: function () {
+                    var self = this;
+                    var innerThrottle = throttle(26);
+                    window.onscroll = function () {
+                        innerThrottle(function () {
+                            if (!self.isIOS) {
+                                if (window.scrollY >= self.navTop && !self.fixedNav) {
+                                    self.fixedNav = true
+                                } else {
+                                    if (window.scrollY < self.navTop && self.fixedNav) {
+                                        self.fixedNav = false
+                                    }
+                                }
+                            }
+                        })
+                    }
+                },
+                // 检测设备类型
+                testDevice: function () {
+                    var u = navigator.userAgent;
+                    if (u.indexOf('iPhone') > -1) {
+                        this.isIOS = true
+                    }
+                },
+                // 检测导航的高度
+                testNavTop: function () {
+                    this.navTop = this.$refs.nav.offsetTop
+                    console.log(this.navTop)
+                },
+                // 切换板块导航
+                switchNav: function (e) {
+                    var index = e.target.dataset.index;
+                    if (index && +index !== this.navIndex) {
+                        this.navIndex = +index
+                    }
+                },
+                // 显示弹层
+                tapPublishLayer: function () {
+                    this.$set(this.layer, 'show', !this.layer.show);
+                }
+            },
+        })
+    </script>
+
+</html>

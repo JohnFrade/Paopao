@@ -1,0 +1,21 @@
+body{
+    background: #fff
+}
+.activity-block-item-wrp{
+    padding-bottom: 1rem
+}
+.activity-item-top{
+    border-radius: unset
+}
+.activity-block-item-title{
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.activity-block-item-condition{
+    padding: 0 1rem
+}
+.activity-block-item-wrp::before{
+    width: calc(100% - 2rem);
+    right: 0;
+    margin: 0 auto;
+}
