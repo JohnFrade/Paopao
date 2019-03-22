@@ -92,3 +92,15 @@
     border-radius: 36px;
     text-align: center;
 }
+.activity-btn-attend{
+    color: #945DFF;
+    background: #e5e5e5
+}
+.activity-btn-start{
+    color: #999;
+    background: #e5e5e5
+}
+.activity-btn-end{
+    color: #999;
+    background: #e5e5e5
+}

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <head>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta content="black" name="apple-mobile-web-app-status-bar-style">
         <meta content="telephone=no" name="format-detection">
@@ -12,90 +14,416 @@
         <link rel="stylesheet" href="../../css/activity-common.css">
         <link rel="stylesheet" href="../../css/activity-detail.css">
         <title>活动详情</title>
-</head>
-<body>
-    <div id="app">
-        <main>
-            <div class="activity-block-item-wrp global-border global-border-bottom">
-                <div class="activity-item-top">
+    </head>
+
+    <body>
+        <div id="app">
+            <main>
+                <div class="activity-block-item-wrp global-border global-border-bottom">
+                    <div class="activity-item-top">
                         <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552920962893&di=9b986485d02c96a88d497310e9ed8b30&imgtype=0&src=http%3A%2F%2Fpic22.nipic.com%2F20120725%2F3196253_090606755323_2.jpg"
                             alt="" class="global-img">
                         <div class="global-flex global-flex-between activity-time">
                             <p>开始：2018-12-15 12:30</p>
                             <p>开始：2018-12-15 12:30</p>
                         </div>
+                    </div>
+                    <h2 class="activity-block-item-title font-ellipsis font-ellipsis-2">
+                        <!-- 线下 activity-type-offline-->
+                        <i class="activity-type-online"></i> 撒旦发是否挂号费德国和iodfgkldsfgdfih 梵蒂冈哦附近的梵蒂冈反对
+                    </h2>
+                    <ul class="activity-block-item-condition">
+                        <li class="condition-item">女性半价</li>
+                        <li class="condition-item">签到付费</li>
+                        <li class="condition-item">签到付费</li>
+                        <li class="condition-item">签到付费</li>
+                    </ul>
                 </div>
-                <h2 class="activity-block-item-title font-ellipsis font-ellipsis-2">
-                    <!-- 线下 activity-type-offline-->
-                    <i class="activity-type-online"></i> 撒旦发是否挂号费德国和iodfgkldsfgdfih 梵蒂冈哦附近的梵蒂冈反对
-                </h2>
-                <ul class="activity-block-item-condition">
-                    <li class="condition-item">女性半价</li>
-                    <li class="condition-item">签到付费</li>
-                    <li class="condition-item">签到付费</li>
-                    <li class="condition-item">签到付费</li>
-                </ul>
+                <!-- 参与人员 -->
+                <section class="global-bg-fff attend-wrp">
+                    <div class="global-flex global-flex-between attend-wrp-top">
+                        <div class="font-14">参与人员<span class="font-999">（0/30）</span></div>
+                        <a href="javascript:void(0);" class="global-flex global-flex-center font-14 font-333"
+                            @click.stop="attend.show = true">
+                            查看更多
+                            <svg class="icon-arrow-right">
+                                <use xlink:href="../../img/activity.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="global-flex global-flex-center attend-content-wrp global-border global-border-bottom">
+                        <p class="font-14 font-999" v-if="attend.attendList.length === 0">快报名参与活动吧...</p>
+                        <ul class="global-flex-1 attend-avatar-list" v-else>
+                            <!-- 最多六个 -->
+                            <li class="attend-item" v-for="(item,index) of attend.attendList" :key="index"
+                                v-if="index <= 5">
+                                <img src="http://img5.imgtn.bdimg.com/it/u=2975191715,801788508&fm=26&gp=0.jpg" alt=""
+                                    class="global-img">
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0);" class="attend-more global-flex" @click.stop="attend.show = true"
+                            v-if="attend.attendList.length > 6">
+                            <svg class="icon-more">
+                                <use xlink:href="../../img/activity.svg#icon-more"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </section>
+                <!-- 导航 -->
+                <section class="global-flex global-flex-center location-wrp">
+                    <p class="font-ellipsis font-ellipsis-1 global-flex-1 font-14 font-666">哈哈哦iusfduosdfuiodsooioiofg
+                    </p>
+                    <a href="javascript:void(0);" class="icon-location-wrp global-flex global-flex-center">
+                        <svg class="icon-location">
+                            <use xlink:href="../../img/activity.svg#icon-location"></use>
+                        </svg>
+                        导航
+                    </a>
+                </section>
+                <div class="nav-wrp" :class="{'sticky-fixed':isIOS}" ref="nav">
+                    <nav id="nav" :class="{'fixed-nav':!isIOS && fixedNav}">
+                        <a href="javascript:;" class="nav-item" :class="{'nav-active':navIndex === 0}"
+                            @click.stop="navIndex = 0">
+                            活动详情
+                        </a>
+                        <a href="javascript:;" class="nav-item" :class="{'nav-active':navIndex === 1}"
+                            @click.stop="navIndex = 1">
+                            注意事项
+                        </a>
+                        <div class="nav-slider" :style="{'transform':'translateX('+navIndex*9.81666666667+'rem)'}"></div>
+                    </nav>
+                </div>
+                <!-- 看论坛或者同城的富文本渲染用什么插件 -->
+                <div id="content">
+                    <div v-show="navIndex === 0">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum esse tempore voluptatem debitis
+                        recusandae mollitia est nostrum dolore delectus possimus? Optio debitis enim voluptatem quia
+                        esse nulla magnam ipsum tempora!
+                        Recusandae eligendi rerum neque laboriosam nostrum temporibus explicabo! Laborum, architecto
+                        obcaecati, molestias sint, doloremque tempora perspiciatis ipsa adipisci exercitationem dolorem
+                        nulla temporibus accusantium repellat voluptates distinctio eius? Quidem, debitis aspernatur.
+                        Eaque, quae iusto! Veritatis, velit corporis pariatur eligendi tempora quia saepe inventore
+                        soluta incidunt exercitationem eius maxime modi quidem iusto, quibusdam repellendus nam sed
+                        delectus? Delectus repudiandae itaque voluptatum temporibus!
+                        Cupiditate aut molestias voluptatum sunt eum blanditiis enim. Expedita similique laboriosam, vel
+                        ab nihil quibusdam quo accusamus? Pariatur, eum molestias sint commodi dicta in, ullam omnis
+                        tempora veniam, eveniet molestiae.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum esse tempore voluptatem debitis
+                        recusandae mollitia est nostrum dolore delectus possimus? Optio debitis enim voluptatem quia
+                        esse nulla magnam ipsum tempora!
+                        Recusandae eligendi rerum neque laboriosam nostrum temporibus explicabo! Laborum, architecto
+                        obcaecati, molestias sint, doloremque tempora perspiciatis ipsa adipisci exercitationem dolorem
+                        nulla temporibus accusantium repellat voluptates distinctio eius? Quidem, debitis aspernatur.
+                        Eaque, quae iusto! Veritatis, velit corporis pariatur eligendi tempora quia saepe inventore
+                        soluta incidunt exercitationem eius maxime modi quidem iusto, quibusdam repellendus nam sed
+                        delectus? Delectus repudiandae itaque voluptatum temporibus!
+                        Cupiditate aut molestias voluptatum sunt eum blanditiis enim. Expedita similique laboriosam, vel
+                        ab nihil quibusdam quo accusamus? Pariatur, eum molestias sint commodi dicta in, ullam omnis
+                        tempora veniam, eveniet molestiae.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero debitis possimus ducimus.
+                        Voluptatum provident consectetur explicabo odio voluptate temporibus. Ducimus animi doloribus
+                        fugit tempora tempore voluptas reprehenderit est harum veritatis.
+                        Facilis, voluptate ad, laboriosam molestias error beatae vero aut ducimus repudiandae
+                        consequatur recusandae? Illum blanditiis repellendus delectus eius consequuntur nisi officia
+                        accusamus quis laborum ut, facilis dicta minus, placeat ea.
+                        Blanditiis non vitae iure nulla natus? Quasi, accusantium beatae provident, necessitatibus
+                        ducimus totam quos dolorum, quia vero ipsum neque eligendi praesentium ut architecto. Quam
+                        architecto et eum aut, veritatis blanditiis.
+                        Cumque non nemo labore aliquid quos, eligendi, dicta molestias tenetur earum veritatis corrupti
+                        distinctio accusantium commodi facilis dolorem ullam excepturi asperiores eius a adipisci quo
+                        eveniet fugiat. Modi, commodi eligendi?
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic, repellat tempora ducimus officiis
+                        modi quae cum vitae fugit a accusamus ipsam et sunt odit neque architecto! Optio dolorem tenetur
+                        voluptatem.
+                        Debitis iure molestias, suscipit at perspiciatis expedita ducimus fuga placeat, dicta blanditiis
+                        doloribus, quod sapiente amet itaque in reiciendis quis voluptates obcaecati nam necessitatibus
+                        optio quisquam impedit! Exercitationem, maiores quaerat.
+                        Blanditiis, quisquam quos. Iusto unde harum qui fugit, esse repellendus nulla accusantium
+                        laudantium earum tempora impedit labore accusamus ullam eum mollitia maxime exercitationem
+                        eligendi nam ipsa maiores reprehenderit id. Magni?
+                        Minima necessitatibus sapiente placeat explicabo quod dolores non nihil provident iste facere
+                        officia doloribus impedit optio, est, ea quis ad, iusto temporibus quae sunt maxime magnam eum
+                        corporis? Consequuntur, nisi.
+                    </div>
+                    <div v-show="navIndex === 1">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, laudantium veniam! Molestiae nemo laborum officia sunt dolorem? Veniam mollitia aliquid quia, voluptatum corrupti architecto voluptatem officia sed iusto voluptates amet.
+                        Doloremque ex, eos sequi quaerat iusto nulla asperiores voluptas, sint laborum maiores harum numquam sapiente unde, sunt reprehenderit nesciunt! Quo quia provident tempore unde consectetur nostrum odio tenetur reiciendis amet!
+                        Sunt dolore, voluptates nesciunt distinctio natus rem, fugiat deleniti suscipit, odio dolorem accusamus ut labore tempora. Repellendus repudiandae veritatis ut inventore quisquam adipisci deleniti ullam voluptas aspernatur, sunt, est provident!
+                        Iusto, ipsa maiores dolorum animi eaque quam maxime esse aut eius inventore dicta odit itaque, a rem velit assumenda excepturi illo? Odio, totam blanditiis. Ducimus sapiente illum id minima enim.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, laudantium veniam! Molestiae nemo laborum officia sunt dolorem? Veniam mollitia aliquid quia, voluptatum corrupti architecto voluptatem officia sed iusto voluptates amet.
+                        Doloremque ex, eos sequi quaerat iusto nulla asperiores voluptas, sint laborum maiores harum numquam sapiente unde, sunt reprehenderit nesciunt! Quo quia provident tempore unde consectetur nostrum odio tenetur reiciendis amet!
+                        Sunt dolore, voluptates nesciunt distinctio natus rem, fugiat deleniti suscipit, odio dolorem accusamus ut labore tempora. Repellendus repudiandae veritatis ut inventore quisquam adipisci deleniti ullam voluptas aspernatur, sunt, est provident!
+                        Iusto, ipsa maiores dolorum animi eaque quam maxime esse aut eius inventore dicta odit itaque, a rem velit assumenda excepturi illo? Odio, totam blanditiis. Ducimus sapiente illum id minima enim.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, laudantium veniam! Molestiae nemo laborum officia sunt dolorem? Veniam mollitia aliquid quia, voluptatum corrupti architecto voluptatem officia sed iusto voluptates amet.
+                        Doloremque ex, eos sequi quaerat iusto nulla asperiores voluptas, sint laborum maiores harum numquam sapiente unde, sunt reprehenderit nesciunt! Quo quia provident tempore unde consectetur nostrum odio tenetur reiciendis amet!
+                        Sunt dolore, voluptates nesciunt distinctio natus rem, fugiat deleniti suscipit, odio dolorem accusamus ut labore tempora. Repellendus repudiandae veritatis ut inventore quisquam adipisci deleniti ullam voluptas aspernatur, sunt, est provident!
+                        Iusto, ipsa maiores dolorum animi eaque quam maxime esse aut eius inventore dicta odit itaque, a rem velit assumenda excepturi illo? Odio, totam blanditiis. Ducimus sapiente illum id minima enim.
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, laudantium veniam! Molestiae nemo laborum officia sunt dolorem? Veniam mollitia aliquid quia, voluptatum corrupti architecto voluptatem officia sed iusto voluptates amet.
+                        Doloremque ex, eos sequi quaerat iusto nulla asperiores voluptas, sint laborum maiores harum numquam sapiente unde, sunt reprehenderit nesciunt! Quo quia provident tempore unde consectetur nostrum odio tenetur reiciendis amet!
+                        Sunt dolore, voluptates nesciunt distinctio natus rem, fugiat deleniti suscipit, odio dolorem accusamus ut labore tempora. Repellendus repudiandae veritatis ut inventore quisquam adipisci deleniti ullam voluptas aspernatur, sunt, est provident!
+                        Iusto, ipsa maiores dolorum animi eaque quam maxime esse aut eius inventore dicta odit itaque, a rem velit assumenda excepturi illo? Odio, totam blanditiis. Ducimus sapiente illum id minima enim.
+                    </div>
+                </div>
+            </main>
+            <footer id="footer" class="global-flex global-flex-center">
+                <div class="global-flex-1 global-flex global-flex-around">
+                    <a href="javascript:void(0);" class="footer-item" :class="{'collected':collected}"
+                        @click.stop="collectedActivity">
+                        <svg class="icon-collect" v-show="!collected">
+                            <use xlink:href="../../img/activity.svg#icon-collect"></use>
+                        </svg>
+                        <svg class="icon-collected" v-show="collected">
+                            <use xlink:href="../../img/activity.svg#icon-collected"></use>
+                        </svg>
+                        <p>收藏</p>
+                    </a>
+                    <a href="javascript:void(0);" class="footer-item">
+                        <svg class="icon-repost">
+                            <use xlink:href="../../img/activity.svg#icon-repost"></use>
+                        </svg>
+                        <p>分享</p>
+                    </a>
+                </div>
+                <!-- .activity-btn-attend 已报名-->
+                <!-- .activity-btn-start 活动开始 -->
+                <!-- .activity-btn-end  活动结束 -->
+                <a href="javascript:void(0);" class="footer-btn" @click.stop="register.show = true">
+                    立即报名
+                </a>
+            </footer>
+            <!-- 广播 -->
+            <div class="broadcast">
+                **米亚 报名
+            </div>
+            <!-- 报名单 -->
+            <div class="register-layer" v-show="register.show">
+                <div class="mask"></div>
+                <div class="register-content" ref="register">
+                    <div class="layer-close" @click.stop="register.show=false"></div>
+                    <h2 class="register-title">填写报名单</h2>
+                    <div class="global-flex global-flex-center register-item">
+                        <span class="register-item-name">性别</span>
+                        <ul class="global-flex">
+                            <li v-for="(item,index) of register.sexual" :key="index" class="sexual-item"
+                                :class="{'sexual-active':index === register.sexualIndex}"
+                                @click="register.sexualIndex = index">{{item}}</li>
+                        </ul>
+                    </div>
+                    <form action="#">
+                        <div class="global-flex register-item">
+                            <span class="register-item-name">姓名</span>
+                            <label for="user-name" class="global-flex-1 input-wrp global-border global-border-bottom">
+                                <input type="text" placeholder="请输入您的名字" id="user-name" @blur="fixInputPosition">
+                            </label>
+                        </div>
+                        <div class="global-flex register-item">
+                            <span class="register-item-name">手机</span>
+                            <label for="user-phone" class="global-flex-1 input-wrp global-border global-border-bottom">
+                                <input type="number" pattern="[0-9]*" type="number" placeholder="请输入您的手机号码"
+                                    id="user-phone" @blur="fixInputPosition" v-if="isIOS">
+                                <input type="number" pattern="\d" type="number" placeholder="请输入您的手机号码" id="user-phone"
+                                    @blur="fixInputPosition" v-else>
+                            </label>
+                        </div>
+                        <div class="global-flex register-item">
+                            <span class="register-item-name">验证码</span>
+                            <div class="global-flex-1 global-flex input-wrp global-border global-border-bottom">
+                                <label for="validate-code" class="global-flex-1">
+                                    <input type="number" pattern="[0-9]*" type="number" placeholder="请输入验证码"
+                                        id="validate-code" @blur="fixInputPosition" v-if="isIOS">
+                                    <input type="number" pattern="\d" type="number" placeholder="请输入验证码"
+                                        id="validate-code" @blur="fixInputPosition" v-else>
+                                </label>
+                                <button class="register-get-code">获取验证码</button>
+                            </div>
+                        </div>
+                        <div class="global-flex register-item">
+                            <span class="register-item-name">微信</span>
+                            <label for="wechat" class="global-flex-1 input-wrp global-border global-border-bottom">
+                                <input type="text" placeholder="请输入您的微信号" id="wechat" @blur="fixInputPosition">
+                            </label>
+                        </div>
+                    </form>
+                    <p class="register-tips">备注：费用将于现场签到并支付。男士199/位，女士半价99/位</p>
+                    <button class="register-btn">确定</button>
+                </div>
             </div>
             <!-- 参与人员 -->
-            <section>
-                <div class="global-flex global-flex-between">
-                    <div></div>
-                    <a href="">
-                        查看更多
-                        <svg>
-                            <use></use>
-                        </svg>
-                    </a>
+            <div class="attend-layer" v-show="attend.show">
+                <div class="mask"></div>
+                <div class="attend-content">
+                    <div class="layer-close" @click.stop="attend.show=false"></div>
+                    <h2 class="attend-layer-title">参与人员</h2>
+                    <div class="attend-btn-wrp global-flex global-flex-between">
+                        <button class="attend-layer-btn" @click.stop="attend.attendIndex = 0">男生：102/500</button>
+                        <button class="attend-layer-btn" @click.stop="attend.attendIndex = 1">女生：102/500</button>
+                    </div>
+                    <div class="attend-list-wrp" ref="layerContent">
+                        <ul class="attend-list" v-show="attend.attendIndex === 0">
+                            <li class="attend-avatar" v-for="(item,index) of attend.attendList[attend.attendIndex]"
+                                :key="index">
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553149611174&di=7b72a02b910443c725b6b2290ec5d644&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201611%2F28%2F20161128195938_2zjMi.jpeg"
+                                    alt="" class="global-img">
+                            </li>
+                        </ul>
+                        <ul class="attend-list" v-show="attend.attendIndex === 1">
+                            <li class="attend-avatar" class="global-img">
+                                <img src="" alt="" class="global-img">
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="global-flex">
-                    <ul class="global-flex-1">
-                    
-                    </ul>
-                    <a href="javascript:;">
-                        <svg>
-
-                        </svg>
-                    </a>
-                </div>
-            </section>
-            <!-- 导航 -->
-            <section>
-                <p class="font-ell"></p>
-                <a href="">
-                    <svg>
-
-                    </svg>
-                    导航
-                </a>
-            </section>
-            <nav>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <div class="nav-slider"></div>
-            </nav>
-            <div>
-
             </div>
-        </main>
-        <footer id="footer" class="global-flex">
-            <div>
-                <a href="javascript:void(0);">
-                    <svg>
-                        <use xlink:href=""></use>
-                    </svg>
-                    <p>收藏</p>
-                </a>
-                <a href="javascript:void(0);">
-                    <svg>
-                        <use xlink:href=""></use>
-                    </svg>
-                    <p>分享</p>
-                </a>
-            </div>
-            <a href="javascript:void(0);">
-                立即报名
-            </a>
-        </footer>
-    </div>
-</body>
+        </div>
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        function throttle(interval) {
+            var timer,
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
+                } else {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                    }, interval)
+                }
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false,
+                    isIOS: false,
+                    fixedNav: false,
+                    navIndex: 0,
+                    collected: false, // 是否收藏
+                    scrollPosition:[0,0],
+                    attend: {
+                        show: false,
+                        attendIndex: 0,
+                        attendList: [
+                            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+                            []
+                        ]
+                    },
+                    register: {
+                        show: false,
+                        sexual: ['男', '女'],
+                        sexualIndex: 0,
+                        userName: '',
+                        userPhone: '',
+                        verifyCode: '',
+                        wechat: ''
+                    }
+                }
+            },
+            watch: {
+                navIndex:function(val,oldVal) {
+                    if(val != oldVal){
+                        if(this.fixedNav){
+                            window.scrollTo(0,this.scrollPosition[this.navIndex]);
+                        }else{
+                            window.scrollTo(0,this.$refs.nav.offsetTop);
+                        }
+                        
+                    }
+                },
+                'attend.show': function (val, oldVal) {
+                    if (val) {
+                        this.listenerLayer()
+                    } else if (oldVal) {
+                        this.$refs.layerContent.addEventListener('touchstart', function () {}, false)
+                        this.$refs.layerContent.addEventListener('touchmove', function () {}, false)
+                    }
+                }
+            },
+            beforeMount: function () {
+                this.testDevice()
+            },
+            mounted: function () {
+                this.testNavTop()
+                this.globalScroll()
+            },
+            methods: {
+                // 全局滚动事件
+                globalScroll: function () {
+                    var self = this;
+                    var innerThrottle = throttle(26);
+                    window.onscroll = function () {
+                        innerThrottle(function () {
+                            if (!self.isIOS) {
+                                if (window.scrollY >= self.navTop && !self.fixedNav) {
+                                    self.fixedNav = true
+                                } else {
+                                    if (window.scrollY < self.navTop && self.fixedNav) {
+                                        self.fixedNav = false
+                                    }
+                                }
+                            }
+                            self.$set(self.scrollPosition,self.navIndex,window.scrollY)
+                        })
+                    }
+                },
+                // 检测设备类型
+                testDevice: function () {
+                    var u = navigator.userAgent;
+                    if (u.indexOf('iPhone') > -1) {
+                        this.isIOS = true
+                    }
+                },
+                testNavTop: function () {
+                    this.navTop = this.$refs.nav.offsetTop
+                },
+                fixInputPosition: function () {
+                    this.$refs.register.scrollIntoView()
+                },
+                listenerLayer: function () {
+                    var startX = 0,
+                        startY = 0,
+                        self = this,
+                        layerContent = this.$refs.layerContent;
+
+                    layerContent.addEventListener('touchstart', function (e) {
+                        startX = e.changedTouches[0].pageX;
+                        startY = e.changedTouches[0].pageY;
+                    }, false);
+
+                    layerContent.addEventListener('touchmove', function (e) {
+                        e.stopPropagation();
+                        var deltaX = e.changedTouches[0].pageX - startX;
+                        var deltaY = e.changedTouches[0].pageY - startY;
+                        // 只能纵向滚
+                        if (Math.abs(deltaY) < Math.abs(deltaX)) {
+                            e.preventDefault();
+                            return false;
+                        }
+                        if (this.offsetHeight + this.scrollTop >= this.scrollHeight) {
+                            if (deltaY < 0) {
+                                e.preventDefault();
+                                return false
+                            }
+                        }
+                        if (this.scrollTop === 0) {
+                            if (deltaY > 0) {
+                                e.preventDefault();
+                                return false
+                            }
+                        }
+                    }, false)
+                },
+                collectedActivity: function () {
+                    this.collected = !this.collected
+                }
+            }
+        })
+    </script>
+
 </html>

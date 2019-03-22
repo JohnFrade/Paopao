@@ -1,10 +1,12 @@
 body{
-    background: #fff
+    padding-bottom: 4.0833333333333rem;
+    overscroll-behavior-y: contain
 }
 .activity-block-item-wrp{
     padding-bottom: 1rem
 }
 .activity-item-top{
+    height: 20.8333333333333rem;
     border-radius: unset
 }
 .activity-block-item-title{
@@ -14,8 +16,424 @@ body{
 .activity-block-item-condition{
     padding: 0 1rem
 }
+.activity-block-item-wrp{
+    background: #fff
+}
 .activity-block-item-wrp::before{
     width: calc(100% - 2rem);
     right: 0;
     margin: 0 auto;
+}
+.register-layer,.attend-layer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    z-index: 10
+}
+.mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.56)
+}
+.register-content{
+    position: absolute;
+    top: 8%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 85.333333333%;
+    padding: 0 1.6666666667rem 2rem;
+    box-sizing: border-box;
+    background: #fff
+}
+.register-title{
+    padding: 1.6666666667rem 0;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+.register-item{
+    padding: 1.25rem 0 
+}
+.register-item-name{
+    width: 5.833333333rem;
+    text-align: left;
+    font-size:1.33333333333333rem
+}
+.sexual-item{
+    margin-right: 1rem;
+    width: 6.6666666667rem;
+    height: 2.5rem;
+    text-align: center;
+    color: #666;
+    font-size: 1.333333333rem;
+    line-height:2.5rem;
+    border-radius: 30px;
+    background: #e5e5e5;
+    transition: all .32s
+}
+.input-wrp{
+    position: relative;
+    top: -4px;
+    height:1.8rem;
+    padding-bottom:.8rem
+}
+.input-wrp input{
+    width: 100%;
+    height: 100%;
+    color: #333;
+    caret-color: #945DFF;
+    font-size: 1.33333333333rem
+}
+.input-wrp input::-webkit-input-placeholder{
+    color: #999
+}
+.input-wrp input::placeholder{
+    color: #999
+}
+.register-get-code{
+    font-size: 1.3333333333rem;
+    color: #009CFF
+}
+.register-code-send{
+    color: #999
+}
+.sexual-active{
+    color: #fff;
+    background:#FFC96B
+}
+.register-tips{
+    margin-bottom: 1.333333333333rem;
+    font-size: 1rem;
+    color: #009CFF;
+    line-height:1.66666666667
+}
+.register-btn{
+    width: 100%;
+    border-radius: 56px;
+    text-align: center;
+    line-height: 3.666666667rem;
+    font-size: 1.3333333333rem;
+    color: #fff;
+    background: #945DFF
+}
+
+/* 参与人员 */
+.layer-close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1.6666666667rem;
+    height: 1.6666666667rem;
+}
+.layer-close::before,.layer-close::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom:0;
+    margin: auto 0;
+    width: 2px;
+    height: 70%;
+    left: 45%;
+    border-radius: 2px;
+    background: #333
+}
+.layer-close::before{
+    transform: rotate(45deg)
+}
+.layer-close::after{
+    
+    transform: rotate(-45deg)
+}
+.attend-content{
+    position: absolute;
+    top: 12%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 75.6%;
+    background: #fff;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+}
+.attend-layer-title{
+    padding:2rem 0;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333
+}
+.attend-btn-wrp{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 1rem
+}
+.attend-layer-btn{
+    width: 47.6190476%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1.166666666667rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+    border-radius: 36px
+}
+.attend-layer-btn:first-of-type{
+    background:linear-gradient(90deg,rgba(119,177,255,1),rgba(74,117,255,1));
+}
+.attend-layer-btn:last-of-type{
+    background:linear-gradient(90deg,rgba(255,119,161,1),rgba(255,129,74,1));
+}
+.attend-list-wrp{
+    height:18.916666666667rem;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    overflow-y: scroll
+}
+.attend-list-wrp::-webkit-scrollbar{
+    display: none
+}
+.attend-list{
+    box-sizing: border-box;
+    padding: 1rem 1.3333333333rem 0;
+    width: 100%;
+    font-size: 0
+}
+.attend-avatar{
+    display: inline-block;
+    margin-bottom: 2rem;
+    width: 12vw;
+    max-width: 90px;
+    height: 12vw;
+    max-height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+@media screen and (min-width:320px) {
+    .attend-avatar:not(:nth-of-type(4n)){
+        margin-right: 1.55rem
+    }
+}
+@media screen and (min-width:360px) {
+    .attend-avatar:not(:nth-of-type(4n)){
+        margin-right: 1.8rem
+    }
+}
+@media screen and (min-width:640px) {
+    .attend-avatar:not(:nth-of-type(4n)){
+        margin-right: 1.68rem
+    }
+}
+/* 参与人员 */
+.attend-wrp-top{
+    padding: 1.333333333rem 1rem
+}
+.attend-wrp-top .icon-arrow-right{
+    width: 1.666666667rem;
+    height: 1.666666667rem;
+    fill: #666
+}
+.attend-content-wrp{
+    padding:0 1rem 1.6666666667rem
+}
+.attend-content-wrp::before{
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 2rem)
+}
+.attend-avatar-list{
+    font-size: 0
+}
+.attend-item{
+    display: inline-block;
+    margin-right: 1rem;
+    width: 3.3333333333rem;
+    height: 3.3333333333rem;
+    border-radius: 50%;
+    overflow: hidden
+}
+.attend-item:nth-of-type(6){
+    margin-right: 0
+}
+.attend-more{
+    width: 3.3333333333rem;
+    height: 3.3333333333rem;
+    border-radius: 50%;
+    background: #f2f2f2
+}
+.attend-more .icon-more{
+    margin: auto;
+    width: 60%;
+    height: 60%;
+    fill: #ccc
+}
+/* 导航 */
+.location-wrp{
+    margin-bottom: .83333333333rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding:0 1rem;
+    background: #fff
+}
+.icon-location-wrp{
+    position: relative;
+    width: 4.333333333rem;
+    height: 3.75rem;
+    color: #009CFF;
+    font-size: 1.16666666667rem;
+}
+.icon-location-wrp::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto 0;
+    width: 1px;
+    height: 80%;
+    background: #e5e5e5;
+    transform: scale(.5)
+}
+.icon-location{
+    margin-left: auto;
+    width:1.666666667rem;
+    height: 1.666666667rem;
+    fill:#009CFF
+}
+/* nav */
+.nav-wrp{
+    width: 100%;
+    height: 3.75rem;;
+    background: #fff;
+}
+.sticky-fixed{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+#nav{
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    max-width: 640px;
+    width: 100%;
+    height: 3.75rem;;
+    background: #fff;
+}
+.fixed-nav{
+    position: fixed;
+    top: 0;
+}
+.nav-item{
+    padding-left: 1rem;
+    margin-right: 3.333333333333rem;
+    display: inline-block;
+    line-height: 3.75rem;
+    font-size: 1.33333333333rem;
+    color: #666
+}
+.nav-active{
+    color: #333;
+    font-weight: 700;
+    transition: all .28s
+}
+.nav-slider{
+    position: absolute;
+    bottom: 0;
+    left: 1.2rem;
+    width: 1.33333333rem;
+    height: .25rem;
+    background: #945DFF;
+    transition: transform .28s
+}
+#content{
+    background: #fff;
+    padding: 0 1rem;
+}
+
+/* footer */
+#footer{
+    padding-right: 1rem;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    height: 4.083333333333rem;
+    width: 100%;
+    max-width: 640px;
+    background: #fff;
+    box-shadow:0px 0px 30px 0px rgba(0, 0, 0, 0.1)
+}
+.icon-collect,.icon-collected,.icon-repost{
+    position: relative;
+    left: 2px;
+    margin-bottom: 2px;
+    width: 1.6666666667rem;
+    height: 1.6666666667rem;
+    fill: #666
+}
+.icon-collected{
+    fill: #FFC96B
+}
+.footer-item{
+    display: block;
+    font-size: 1rem;
+    color: #666
+}
+.collected{
+    color: #FFC96B
+}
+.footer-btn{
+    display: block;
+    width: 13.33333333333rem;
+    line-height: 3.333333333333rem;
+    text-align: center;
+    font-size: 1.3333333333rem;
+    color: #fff;
+    background:#945DFF;
+    border-radius:40px;
+}
+.broadcast{
+    position: fixed;
+    top: 3rem;
+    left: 1rem;
+    width: 10rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #fff;
+    text-align: center;
+    border-radius:36px;
+    background: rgba(0,0,0,.56);
+    animation:broadcast 3s linear both;
+    z-index: 11
+}
+@keyframes broadcast{
+    0%{
+        transform: translateX(-12rem)
+    }
+    12%{
+        transform: unset
+    }
+    80%{
+        opacity: 1;
+        transform: unset
+    }
+    85%{
+        opacity: .8;
+        transform: translateY(-.5rem)
+    }
+    100%{
+        transform:translateY(-2.5rem);
+        opacity: 0;
+    }
 }
