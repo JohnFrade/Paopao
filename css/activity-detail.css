@@ -414,7 +414,7 @@ body{
     text-align: center;
     border-radius:36px;
     background: rgba(0,0,0,.56);
-    animation:broadcast 3s linear both;
+    animation:broadcast 2.8s linear both;
     z-index: 11
 }
 @keyframes broadcast{
