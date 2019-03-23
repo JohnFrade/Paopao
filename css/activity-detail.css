@@ -280,7 +280,11 @@ body{
     width: 100%;
     box-sizing: border-box;
     padding:0 1rem;
+    height: 3.75rem;
     background: #fff
+}
+.location-wrp p{
+    line-height: 3.75rem
 }
 .icon-location-wrp{
     position: relative;
@@ -404,8 +408,8 @@ body{
     border-radius:40px;
 }
 .broadcast{
-    position: fixed;
-    top: 3rem;
+    position: absolute;
+    top: 3.5rem;
     left: 1rem;
     width: 10rem;
     height: 2.5rem;
@@ -414,8 +418,10 @@ body{
     text-align: center;
     border-radius:36px;
     background: rgba(0,0,0,.56);
-    animation:broadcast 2.8s linear both;
     z-index: 11
+}
+.broadcasting{
+    animation:broadcast 2.8s linear both;
 }
 @keyframes broadcast{
     0%{
@@ -430,10 +436,29 @@ body{
     }
     85%{
         opacity: .8;
-        transform: translateY(-.5rem)
+        transform: translateY(-1rem)
     }
     100%{
-        transform:translateY(-2.5rem);
+        transform:translateY(-3.5rem);
         opacity: 0;
     }
+}
+.shareLayer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    background: rgba(0, 0, 0, .56);
+    z-index: 2
+}
+.share-img{
+    position: absolute;
+    top: 1rem;
+    right: 1.75rem;
+    width: 19.166666666667rem;
+    height: 9.91666666667rem;
 }

@@ -177,7 +177,7 @@
                         </svg>
                         <p>收藏</p>
                     </a>
-                    <a href="javascript:void(0);" class="footer-item">
+                    <a href="javascript:void(0);" class="footer-item" @click.stop="showShare = true">
                         <svg class="icon-repost">
                             <use xlink:href="../../img/activity.svg#icon-repost"></use>
                         </svg>
@@ -192,8 +192,12 @@
                 </a>
             </footer>
             <!-- 广播 -->
-            <div class="broadcast">
+            <div class="broadcast" v-show="broadcast.show" :class="{'broadcasting':broadcast.show}">
                 **米亚 报名
+            </div>
+            <!-- 分享 -->
+            <div class="shareLayer" v-show="showShare" :class="{'fadeIn':showShare}" @click.stop="showShare = false">
+                <img src="../../img/share.png" alt="" class="share-img">
             </div>
             <!-- 报名单 -->
             <div class="register-layer" v-show="register.show">
@@ -278,6 +282,26 @@
     </body>
     <script src="../../js/vue.min.js"></script>
     <script>
+        // requestAnimationFrame兼容
+        (function () {
+            if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+                window.requestAnimationFrame = function (callback) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                    var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                    }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return timer
+                };
+            }
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function (timer) {
+                    clearTimeout(timer)
+                };
+            }
+        })();
+
         function throttle(interval) {
             var timer,
                 startTime = +new Date();
@@ -306,6 +330,7 @@
                     navIndex: 0,
                     collected: false, // 是否收藏
                     scrollPosition:[0,0],
+                    showShare:false,
                     attend: {
                         show: false,
                         attendIndex: 0,
@@ -313,6 +338,11 @@
                             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
                             []
                         ]
+                    },
+                    broadcast:{
+                        broadcastList:[1,2,3,4,5,6,7],     // 广播
+                        show:false,
+                        broadIndex:0,
                     },
                     register: {
                         show: false,
@@ -351,6 +381,7 @@
             mounted: function () {
                 this.testNavTop()
                 this.globalScroll()
+                this.circulatingBroadcast()
             },
             methods: {
                 // 全局滚动事件
@@ -362,7 +393,7 @@
                             if (!self.isIOS) {
                                 if (window.scrollY >= self.navTop && !self.fixedNav) {
                                     self.fixedNav = true
-                                } else {
+                                    } else {
                                     if (window.scrollY < self.navTop && self.fixedNav) {
                                         self.fixedNav = false
                                     }
@@ -384,6 +415,27 @@
                 },
                 fixInputPosition: function () {
                     this.$refs.register.scrollIntoView()
+                },
+                circulatingBroadcast:function() {
+                    var self = this,
+                        count = 0;
+                    var timer = requestAnimationFrame(function fn() {
+                        if(count < 192){
+                            if(!self.broadcast.show){
+                                self.$set(self.broadcast,'show',true)
+                            }
+                            ++count;
+                            requestAnimationFrame(fn)
+                        }else{
+                            cancelAnimationFrame(timer);
+                            count = 0;
+                            self.broadcast.broadIndex += 1;
+                            self.$set(self.broadcast,'show',false)
+                            if(self.broadcast.broadIndex <= self.broadcast.broadcastList.length){
+                                self.circulatingBroadcast()
+                            }
+                        }
+                    })
                 },
                 listenerLayer: function () {
                     var startX = 0,
