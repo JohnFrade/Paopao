@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/activity-common.css">
+        <link rel="stylesheet" href="../../css/my-activity.css">
+        <title>活动详情</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <nav id="nav" class="global-flex">
+                <a href="javascript:void(0);" class="nav-item global-flex-1" :class="{'nav-active':navIndex === 0}"
+                    @click.stop="navIndex = 0">
+                    已报名
+                </a>
+                <a href="javascript:void(0);" class="nav-item global-flex-1" :class="{'nav-active':navIndex === 1}"
+                    @click.stop="navIndex = 1">
+                    收藏夹
+                </a>
+                <div class="nav-slider" :style="{'left':20*(2.5*navIndex+1)+'%'}"></div>
+            </nav>
+            <main id="main">
+                <!-- 已报名 -->
+                <div v-show="navIndex === 0">
+                    <ul class="activity-block">
+                        <li class="activity-block-item global-border global-border-bottom"
+                            v-for="(activityItem,activityIndex) of activityList" :key="activityIndex">
+                            <a href="./activity-detail.html" class="activity-block-item-wrp">
+                                <div class="activity-item-top">
+                                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552920962893&di=9b986485d02c96a88d497310e9ed8b30&imgtype=0&src=http%3A%2F%2Fpic22.nipic.com%2F20120725%2F3196253_090606755323_2.jpg"
+                                        alt="" class="global-img">
+                                    <div class="global-flex global-flex-between activity-time">
+                                        <p>开始：2018-12-15 12:30</p>
+                                        <p>开始：2018-12-15 12:30</p>
+                                    </div>
+                                </div>
+                                <h2 class="activity-block-item-title font-ellipsis font-ellipsis-2">
+                                    <!-- 线下 activity-type-offline-->
+                                    <i class="activity-type-online"></i> 撒旦发是否挂号费德国和iodfgkldsfgdfih 梵蒂冈哦附近的梵蒂冈反对
+                                </h2>
+                                <ul class="activity-block-item-condition">
+                                    <!-- 最多显示4个 -->
+                                    <li class="condition-item">女性半价</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <span class="condition-more">...</span>
+                                </ul>
+                                <div
+                                    class="global-flex global-flex-center global-flex-between activity-block-item-bottom">
+                                    <p class="activity-attend-num">40/60人参与</p>
+                                    <!--activity-btn-attend 参与了 -->
+                                    <!--activity-btn-start 活动开始 -->
+                                    <!--activity-btn-end活动结束 -->
+                                    <button class="activity-btn-defalut">立即参与</button>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <img src="../../img/loading.svg" class="loading-icon">
+                    <p class="load-all" v-show="loadAll[navIndex]">已查看所有活动</p>
+                </div>
+                <!-- 收藏夹 -->
+                <div v-show="navIndex === 1">
+                    <ul class="activity-block">
+                        <li class="activity-block-item global-border global-border-bottom"
+                            v-for="(activityItem,activityIndex) of activityList" :key="activityIndex">
+                            <a href="./activity-detail.html" class="activity-block-item-wrp">
+                                <div class="activity-item-top">
+                                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552920962893&di=9b986485d02c96a88d497310e9ed8b30&imgtype=0&src=http%3A%2F%2Fpic22.nipic.com%2F20120725%2F3196253_090606755323_2.jpg"
+                                        alt="" class="global-img">
+                                    <div class="global-flex global-flex-between activity-time">
+                                        <p>开始：2018-12-15 12:30</p>
+                                        <p>开始：2018-12-15 12:30</p>
+                                    </div>
+                                </div>
+                                <h2 class="activity-block-item-title font-ellipsis font-ellipsis-2">
+                                    <!-- 线下 activity-type-offline-->
+                                    <i class="activity-type-online"></i> 撒旦发是否挂号费德国和iodfgkldsfgdfih 梵蒂冈哦附近的梵蒂冈反对
+                                </h2>
+                                <ul class="activity-block-item-condition">
+                                    <!-- 最多显示4个 -->
+                                    <li class="condition-item">女性半价</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <li class="condition-item">签到付费</li>
+                                    <span class="condition-more">...</span>
+                                </ul>
+                                <div
+                                    class="global-flex global-flex-center global-flex-between activity-block-item-bottom">
+                                    <p class="activity-attend-num">40/60人参与</p>
+                                    <!--activity-btn-attend 参与了 -->
+                                    <!--activity-btn-start 活动开始 -->
+                                    <!--activity-btn-end活动结束 -->
+                                    <button class="activity-btn-defalut">立即参与</button>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <img src="../../img/loading.svg" class="loading-icon">
+                    <p class="load-all" v-show="loadAll[navIndex]">已查看所有活动</p>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        function throttle(interval) {
+            var timer,
+                startTime = +new Date();
+            return function (fn) {
+                var currentTime = +new Date();
+                clearTimeout(timer);
+                if (currentTime - startTime >= interval) {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                        startTime = currentTime;
+                    }, interval)
+                } else {
+                    timer = setTimeout(function () {
+                        fn && fn()
+                    }, interval)
+                }
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    navIndex: 0,
+                    activityList: [1, 2, 3, 4, 5, 6],
+                    loadAll:[false,false]
+                }
+            },
+            mounted: function () {
+                this.globalScroll()
+            },
+            methods: {
+                globalScroll: function () {
+                    var self = this;
+                    var innerThrottle = throttle(26);
+                    window.onscroll = function () {
+                        innerThrottle(function () {
+                            // 加载的数据写在这里
+                            if(window.scrollY + document.documentElement.clientHeight + 168 >= document.documentElement.offsetHeight){
+
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    </script>
+
+</html>
