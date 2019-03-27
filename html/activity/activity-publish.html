@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/activity-publish.css">
+    <title>活动发布</title>
+</head>
+<body class="global-bg-fff">
+    <div id="app">
+        <main>
+            <!-- 活动图 -->
+            <section>
+                <div class="global-flex global-flex-center section-top">
+                    <h2 class="section-title section-descrition">活动图</h2>
+                    <p class="section-description">（上传活动宣传图，尺寸：750*500）</p>
+                </div>
+                <div class="activity-banner">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553590257153&di=735f4bfca2d15bbdd18da61ed23823ff&imgtype=0&src=http%3A%2F%2Fpic3.40017.cn%2Fscenery%2Fdestination%2F2015%2F04%2F18%2F03%2Fvrn29Y.jpg" alt="" class="global-img">
+                    <div class="add-btn-wrp">
+                        <input type="file">
+                    </div>
+                </div>
+            </section>
+            <!-- 活动主题 -->
+            <section>
+                <div class="global-flex global-flex-center section-top">
+                    <h2 class="section-title section-descrition">活动主题</h2>
+                </div>
+                <div class="section-topic-wrp global-border global-border-bottom">
+                    <input type="text" placeholder="活动主题限26个字">
+                </div>
+            </section>
+            <!-- 活动时间 -->
+            <section>
+                <div class="section-top">
+                    <h2 class="section-title section-descrition">活动时间</h2>
+                </div>
+                <div>
+                    <div class="global-flex global-flex-center global-border global-border-bottom activity-time">
+                        <span>开始时间</span>
+                        <input type="datetime-local" class="global-align-right" placeholder="请选择活动开始时间" @blur="chooseTime" :data-time="0" v-model="startTime">
+                        <p class="global-align-right" :class="{'font-333':startTime}">{{startTime?startTime:'请选择活动开始的时间'}}</p>
+                        <svg class="icon-arrow-right">
+                            <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                    <div class="global-flex global-flex-center global-border global-border-bottom activity-time">
+                        <span>结束时间</span>
+                        <p class="global-align-right" :class="{'font-333':startTime}">{{endTime?endTime:'请选择活动结束的时间'}}</p>
+                        <input type="datetime-local" @blur="chooseTime" v-model="endTime" :data-time="1">
+                        <svg class="icon-arrow-right">
+                            <use xlink:href="../../img/global.svg#icon-arrow-right"></use>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+            <!-- 活动地址 -->
+            <section>
+                <div class="section-top">
+                    <h2 class="section-title section-descrition">活动地址</h2>
+                </div>
+                <div class="global-border global-border-bottom global-flex">
+                    <textarea placeholder="请输入活动地址" class="global-flex-1 location-input"></textarea>
+                    <a href="javascript:void(0);" class="location-wrp">
+                        <svg class="icon-location">
+                            <use xlink:href="../../img/activity.svg#icon-location"></use>
+                        </svg>
+                        导航
+                    </a>
+                </div>
+            </section>
+            <!-- 人员限制 -->
+            <section>
+                <div class="section-top global-flex">
+                    <h2 class="section-title">人员限制</h2>
+                    <p class="section-description">（不填写默认为不限）</p>
+                </div>
+                <ul class="global-flex global-flex-between">
+                    <li class="global-flex global-flex-center activity-person-item">
+                        <span class="activity-person-tag">数量：</span>
+                        <input type="number" pattern="[0-9]*" class="global-flex-1" v-model="attendNum.together" v-if="isIOS"/>
+                        <input type="number" pattern="\d" class="global-flex-1" v-model="attendNum.together" v-else/>
+                    </li>
+                    <li class="global-flex global-flex-center activity-person-item">
+                        <span class="activity-person-tag">女：</span>
+                        <input type="number" pattern="[0-9]*" placeholder="选填" class="global-flex-1" v-model="attendNum.man" v-if="isIOS"/>
+                        <input type="number" pattern="\d" placeholder="选填" class="global-flex-1" v-model="attendNum.man" v-else/>
+                    </li>
+                    <li class="global-flex global-flex-center activity-person-item">
+                        <span class="activity-person-tag">男：</span>
+                        <input type="number" pattern="[0-9]*" placeholder="选填" class="global-flex-1" v-model="attendNum.girl" v-if="isIOS"/>
+                        <input type="number" pattern="\d" placeholder="选填" class="global-flex-1" v-model="attendNum.girl" v-else/>
+                    </li>
+                </ul>
+            </section>
+            <!-- 标签 -->
+            <section>
+                <div class="section-top global-flex global-flex-end">
+                    <h2 class="section-title">标签</h2>
+                    <p class="section-description">不填写则不显示</p>
+                    <a href="javascript:void(0);" class="create-tag" @click.stop="createTag">创建标签<span class="font-18">+</span></a>
+                </div>
+                <ul class="tag-list global-flex global-flex-wrap">
+                    <!-- 限制五个字 -->
+                    <li class="tag-item global-flex global-flex-center" :class="{'tag-selected':selectedTagList[index]}" v-for="(tag,index) of tagList" :key="index" @click.stop="selectedTag(index)">
+                        <div v-if="index <= 2">男女不限</div>
+                        <input type="text" placeholder="请输入标签" v-model.trim="tag.text" autofocus="autofocus" v-focus @input="if(tag.text.length > 5){tag.text = tag.text.slice(0, 5)}" @blur="filterEmpty(index)" v-else/>
+                        <span class="close-tag" @click.stop="deleteTag" :data-index="index" v-show="selectedTagList[index]"></span>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <footer id="footer" class="global-flex">
+            <a href="javascript:;" class="global-flex-1 footer-btn">下一步</a>
+        </footer>
+        <a href="javascript:void(0);" id="aside">
+            <svg class="icon-model">
+                <use xlink:href=""></use>
+            </svg>
+            <p>模板</p>
+        </a>
+    </div>
+</body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    Vue.directive('focus', {
+        // 当绑定元素插入到 DOM 中。     
+        inserted: function (el) {
+            // 聚焦元素
+            el.focus()
+        }
+   })
+   
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return {
+                isIOS:false,
+                tagList:[{
+                    text:'男女不限'
+                },{
+                    text:'男女不限'
+                },{
+                    text:'男女不限'
+                }],
+                selectedTagList:[false,false,false],
+                startTime:'', //开始时间
+                endTime:'',// 结束时间
+                attendNum:{      // 人员限制
+                    together:100,
+                    man:50,
+                    girl:50
+                }
+            }
+        },
+        mounted:function() {
+            this.testDevice()
+        },
+        methods:{
+            // 检测设备类型
+            testDevice:function() {
+                var u = navigator.userAgent;
+                if (u.indexOf('iPhone') > -1) {
+                    this.isIOS = true
+                }
+            },
+            chooseTime:function(e){
+                var time = e.target.dataset.time;
+                if(+time === 0){
+                    console.log(this.startTime)
+                }else if(+time === 1){
+                    console.log(this.endTime)
+                }
+            },
+            // 创造标签
+            createTag:function() {
+                this.tagList.push({
+                    text:''
+                })
+                this.selectedTagList.push(false)
+            },
+            // 选择标签
+            selectedTag:function(index) {
+                // if(this.tagList[index].text.trim().length > 0){
+                    this.$set(this.selectedTagList,index,true)
+                // }
+            },
+            // 过滤标签
+            filterEmpty:function(index){
+                if(this.tagList[index].text.length === 0){
+                    this.selectedTagList.splice(index,1)
+                    this.tagList.splice(index,1)
+                }
+            },
+            // 删除标签
+            deleteTag:function(e) {
+                var index = +e.target.dataset.index;
+                if(index >= 3){
+                    this.tagList.splice(index,1)
+                    this.selectedTagList.splice(index,1)
+                }else{
+                    this.$set(this.selectedTagList,index,false)
+                }
+            }
+        }
+    })
+</script>
+</html>
