@@ -14,31 +14,89 @@
 </head>
 <body>
     <div id="app">
-        <nav id="nav">
-            <a href="">活动详情</a>
-            <a href="">注意事项(选填)</a>
+        <nav id="nav" class="global-flex">
+            <a href="javascript:void(0);" class="nav-item" :class="{'nav-active':navIndex === 0}" @click.stop="navIndex = 0">活动详情<span class="font-red">*</span></a>
+            <a href="javascript:void(0);" :class="{'nav-active':navIndex === 1}" class="nav-item" @click.stop="navIndex = 1">注意事项(选填)</a>
         </nav>
-        <main>
-            <!-- 备注 -->
-            <section>
-                <div class="global-flex global-flex-between">
-                    <div>
-                        <h2>备注</h2>
-                        <span>(选填)</span>
+        <main id="main">
+            <div class="detail-wrp">
+                <!-- 活动详情 -->
+                <div v-show="navIndex === 0" class="detail-block">
+                    <ul>
+                        <textarea placeholder="请输入活动详情..." v-model.trim="detail" autoHeight="true" @keyup="autoHeight"></textarea>
+                        <ul>
+                            <li v-for="(imgItem,imgIndex) of imgList" :key="imgIndex" class="img-item">
+                                <img :src="imgItem" style="width:100%;margin-bottom: .8333333333rem">
+                                <div @click.stop="imgList.splice(imgIndex,1)" class="delete-img"></div>
+                            </li>
+                        </ul>
+                    </ul>
+                    <!--  -->
+                    <div class="upload-wrp">
+                        <input type="file">
+                        <div class="upload-content">
+                            <img src="../../img/upload-img.png" alt="">
+                            <p>新增图片</p>
+                        </div>
                     </div>
-                    <div>0/30</div>
                 </div>
-                <textarea placeholder="
-                请填写备注信息，将显示在用户报名表单。例：费用将于现场签到后支付，男士199/位，女士半价99/位。"></textarea>
+                <!-- 注意事项(选填)-->
+                <div v-show="navIndex === 1" class="activity-tips-block">
+                    <!-- @keyup.13="newLine" -->
+                    <textarea placeholder="请输入活动注意事项" v-model.trim="detailMark" autoHeight="true"></textarea>
+                </div>
+            </div>
+            <!-- 备注 -->
+            <section class="tips-wrp">
+                <div class="global-flex global-flex-center global-flex-between tips-top">
+                    <div class="global-flex global-flex-end font-14">
+                        <h2>备注</h2>
+                        <span class="font-999">(选填)</span>
+                    </div>
+                    <div class="font-999 font-14">{{mark.length}}/30</div>
+                </div>
+                <div class="textarea-wrp">
+                    <textarea placeholder="请填写备注信息，将显示在用户报名表单。例：费用将于现场签到后支付，男士199/位，女士半价99/位。" class="textarea" v-model.trim="mark" @input="limitMark"></textarea>
+                </di>
             </section>
         </main>
-        <footer id="footer">
-
+        <footer id="footer" class="global-flex">
+            <a href="javascript:void(0);" class="footer-btn global-flex-1">上一步</a>
+            <a href="javascript:void(0);" class="footer-btn global-flex-1">发布</a>
         </footer>
     </div>
 </body>
-<script src=""></script>
+<script src="../../js/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+<script type="text/javascript">
+    var vConsole = new VConsole();
+</script>
 <script>
-
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return {
+                navIndex:0,
+                detail:'',  //活动详情
+                detailMark:'', // 注意事项
+                imgList:['https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=328517395,2303970886&fm=26&gp=0.jpg','http://pic.58pic.com/58pic/13/71/59/68w58PICjYB_1024.jpg'],    // 图片
+                mark:'' // 备注
+            }
+        },
+        methods:{
+            // newLine:function(e){
+            //     console.log(e.target.value)
+            // },
+            autoHeight:function(el) {
+                el.target.style['height'] = el.target.scrollHeight + 'px';
+            },
+            // 限制备注输入
+            limitMark:function() {
+                if(this.mark.length > 30){
+                    this.mark = this.mark.slice(0, 30)
+                }
+            }
+        }
+    })
 </script>
 </html>
