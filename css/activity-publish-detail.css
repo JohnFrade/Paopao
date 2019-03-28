@@ -6,7 +6,8 @@
     width: 100%;
     max-width: 640px;
     height: 3.66666666667rem;
-    background: #e5e5e5
+    background: #e5e5e5;
+    z-index: 2
 }
 .nav-item{
     width: 50%;
@@ -151,6 +152,102 @@ textarea{
     color: #999
 }
 .footer-btn:last-of-type{
+    background: #945DFF;
+    color: #fff
+}
+.model-layer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    max-width: 640px;
+    z-index: 99
+}
+.mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.56)
+}
+.model-layer-content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 64%;
+    height: 23.3333333333rem;
+    margin: auto;
+    text-align: center;
+    background: #fff;
+    border-radius: .66666666667rem;
+    overflow: hidden;
+}
+.model-layer-content .close{
+    position: absolute;
+    top: .83333333333rem;
+    right: .8333333333rem;
+    width: 1.6666666666667rem;
+    height: 1.6666666666667rem;
+}
+
+.model-layer-content .close::before,.model-layer-content .close::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 80%;
+    height: 2px;
+    background: #e5e5e5
+}
+.model-layer-content .close::before{
+    transform: rotate(45deg)
+}
+.model-layer-content .close::after{
+    transform: rotate(-45deg)
+}
+
+.model-layer-content img{
+    padding: 1.6666666667rem 0;
+    width: 10.3333333333rem;
+    height: 10.333333333rem;
+}
+.model-layer-content p{
+    font-size: 1.16666666667rem;
+    margin-bottom: 1rem;
+    color: #333
+}
+.model-layer-content h2{
+    font-size: 1.3333333333rem;
+    color: #333
+}
+
+.layer-footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+.layer-footer button{
+    text-align: center;
+    height: 3.625rem;
+    line-height: 3.625rem;
+    font-size: 1.6666666667rem
+}
+.layer-footer button:first-of-type{
+    color: #999
+}
+.layer-footer button:last-of-type{
     background: #945DFF;
     color: #fff
 }
