@@ -167,6 +167,12 @@
             </main>
             <footer id="footer" class="global-flex global-flex-center">
                 <div class="global-flex-1 global-flex global-flex-around">
+                    <a href="javascript:void(0);" class="footer-item">
+                        <svg class="icon-repost">
+                            <use xlink:href="../../img/activity.svg#icon-back-activity"></use>
+                        </svg>
+                        <p>返回</p>
+                    </a>
                     <a href="javascript:void(0);" class="footer-item" :class="{'collected':collected}"
                         @click.stop="collectedActivity">
                         <svg class="icon-collect" v-show="!collected">
