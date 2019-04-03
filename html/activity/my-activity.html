@@ -31,6 +31,13 @@
             <main id="main">
                 <!-- 已报名 -->
                 <div v-show="navIndex === 0">
+                    <div class="activity-empty">
+                        <div class="activity-empty-wrp">
+                            <img src="../../img/ad-empty.png" alt="">
+                            <p>您还没报名过活动</p>
+                        </div>
+                        <a href="javascript:;" class="activity-empty-btn">发现好活动</a>
+                    </div>
                     <ul class="activity-block">
                         <li class="activity-block-item global-border global-border-bottom"
                             v-for="(activityItem,activityIndex) of activityList" :key="activityIndex">
@@ -71,6 +78,12 @@
                 </div>
                 <!-- 收藏夹 -->
                 <div v-show="navIndex === 1">
+                    <div class="activity-empty">
+                            <div class="activity-empty-wrp">
+                            <img src="../../img/ad-empty.png" alt="">
+                                <p>您还没有收藏过活动</p>
+                            </div>
+                            <a href="javascript:;" class="activity-empty-btn">发现好活动</a>                            </div>
                     <ul class="activity-block">
                         <li class="activity-block-item global-border global-border-bottom"
                             v-for="(activityItem,activityIndex) of activityList" :key="activityIndex">
@@ -101,7 +114,8 @@
                                     <!--activity-btn-attend 参与了 -->
                                     <!--activity-btn-start 活动开始 -->
                                     <!--activity-btn-end活动结束 -->
-                                    <button class="activity-btn-defalut">立即参与</button>
+                                    <button class="activity-btn-delete">删除</button>
+                                    <button class="activity-btn-defalut">编辑发布</button>
                                 </div>
                             </a>
                         </li>
@@ -110,6 +124,10 @@
                     <p class="load-all" v-show="loadAll[navIndex]">已查看所有活动</p>
                 </div>
             </main>
+            <footer id="footer">
+                <p class="footer-tips">只需重新设置活动时间，便可快捷发布</p>
+                <a href="javascript:void(0);" class="footer-create-btn">创建模板</a>
+            </footer>
         </div>
     </body>
     <script src="../../js/vue.min.js"></script>

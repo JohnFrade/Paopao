@@ -12,30 +12,25 @@
     <title>脱单结果</title>
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-if="init">
         <header>
             <div class="score-wrp">
-                <span class="score-num">95</span>
+                <span class="score-num">{{score}}</span>
                 <span class="score">分</span>
             </div>
             <div class="star-wrp">
                 <span class="star-name">桃花运势:</span>
-                <div class="star-list-wrp">
-                    <div class="star-list">
-                    </div>
+                <div class="star-list">
+                    <div class="star-item" :style="{'width':score+'%'}"></div>
                 </div>
             </div>
         </header>
         <main id="main">
             <div class="avatar">
-                <img src="http://img5.duitang.com/uploads/item/201408/14/20140814165959_VCtan.thumb.700_0.png" class="global-img">
+                <img src="http://img4.duitang.com/uploads/item/201303/19/20130319223714_sGt8z.thumb.700_0.jpeg" class="global-img">
             </div>
             <ul class="feature-list">
-                <li class="feature-item">柳叶眉</li>
-                <li class="feature-item">丹凤眼</li>
-                <li class="feature-item">算头鼻</li>
-                <li class="feature-item">瓜子脸</li>
-                <li class="feature-item">樱桃嘴</li>
+                <li class="feature-item" :class="{'show-feature-item':init}" v-for="(item,index) of featureList" :style="{'animation-delay':+index*.18+'s'}">{{item}}</li>
             </ul>
             <ul class="result-list">
                 <li class="result-item global-flex">
@@ -76,17 +71,36 @@
         <footer class="global-flex global-flex-between global-flex-center" id="footer">
             <a href="javascript:void(0);" class="global-flex global-flex-center global-flex-justify-center footer-btn">
                 <svg class="footer-icon">
-                    <use xlink:href=""></use>
+                    <use xlink:href="../../img/ai.svg#icon-share"></use>
                 </svg>
                 分享赚钱
             </a>
             <a href="javascript:void(0);" class="global-flex global-flex-center global-flex-justify-center footer-btn">
                 <svg class="footer-icon">
-                    <use xlink:href=""></use>
+                    <use xlink:href="../../img/ai.svg#icon-heart"></use>
                 </svg>
                 立即脱单
             </a>
         </footer>
     </div>
 </body>
+<script src="../../js/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:function() {
+            return {
+                init:false,
+                score:82,
+                featureList:['柳叶眉','丹凤眼','算头鼻','瓜子脸','樱桃嘴']
+            }
+        },
+        mounted:function() {
+            this.init = true
+        },
+        methods:{
+
+        }
+    })
+</script>
 </html>

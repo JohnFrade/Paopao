@@ -15,40 +15,22 @@
     <div id="app" v-if="init">
         <div class="poster-wrp">
             <canvas id="poster"></canvas>
-            <img src="" class="poster-img">
+            <img :src="imgSrc" class="poster-img">
         </div>
         <h1 class="poster-tips">长按保存图片，分享赚钱</h1>
     </div>
 </body>
 <script src="../../js/vue.min.js"></script>
 <script>
-    // 加载图片
-    function preLoadImg(img) {
-        if(!img) return;
-        var newImg = new Image();
-        var loadDone = function () {}
-        newImg.src = img;
-        newImg.onload = function () {
-            loadDone(newImg)
-        }
-        return {
-            done: function (f) {
-                loadDone = f || loadDone
-            }
-        }
-    }
-
     // 获取canvas的尺寸
     function getCanvasSize() {
-        var u = navigator.userAgent;
-        var winW = document.documentElement.clientWidth;
-        var winH = document.documentElement.clientHeight;        
-        if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
-            winH = winH*1.08;
-        }
-        winW = Math.round(((winW >= 640 ? 640 : winW) * 0.8));
-        winH = Math.round(winH * 0.7860199004975);
-        var outline = Math.round(winW * 0.0166666666667)
+        var u = navigator.userAgent,
+            winW = document.documentElement.clientWidth;
+            winH = document.documentElement.clientHeight;        
+        winW = winW >= 640 ? 640 : winW;
+        winH = winH >= 960 ? 960 : winH;
+        winH = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)?winH*1.08:winH;
+        var outline = Math.round(winW * 0.032);
         return {
             outline:outline*2,
             w: winW * 2,
@@ -71,35 +53,51 @@
         }
     }
 
-    //
+    // 绘制图片
+    function preLoadImg(imgSrc) {
+        var newImg = new Image();
+        newImg.src = imgSrc;
+        return function(fn) {
+            newImg.onload = function(e) {
+                fn(newImg)
+            }
+        }
+    }
+
 
     var app = new Vue({
         el:'#app',
         data:function() {
             return{
-                init:false
+                init:false,
+                imgSrc:''
             }
         },
         mounted:function() {
-            this.init = true;
-            this.$nextTick(function() {
-                this.drawPoster()
-            })
+            this.init = true;            
+        },
+        watch:{
+            init:function(val){
+                if(val){
+                    this.$nextTick(function(){
+                        this.drawPoster()
+                    })
+                }
+            }
         },
         methods:{
             //  绘制海报
             drawPoster:function(content) {
+                var parent = getCanvasSize(),
+                    fontSize = getBasePixal();   // 字体的缩放系数
+                    console.log(parent)
                 var canvas = document.getElementById("poster");
+                console.log(canvas)
                 var ctx = canvas.getContext("2d");
-                var parent = getCanvasSize();
-                console.log(parent)
                 canvas.setAttribute("width", parent.w);
                 canvas.setAttribute("height", parent.h);
                 canvas.style.width = (parent.w / 2) + 'px';
                 canvas.style.height = (parent.h / 2) + 'px';
-
-                // 字体的缩放系数
-                var fontSize = getBasePixal();
 
                 // 清空画布
                 ctx.clearRect(0, 0, parent.w, parent.h)
@@ -108,28 +106,37 @@
                 ctx.fillStyle = "#fff";
                 ctx.fillRect(0, 0, parent.w, parent.h);
 
+                // 绘制边框
+                ctx.lineWidth = parent.outline;
+
+                ctx.strokeStyle = '#7A5BFF';
+                ctx.strokeRect(0,0,parent.w, parent.h)
+
                 // 绘制banner
-                preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551695617646&di=81f9ddfc9cd3b5106d7253ebb9f0d0b0&imgtype=0&src=http%3A%2F%2Ff2.dn.anqu.com%2Fdown%2FZmEwZA%3D%3D%2Fallimg%2F1208%2F48-120P5154015.jpg').done(function(img) {
-                    ctx.drawImage(img, parent.outline, parent.outline, parent.w-parent.outline*2, parent.w-parent.outline*0.80357142857);
+                preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554204405883&di=6a151b58a41e0d4bd3f4ed9e306afabb&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b0555541c143000001a64b78e301.jpg%401280w_1l_2o_100sh.jpg')(function(img){
+                    ctx.drawImage(img,parent.outline*.5, parent.outline*.5, parent.w-parent.outline, parent.h*.55319148936);
                 })
-
                 // 绘制头像
-                function drawAvatar(ctx,img,x,y,r){
-                    // ctx.save();
-                    var d = 2 * r;
-                    var cx = x + r;
-                    var cy = y + r;
-                    ctx.beginPath();
-                    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-                    ctx.clip();
-                    ctx.drawImage(img, x, y, d, d);
-                    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-                }
-
-                // 绘制头像
-                preLoadImg('http://img.duoziwang.com/2017/10/1722593612686.jpg').done(function(img) {
-                    drawAvatar(ctx,img,20*fontSize,5.833333333*fontSize,5*fontSize)
+                preLoadImg('http://img5.duitang.com/uploads/item/201408/14/20140814165959_VCtan.thumb.700_0.png')(function(img){
+                    function drawAvatar(ctx,img,x,y,r){
+                        var d = 2 * r;
+                        var cx = x + r;
+                        var cy = y + r;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                        ctx.clip();
+                        ctx.drawImage(img, x, y, d, d);
+                        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                        ctx.save();
+                        // ctx.strokeStyle = '#orange';
+                        ctx.fillStyle = '#orange';
+                        ctx.strokeWidth = 2
+                        ctx.arc(100,400,100,0*Math.PI/180,120*Math.PI/180);
+                        ctx.stroke();
+                    }
+                    drawAvatar(ctx,img,(parent.w - 10*fontSize - parent.outline*4)/2,parent.h*.0625,10*fontSize)
                 })
+                
 
                 // 绘制用户名
                 var test = '哈哈哈哈哈哈';
@@ -146,6 +153,11 @@
                 // 副标题
 
                 // 二维码
+
+                // 指纹
+                
+                var src = canvas.toDataURL('image/jpeg', 1);
+                this.imgSrc = src;
             }
         }
     })
