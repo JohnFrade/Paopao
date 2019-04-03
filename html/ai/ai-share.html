@@ -88,11 +88,27 @@
         methods:{
             //  绘制海报
             drawPoster:function(content) {
+                // 绘制星星
+                function drawStar(score) {
+                    var scoreText = '桃花运势：';
+                    ctx.font = fontSize * 3 + 'px bold PingFang SC';
+                    ctx.fillText(scoreText, parent.w /2 - ctx.measureText(scoreText).width/2,0.489166666667 * parent.h);
+                    preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554204405883&di=6a151b58a41e0d4bd3f4ed9e306afabb&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b0555541c143000001a64b78e301.jpg%401280w_1l_2o_100sh.jpg')(function(img){
+                    ctx.drawImage(img,parent.outline*.5, parent.outline*.5, parent.w-parent.outline, parent.h*.55319148936);
+                })
+                    
+                }
+                function drawTitle(title) {
+                    ctx.fillStyle = "#333";
+                }
+                function drawSlogan() {
+
+                }
                 var parent = getCanvasSize(),
                     fontSize = getBasePixal();   // 字体的缩放系数
                     console.log(parent)
+                    console.log(fontSize)
                 var canvas = document.getElementById("poster");
-                console.log(canvas)
                 var ctx = canvas.getContext("2d");
                 canvas.setAttribute("width", parent.w);
                 canvas.setAttribute("height", parent.h);
@@ -116,6 +132,7 @@
                 preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554204405883&di=6a151b58a41e0d4bd3f4ed9e306afabb&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b0555541c143000001a64b78e301.jpg%401280w_1l_2o_100sh.jpg')(function(img){
                     ctx.drawImage(img,parent.outline*.5, parent.outline*.5, parent.w-parent.outline, parent.h*.55319148936);
                 })
+
                 // 绘制头像
                 preLoadImg('http://img5.duitang.com/uploads/item/201408/14/20140814165959_VCtan.thumb.700_0.png')(function(img){
                     function drawAvatar(ctx,img,x,y,r){
@@ -127,30 +144,50 @@
                         ctx.clip();
                         ctx.drawImage(img, x, y, d, d);
                         ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-                        ctx.save();
-                        // ctx.strokeStyle = '#orange';
-                        ctx.fillStyle = '#orange';
-                        ctx.strokeWidth = 2
-                        ctx.arc(100,400,100,0*Math.PI/180,120*Math.PI/180);
+                        ctx.restore();
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#fff'
+                        ctx.lineWidth = .41666666666667*fontSize;
+                        ctx.fillStyle = 'transparent'
+                        ctx.arc(cx, cy, r, 0, 2 * Math.PI)
                         ctx.stroke();
+                        ctx.closePath()
                     }
                     drawAvatar(ctx,img,(parent.w - 10*fontSize - parent.outline*4)/2,parent.h*.0625,10*fontSize)
                 })
                 
+                
+                
 
-                // 绘制用户名
-                var test = '哈哈哈哈哈哈';
-                ctx.font = fontSize * 2 + 'px PingFang SC';
-                ctx.fillStyle = '#fff';
-                ctx.fillText(test, (parent.w - ctx.measureText(test).width) / 2,0.2229166666667 * parent.h);
+                                    
+                setTimeout(function() {
+                    // 绘制用户名
+                    var userName = '哈哈哈哈哈xvczjgjfk ghdh ghn fgh jgb哈';
+                    ctx.fillStyle = '#fff';
+                    ctx.font = fontSize * 2.333333333333 + 'px PingFang SC';
+                    ctx.fillText(userName, (parent.w - ctx.measureText(userName).width) / 2,0.2829166666667 * parent.h);
 
-                // 分数
+                    // 分数
+                    ctx.textAlign="center";
+                    var score = 95;
+                    ctx.font = fontSize * 10 + 'px bold PingFang SC';
+                    ctx.fillText(score, parent.w /2 - ctx.measureText(score).width/4,0.409166666667 * parent.h);
+                    var scoreText = '分';
+                    ctx.font = fontSize * 5 + 'px bold PingFang SC';
+                    ctx.fillText(scoreText, parent.w /2 + ctx.measureText(scoreText).width*4/3,0.409166666667 * parent.h);
 
-                // 星星
+                    // 星星
+                    drawStar(score)
 
-                // 标题
+                    // 标题
+                    drawTitle()
 
-                // 副标题
+                    // 副标题
+
+                },128)
+                    
+                // ctx.save()
+                
 
                 // 二维码
 
