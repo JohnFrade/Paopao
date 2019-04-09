@@ -1,202 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black" name="apple-mobile-web-app-status-bar-style">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="email=no" name="format-detection">
-    <meta name="x5-page-mode" content="app">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/ai-share.css">
-    <title>脱单分享</title>
-</head>
-<body>
-    <div id="app" v-if="init">
-        <div class="poster-wrp">
-            <canvas id="poster"></canvas>
-            <img :src="imgSrc" class="poster-img">
+
+    <head>
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="email=no" name="format-detection">
+        <meta name="x5-page-mode" content="app">
+        <link rel="stylesheet" href="../../css/common.css">
+        <link rel="stylesheet" href="../../css/ai-share.css">
+        <title>脱单分享</title>
+    </head>
+
+    <body>
+        <div id="app" v-if="init">
+            <div class="poster-wrp">
+                <canvas id="poster"></canvas>
+                <img :src="imgSrc" class="poster-img" v-show="imgSrc">
+            </div>
+            <h1 class="poster-tips">长按保存图片，分享赚钱</h1>
         </div>
-        <h1 class="poster-tips">长按保存图片，分享赚钱</h1>
-    </div>
-</body>
-<script src="../../js/vue.min.js"></script>
-<script>
-    // 获取canvas的尺寸
-    function getCanvasSize() {
-        var u = navigator.userAgent,
-            winW = document.documentElement.clientWidth;
-            winH = document.documentElement.clientHeight;        
-        winW = winW >= 640 ? 640 : winW;
-        winH = winH >= 960 ? 960 : winH;
-        winH = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)?winH*1.08:winH;
-        var outline = Math.round(winW * 0.032);
-        return {
-            outline:outline*2,
-            w: winW * 2,
-            h: winH * 2
-        }
-    }
-
-    // 获取缩放比例
-    function getBasePixal() {
-        var winW = document.documentElement.clientWidth;
-        winW = winW >= 640 ? 640 : winW;
-        if (winW >= 320 && winW < 360) {
-            return 10
-        } else if (winW >= 360 && winW < 414) {
-            return 12
-        } else if (winW >= 414 && winW < 480) {
-            return 14
-        } else if (winW >= 480) {
-            return 16
-        }
-    }
-
-    // 绘制图片
-    function preLoadImg(imgSrc) {
-        var newImg = new Image();
-        newImg.src = imgSrc;
-        return function(fn) {
-            newImg.onload = function(e) {
-                fn(newImg)
+    </body>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        // 获取canvas的尺寸
+        function getCanvasSize() {
+            var u = navigator.userAgent,
+                winW = document.documentElement.clientWidth;
+            winH = document.documentElement.clientHeight;
+            winW = winW >= 640 ? 640 : winW;
+            winH = winH >= 960 ? 960 : winH;
+            // winH = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? winH * 1.08 : winH;
+            var outline = Math.round(winW * 0.032);
+            return {
+                outline: outline * 2,
+                w: winW * 2 + outline*4,
+                h: winH * 2
             }
         }
-    }
 
-
-    var app = new Vue({
-        el:'#app',
-        data:function() {
-            return{
-                init:false,
-                imgSrc:''
+        // 获取缩放比例
+        function getBasePixal() {
+            var winW = document.documentElement.clientWidth;
+            winW = winW >= 640 ? 640 : winW;
+            if (winW >= 320 && winW < 360) {
+                return 10
+            } else if (winW >= 360 && winW < 414) {
+                return 12
+            } else if (winW >= 414 && winW < 480) {
+                return 14
+            } else if (winW >= 480) {
+                return 16
             }
-        },
-        mounted:function() {
-            this.init = true;            
-        },
-        watch:{
-            init:function(val){
-                if(val){
-                    this.$nextTick(function(){
-                        this.drawPoster()
-                    })
+        }
+
+        // 绘制图片
+        function preLoadImg(imgSrc) {
+            var newImg = new Image();
+            newImg.src = imgSrc;
+            return function (fn) {
+                newImg.onload = function (e) {
+                    fn(newImg)
                 }
             }
-        },
-        methods:{
-            //  绘制海报
-            drawPoster:function(content) {
-                // 绘制星星
-                function drawStar(score) {
-                    var scoreText = '桃花运势：';
-                    ctx.font = fontSize * 3 + 'px bold PingFang SC';
-                    ctx.fillText(scoreText, parent.w /2 - ctx.measureText(scoreText).width/2,0.489166666667 * parent.h);
-                    preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554204405883&di=6a151b58a41e0d4bd3f4ed9e306afabb&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b0555541c143000001a64b78e301.jpg%401280w_1l_2o_100sh.jpg')(function(img){
-                    ctx.drawImage(img,parent.outline*.5, parent.outline*.5, parent.w-parent.outline, parent.h*.55319148936);
-                })
-                    
+        }
+
+
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    init: false,
+                    imgSrc: ''
                 }
-                function drawTitle(title) {
-                    ctx.fillStyle = "#333";
-                }
-                function drawSlogan() {
-
-                }
-                var parent = getCanvasSize(),
-                    fontSize = getBasePixal();   // 字体的缩放系数
-                    console.log(parent)
-                    console.log(fontSize)
-                var canvas = document.getElementById("poster");
-                var ctx = canvas.getContext("2d");
-                canvas.setAttribute("width", parent.w);
-                canvas.setAttribute("height", parent.h);
-                canvas.style.width = (parent.w / 2) + 'px';
-                canvas.style.height = (parent.h / 2) + 'px';
-
-                // 清空画布
-                ctx.clearRect(0, 0, parent.w, parent.h)
-
-                // 开始绘制
-                ctx.fillStyle = "#fff";
-                ctx.fillRect(0, 0, parent.w, parent.h);
-
-                // 绘制边框
-                ctx.lineWidth = parent.outline;
-
-                ctx.strokeStyle = '#7A5BFF';
-                ctx.strokeRect(0,0,parent.w, parent.h)
-
-                // 绘制banner
-                preLoadImg('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554204405883&di=6a151b58a41e0d4bd3f4ed9e306afabb&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b0555541c143000001a64b78e301.jpg%401280w_1l_2o_100sh.jpg')(function(img){
-                    ctx.drawImage(img,parent.outline*.5, parent.outline*.5, parent.w-parent.outline, parent.h*.55319148936);
-                })
-
-                // 绘制头像
-                preLoadImg('http://img5.duitang.com/uploads/item/201408/14/20140814165959_VCtan.thumb.700_0.png')(function(img){
-                    function drawAvatar(ctx,img,x,y,r){
-                        var d = 2 * r;
-                        var cx = x + r;
-                        var cy = y + r;
-                        ctx.beginPath();
-                        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-                        ctx.clip();
-                        ctx.drawImage(img, x, y, d, d);
-                        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-                        ctx.restore();
-                        ctx.beginPath();
-                        ctx.strokeStyle = '#fff'
-                        ctx.lineWidth = .41666666666667*fontSize;
-                        ctx.fillStyle = 'transparent'
-                        ctx.arc(cx, cy, r, 0, 2 * Math.PI)
-                        ctx.stroke();
-                        ctx.closePath()
+            },
+            mounted: function () {
+                this.init = true;
+            },
+            watch: {
+                init: function (val) {
+                    if (val) {
+                        this.$nextTick(function () {
+                            this.drawPoster()
+                        })
                     }
-                    drawAvatar(ctx,img,(parent.w - 10*fontSize - parent.outline*4)/2,parent.h*.0625,10*fontSize)
-                })
-                
-                
-                
+                }
+            },
+            methods: {
+                //  绘制海报
+                drawPoster: function (content) {
+                    // 绘制星星
+                    function drawStar(score) {
+                        var scoreText = '桃花运势：';
+                        ctx.font = 'bold ' + fontSize * 3 + 'px PingFang SC';
+                        ctx.fillText(scoreText, parent.w / 2 - ctx.measureText(scoreText).width / 2,
+                            0.489166666667 * parent.h);
+                        preLoadImg('../../img/star-empty.png')(function (emptyStar) {
+                            preLoadImg('../../img/star.png')(function (star) {
+                                var inter = Math.floor(score / 20),
+                                    remainder = score % 20;
+                                for (var i = 1; i < 6; i++) {
+                                    if (inter >= i) {
+                                        ctx.drawImage(star, parent.w / 2 - ctx.measureText(
+                                                scoreText).width / 3 + fontSize * 3.75 * i,
+                                            0.489166666667 * parent.h - fontSize * 3 +
+                                            2, fontSize * 3.75, fontSize * 3)
+                                    } else {
+                                        if (Math.ceil(score / 20) === i) {
+                                            ctx.save();
+                                            ctx.drawImage(emptyStar, parent.w / 2 - ctx
+                                                .measureText(scoreText).width / 3 +
+                                                fontSize * 3.75 * i, 0.489166666667 *
+                                                parent.h - fontSize * 3 + 2, fontSize *
+                                                3.75, fontSize * 3);
+                                            ctx.rect(parent.w / 2 - ctx.measureText(
+                                                    scoreText).width / 3 + fontSize *
+                                                3 * i, 0.489166666667 * parent.h -
+                                                fontSize * 3.75 + 2, fontSize * 3 * (
+                                                    remainder / 20), fontSize * 3);
+                                            ctx.clip();
+                                            ctx.drawImage(star, parent.w / 2 - ctx
+                                                .measureText(scoreText).width / 3 +
+                                                fontSize * 3.75 * i, 0.489166666667 *
+                                                parent.h - fontSize * 3 + 2, fontSize *
+                                                3.75, fontSize * 3);
+                                            
+                                        } else {
+                                            ctx.restore();
+                                            ctx.drawImage(emptyStar, parent.w / 2 - ctx
+                                                .measureText(scoreText).width / 3 +
+                                                fontSize * 3.75 * i, 0.489166666667 *
+                                                parent.h - fontSize * 3 + 2, fontSize *
+                                                3.75, fontSize * 3);
+                                           
+                                        }
+                                    }
+                                }
+                            })
+                        })
+                    }
+                    // 绘制标题
+                    function drawTitle(title) {
+                        var textLen = title.length;
+                        var textLine = Math.ceil(textLen / 17);
+                        var text = '';
+                        var lineCount = {
+                            12: 19,
+                            14: 18,
+                            16: 22
+                        } [fontSize];
+                        ctx.fillStyle = "#333";
+                        ctx.textAlign = 'start';
+                        ctx.font = 'bold ' + fontSize * 3.5 + 'px PingFang SC';
+                        for (var i = 0; i < textLen; i++) {
+                            text = i !== textLine ? title.slice(lineCount * i, lineCount * (i + 1)) : title
+                                .slice(lineCount * i, title.length);
+                            ctx.fillText(text, parent.outline * 1.5, 0.6129166666667 * parent.h + 6 * i *
+                                fontSize);
+                        }
+                    }
 
-                                    
-                setTimeout(function() {
-                    // 绘制用户名
-                    var userName = '哈哈哈哈哈xvczjgjfk ghdh ghn fgh jgb哈';
-                    ctx.fillStyle = '#fff';
-                    ctx.font = fontSize * 2.333333333333 + 'px PingFang SC';
-                    ctx.fillText(userName, (parent.w - ctx.measureText(userName).width) / 2,0.2829166666667 * parent.h);
+                    // 绘制副标题
+                    function drawSlogan(slogan) {
+                        ctx.lineWidth = fontSize / 2;
+                        ctx.lineJoin = "round";
+                        ctx.strokeStyle = '#FDF4FF';
+                        ctx.strokeRect(parent.outline * 2, parent.h * 0.707916666667, parent.w - parent
+                            .outline * 4, 5 * fontSize);
+                        ctx.fillStyle = '#FDF4FF';
+                        ctx.fillRect(parent.outline * 2 + fontSize / 4, parent.h * 0.707916666667 +
+                            fontSize / 4, parent.w - parent.outline * 4 - fontSize / 4, 4 * fontSize +
+                            fontSize / 2);
+                        ctx.font = fontSize * 2.5 + 'px PingFang SC';
+                        ctx.fillStyle = '#9A20E7';
+                        ctx.fillText(slogan, (parent.w - ctx.measureText(slogan).width) / 2,
+                            0.71875 * parent.h + fontSize*2.25);
+                    }
 
-                    // 分数
-                    ctx.textAlign="center";
-                    var score = 95;
-                    ctx.font = fontSize * 10 + 'px bold PingFang SC';
-                    ctx.fillText(score, parent.w /2 - ctx.measureText(score).width/4,0.409166666667 * parent.h);
-                    var scoreText = '分';
-                    ctx.font = fontSize * 5 + 'px bold PingFang SC';
-                    ctx.fillText(scoreText, parent.w /2 + ctx.measureText(scoreText).width*4/3,0.409166666667 * parent.h);
+                    function drawConnect(ctx, parent, fontSize) {
+                        ctx.lineWidth = 2;
+                        ctx.strokeStyle = '#D4BF93';
+                        ctx.beginPath();
+                        ctx.moveTo(parent.w * .5 - fontSize * 1.5, parent.h * .85104166666667);
+                        ctx.lineTo(parent.w * .5 + fontSize * 1.5, parent.h * .85104166666667 + fontSize * 3);
+                        ctx.stroke();
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(parent.w * .5 + fontSize * 1.5, parent.h * .85104166666667);
+                        ctx.lineTo(parent.w * .5 - fontSize * 1.5, parent.h * .85104166666667 + fontSize * 3)
+                        ctx.stroke();
+                        ctx.restore()
+                    }
 
-                    // 星星
-                    drawStar(score)
+                    var parent = getCanvasSize(),
+                        fontSize = getBasePixal(); // 字体的缩放系数
+                    var canvas = document.getElementById("poster");
+                    var ctx = canvas.getContext("2d");
+                    var self = this;
+                    canvas.setAttribute("width", parent.w);
+                    canvas.setAttribute("height", parent.h);
+                    canvas.style.width = (parent.w / 2) + 'px';
+                    canvas.style.height = (parent.h / 2) + 'px';
 
-                    // 标题
-                    drawTitle()
+                    // 清空画布
+                    ctx.clearRect(0, 0, parent.w, parent.h)
 
-                    // 副标题
+                    // 开始绘制
+                    ctx.fillStyle = "#fff";
+                    ctx.fillRect(0, 0, parent.w, parent.h);
 
-                },128)
+                    // 绘制边框
+                    ctx.lineWidth = parent.outline;
+
+                    ctx.strokeStyle = '#7A5BFF';
+                    ctx.strokeRect(0, 0, parent.w, parent.h)
+
+                    // 绘制banner
+                    preLoadImg(
+                        '../../img/ai-poster-banner.png'
+                        )(function (banner) {
+                        ctx.drawImage(banner, parent.outline * .5, parent.outline * .5, parent.w -
+                            parent.outline, parent.h * .55319148936);
+
+                        // 绘制头像
+                        preLoadImg('../../img/fo.jpg')(function (avatar) {
+                            function drawAvatar(ctx, avatar, x, y, r) {
+                            ctx.save()
+                            var d = 2 * r;
+                            var cx = x + r;
+                            var cy = y + r;
+                            ctx.beginPath();
+                            ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                            ctx.clip();
+                            ctx.drawImage(avatar, x, y, d, d);
+                            ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                            ctx.beginPath();
+                            ctx.strokeStyle = '#fff'
+                            ctx.lineWidth = .41666666666667 * fontSize;
+                            ctx.fillStyle = 'transparent'
+                            ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                        drawAvatar(ctx, avatar, (parent.w - 7 * fontSize - parent.outline * 3) / 2, parent.h * .0825, 7 * fontSize)
+                    })
+                    })
                     
-                // ctx.save()
-                
 
-                // 二维码
+                    setTimeout(function () {
+                        ctx.restore()
+                        // 绘制用户名
+                        var userName = 'John Frade';
+                        ctx.fillStyle = '#fff';
+                        ctx.font = fontSize * 3 + 'px PingFang SC';
+                        ctx.fillText(userName, (parent.w - ctx.measureText(userName).width) / 2,
+                            0.2829166666667 * parent.h);
 
-                // 指纹
-                
-                var src = canvas.toDataURL('image/jpeg', 1);
-                this.imgSrc = src;
+                        // 分数
+                        ctx.textAlign = "center";
+                        var score = 68;
+                        ctx.font = 'bold ' + fontSize * 10 + 'px PingFang SC';
+                        ctx.fillText(score, parent.w / 2 ,
+                            0.439166666667 * parent.h);
+                        var scoreText = '分';
+                        ctx.font = fontSize * 4 + 'px bold PingFang SC';
+                        ctx.fillText(scoreText, parent.w / 2 + ctx.measureText(score).width*2.25, 0.434166666667 * parent.h);
+
+                        // 星星
+                        drawStar(score);
+
+                        // 标题
+                        var title = '2019继续当单身狗？还是迅速摆脱单身模式？';
+                        drawTitle(title);
+
+                        // 副标题
+                        var slogan = '同城交友，扩大你的异性交友圈，实现脱单！';
+                        drawSlogan(slogan);
+
+                        // 二维码
+                        preLoadImg('../../img/code.png')(function (img) {
+                            ctx.drawImage(img, parent.w * 0.171875, parent.h * .80208333333,
+                                fontSize * 14, fontSize * 14);
+                        })
+
+                        // 绘制X
+                        drawConnect(ctx, parent, fontSize)
+
+                        // 指纹
+                        preLoadImg(
+                            '../../img/finger.png')(function (img) {
+                            ctx.drawImage(img, parent.w * 0.828125 - 14 * fontSize, parent
+                                .h * .80208333333, fontSize * 14, fontSize * 14);
+                        })
+
+                        setTimeout(function() {
+                            var src = canvas.toDataURL("image/png");
+                            self.imgSrc = src;
+                        },200)
+                    },300)
+                }
             }
-        }
-    })
-</script>
+        })
+    </script>
+
 </html>

@@ -3,8 +3,9 @@
     padding-top: 2.3333333333333rem;
     width: 100%;
     height: 100vh;
+    background: url(../img/ai-bg.png) no-repeat;
+    background-size: 100%;
     /* overflow: hidden; */
-    background:linear-gradient(0deg,rgba(4,5,47,1),rgba(64,64,237,1));
 }
 
 .poster-wrp{
@@ -15,10 +16,14 @@
     box-shadow:0px 8px 20px 0px rgba(91,99,245,0.69)
 }
 #poster{
-    width: 100%;
-    height: 100%;
-    opacity: 1
-    /* opacity: 0; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
 }
 .poster-img{
     position: absolute;
@@ -26,8 +31,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    /* opacity: 1 */
+    opacity: 1
 }
 .poster-tips{
     font-size: 1.3333333333333rem;

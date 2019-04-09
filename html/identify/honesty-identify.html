@@ -124,19 +124,17 @@
                         <p>尊敬的用户：</p>
                         <p>您上传的证件图片等资料，仅供审核使用且TA人无法查看。</p>
                         <p>除此之外，我们还会进行安全水印处理，尽情放心。</p>
-                        <p>您上传的证件图片等资料，仅供审核使用且TA人无法查看。</p>
-                        <p>除此之外，我们还会进行安全水印处理，尽情放心。</p>
+                        <div class="layer-comfirm">
+                            <label for="layer-checkbox" class="global-flex global-flex-center layer-checkbox-wrp" @click="readPolicy">
+                                <input type="checkbox" id="layer-checkbox" :checked="layer.readDone">
+                                <i class="checkbox"></i>
+                                已阅读并同意认证服务条款
+                            </label>
+                        </div>
+                        <p class="layer-tips">
+                            （您所上传的证件资料，平台将进行人工审核。我们会尽可能的去辨别信息的真假。（平台仅作信息展示，不负责也不能保证信息的真实性。因此，如果当事人因信息认证原因，产生相关刑事事件，本平台将不负责相关责任。）
+                        </p>
                     </div>
-                    <div class="layer-comfirm">
-                        <label for="layer-checkbox" class="global-flex global-flex-center layer-checkbox-wrp" @click="readPolicy">
-                            <input type="checkbox" id="layer-checkbox" :checked="layer.readDone">
-                            <i class="checkbox"></i>
-                            已阅读并同意认证服务条款
-                        </label>
-                    </div>
-                    <p class="layer-tips">
-                        (平台仅作信息展示，不负责也不能保证信息的真实性。因此，如果当事人因信息认证原因，产生相关刑事事件，本平台将不负责相关责任）
-                    </p>
                     <a href="javascript:void(0);" class="layer-btn" :class="{'layer-btn-read':layer.readDone}" @click.stop="closeLayer">确定</a>
                 </div>
             </div>

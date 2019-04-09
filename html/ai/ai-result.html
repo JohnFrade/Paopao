@@ -13,6 +13,7 @@
 </head>
 <body>
     <div id="app" v-if="init">
+        <a href="javascript:void(0);" class="rules-btn" @click.stop="layer.show = !layer.show"></a>
         <header>
             <div class="score-wrp">
                 <span class="score-num">{{score}}</span>
@@ -27,7 +28,7 @@
         </header>
         <main id="main">
             <div class="avatar">
-                <img src="http://img4.duitang.com/uploads/item/201303/19/20130319223714_sGt8z.thumb.700_0.jpeg" class="global-img">
+                <img src="../../img/fo.jpg" class="global-img">
             </div>
             <ul class="feature-list">
                 <li class="feature-item" :class="{'show-feature-item':init}" v-for="(item,index) of featureList" :style="{'animation-delay':+index*.18+'s'}">{{item}}</li>
@@ -52,36 +53,51 @@
                         </div>
                     </div>
                     <div class="result-item-content global-flex-1 global-flex global-flex-center">
-                        本周白羊座的工作运势表现大致尚好，有工作的白羊座本周工作表现稳定也能够得到周遭同事的积极配合。
-                        本周白羊座的工作运势表现大致尚好，有工作的白羊座本周工作表现稳定也能够得到周遭同事的积极配合。
+                        对心中最牵挂的人，尽量能抽空陪伴，感情必定甜甜蜜蜜，偶尔制造一点小惊喜，也许会有意想不到的效果哦。
                     </div>
                 </li>
                 <li class="result-item global-flex">
                     <div class="result-item-name result-lucky global-flex">
                         <div class="result-item-name-text">
-                            幸运色
+                            匹配
                         </div>
                     </div>
-                    <div class="result-item-content global-flex-1 global-flex global-flex-center">
-                        绿色
+                    <div class="result-item-content global-flex-1 global-flex global-flex-column global-flex-justify-center">
+                        <p>星座：水瓶座</p>
+                        <p>颜色：火焰红</p>
                     </div>
                 </li>
             </ul>
         </main>
         <footer class="global-flex global-flex-between global-flex-center" id="footer">
-            <a href="javascript:void(0);" class="global-flex global-flex-center global-flex-justify-center footer-btn">
+            <a href="./ai-share.html" class="global-flex global-flex-center global-flex-justify-center footer-btn">
                 <svg class="footer-icon">
                     <use xlink:href="../../img/ai.svg#icon-share"></use>
                 </svg>
                 分享赚钱
             </a>
             <a href="javascript:void(0);" class="global-flex global-flex-center global-flex-justify-center footer-btn">
-                <svg class="footer-icon">
-                    <use xlink:href="../../img/ai.svg#icon-heart"></use>
-                </svg>
-                立即脱单
+                <img src="../../img/ai-footer-btn.png" alt="" class="global-img">
             </a>
         </footer>
+        <div class="poster-rules-layer" v-show="layer.show">
+            <div class="poster-rules-mask"></div>
+            <div class="poster-rules-content global-box">
+                <img src="../../img/title-bg.png" alt="" class="poster-title">
+                <p>
+                    邀请新用户进入平台，并完善资料，即可获得红包。
+                </p>
+                <p>
+                    分享赚钱--转发海报给朋友，TA通过识别二维码进入社区。注册之后消费的每一笔，你将会获得他所消费额度的20%分销提成。
+                </p>
+                <p class="font-blue">
+                    提现金额达到1元以上才可以提现，在《我的》-《申请提现》。
+                </p>
+                <button class="global-btn poster-layer-btn" @click.stop="layer.show = !layer.show">
+                    <img src="../../img/ai-layer-btn.png" alt="" class="global-img">
+                </button>
+                </div>
+            </div>
     </div>
 </body>
 <script src="../../js/vue.min.js"></script>
@@ -91,7 +107,10 @@
         data:function() {
             return {
                 init:false,
-                score:82,
+                layer:{
+                    show:false
+                },
+                score:90,
                 featureList:['柳叶眉','丹凤眼','算头鼻','瓜子脸','樱桃嘴']
             }
         },
