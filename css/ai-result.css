@@ -1,7 +1,6 @@
 #app{
     width: 100%;
     max-width: 640px;
-    height: 100vh;
     margin: 0 auto;
     background:url(../img/ai-bg.png) no-repeat 0 0;
     background-size: 100%
