@@ -13,20 +13,238 @@
 </head>
 <body>
     <div id="app" v-if="init">
-        <h1>你能脱单吗？</h1>
-        <h2>人工智能检测 • 解锁2019的桃花运</h2>
-        <div>
-            <button>测一测</button>
+        <!-- 人脸识别 -->
+        <div v-show="step.first" id="ai-entrance">
+            <div class="title-wrp">
+                <h2 class="title">你能脱单吗？</h1>
+                <h3 class="sub-title">人工智能检测 • 解锁2019的桃花运</h3>
+            </div>
+            <!-- 人脸 -->
+            <div class="avatar-wrp">
+                <img src="../../img/ai-default.png" alt="" class="global-img" v-show="!avatar">
+                <img :src="avatar" alt="" class="global-img" v-show="avatar">
+                <!--  -->
+                <div class="test-anim test-anim-move" v-show="avatar"></div>
+            </div>
+            <!-- 检测状态 -->
+            <!-- <div> -->
+            <!-- </div> -->
+            <!-- 检测名单 -->
+            <div class="attend-list-wrp anim" v-if="!dataFillDone">
+                <ul class="attend-list" :class="{'broadcast':broadcast}" :style="{'animation-duration':3*attendList.length + 's'}">
+                    <li v-for="(attend,index) of attendList" :key="index">{{attend+'生成了报告'}}</li>
+                </ul>
+            </div>
+            <div>
+                <button v-show="!dataFillDone" class="ai-btn" @click.stop="fillData">测一测</button>
+                <label for="upload" class="ai-btn" v-show="dataFillDone">
+                    <input type="file" id="upload">
+                    上传个人照片
+                </label>
+            </div>
         </div>
+        <!-- 人脸检测不到 -->
+        <div id="ai-empty" v-show="step.third">
+           <div class="img-wrp">
+               <img src="../../img/ai-empty.png" alt="" class="global-img">
+           </div> 
+           <h2 class="title">没有检测到人脸</h2>
+           <h3 class="sub-title">重新上传照片尽量做到：</h3>
+           <p class="tips">脸部完整呈现 </p>
+           <p class="tips">五官正面清晰</p>
+           <p class="tips">没有刘海遮挡</p>
+           <label for="re-upload" class="ai-btn">
+                <input type="file" value="重新上传" id="re-upload">
+                重新上传
+           </label>
+        </div>
+        <!-- 信息填写 -->
+        <div v-show="step.second" id="ai-data">
+            <h2 class="title">信息填写</h2>
+            <div class="data-wrp">
+                <label for="user-name" class="user-name-wrp">
+                    <input type="text" id="user-name" placeholder="请输入你的名字" v-model.trim="data.userName" @input="fixInputPosition" ref="input">
+                </label>
+                <ul class="sexual-list global-flex global-flex-between">
+                    <li class="sexual-item ai-btn" :class="{'sexual-active':data.sexualIndex === 0}" @click.stop="data.sexualIndex = 0">男</li>
+                    <li class="sexual-item ai-btn" :class="{'sexual-active':data.sexualIndex === 1}" @click.stop="data.sexualIndex = 1">女</li>
+                </ul>
+                <label for="time-select" class="ai-btn time-select-wrp">
+                    <input type="date" id="time-select" @change="selectedBirth">
+                    {{data.birth?data.birth:'请选择你的出生日期'}}
+                </label>
+            </div>
+            <button class="ai-btn" @click.stop="startTest">下一步</button>
+        </div>
+        <!-- 提示 -->
+        <div class="global-tips" v-show="tips.show">{{tips.content}}</div>
     </div>
 </body>
 <script src="../../js/vue.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+<script type="text/javascript">
+    var vConsole = new VConsole();
+</script> -->
+
 <script>
+    // requestAnimationFrame兼容
+    (function () {
+        if (!window.requestAnimationFrame) { //兼容requestAnimationFrame
+            window.requestAnimationFrame = function (callback) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                var timer = window.setTimeout(function () {
+                        callback(currTime + timeToCall);
+                }, timeToCall);
+                lastTime = currTime + timeToCall;
+                return timer
+            };
+        }
+        if (!window.cancelAnimationFrame) {
+            window.cancelAnimationFrame = function (timer) {
+                clearTimeout(timer)
+            };
+        }
+    })();
     var app = new Vue({
         el:'#app',
         data:function(){
             return{
-                init:false
+                init:false,
+                avatar:'',
+                broadcast:false,
+                count:1,
+                attendList:[
+                    '琳琳***1',
+                    '琳琳***2',
+                    '琳琳***3',
+                    '琳琳***4',
+                    '琳琳***5',
+                    '琳琳***6',
+                    '琳琳***7',
+                    '琳琳***8',
+                    '琳琳***9',
+                    '琳琳***10'
+                ],  // 参与名单
+                step:{
+                    first:true,
+                    second:false,
+                    third:false
+                },
+                data:{
+                    userName:'',
+                    sexualIndex:0,
+                    birth:''
+                },
+                tips:{
+                    show:false,
+                    content:''
+                },
+                dataFillDone:false // 数据填写完成
+            }
+        },
+        mounted:function() {
+            this.init = true;
+            var self = this;
+            setTimeout(function() {
+                self.broadcast = true;
+                // self.broadcasting(3000)
+            },168)
+        },
+        watch: {
+            broadcast:function(val,oldVal) {
+                if(oldVal){
+                    ++this.count;
+                    this.broadcast = true;
+                    this.broadcasting(3000)
+                }
+            },
+            'tips.show':function(val) {
+                if(val){
+                    var self = this;
+                    setTimeout(function() {
+                        self.showTips(false,'')
+                    },1500)
+                }
+            }
+        },
+        methods:{
+            // 测试
+            broadcasting:function(time) {
+                var self = this;
+                var totalNum = Math.round((time*(this.attendList.length-1)*this.count)/16.7);
+                var Num = 0;
+                var timer = requestAnimationFrame(function fn() {
+                    if(Num < totalNum){
+                        ++Num;
+                        console.log(Num)
+                        if(self.count < 3){
+                            self.attendList = self.attendList.concat([],self.attendList)
+                        }
+                        requestAnimationFrame(fn)
+                    }else{
+                        Num = 0;
+                        self.broadcast = false;
+                        cancelAnimationFrame(timer)
+                    }
+                })
+            },
+            // 信息填写
+            fillData:function() {
+                this.step = Object.assign({},this.step,{
+                    first:false,
+                    second:true,
+                    third:false
+                })
+            },
+            // 检测信息填写
+            startTest:function() {
+                if(this.testUserName() && this.testBirth()){
+                    this.dataFillDone = true
+                    this.step = Object.assign({},this.step,{
+                        first:true,
+                        second:false,
+                        third:false
+                    })
+                }
+            },
+            // 修正输入框的位置
+            fixInputPosition:function() {
+                this.$refs.input.scrollIntoView(false)
+            },
+            // 选择出生日期
+            selectedBirth:function(e){
+                if(+new Date(e.target.value) > + new Date()){
+                    this.showTips(true,'请选择正确的出生日期');
+                    this.$set(this.data,'birth','')
+                }else{
+                    this.$set(this.data,'birth',e.target.value)
+                }                
+            },
+            // 检测用户名
+            testUserName:function() {
+                if(this.data.userName == ''){
+                    this.showTips(true,'请输入你的名字')
+                    return false
+                }else{
+                    return true
+                }
+            },
+            // 检测出生
+            testBirth:function() {
+                if(this.data.birth == ''){
+                    this.showTips(true,'请选择你的出生日期')
+                    return false
+                }else{
+                    return true
+                }
+            },
+            // 显示提示
+            showTips:function(show,content) {
+                this.tips = Object.assign({},this.tips,{
+                    show:show,
+                    content:content
+                })
             }
         }
     })
