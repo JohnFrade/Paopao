@@ -1,8 +1,7 @@
-#app{
+body{
     width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    background:url(../img/ai-bg.png) no-repeat 0 0;
+    height: 100%;
+    background: url(../img/ai-bg.png) no-repeat;
     background-size: 100%
 }
 header{

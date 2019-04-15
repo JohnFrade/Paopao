@@ -24,22 +24,30 @@
                 <img src="../../img/ai-default.png" alt="" class="global-img" v-show="!avatar">
                 <img :src="avatar" alt="" class="global-img" v-show="avatar">
                 <!--  -->
-                <div class="test-anim test-anim-move" v-show="avatar"></div>
+                <div class="test-anim test-anim-move" v-show="testing"></div>
             </div>
             <!-- 检测状态 -->
-            <!-- <div> -->
-            <!-- </div> -->
+            <div class="test-status-wrp anim" v-show="dataFillDone">
+                <div class="test-status" v-show="testing" ref="testWrp">
+                    <p class="test-status-item showTesting">正在进行全面检测ing...</p>
+                    <p class="test-status-item">正在进行检测三庭五眼ing...</p>
+                    <p class="test-status-item">上庭正在检测中庭ing...</p>
+                    <p class="test-status-item">中庭正在检测中庭ing...</p>
+                    <p class="test-status-item">下庭正在检测中庭ing...</p>
+                    <p class="test-status-item">检测完毕</p>
+                </div>
+            </div>
             <!-- 检测名单 -->
-            <div class="attend-list-wrp anim" v-if="!dataFillDone">
-                <ul class="attend-list" :class="{'broadcast':broadcast}" :style="{'animation-duration':3*attendList.length + 's'}">
+            <div class="attend-list-wrp anim" v-if="!dataFillDone" v-if="!avatar">
+                <ul class="attend-list" :class="{'broadcast':broadcast}" :style="{'animation-duration':3600*attendList.length + 'ms'}">
                     <li v-for="(attend,index) of attendList" :key="index">{{attend+'生成了报告'}}</li>
                 </ul>
             </div>
             <div>
                 <button v-show="!dataFillDone" class="ai-btn" @click.stop="fillData">测一测</button>
-                <label for="upload" class="ai-btn" v-show="dataFillDone">
-                    <input type="file" id="upload">
-                    上传个人照片
+                <label for="upload" class="ai-btn" :class="{'testing-btn':testing}"v-show="dataFillDone">
+                    <input type="file" id="upload" v-if="!testing">
+                    {{testing?(testDone?'正在生成报告':'检测中'):'上传个人照片'}}
                 </label>
             </div>
         </div>
@@ -140,23 +148,67 @@
                     show:false,
                     content:''
                 },
-                dataFillDone:false // 数据填写完成
+                dataFillDone:false, // 数据填写完成
+                testing:false,    // 正在检测
+                testDone:false   // 检测完成
             }
         },
         mounted:function() {
             this.init = true;
             var self = this;
             setTimeout(function() {
-                self.broadcast = true;
-                // self.broadcasting(3000)
-            },168)
+                self.dataFillDone = true
+                self.testing = true
+                self.broadcasting(3000)
+            },500)
         },
         watch: {
             broadcast:function(val,oldVal) {
                 if(oldVal){
+                    var self = this;
                     ++this.count;
-                    this.broadcast = true;
-                    this.broadcasting(3000)
+                    if(this.count === 2){
+                        this.broadcasting(3000)
+                    }else{
+                        setTimeout(function() {
+                            self.broadcasting(3000)
+                        },128)
+                    }
+                    
+                }
+            },
+            dataFillDone:function(val){
+                if(val){
+                    this.getTestingStatus()
+                }
+            },
+            testing:function(val){
+                if(val){
+                    var self = this;
+                    this.testingStatus.forEach(function(item,index){
+                        setTimeout(function(){
+                            item.className += ' test-active';
+                            if(index+1 <= self.testingStatus.length - 1){
+                                self.testingStatus[index+1].className += ' showTesting'
+                            }
+                            if(index > 0){
+                                self.testingStatus[index-1].className -= ' showTesting'
+                            }
+                            
+                            if(index === self.testingStatus.length - 1){
+                                self.testDone = true
+                            }
+                            setTimeout(function() {
+                                if(index < self.testingStatus.length - 1){
+                                    self.$refs.testWrp.style.cssText = 'transform:translateY(-'+((index+1)*2)+'rem)';
+                                }else if (index === self.testingStatus.length - 1){
+                                    setTimeout(function() {
+                                        window.location.href= "./ai-result.html"
+                                    },1000)
+                                }
+                            },2000)
+                        },2000*index)
+                    })
                 }
             },
             'tips.show':function(val) {
@@ -172,20 +224,20 @@
             // 测试
             broadcasting:function(time) {
                 var self = this;
-                var totalNum = Math.round((time*(this.attendList.length-1)*this.count)/16.7);
+                var totalNum = Math.round((time*(this.attendList.length/6)*this.count)/16.7);
                 var Num = 0;
+                this.broadcast = true;
                 var timer = requestAnimationFrame(function fn() {
-                    if(Num < totalNum){
-                        ++Num;
-                        console.log(Num)
-                        if(self.count < 3){
+                    if(Num <= totalNum){
+                        if(self.count < 3 && Num === totalNum){
                             self.attendList = self.attendList.concat([],self.attendList)
                         }
+                        ++Num;
                         requestAnimationFrame(fn)
                     }else{
+                        cancelAnimationFrame(timer)
                         Num = 0;
                         self.broadcast = false;
-                        cancelAnimationFrame(timer)
                     }
                 })
             },
@@ -200,7 +252,8 @@
             // 检测信息填写
             startTest:function() {
                 if(this.testUserName() && this.testBirth()){
-                    this.dataFillDone = true
+                    this.dataFillDone = true;
+                    this.testing = true;   // 上传完图片才把这个testing变成true
                     this.step = Object.assign({},this.step,{
                         first:true,
                         second:false,
@@ -238,6 +291,10 @@
                 }else{
                     return true
                 }
+            },
+            // 获取检测状态
+            getTestingStatus:function(){
+                this.testingStatus = Array.prototype.slice.call(document.querySelectorAll('.test-status-item'))
             },
             // 显示提示
             showTips:function(show,content) {

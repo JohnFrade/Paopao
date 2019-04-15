@@ -22,7 +22,13 @@ body{
     background:linear-gradient(0deg,rgba(32,129,249,1),rgba(99,6,240,1));
     box-shadow:0px 0px 0px 0px rgba(54,63,241,0.81),0px 4px 16px 0px rgba(163,64,255,0.54),inset 0px -4px 8px 0px rgba(6,73,183,0.65),inset 0px -10px 16px 0px rgba(88,151,255,0.65);
     border-radius:64px;
+    transition: all .32s;
     overflow: hidden;
+}
+.testing-btn{
+    background:linear-gradient(0deg,rgba(241,165,19,1),rgba(246,45,102,1));
+    box-shadow:0px 4px 16px 0px rgba(192,220,255,0.54), 0px -2px 8px 0px rgba(6,73,183,0.65), 0px -10px 16px 0px rgba(178,88,255,0.65);
+    box-shadow: unset;
 }
 .ai-btn  input[type="file"]{
     position: absolute;
@@ -87,6 +93,55 @@ body{
         transform: unset
     }
 }
+/* 检测状态 */
+.test-status-wrp{
+    margin: 6.16666666667rem auto 2.5rem;
+    width: 80%;
+    height: 6rem;
+    max-width: 480px;
+    text-align: center;
+    font-size: 1.1666666667rem;
+    line-height: 1.72;
+    overflow: hidden;
+    color: #fff
+}
+.test-status{
+    transition: transform .36s
+}
+.test-status-item{
+    position: relative;
+    opacity: 0;
+}
+.test-status-item::before{
+    content: '';
+    display: inline-block;
+    width: .5rem;
+    height: .5rem;
+    margin-right: 4px;
+    vertical-align: middle;
+    background: #F92049;
+    border-radius: 50%;
+    transition: all .28s
+}
+.test-active::before{
+    background: #00D40A
+}
+@keyframes showTesting{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.showTesting{
+    animation-name: showTesting;
+    animation-duration: .48s;
+    animation-delay: .22s;
+    animation-timing-function: linear;
+    animation-fill-mode: both
+}
+/* 参与名单 */
 .attend-list-wrp{
     margin: 2.16666666667rem auto 2.5rem;
     width: 80%;
