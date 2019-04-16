@@ -166,6 +166,13 @@
                     </ul>
                 </div>
             </div>
+            <!-- 桃花运测试 -->
+            <div class="guide-layer" @touchmove="preventMove">
+                <div class="guide-img-wrp">
+                    <img src="../../img/guide-0.png" class="global-img">
+                </div>
+                <button class="guide-btn">确定</button>
+            </div>
         </div>
     </body>
     <script src="../../js/swiper.js"></script>
@@ -234,6 +241,9 @@
                 // 初始化公告
                 initAnnounce: function () {
 
+                },
+                preventMove:function(e){
+                    e.preventDefault();
                 },
                 // 全局滚动事件
                 globalScroll: function () {

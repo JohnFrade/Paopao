@@ -4,10 +4,6 @@ body{
     background: url(../img/ai-bg.png) no-repeat;
     background-size: 100%
 }
-#app{
-    padding-top: 2.3333333333333rem;
-}
-
 .ai-btn{
     position: relative;
     display: block;

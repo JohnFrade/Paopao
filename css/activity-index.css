@@ -252,3 +252,36 @@ body{
 #aside{
     bottom: 17.25rem
 }
+.guide-layer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 640px;
+    height: 100vh;
+    background: rgba(0, 0, 0, .56);
+    z-index: 999
+}
+.guide-img-wrp{
+    position: relative;
+    top: 13.8333333333333rem;;
+    left: 3rem;
+    margin: 0 auto 3.5416666667rem;
+    width: 17.91666666666666rem;
+    height: 12.25rem;
+}
+
+.guide-btn{
+    display: block;
+    margin: 17.696666666667rem auto;
+    width: 8.0833333333rem;
+    height: 2.66666666667rem;
+    font-size:1.1666666667rem;
+    color: #333;
+    text-align: center;
+    line-height: 2.6666666667rem;
+    background: #fff;
+    border-radius: 32px
+}
