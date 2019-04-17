@@ -91,9 +91,9 @@ body{
 }
 /* 检测状态 */
 .test-status-wrp{
-    margin: 6.16666666667rem auto 2.5rem;
+    margin: 4.16666666667rem auto 2.5rem;
     width: 80%;
-    height: 6rem;
+    height: 4rem;
     max-width: 480px;
     text-align: center;
     font-size: 1.1666666667rem;
