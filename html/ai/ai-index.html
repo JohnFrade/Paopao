@@ -21,9 +21,11 @@
             </div>
             <!-- 人脸 -->
             <div class="avatar-wrp">
-                <img src="" class="avatar-wrp-area">
-                <img src="../../img/ai-default.png" alt="" class="global-img" v-show="!avatar">
-                <img :src="avatar" alt="" class="global-img" v-show="avatar">
+                <img src="../../img/ai-outline.png" class="avatar-wrp-area">
+                <div class="avatar-wrp-content">
+                    <img src="../../img/ai-default.png" alt="" class="global-img" v-show="!avatar">
+                    <img :src="avatar" alt="" class="global-img" v-show="avatar">
+                </div>
                 <div class="test-anim test-anim-move" v-show="testing"></div>
             </div>
             <!-- 检测状态 -->
@@ -120,6 +122,7 @@
             return{
                 init:false,
                 avatar:'',
+                // avatar:'http://tupian.qqw21.com/article/UploadPic/2019-4/201941421214556526.jpg',
                 broadcast:false,
                 count:1,
                 attendList:[
